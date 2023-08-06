@@ -53,43 +53,12 @@ public class Move : MonoBehaviour
             // 力の加わる方向に正面を合わせる
             transform.up = movePos.normalized;
         }
-        else if(moveX != 0||moveZ != 0)
+        else if (moveX != 0 || moveZ != 0)
         {
-            transform.up = new Vector2(moveX , moveZ ).normalized;
+            transform.up = new Vector2(unitRb.velocity.x, unitRb.velocity.y).normalized;
         }
 
-        // 左右移動
-        //float keyX = 0;
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    inputPos.x = -1;
-        //}
-        //else if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    inputPos.x = 1;
-        //}
-        //else
-        //{
-        //    inputPos.x = 0;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    inputPos.y = 1;
-        //}
-        //else if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    inputPos.y = -1;
-        //}
-        //else
-        //{
-        //    inputPos.y = 0;
-        //}
-       
-
-        //Debug.Log(inputPos.normalized * _moveSpd );
-        unitRb.velocity = new Vector2(moveX * _moveSpd, moveZ * _moveSpd);
-        
+        unitRb.velocity = new Vector2(moveX * _moveSpd, moveZ * _moveSpd);        
         
         float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);　//X方向の速度を制限
         float speedYTemp = Mathf.Clamp(unitRb.velocity.y, -limitSpeed, limitSpeed);  //Y方向の速度を制限

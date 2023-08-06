@@ -32,26 +32,6 @@ public class EnemyCheak : MonoBehaviour
                 Debug.Log(emHits.collider.gameObject.name+"‚ğŒŸ’m‚µ‚½");
                 if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable)) return true ;
                 else return false;
-                //if (pnt != null)
-                //{
-
-                //    //pnt‚É“ü‚Á‚Ä‚é‚Ì‚Æ“¯‚¶‚¾‚Á‚½‚ç
-                //    if (pnt == emHits.collider.gameObject)
-                //    {
-                //        return false;
-                //    }
-                //    else
-                //    {
-                //        pnt = emHits.collider.gameObject;
-                //        return true;
-                //    }
-                //}
-                //// Å‰‚Í‚±‚Á‚¿‚É—ˆ‚é
-                //else
-                //{
-                //    pnt = emHits.collider.gameObject;
-                //    return true;
-                //}
             }
         }
         return false;
