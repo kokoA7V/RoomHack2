@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class HackManager : MonoBehaviour
 {
+    public GameObject HackUIObj;
+    public GameObject TypingObj;
+
     void Start()
     {
 
@@ -17,8 +20,14 @@ public class HackManager : MonoBehaviour
             if (hit.collider != null && hit.collider.gameObject.TryGetComponent<IUnitHack>(out IUnitHack iUnitHack))
             {
                 // ÉNÉäÉbÉNèàóù
-
+                if (HackUIObj == null) return;
+                GameObject hackUI = Instantiate(HackUIObj);
             }
         }
+    }
+
+    public void TypingStart()
+    {
+        GameObject typing = Instantiate(TypingObj);
     }
 }
