@@ -7,7 +7,7 @@ public class HackUI : MonoBehaviour
 {
     public RectTransform HackUIPos;
 
-    public Vector2 targetPosition = new Vector2(555f, -140f);
+    public Vector2 targetPosition = new Vector2(555f, -140f); //inspector‚Å©—R‚É•ÏX‰Â”\
 
     void Start()
     {
