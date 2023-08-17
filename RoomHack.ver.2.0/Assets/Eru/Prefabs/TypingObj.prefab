@@ -199,7 +199,8 @@ MonoBehaviour:
   - ERU
   text: {fileID: 7534927208544242140}
   randomFlg: 0
-  color: {r: 1, g: 0.79607844, b: 0.3254902, a: 0}
+  clearColor: {r: 1, g: 0.79607844, b: 0.33333334, a: 0}
+  missColor: {r: 1, g: 0, b: 0, a: 0}
   shakeDuration: 0.15
   shakeAmount: 5
   decreaseFactor: 1
