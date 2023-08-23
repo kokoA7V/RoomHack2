@@ -7,11 +7,11 @@ public class TypingObj : MonoBehaviour
     [Header("ワード")]
     public string[] word;
 
+    [Header("ランダムワード")]
+    public bool randomFlg = false;
+
     [SerializeField,Header("UIテキスト")]
     private Text text;
-
-    [SerializeField,Header("ランダムワード")]
-    private bool randomFlg = false;
 
     [SerializeField,Header("クリア文字の色")]
     private Color clearColor;

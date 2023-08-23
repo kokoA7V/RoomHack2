@@ -3,12 +3,9 @@ using UnityEngine;
 public class HackManager : MonoBehaviour
 {
     public GameObject HackUIObj;
-    public GameObject TypingObj;
 
-    void Start()
-    {
-
-    }
+    private string[] word;
+    private bool randomFlg;
 
     void Update()
     {
@@ -21,13 +18,30 @@ public class HackManager : MonoBehaviour
             {
                 // クリック処理
                 if (HackUIObj == null) return;
-                GameObject hackUI = Instantiate(HackUIObj);
+                GameObject hackUIObj = Instantiate(HackUIObj);
+                HackUI hackUI = hackUIObj.GetComponent<HackUI>();
+
+                //カメラ
+                if(hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
+                {
+                    randomFlg = cameraCon.randomFlg;
+                    for(int i = 0; i < cameraCon.word.Length; i++) word[i] = cameraCon.word[i];
+                }
+
+                //ドア
+                else if (hit.collider.gameObject.TryGetComponent<DoorController>(out DoorController doorCon))
+                {
+                    randomFlg = doorCon.randomFlg;
+                    for (int i = 0; i < doorCon.word.Length; i++) word[i] = doorCon.word[i];
+                }
+
+                //タイピングのデータを送る
+                hackUI._randomFlg = randomFlg;
+                for (int i = 0; i < word.Length; i++)
+                {
+                    hackUI._word[i] = word[i];
+                }
             }
         }
-    }
-
-    public void TypingStart()
-    {
-        GameObject typing = Instantiate(TypingObj);
     }
 }
