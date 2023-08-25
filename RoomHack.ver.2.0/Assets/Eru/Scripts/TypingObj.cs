@@ -4,28 +4,38 @@ using UnityEngine.UI;
 
 public class TypingObj : MonoBehaviour
 {
+    [Header("ワード")]
     public string[] word;
 
-    [SerializeField]
-    private Text text;
-
-    [SerializeField]
+    [Header("ランダムワード")]
     public bool randomFlg = false;
 
-    [SerializeField]
-    private Color color;
+    [SerializeField,Header("UIテキスト")]
+    private Text text;
 
-    private string colorCode;
+    [SerializeField,Header("クリア文字の色")]
+    private Color clearColor;
+
+    [SerializeField, Header("ミス文字の色")]
+    private Color missColor;
+
+    [SerializeField,Header("振動時間")]
+    private float shakeDuration = 0.1f;
+
+    [SerializeField,Header("振動する力")]
+    private float shakeAmount = 5f;
+
+    [SerializeField,Header("減衰率")]
+    private float decreaseFactor = 1.0f;
+
+    private string clearColorCode, missColorCode;
 
     private int i, clearWord;
 
     private bool clearFlg = false;
 
-    public float shakeDuration = 0.1f;
-    public float shakeAmount = 5f;
-    public float decreaseFactor = 1.0f;
-
     private Vector3 originalPosition;
+
     private float currentShakeDuration = 0f;
 
     void Start()
@@ -35,24 +45,27 @@ public class TypingObj : MonoBehaviour
         clearFlg = false;
         if (randomFlg) ShuffleArray(word);
         originalPosition = text.transform.localPosition;
-        colorCode = ColorUtility.ToHtmlStringRGB(color);
-        text.text = "<color=#" + colorCode + "></color>" + word[clearWord].ToString();
+        clearColorCode = ColorUtility.ToHtmlStringRGB(clearColor);
+        missColorCode = ColorUtility.ToHtmlStringRGB(missColor);
+        text.text = "<color=#" + clearColorCode + "></color>" + word[clearWord].ToString();
     }
 
     void Update()
     {
-        if (Input.anyKeyDown && !clearFlg)
+        if (clearFlg) return;
+
+        if (Input.anyKeyDown)
         {
             foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
             {
-                if (Input.GetKeyDown(code))
+                if (code >= KeyCode.A && code <= KeyCode.Z && Input.GetKeyDown(code))
                 {
                     if (code.ToString() == word[clearWord][i].ToString())
                     {
                         i++;
 
                         //色変更処理
-                        string _text = "<color=#" + colorCode + ">";
+                        string _text = "<color=#" + clearColorCode + ">";
                         for (int j = 0; j < i; j++) _text = _text + word[clearWord][j].ToString();
                         _text = _text + "</color>";
                         for(int j = i;j< word[clearWord].Length; j++) _text = _text + word[clearWord][j].ToString();
@@ -71,7 +84,7 @@ public class TypingObj : MonoBehaviour
                             else
                             {
                                 clearWord++;
-                                text.text = "<color=#" + colorCode + "></color>" + word[clearWord].ToString();
+                                text.text = "<color=#" + clearColorCode + "></color>" + word[clearWord].ToString();
                             }
                         }
                     }
@@ -84,18 +97,29 @@ public class TypingObj : MonoBehaviour
             }
         }
 
-        if (currentShakeDuration > 0)
+        if (currentShakeDuration > 0 && !clearFlg)
         {
             Vector3 randomOffset = UnityEngine.Random.insideUnitSphere * shakeAmount;
             text.transform.localPosition = originalPosition + randomOffset;
-            text.color = Color.red;
+
+            string _text = "<color=#" + clearColorCode + ">";
+            for (int j = 0; j < i; j++) _text = _text + word[clearWord][j].ToString();
+            _text = _text + "</color><color=#" + missColorCode + ">" + word[clearWord][i].ToString() + "</color>";
+            for (int j = i + 1; j < word[clearWord].Length; j++) _text = _text + word[clearWord][j].ToString();
+            text.text = _text;
+
             currentShakeDuration -= Time.deltaTime * decreaseFactor;
         }
-        else
+        else if(!clearFlg)
         {
             currentShakeDuration = 0f;
             text.transform.localPosition = originalPosition;
-            text.color = Color.white;
+
+            string _text = "<color=#" + clearColorCode + ">";
+            for (int j = 0; j < i; j++) _text = _text + word[clearWord][j].ToString();
+            _text = _text + "</color>";
+            for (int j = i; j < word[clearWord].Length; j++) _text = _text + word[clearWord][j].ToString();
+            text.text = _text;
         }
     }
 

@@ -16,11 +16,16 @@ public class HackUI : MonoBehaviour
     {
         // RectTransformの座標を設定
         HackUIPos.anchoredPosition = targetPosition;
+        
         typingobj = gameObject.GetComponent<TypingObj>();
     }
     void Update()
     {
-        typingobj.word = _word;
+        //TypingObjにHackManagerから貰ったデータを送る。
         typingobj.randomFlg = _randomFlg;
+        for(int i = 0; i < _word.Length; i++)
+        {
+            typingobj.word[i] = _word[i];
+        }
     }
 }
