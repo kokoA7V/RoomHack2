@@ -1388,6 +1388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HackUIPos: {fileID: 1623561311}
+  typingobj: {fileID: 0}
+  _word: []
+  _randomFlg: 0
   targetPosition: {x: 541, y: -260}
 --- !u!114 &1623561313
 MonoBehaviour:

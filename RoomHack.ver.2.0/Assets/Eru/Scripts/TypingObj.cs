@@ -10,7 +10,7 @@ public class TypingObj : MonoBehaviour
     private Text text;
 
     [SerializeField]
-    private bool randomFlg = false;
+    public bool randomFlg = false;
 
     [SerializeField]
     private Color color;
