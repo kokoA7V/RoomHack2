@@ -10,23 +10,25 @@ public class TypingObj : MonoBehaviour
     [Header("ランダムワード")]
     public bool randomFlg = false;
 
-    [SerializeField,Header("UIテキスト")]
-    private Text text;
-
-    [SerializeField,Header("クリア文字の色")]
+    [SerializeField, Header("クリア文字の色")]
     private Color clearColor;
 
     [SerializeField, Header("ミス文字の色")]
-    private Color missColor;
+    private Color missColor = Color.red;
 
     [SerializeField,Header("振動時間")]
-    private float shakeDuration = 0.1f;
+    private float shakeDuration = 0.15f;
 
     [SerializeField,Header("振動する力")]
     private float shakeAmount = 5f;
 
     [SerializeField,Header("減衰率")]
     private float decreaseFactor = 1.0f;
+
+    [SerializeField, Header("位置")]
+    private Vector2 targetPosition = new Vector2(555f, -140f);
+
+    private Text text;
 
     private string clearColorCode, missColorCode;
 
@@ -43,8 +45,10 @@ public class TypingObj : MonoBehaviour
         i = 0;
         clearWord = 0;
         clearFlg = false;
+        text = gameObject.GetComponentInChildren<Text>();
+        this.transform.position = targetPosition;
         if (randomFlg) ShuffleArray(word);
-        originalPosition = text.transform.localPosition;
+        originalPosition = targetPosition;
         clearColorCode = ColorUtility.ToHtmlStringRGB(clearColor);
         missColorCode = ColorUtility.ToHtmlStringRGB(missColor);
         text.text = "<color=#" + clearColorCode + "></color>" + word[clearWord].ToString();

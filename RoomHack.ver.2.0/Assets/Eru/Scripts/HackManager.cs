@@ -4,9 +4,6 @@ public class HackManager : MonoBehaviour
 {
     public GameObject HackUIObj;
 
-    private string[] word;
-    private bool randomFlg;
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -22,24 +19,19 @@ public class HackManager : MonoBehaviour
                 HackUI hackUI = hackUIObj.GetComponent<HackUI>();
 
                 //カメラ
-                if(hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
+                if (hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
                 {
-                    randomFlg = cameraCon.randomFlg;
-                    for(int i = 0; i < cameraCon.word.Length; i++) word[i] = cameraCon.word[i];
+                    hackUI._randomFlg = cameraCon.randomFlg;
+                    hackUI._word = new string[cameraCon.word.Length];
+                    for (int i = 0; i < cameraCon.word.Length; i++) hackUI._word[i] = cameraCon.word[i];
                 }
 
                 //ドア
                 else if (hit.collider.gameObject.TryGetComponent<DoorController>(out DoorController doorCon))
                 {
-                    randomFlg = doorCon.randomFlg;
-                    for (int i = 0; i < doorCon.word.Length; i++) word[i] = doorCon.word[i];
-                }
-
-                //タイピングのデータを送る
-                hackUI._randomFlg = randomFlg;
-                for (int i = 0; i < word.Length; i++)
-                {
-                    hackUI._word[i] = word[i];
+                    hackUI._randomFlg = doorCon.randomFlg;
+                    hackUI._word = new string[cameraCon.word.Length];
+                    for (int i = 0; i < doorCon.word.Length; i++) hackUI._word[i] = doorCon.word[i];
                 }
             }
         }
