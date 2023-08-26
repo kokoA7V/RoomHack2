@@ -28,6 +28,12 @@ public class TypingObj : MonoBehaviour
     [SerializeField, Header("位置")]
     private Vector2 targetPosition = new Vector2(555f, -140f);
 
+    [HideInInspector]
+    public HackManager hackManager;
+
+    [HideInInspector]
+    public IUnitHack unitHack;
+
     private Text text;
 
     private string clearColorCode, missColorCode;
@@ -58,6 +64,14 @@ public class TypingObj : MonoBehaviour
     {
         if (clearFlg) return;
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //キャンセル
+            hackManager.nowTypingFlg = false;
+            hackManager.nowObj = null;
+            Destroy(gameObject);
+        }
+
         if (Input.anyKeyDown)
         {
             foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
@@ -84,6 +98,12 @@ public class TypingObj : MonoBehaviour
                                 //ゲームクリア処理
                                 text.text = "GameClear";
                                 clearFlg = true;
+                                hackManager.nowTypingFlg = false;
+                                unitHack.hacked = true;
+
+                                //CoolHackUI生成
+                                hackManager.nowObj = null;
+                                Destroy(gameObject);
                             }
                             else
                             {
