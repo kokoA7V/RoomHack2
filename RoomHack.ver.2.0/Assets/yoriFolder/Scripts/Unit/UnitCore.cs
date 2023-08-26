@@ -32,6 +32,6 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDam
 
     public void Move(float moveSpd,GameObject unit)
     {
-        GetComponent<Move>().DemoMove(moveSpd,unit);
+        GetComponent<Move>().UnitMove(moveSpd,unit);
     }
 }

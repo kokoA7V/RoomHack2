@@ -5,7 +5,6 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     private Vector3 movePos;
-    private Vector2 inputPos;
     
     [SerializeField]
     private float limitSpeed;
@@ -13,8 +12,6 @@ public class Move : MonoBehaviour
     private Rigidbody2D unitRb;
 
     private Vector2 moveDir;
-
-    private float moveCtr = 0;
 
     private void Start()
     {
@@ -25,11 +22,15 @@ public class Move : MonoBehaviour
     {
         movePos = _unit.transform.position - this.transform.position;
         moveDir = movePos.normalized;
-
-        moveCtr += Time.deltaTime;
       
         unitRb.AddForce(moveDir * _moveSpd);
 
+        if (Mathf.Abs(movePos.x) <= 0.5 && Mathf.Abs(movePos.y) <= 0.5f)
+        {
+            Debug.Log("Ž~‚Ü‚é‚æ");
+            moveDir = Vector2.zero;
+            unitRb.velocity = Vector2.zero;
+        }
         // —Í‚Ì‰Á‚í‚é•ûŒü‚É³–Ê‚ð‡‚í‚¹‚é
         transform.up = movePos.normalized;
 

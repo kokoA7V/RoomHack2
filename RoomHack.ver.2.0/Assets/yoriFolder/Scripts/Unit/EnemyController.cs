@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MateController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
+    private Vector3 movePos;
+    private Vector2 moveDir;
+
     // 情報取得
-    UnitCore mateCore;
+    UnitCore eCore;
 
     [SerializeField, Header("行動番号")]
     public int stateNo = 0;      // 行動番号
     [SerializeField, Header("メソッド用汎用番号")]
     public int methodNo = 0;   // メソッド用汎用番号
 
-    EnemyCheak emCheak;
+    SightCheak emCheak;
 
-    private TargetPoint hitsPnt;
-    private TargetPoint unitPnt;
+    TargetPoint hitsPnt;
+    TargetPoint unitPnt;
 
     private Rigidbody2D plRb;
 
@@ -38,26 +41,23 @@ public class MateController : MonoBehaviour
 
     private int burst;
 
+    int emDmgLayer = 2;
+
     enum State
     {
-        Wait,
         Shot,
-        Move,
         Search,
         Num
     }
+    // Start is called before the first frame update
     void Start()
     {
-        mateCore = GetComponent<UnitCore>();
-        
-        moveSpd = mateCore.moveSpd;
-        mateCore.dmgLayer = 1;
+        eCore = GetComponent<UnitCore>();
+
         burst = 3;
-       
+
         actFuncTbl = new ActFunc[(int)State.Num];
-        actFuncTbl[(int)State.Wait] = ActWait;
         actFuncTbl[(int)State.Shot] = ActShot;
-        actFuncTbl[(int)State.Move] = ActMove;
         actFuncTbl[(int)State.Search] = ActSearch;
 
         stateNo = (int)State.Search;
@@ -66,60 +66,37 @@ public class MateController : MonoBehaviour
 
         plRb = GetComponent<Rigidbody2D>();
 
-        emCheak = GetComponent<EnemyCheak>();
+        emCheak = GetComponent<SightCheak>();
+        eCore.dmgLayer = emDmgLayer;
 
         unit = null;
     }
 
+    // Update is called once per frame
     void Update()
     {
-
-
         actFuncTbl[stateNo]();
-        //Debug.Log("ugoiteru");
-        ActMove();
-    }
-    private void ActWait()
-    {
-        switch (methodNo)
+        if (unit!=null)
         {
-            case 0:
-                Debug.Log("待ちに移行");
-
-                plRb.velocity = Vector2.zero;
-                methodCtr = 1.5f;
-                methodNo++;
-                break;
-            case 1:
-                methodCtr -= Time.deltaTime;
-                if (methodCtr<=0)
-                {
-                    plRb.isKinematic = true;
-                    Debug.Log("完全に止まった");
-                    isEm = true;
-                    methodNo++;
-                }    
-                break;
-            case 2:
-                Debug.Log("もう動けるよ");
-                plRb.isKinematic = false;
-                break;
+            movePos = unit.transform.position - this.transform.position;
+            moveDir = movePos.normalized;
+            transform.up = moveDir;
         }
-       
     }
+
     private void ActShot()
     {
         switch (methodNo)
         {
             case 0:
                 Debug.Log("Shotに移行");
-                mateCore.Shot(mateCore.dmgLayer, pow, burst);
+                eCore.Shot(eCore.dmgLayer, pow, burst);
                 methodCtr = 1.5f;
                 methodNo++;
                 break;
             case 1:
                 methodCtr -= Time.deltaTime;
-                if (methodCtr<=0)
+                if (methodCtr <= 0)
                 {
                     methodNo = 0;
                     methodCtr = 0;
@@ -129,43 +106,7 @@ public class MateController : MonoBehaviour
                 break;
         }
     }
-    private void ActMove()
-    {
-        mateCore.Move(moveSpd, unit);
-        //switch (methodNo)
-        //{
-        //    case 0:
-        //        methodCtr = 6;
-        //        methodNo++;
-        //        break;
-        //    case 1:
-        //        if (unit != null)
-        //        {
-        //            Debug.Log("Move");
-        //            mateCore.Move(moveSpd, unit);
 
-        //            methodCtr -= Time.deltaTime;
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("unit = NULL");
-        //            plRb.velocity = Vector3.zero;
-        //            stateNo = 0;
-        //        }
-        //        if (methodCtr <= 0)
-        //        {
-        //            Debug.Log("とまるよ");
-        //            plRb.velocity = Vector3.zero;
-        //            plRb.isKinematic = true;
-        //            unit = null;
-        //            methodNo++;
-        //        }
-        //        break;
-        //    case 2:
-        //        plRb.isKinematic = false;
-        //        break;
-        //}
-    }
     void ActSearch()
     {
         switch (methodNo)
@@ -183,8 +124,6 @@ public class MateController : MonoBehaviour
         }
     }
 
-
-    // いずれ別のクラスにするそれまではここ
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("atattayo");
@@ -214,28 +153,28 @@ public class MateController : MonoBehaviour
             //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
 
             // 何か当たったら名前を返す
-            RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance,layerMask);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance, layerMask);
             foreach (RaycastHit2D hits in hit)
             {
                 if (hits.collider != null)
                 {
                     if (hits.collider.gameObject.layer == 8)
                     {
-                        Debug.Log("rayが"+hits.collider.gameObject.name+"に当たった");
-                        //unit = null;
+                        Debug.Log("rayが" + hits.collider.gameObject.name + "に当たった");
+                        unit = null;
                         break;
                     }
                     else
                     {
-                        Debug.Log("TagetPointをもつ"+hits.collider.gameObject.name+"に当たった");
-                        if (unit != null )
+                        Debug.Log("TagetPointをもつ" + hits.collider.gameObject.name + "に当たった");
+                        if (unit != null)
                         {
                             if (unit != hits.collider.gameObject)
                             {
                                 unitPnt = unit.GetComponent<TargetPoint>();
                                 hitsPnt = hits.collider.gameObject.GetComponent<TargetPoint>();
                                
-                                if (hitsPnt != null)
+                                if(hitsPnt != null)
                                 {
                                     if (unitPnt.priority <= hitsPnt.priority)
                                     {
@@ -249,7 +188,7 @@ public class MateController : MonoBehaviour
                                             "より優先度低いよ");
                                     }
                                     // 移動すべきobjに当たったらMoveに移行
-                                    methodNo = 0;
+                                    //methodNo = 0;
                                     //stateNo = (int)State.Move;
                                 }
                             }
@@ -257,25 +196,15 @@ public class MateController : MonoBehaviour
                         else
                         {
                             unit = hits.collider.gameObject;
-                            Debug.Log("最初に当たったオブジェクト"+unit.gameObject.name);
+                            Debug.Log("最初に当たったオブジェクト" + unit.gameObject.name);
                             // 移動すべきobjに当たったらMoveに移行
-                            methodNo = 0;
+                            //methodNo = 0;
                             //stateNo = (int)State.Move;
                         }
-                        break;                       
-                    }                    
+                        break;
+                    }
                 }
             }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (unit != null)
-        {
-            if (unit=collision.gameObject)
-            {
-                unit = null;
-            }
-        }        
     }
 }
