@@ -34,6 +34,9 @@ public class TypingObj : MonoBehaviour
     [HideInInspector]
     public IUnitHack unitHack;
 
+    [HideInInspector]
+    public RaycastHit2D hit;
+
     private Text text;
 
     private string clearColorCode, missColorCode;
@@ -102,6 +105,7 @@ public class TypingObj : MonoBehaviour
                                 unitHack.hacked = true;
 
                                 //CoolHackUI生成
+                                hackManager.InstantHackUI(hit, unitHack);
                                 hackManager.nowObj = null;
                                 Destroy(gameObject);
                             }

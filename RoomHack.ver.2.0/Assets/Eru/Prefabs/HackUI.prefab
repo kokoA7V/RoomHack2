@@ -123,7 +123,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8242936823356317136}
         m_TargetAssemblyTypeName: HackUI, Assembly-CSharp
-        m_MethodName: TypingStart
+        m_MethodName: PushButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -405,7 +405,13 @@ MonoBehaviour:
   typingobj: {fileID: 8729693371784900569, guid: 45c60e7ca6d086f46a01129ecec0aba1, type: 3}
   _word: []
   _randomFlg: 0
+  hackManager: {fileID: 0}
   targetPosition: {x: 541, y: -260}
+  imageBG: {fileID: 6379701507217280556}
+  imageIcon: {fileID: 6379701506944394269}
+  titleText: {fileID: 6379701508209278963}
+  lvText: {fileID: 6379701507497637529}
+  comentText: {fileID: 6379701508200836455}
 --- !u!1 &6379701507497637535
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +571,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: test
+  m_Text: Hack
 --- !u!1 &6379701508200836453
 GameObject:
   m_ObjectHideFlags: 0

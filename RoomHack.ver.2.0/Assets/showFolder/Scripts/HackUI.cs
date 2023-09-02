@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,25 +14,35 @@ public class HackUI : MonoBehaviour
     public HackManager hackManager;
     [HideInInspector]
     public IUnitHack unitHack;
+    [HideInInspector]
+    public RaycastHit2D hit;
 
-    public Vector2 targetPosition = new Vector2(541f, -260); //inspectorで自由に変更可能
+    [SerializeField]
+    private Vector2 targetPosition = new Vector2(541f, -260); //inspectorで自由に変更可能
+
+    public Image imageBG,imageIcon;
+
+    public Text titleText, lvText, comentText;
 
     void Start()
     {
         // RectTransformの座標を設定
         HackUIPos.anchoredPosition = targetPosition;
     }
-    void Update()
+
+    public void PushButton()
     {
-        
+        if (unitHack.hacked) unitHack.StatusDisp();
+        else TypingStart();
     }
 
-    public void TypingStart()
+    private void TypingStart()
     {
         GameObject obj = Instantiate(typingobj);
         hackManager.nowTypingFlg = true;
         //TypingObjにHackManagerから貰ったデータを送る。
         TypingObj typing = obj.GetComponent<TypingObj>();
+        typing.hit = hit;
         typing.hackManager = hackManager;
         typing.unitHack = unitHack;
         typing.randomFlg = _randomFlg;
