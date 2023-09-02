@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour ,IUnitHack
@@ -38,11 +37,6 @@ public class DoorController : MonoBehaviour ,IUnitHack
     {
         bc2d = GetComponent<BoxCollider2D>();
         bc2d.isTrigger = false;
-    }
-
-    void Update()
-    {
-        
     }
 
     public void StatusDisp()

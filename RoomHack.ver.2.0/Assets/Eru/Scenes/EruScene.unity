@@ -1061,6 +1061,10 @@ PrefabInstance:
       value: Door1-2
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: word.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: word.Array.data[0]
       value: SCENE
       objectReference: {fileID: 0}
@@ -1074,7 +1078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: word.Array.data[3]
-      value: SHUTUP
+      value: ' SHUTUP'
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569031, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: m_RootOrder
@@ -2338,6 +2342,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4018928410273293948, guid: 55ebb5c143baaf349a253c8037d4f936, type: 3}
+      propertyPath: word.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018928410273293948, guid: 55ebb5c143baaf349a253c8037d4f936, type: 3}
+      propertyPath: word.Array.data[0]
+      value: TEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018928410273293948, guid: 55ebb5c143baaf349a253c8037d4f936, type: 3}
+      propertyPath: word.Array.data[1]
+      value: FUNCTION
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018928410273293948, guid: 55ebb5c143baaf349a253c8037d4f936, type: 3}
+      propertyPath: word.Array.data[2]
+      value: GAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018928410273293948, guid: 55ebb5c143baaf349a253c8037d4f936, type: 3}
+      propertyPath: word.Array.data[3]
+      value: ERU
+      objectReference: {fileID: 0}
     - target: {fileID: 4018928410273293949, guid: 55ebb5c143baaf349a253c8037d4f936, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -2354,6 +2378,26 @@ PrefabInstance:
     - target: {fileID: 4032168422148569027, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: word.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: word.Array.data[0]
+      value: DOOR
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: word.Array.data[1]
+      value: VALORANT
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: word.Array.data[2]
+      value: VCT
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: word.Array.data[3]
+      value: SAGE
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569031, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: m_RootOrder

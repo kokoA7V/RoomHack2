@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour, IUnitHack
@@ -25,16 +23,6 @@ public class CameraController : MonoBehaviour, IUnitHack
     public SpriteRenderer frameSR;
 
     public Sprite frameSprite;
-
-    void Start()
-    {
-
-    }
-    
-    void Update()
-    {
-        
-    }
 
     public void StatusDisp()
     {
