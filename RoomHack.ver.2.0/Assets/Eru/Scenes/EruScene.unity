@@ -1078,7 +1078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: word.Array.data[3]
-      value: ' SHUTUP'
+      value: SHUTUP
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569031, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: m_RootOrder
