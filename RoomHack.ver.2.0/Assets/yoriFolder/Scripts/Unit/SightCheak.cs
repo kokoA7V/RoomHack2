@@ -35,10 +35,9 @@ public class SightCheak : MonoBehaviour
         return false;
     }
 
-
-    private TargetPoint hitsPnt;
-    private TargetPoint unitPnt;
     private GameObject unit;
+    private Vector3 hitsPos;
+    private Vector3 unitPos;
     public int SerchRay(GameObject _obj, int _stateNo)
     {
         // Ray‚ğ¶¬
@@ -61,7 +60,7 @@ public class SightCheak : MonoBehaviour
             {
                 if (hits.collider.gameObject.layer == 8)
                 {
-                    Debug.Log("ray‚ª" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
+                    Debug.Log("ray‚ª(•Ç)" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
                     //unit = null;
                     break;
                 }
@@ -70,25 +69,20 @@ public class SightCheak : MonoBehaviour
                     Debug.Log("ray‚ª" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
                     if (unit != null)
                     {
-                        if (unit != hits.collider.gameObject)
-                        {
-                            unitPnt = unit.GetComponent<TargetPoint>();
-                            hitsPnt = hits.collider.gameObject.GetComponent<TargetPoint>();
+                        unitPos = unit.gameObject.transform.position;
+                        hitsPos = hits.collider.gameObject.transform.position;
 
-                            if (hitsPnt != null)
-                            {
-                                if (unitPnt.priority <= hitsPnt.priority)
-                                {
-                                    Debug.Log("æ‚É“–‚½‚Á‚½" + unitPnt.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
-                                        hitsPnt.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
-                                    unit = hits.collider.gameObject;
-                                }
-                                else
-                                {
-                                    Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unitPnt.gameObject.name +
-                                        "‚æ‚è—Dæ“x’á‚¢‚æ");
-                                }
-                            }
+                        // ‹——£‚É‚æ‚Á‚Ä—Dæ‚ğŒˆ‚ß‚é
+                        if (Vector2.Distance(unitPos, origin) >= Vector2.Distance(hitsPos, origin))
+                        {
+                            Debug.Log("æ‚É“–‚½‚Á‚½" + unit.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
+                                    hits.collider.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
+                            unit = hits.collider.gameObject;
+                        }
+                        else
+                        {
+                            Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unit.gameObject.name +
+                                    "‚æ‚è—Dæ“x’á‚¢‚æ");
                         }
                     }
                     else
@@ -105,35 +99,4 @@ public class SightCheak : MonoBehaviour
         }
         return _stateNo;
     }
-
-
-    //public bool PointCheck()
-    //{
-    //    // Ray‚ğ¶¬
-    //    Vector3 origin = this.gameObject.transform.position;
-    //    Vector3 diredtion = this.transform.up;
-    //    Ray pTCheackray = new Ray(origin, diredtion);
-
-    //    // Ray‚ğ•\¦
-    //    Debug.DrawRay(pTCheackray.origin, pTCheackray.direction, Color.blue);
-
-    //    // ray‚Ì‹——£‚ğ§ŒÀ
-    //    float maxDistance = 0.7f;
-
-    //    // ©•ªˆÈŠO‚É“–‚½‚é‚æ‚¤‚É‚·‚é
-    //    int layerMask = ~(1 << gameObject.layer);
-
-    //    // ‰½‚©“–‚½‚Á‚½‚çpnt‚Éonj‚ğ“ü‚ê‚é
-    //    emHit = Physics2D.RaycastAll(pTCheackray.origin, pTCheackray.direction, maxDistance, layerMask);
-    //    foreach (RaycastHit2D emHits in emHit)
-    //    {
-    //        if (emHits.collider != null)
-    //        {
-    //            Debug.Log(emHits.collider.gameObject.name + "‚ğŒŸ’m‚µ‚½(PointCheck)");
-    //            if (emHits.collider.gameObject.TryGetComponent<TargetPoint>(out var target)) return true;
-    //            else return false;
-    //        }
-    //    }
-    //    return false;
-    //}
 }

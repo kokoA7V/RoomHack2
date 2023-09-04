@@ -20,12 +20,13 @@ public class Move : MonoBehaviour
 
     public void UnitMove(float _moveSpd,GameObject _unit)
     {
+        Debug.Log("“®‚¢‚Ä‚é");
         movePos = _unit.transform.position - this.transform.position;
         moveDir = movePos.normalized;
       
         unitRb.AddForce(moveDir * _moveSpd);
 
-        if (Mathf.Abs(movePos.x) <= 0.5 && Mathf.Abs(movePos.y) <= 0.5f)
+        if (Mathf.Abs(movePos.x) <= 0.1f && Mathf.Abs(movePos.y) <= 0.1f)
         {
             Debug.Log("Ž~‚Ü‚é‚æ");
             moveDir = Vector2.zero;

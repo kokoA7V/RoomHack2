@@ -76,6 +76,7 @@ public class MateController : MonoBehaviour
         actFuncTbl[stateNo]();
         //Debug.Log("ugoiteru");
         //ActMove();
+        Debug.Log(stateNo);
     }
     private void ActWait()
     {
@@ -101,6 +102,8 @@ public class MateController : MonoBehaviour
             case 2:
                 Debug.Log("もう動けるよ");
                 plRb.isKinematic = false;
+                methodNo = 0;
+                stateNo = (int)State.Move;
                 break;
         }
        
@@ -111,13 +114,14 @@ public class MateController : MonoBehaviour
         {
             case 0:
                 Debug.Log("Shotに移行");
+                plRb.velocity = Vector3.zero;
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
-                methodCtr = 1.5f;
+                methodCtr = 2f;
                 methodNo++;
                 break;
             case 1:
                 methodCtr -= Time.deltaTime;
-                if (methodCtr<=0)
+                if (methodCtr <= 0)
                 {
                     methodNo = 0;
                     methodCtr = 0;
@@ -131,18 +135,28 @@ public class MateController : MonoBehaviour
     {
         if ( unit!=null )
         {
-            Debug.Log("Move");
-            mateCore.Move(moveSpd, unit);
-            // 敵がいたらShotに移行
-            if (unitSight.EnemyCheck() && isEm)
+            switch (methodNo)
             {
-                plRb.velocity = Vector2.zero;
-                //Debug.Log("Shotに移行");
-                methodNo = 0;
-                methodCtr = 0;
-                stateNo = (int)State.Shot;
-                isEm = false;
+                case 0:
+                    Debug.Log("Move");
+                    mateCore.Move(moveSpd, unit);
+                    ////敵がいたらShotに移行
+                    //if (unitSight.EnemyCheck() && isEm)
+                    //{
+                    //    methodNo++;
+                    //    break;
+                    //}
+                    break;
+                case 1:
+                    plRb.velocity = Vector3.zero;
+                    Debug.Log("Shotに移行");
+                    methodNo = 0;
+                    methodCtr = 0;
+                    isEm = false;
+                    stateNo = (int)State.Shot;
+                    break;
             }
+            
             //// ポイントに触ったらwaitに移行
             //if (emCheak.PointCheck() && isEm)
             //{
@@ -153,7 +167,14 @@ public class MateController : MonoBehaviour
             //    isEm = false;
             //}
         }
-        
+        else
+        {
+            methodNo = 0;
+            methodCtr = 0;
+            stateNo = (int)State.Search;
+            isEm = false;
+        }
+
 
         //switch (methodNo)
         //{
@@ -195,7 +216,7 @@ public class MateController : MonoBehaviour
             case 0:
                 if (unitSight.EnemyCheck() && isEm)
                 {
-                    //Debug.Log("Shotに移行");
+                    Debug.Log("Shotに移行");
                     methodNo = 0;
                     methodCtr = 0;
                     stateNo = (int)State.Shot;
@@ -207,6 +228,8 @@ public class MateController : MonoBehaviour
 
 
     // いずれ別のクラスにするそれまではここ
+    private Vector3 hitsPos;
+    private Vector3 unitPos;
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("atattayo");
@@ -218,82 +241,87 @@ public class MateController : MonoBehaviour
             //Debug.Log("ついてないよ");
             return;
         }
+        else if (hitsPnt.visited)
+        {
+            return;
+        }
         // ついてるならレイを飛ばす
         else
         {
-            unit = collision.gameObject;
-            stateNo = unitSight.SerchRay(unit, stateNo);
+            if (stateNo == (int)State.Shot)
+            {
+                return;
+            }
+            // Rayを生成
+            Vector3 origin = this.gameObject.transform.position;
+            Vector3 diredtion = hitsPnt.gameObject.transform.position - origin;
+            diredtion = diredtion.normalized;
+            Ray ray = new Ray(origin, diredtion * 10);
 
-            Debug.Log(stateNo);
-            ////Debug.Log("tuiteruyo");
+            // Rayを表示
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
+            float maxDistance = 10;
+            int layerMask = ~(1 << gameObject.layer);
+            //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
 
-            //// Rayを生成
-            //Vector3 origin = this.gameObject.transform.position;
-            //Vector3 diredtion = collision.gameObject.transform.position - origin;
-            //diredtion = diredtion.normalized;
-            //Ray ray = new Ray(origin, diredtion * 10);
+            // 何か当たったら名前を返す
+            RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance, layerMask);
+            foreach (RaycastHit2D hits in hit)
+            {
+                if (hits.collider != null)
+                {
+                    if (hits.collider.gameObject.layer == 8)
+                    {
+                        Debug.Log("rayが(壁)" + hits.collider.gameObject.name + "に当たった");
+                        unit = null;
 
-            //// Rayを表示
-            //Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-            //float maxDistance = 10;
-            //int layerMask = ~(1 << gameObject.layer);
-            ////LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log("rayが" + hits.collider.gameObject.name + "に当たった");
+                        if (unit != null)
+                        {
+                            unitPos = unit.gameObject.transform.position;
+                            hitsPos = hits.collider.gameObject.transform.position;
 
-            //// 何か当たったら名前を返す
-            //RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance,layerMask);
-            //foreach (RaycastHit2D hits in hit)
-            //{
-            //    if (hits.collider != null)
-            //    {
-            //        if (hits.collider.gameObject.layer == 8)
-            //        {
-            //            Debug.Log("rayが"+hits.collider.gameObject.name+"に当たった");
-            //            //unit = null;
-            //            break;
-            //        }
-            //        else
-            //        {
-            //            Debug.Log("rayが" + hits.collider.gameObject.name+"に当たった");
-            //            if (unit != null )
-            //            {
-            //                if (unit != hits.collider.gameObject)
-            //                {
-            //                    unitPnt = unit.GetComponent<TargetPoint>();
-            //                    hitsPnt = hits.collider.gameObject.GetComponent<TargetPoint>();
-                               
-            //                    if (hitsPnt != null)
-            //                    {
-            //                        if (unitPnt.priority <= hitsPnt.priority)
-            //                        {
-            //                            Debug.Log("先に当たった" + unitPnt.gameObject.name + "より今当たった" +
-            //                                hitsPnt.gameObject.name + "のほうが優先度が高いよ");
-            //                            unit = hits.collider.gameObject;
-            //                        }
-            //                        else
-            //                        {
-            //                            Debug.Log("当たったけどもともとある" + unitPnt.gameObject.name +
-            //                                "より優先度低いよ");
-            //                        }
-            //                        // 移動すべきobjに当たったらMoveに移行
-            //                        methodNo = 0;
-            //                        //stateNo = (int)State.Move;
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                unit = hits.collider.gameObject;
-            //                Debug.Log("最初に当たったオブジェクト"+unit.gameObject.name);
-            //                // 移動すべきobjに当たったらMoveに移行
-            //                methodNo = 0;
-            //                //stateNo = (int)State.Move;
-            //            }
-            //            break;                       
-            //        }                    
-            //    }
-            //}
+                            if (Mathf.Abs(Vector2.Distance(unitPos, origin))<=0.3)
+                            {
+                                stateNo = (int)State.Wait;
+                                unit.GetComponent<TargetPoint>().visited = true;
+                            }
+                            // 距離によって優先を決める
+                            if (Vector2.Distance(unitPos, origin) <= Vector2.Distance(hitsPos, origin))
+                            {
+                                Debug.Log("先に当たった" + unit.gameObject.name + "より今当たった" +
+                                        hits.collider.gameObject.name + "のほうが優先度が高いよ");
+                                unit.GetComponent<TargetPoint>().visited = false;
+                                unit = hits.collider.gameObject;
+                                stateNo = (int)State.Move;
+                            }
+                            else
+                            {
+                                Debug.Log("当たったけどもともとある" + unit.gameObject.name +
+                                        "より優先度低いよ");
+                            }
+                        }
+                        else
+                        {
+                            unit = hits.collider.gameObject;
+                            Debug.Log("最初に当たったオブジェクト" + unit.gameObject.name);
+                            // 移動すべきobjに当たったらMoveに移行
+                            stateNo = (int)State.Move;
+                        }
+                        break;
+                    }
+                }
+            }
         }
-    }
+        unit = collision.gameObject;
+            //stateNo = unitSight.SerchRay(unit, stateNo);
+
+
+}
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (unit != null)

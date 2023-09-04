@@ -176,17 +176,17 @@ public class EnemyController : MonoBehaviour
                                
                                 if(hitsPnt != null)
                                 {
-                                    if (unitPnt.priority <= hitsPnt.priority)
-                                    {
-                                        Debug.Log("æ‚É“–‚½‚Á‚½" + unitPnt.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
-                                            hitsPnt.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
-                                        unit = hits.collider.gameObject;
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unitPnt.gameObject.name +
-                                            "‚æ‚è—Dæ“x’á‚¢‚æ");
-                                    }
+                                    //if (unitPnt.priority <= hitsPnt.priority)
+                                    //{
+                                    //    Debug.Log("æ‚É“–‚½‚Á‚½" + unitPnt.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
+                                    //        hitsPnt.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
+                                    //    unit = hits.collider.gameObject;
+                                    //}
+                                    //else
+                                    //{
+                                    //    Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unitPnt.gameObject.name +
+                                    //        "‚æ‚è—Dæ“x’á‚¢‚æ");
+                                    //}
                                     // ˆÚ“®‚·‚×‚«obj‚É“–‚½‚Á‚½‚çMove‚ÉˆÚs
                                     //methodNo = 0;
                                     //stateNo = (int)State.Move;

@@ -5,5 +5,5 @@ using UnityEngine;
 public class TargetPoint : MonoBehaviour
 {
     [SerializeField]
-    public int priority;
+    public bool visited=false;
 }
