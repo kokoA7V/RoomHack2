@@ -103,7 +103,6 @@ public class MateController : MonoBehaviour
                 Debug.Log("もう動けるよ");
                 plRb.isKinematic = false;
                 methodNo = 0;
-                stateNo = (int)State.Move;
                 break;
         }
        
@@ -156,16 +155,6 @@ public class MateController : MonoBehaviour
                     stateNo = (int)State.Shot;
                     break;
             }
-            
-            //// ポイントに触ったらwaitに移行
-            //if (emCheak.PointCheck() && isEm)
-            //{
-            //    //Debug.Log("Shotに移行");
-            //    methodNo = 0;
-            //    methodCtr = 0;
-            //    stateNo = (int)State.Shot;
-            //    isEm = false;
-            //}
         }
         else
         {
@@ -174,40 +163,6 @@ public class MateController : MonoBehaviour
             stateNo = (int)State.Search;
             isEm = false;
         }
-
-
-        //switch (methodNo)
-        //{
-        //    case 0:
-        //        methodNo++;
-        //        break;
-        //    case 1:
-        //        if (unit != null)
-        //        {
-        //            Debug.Log("Move");
-        //            mateCore.Move(moveSpd, unit);
-
-        //            methodCtr -= Time.deltaTime;
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("unit = NULL");
-        //            plRb.velocity = Vector3.zero;
-        //            stateNo = 0;
-        //        }
-        //        if (methodCtr <= 0)
-        //        {
-        //            Debug.Log("とまるよ");
-        //            plRb.velocity = Vector3.zero;
-        //            plRb.isKinematic = true;
-        //            unit = null;
-        //            methodNo++;
-        //        }
-        //        break;
-        //    case 2:
-        //        plRb.isKinematic = false;
-        //        break;
-        //}
     }
     void ActSearch()
     {
@@ -241,7 +196,7 @@ public class MateController : MonoBehaviour
             //Debug.Log("ついてないよ");
             return;
         }
-        else if (hitsPnt.visited)
+        if (hitsPnt.visited)
         {
             return;
         }
@@ -285,19 +240,28 @@ public class MateController : MonoBehaviour
                             unitPos = unit.gameObject.transform.position;
                             hitsPos = hits.collider.gameObject.transform.position;
 
-                            if (Mathf.Abs(Vector2.Distance(unitPos, origin))<=0.3)
+                            if (Mathf.Abs(Vector2.Distance(unitPos, origin))<=0.5)
                             {
-                                stateNo = (int)State.Wait;
-                                unit.GetComponent<TargetPoint>().visited = true;
+                                if (stateNo==(int)State.Move)
+                                {
+                                    stateNo = (int)State.Wait;
+                                    unit.GetComponent<TargetPoint>().visited = true;
+                                }
                             }
                             // 距離によって優先を決める
                             if (Vector2.Distance(unitPos, origin) <= Vector2.Distance(hitsPos, origin))
                             {
-                                Debug.Log("先に当たった" + unit.gameObject.name + "より今当たった" +
-                                        hits.collider.gameObject.name + "のほうが優先度が高いよ");
-                                unit.GetComponent<TargetPoint>().visited = false;
-                                unit = hits.collider.gameObject;
-                                stateNo = (int)State.Move;
+                                if (stateNo==(int)State.Wait)
+                                {
+                                    if (unit.gameObject!=hits.collider.gameObject)
+                                    {
+                                        Debug.Log("先に当たった" + unit.gameObject.name + "より今当たった" +
+                                       hits.collider.gameObject.name + "のほうが優先度が高いよ");
+                                        unit.GetComponent<TargetPoint>().visited = false;
+                                        unit = hits.collider.gameObject;
+                                        stateNo = (int)State.Move;
+                                    }                                    
+                                }                               
                             }
                             else
                             {
@@ -318,9 +282,6 @@ public class MateController : MonoBehaviour
             }
         }
         unit = collision.gameObject;
-            //stateNo = unitSight.SerchRay(unit, stateNo);
-
-
 }
     private void OnTriggerExit2D(Collider2D collision)
     {
