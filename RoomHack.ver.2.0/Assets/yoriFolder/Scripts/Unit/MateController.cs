@@ -62,7 +62,7 @@ public class MateController : MonoBehaviour
 
         stateNo = (int)State.Move;
 
-        moveSpd = 10;
+        //moveSpd = 10;
 
         plRb = GetComponent<Rigidbody2D>();
 
@@ -190,19 +190,10 @@ public class MateController : MonoBehaviour
         //Debug.Log("atattayo");
         // ターゲットポイントがついてるかどうか
         hitsPnt = collision.gameObject.GetComponent<TargetPoint>();
-        // ついてないならそのまま返す
-        if (hitsPnt == null)
+        // ついてたら処理
+        if (hitsPnt != null)
         {
-            //Debug.Log("ついてないよ");
-            return;
-        }
-        //if (hitsPnt.visited)
-        //{
-        //    return;
-        //}
-        // ついてるならレイを飛ばす
-        else
-        {
+            // Shot中なら処理しない
             if (stateNo == (int)State.Shot)
             {
                 return;
@@ -216,6 +207,7 @@ public class MateController : MonoBehaviour
             // Rayを表示
             Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
             float maxDistance = 10;
+            // 自分は当たらないようにする
             int layerMask = ~(1 << gameObject.layer);
             //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
 
@@ -225,57 +217,66 @@ public class MateController : MonoBehaviour
             {
                 if (hits.collider != null)
                 {
+                    // 壁に当たったらのunitの中身をnullにする
                     if (hits.collider.gameObject.layer == 8)
                     {
                         Debug.Log("rayが(壁)" + hits.collider.gameObject.name + "に当たった");
                         unit = null;
-
                         break;
                     }
                     else
                     {
                         Debug.Log("rayが" + hits.collider.gameObject.name + "に当たった");
+                        // unitの中身が入っていたら
                         if (unit != null)
                         {
                             unitPos = unit.gameObject.transform.position;
                             hitsPos = hits.collider.gameObject.transform.position;
-
-                            if (Mathf.Abs(Vector2.Distance(unitPos, origin))<=0.5)
+                            // unitと自分の距離が0.5以下だったらmoveSpdを0にする
+                            if (Mathf.Abs(Vector2.Distance(unitPos, origin)) <= 0.5)
                             {
-                                if (stateNo==(int)State.Move)
-                                {
-                                    stateNo = (int)State.Wait;
-                                    unit.GetComponent<TargetPoint>().visited = true;
-                                }
+                                moveSpd = 0;
+                                unit.GetComponent<TargetPoint>().visited = true;
+                                // 動いてるならWaitにいく
+                                //if (stateNo==(int)State.Move)
+                                //{
+                                //    stateNo = (int)State.Wait;
+
+                                //}
                             }
-                            
+                            // unitとレイが当たったobjが違ったら
                             if (unit.gameObject != hits.collider.gameObject)
                             {
-                                Debug.Log("Mathf.Abs(Vector2.Distance(unitPos, origin)) "+ unit.gameObject.name + Mathf.Abs(Vector2.Distance(unitPos, origin)));
-                                Debug.Log("Mathf.Abs(Vector2.Distance(hitsPos, origin)) " + hits.collider.gameObject.name + Mathf.Abs(Vector2.Distance(hitsPos, origin)));
-                                if (stateNo==(int)State.Wait)
+                                Debug.Log("Mathf.Abs(Vector2.Distance(unitPos, origin)) " + unit.gameObject.name
+                                    + Mathf.Abs(Vector2.Distance(unitPos, origin)));
+                                Debug.Log("Mathf.Abs(Vector2.Distance(hitsPos, origin)) " + hits.collider.gameObject.name
+                                    + Mathf.Abs(Vector2.Distance(hitsPos, origin)));
+                                // 距離によって優先を決める
+                                if (Mathf.Abs(Vector2.Distance(unitPos, origin)) >=
+                                    Mathf.Abs(Vector2.Distance(hitsPos, origin)))
                                 {
-                                    // 距離によって優先を決める
-                                    if (Mathf.Abs(Vector2.Distance(unitPos, origin)) >= Mathf.Abs(Vector2.Distance(hitsPos, origin)))
+                                    Debug.Log("先に当たった" + unit.gameObject.name + "より今当たった" +
+                                    hits.collider.gameObject.name + "のほうが優先度が高いよ");
+                                    unit.GetComponent<TargetPoint>().visited = false;
+                                    unit = hits.collider.gameObject;
+                                    moveSpd = mateCore.moveSpd;
+                                    stateNo = (int)State.Move;
+                                    break;
+                                }
+                                else
+                                {
+                                    Debug.Log("当たったけどもともとある" + unit.gameObject.name +
+                                            "より優先度低いよ");
+                                    if (hits.collider.gameObject.GetComponent<TargetPoint>().visited)
                                     {
-                                        Debug.Log("先に当たった" + unit.gameObject.name + "より今当たった" +
-                                       hits.collider.gameObject.name + "のほうが優先度が高いよ");
-                                        unit.GetComponent<TargetPoint>().visited = false;
+                                        unit.gameObject.GetComponent<TargetPoint>().visited = false;
                                         unit = hits.collider.gameObject;
+                                        moveSpd = mateCore.moveSpd;
                                         stateNo = (int)State.Move;
                                     }
-                                    else
-                                    {
-                                        Debug.Log("当たったけどもともとある" + unit.gameObject.name +
-                                                "より優先度低いよ");
-                                        if (hits.collider.gameObject.GetComponent<TargetPoint>().visited)
-                                        {
-                                            hits.collider.gameObject.GetComponent<TargetPoint>().visited = false;
-                                            unit = hits.collider.gameObject;
-                                            stateNo = (int)State.Move;
-                                        }
-                                    }
-                                }                               
+                                    break;
+                                }
+
                             }
                         }
                         else
@@ -284,12 +285,17 @@ public class MateController : MonoBehaviour
                             Debug.Log("最初に当たったオブジェクト" + unit.gameObject.name);
                             // 移動すべきobjに当たったらMoveに移行
                             stateNo = (int)State.Move;
+                            break;
                         }
                         break;
                     }
                 }
             }
         }
-        //unit = collision.gameObject;
+        //if (hitsPnt.visited)
+        //{
+        //    return;
+        //}
+        // ついてるならレイを飛ばす
     }
 }
