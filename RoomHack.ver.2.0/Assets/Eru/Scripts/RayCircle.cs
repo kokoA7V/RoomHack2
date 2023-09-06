@@ -3,26 +3,13 @@ using UnityEngine;
 [System.Serializable]
 public class RayCircle
 {
-    public int numberOfRays = 12; // レイの本数
-    public float detectionRange = 5f; // レイキャストの最大距離
+    [Header("レイの本数")]
+    public int numberOfRays = 12;
+
+    [Header("レイの最大距離")]
+    public float detectionRange = 5f;
 
     private GameObject obj;
-    //private LineRenderer lineRenderer; // レイの可視化用
-
-    //void Start()
-    //{
-    //    // LineRendererコンポーネントを取得または作成
-    //    lineRenderer = GetComponent<LineRenderer>();
-    //    if (lineRenderer == null)
-    //    {
-    //        lineRenderer = gameObject.AddComponent<LineRenderer>();
-    //    }
-
-    //    // LineRendererの設定
-    //    lineRenderer.positionCount = numberOfRays * 2; // 頂点の数を設定（始点と終点の2倍）
-    //    lineRenderer.startWidth = 0.05f; // 開始幅
-    //    lineRenderer.endWidth = 0.05f; // 終了幅
-    //}
 
     public GameObject CircleChk(Transform transform)
     {
@@ -42,8 +29,14 @@ public class RayCircle
             // レイキャストを発射
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionRange);
 
+            Debug.DrawRay(transform.position, direction * detectionRange, Color.red);
+
             // レイキャストが何かにヒットした場合
-            if (hit.collider != null && obj == null) obj = hit.collider.gameObject;
+            if (hit.collider != null)
+            {
+                obj = hit.collider.gameObject;
+                break;
+            }
             else obj = null;
 
             //// レイの始点と終点を設定して可視化

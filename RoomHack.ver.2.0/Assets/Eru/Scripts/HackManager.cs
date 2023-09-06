@@ -87,5 +87,20 @@ public class HackManager : MonoBehaviour
                 doorCon.rightFrameSR.sprite = doorCon.frameSprite;
             }
         }
+
+        //ƒ^ƒŒƒbƒg
+        else if (hit.collider.gameObject.TryGetComponent<TurretController>(out TurretController turretCon))
+        {
+            hackUI._randomFlg = turretCon.randomFlg;
+            hackUI._word = new string[turretCon.word.Length];
+            for (int i = 0; i < turretCon.word.Length; i++) hackUI._word[i] = turretCon.word[i];
+
+            hackUI.imageIcon.sprite = turretCon.icon;
+            hackUI.titleText.text = turretCon.titleStr;
+            hackUI.lvText.text = turretCon.lvStr[h];
+            hackUI.comentText.text = turretCon.comentStr;
+
+            if (h == 1) turretCon.frameSR.sprite = turretCon.frameSprite;
+        }
     }
 }
