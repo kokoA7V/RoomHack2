@@ -22,34 +22,29 @@ public class ButtonManager : MonoBehaviour
 
     void ToggleButtonsSetA()
     {
+
         isButtonAToggled = !isButtonAToggled;
 
         // ButtonAを押したときにはButtonBのセットを非表示にする
-        foreach (GameObject obj in buttonTrigB)
-        {
-            obj.SetActive(false);
-        }
+        foreach (GameObject obj in buttonTrigB) obj.SetActive(false);
 
-        foreach (GameObject obj in buttonTrigA)
-        {
-            obj.SetActive(isButtonAToggled);
-        }
+        foreach (GameObject obj in buttonTrigA) obj.SetActive(isButtonAToggled);
+
+        // ButtonAのセットが表示されている場合、ButtonAを再度押すことで非表示にする
+        if (isButtonAToggled) isButtonAToggled = false;
     }
 
     void ToggleButtonsSetB()
     {
         isButtonBToggled = !isButtonBToggled;
+
         // ButtonBを押したときにはButtonAのセットを非表示にする
-        foreach (GameObject obj in buttonTrigA)
-        {
-            obj.SetActive(false);
-        }
+        foreach (GameObject obj in buttonTrigA) obj.SetActive(false);
 
         // ButtonBのセットを表示する
-        foreach (GameObject obj in buttonTrigB)
-        {
-            obj.SetActive(isButtonBToggled);
-        }
+        foreach (GameObject obj in buttonTrigB)  obj.SetActive(isButtonBToggled);
+
+        if (isButtonBToggled) isButtonBToggled = false;
     }
 }
 
