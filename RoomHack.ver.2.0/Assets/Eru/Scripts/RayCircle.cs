@@ -65,10 +65,6 @@ public class RayCircle
                 break;
             }
             else obj = null;
-
-            //// レイの始点と終点を設定して可視化
-            //lineRenderer.SetPosition(i * 2, transform.position); // 始点
-            //lineRenderer.SetPosition(i * 2 + 1, (Vector3)transform.position + (Vector3)(direction * detectionRange)); // 終点
         }
         return obj;
     }

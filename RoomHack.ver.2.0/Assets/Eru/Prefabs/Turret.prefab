@@ -211,7 +211,7 @@ MonoBehaviour:
   word:
   - TYPING
   randomFlg: 1
-  icon: {fileID: 21300000, guid: c040fb008bca0a546ab3da016c3ddfb1, type: 3}
+  icon: {fileID: 21300000, guid: dc6bd1a38973cf74fb057c591fc023e5, type: 3}
   titleStr: Turret1-1
   lvStr:
   - 'SecLv :1
