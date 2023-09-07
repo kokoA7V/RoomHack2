@@ -45,7 +45,7 @@ public class RayCircle
         for (int i = 0; i < numberOfRays; i++)
         {
             // ƒŒƒC‚ÌŠp“x‚ðŒvŽZ
-            float angle = (i * (int)chkType / numberOfRays) + q;
+            float angle = (i * (int)chkType / numberOfRays) + q + transform.rotation.eulerAngles.z;
 
             // Šp“x‚ðƒ‰ƒWƒAƒ“‚É•ÏŠ·
             float radians = angle * Mathf.Deg2Rad;
