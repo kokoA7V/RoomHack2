@@ -8,7 +8,7 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDam
     public int nowHP { get; set; }
     public int dmgLayer { get; set; } = 2;
 
-    public float moveSpd { get; set; } = 1.5f;
+    public float moveSpd { get; set; } = 0.1f;
 
 
     public bool hacked { get; set; } = false;

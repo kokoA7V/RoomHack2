@@ -11,7 +11,7 @@ public class Move : MonoBehaviour
 
     private Rigidbody2D unitRb;
 
-    private Vector2 moveDir;
+    private Vector3 moveDir;
 
     private void Start()
     {
@@ -23,8 +23,9 @@ public class Move : MonoBehaviour
         Debug.Log("“®‚¢‚Ä‚é");
         movePos = _unit.transform.position - this.transform.position;
         moveDir = movePos.normalized;
-      
-        unitRb.AddForce(moveDir * _moveSpd);
+
+        //unitRb.AddForce(moveDir * _moveSpd);
+        this.transform.position += moveDir * _moveSpd;
 
         //if (Mathf.Abs(movePos.x) <= 0.1f && Mathf.Abs(movePos.y) <= 0.1f)
         //{
