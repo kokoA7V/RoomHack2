@@ -230,6 +230,7 @@ MonoBehaviour:
   bulletSpeed: 3
   shotTime: 1
   rayCircle:
+    tr: {fileID: 3399257354437723179}
     numberOfRays: 30
     detectionRange: 3
     layerMask:

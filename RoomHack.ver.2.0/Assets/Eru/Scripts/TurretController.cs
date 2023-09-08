@@ -43,7 +43,7 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     void Update()
     {
-        GameObject obj = rayCircle.CircleChk(transform);
+        GameObject obj = rayCircle.CircleChk();
 
         if (obj == null) return;
         ObjRotation(obj);
