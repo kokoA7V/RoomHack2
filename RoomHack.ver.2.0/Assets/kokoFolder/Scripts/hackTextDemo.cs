@@ -6,35 +6,46 @@ using System;
 
 public class hackTextDemo : MonoBehaviour
 {
-    [SerializeField] string hackText = "hello";
-
+    [SerializeField] string inputText = "hello";
+    string outputText = "";
     string dispText;
+    string timeText;
 
     [SerializeField] float textSpd = 10;
-
     float time = 0;
     int count = 0;
 
-    Text text;
+    [SerializeField] bool timeDisp = true;
+
+    Text tx;
 
     DateTime dt;
 
     private void Start()
     {
-        text = GetComponent<Text>();
+        tx = GetComponent<Text>();
+
+        dt = DateTime.Now;
+        timeText = "[" + dt + "]";
+        if (timeDisp)
+        {
+            dispText += timeText;
+        }
+
+        dispText += inputText;
     }
 
     private void Update()
     {
-        text.text = dispText;
-        dt = DateTime.Now;
+        tx.text = outputText;
+
+        //Debug.Log(dispText.Length);
+        //Debug.Log(outputText.Length);
 
         time++;
-        if (time >= textSpd)
+        if (time >= textSpd && dispText.Length > outputText.Length)
         {
-            string timeText = "[" + dt + "]";
-            timeText += hackText;
-            dispText += timeText[count];
+            outputText += dispText[count];
             time = 0;
             count++;
         }
