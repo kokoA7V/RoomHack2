@@ -20,7 +20,7 @@ public class ButtonManager : MonoBehaviour
         buttonB.onClick.AddListener(ToggleButtonsSetB);
     }
 
-    void ToggleButtonsSetA()
+    void ToggleButtonsSetA() //ButtonA
     {
 
         isButtonAToggled = !isButtonAToggled;
@@ -34,7 +34,7 @@ public class ButtonManager : MonoBehaviour
         if (isButtonAToggled) isButtonAToggled = false;
     }
 
-    void ToggleButtonsSetB()
+    void ToggleButtonsSetB() //ButtonB
     {
         isButtonBToggled = !isButtonBToggled;
 
