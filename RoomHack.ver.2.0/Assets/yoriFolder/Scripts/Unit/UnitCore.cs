@@ -8,7 +8,7 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDam
     public int nowHP { get; set; }
     public int dmgLayer { get; set; } = 2;
 
-    public float moveSpd { get; set; } = 0.1f;
+    public float moveSpd { get; set; } = 1f;
 
 
     public bool hacked { get; set; } = false;
@@ -30,7 +30,7 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDam
 
     }
 
-    public void Move(float moveSpd,GameObject unit)
+    public void Move(float moveSpd,Vector3 unit)
     {
         GetComponent<Move>().UnitMove(moveSpd,unit);
     }

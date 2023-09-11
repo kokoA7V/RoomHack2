@@ -38,6 +38,8 @@ public class MateController : MonoBehaviour
 
     private int burst;
 
+    Vector3 mousePos;
+    Vector3 worldPos;
     enum State
     {
         Wait,
@@ -77,6 +79,7 @@ public class MateController : MonoBehaviour
         //Debug.Log("ugoiteru");
         //ActMove();
         Debug.Log(stateNo);
+
     }
     private void ActWait()
     {
@@ -124,7 +127,7 @@ public class MateController : MonoBehaviour
                 {
                     methodNo = 0;
                     methodCtr = 0;
-                    stateNo = (int)State.Search;
+                    stateNo = (int)State.Move;
                     isEm = true;
                 }
                 break;
@@ -133,19 +136,24 @@ public class MateController : MonoBehaviour
     private void ActMove()
     {
         Debug.Log("move" + unit);
-        if ( unit!=null )
-        {
+        //if ( unit!=null )
+        //{
             switch (methodNo)
             {
                 case 0:
                     Debug.Log("Move" + moveSpd);
-                    mateCore.Move(moveSpd, unit);
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        mousePos = Input.mousePosition;
+                        worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10f));
+                    }
+                    mateCore.Move(moveSpd, worldPos);
                     ////ìGÇ™Ç¢ÇΩÇÁShotÇ…à⁄çs
-                    //if (unitSight.EnemyCheck() && isEm)
-                    //{
-                    //    methodNo++;
-                    //    break;
-                    //}
+                    if (unitSight.EnemyCheck() && isEm)
+                    {
+                        methodNo++;
+                        break;
+                    }
                     break;
                 case 1:
                     plRb.velocity = Vector3.zero;
@@ -155,14 +163,14 @@ public class MateController : MonoBehaviour
                     stateNo = (int)State.Shot;
                     break;
             }
-        }
-        else
-        {
-            methodNo = 0;
-            methodCtr = 0;
-            stateNo = (int)State.Search;
-            isEm = false;
-        }
+        //}
+        //else
+        //{
+        //    methodNo = 0;
+        //    methodCtr = 0;
+        //    stateNo = (int)State.Search;
+        //    isEm = false;
+        //}
     }
     void ActSearch()
     {
@@ -233,7 +241,8 @@ public class MateController : MonoBehaviour
                             unitPos = unit.gameObject.transform.position;
                             hitsPos = hits.collider.gameObject.transform.position;
                             // unitÇ∆é©ï™ÇÃãóó£Ç™0.5à»â∫ÇæÇ¡ÇΩÇÁmoveSpdÇ0Ç…Ç∑ÇÈ
-                            if (Mathf.Abs(Vector2.Distance(unitPos, origin)) <= 5 && !unit.GetComponent<TargetPoint>().visited)
+                            if (Mathf.Abs(Vector2.Distance(unitPos, origin)) <= 0.5 &&
+                                !unit.GetComponent<TargetPoint>().visited)
                             {
                                 Debug.Log(unit + "0.5à»â∫");
                                 Debug.Log(Mathf.Abs(Vector2.Distance(unitPos, origin)));
@@ -245,35 +254,33 @@ public class MateController : MonoBehaviour
                             if (unit.gameObject != hits.collider.gameObject)
                             {
                                 TargetPoint hitVis = hits.collider.gameObject.GetComponent<TargetPoint>();
-                                //Debug.Log("Mathf.Abs(Vector2.Distance(unitPos, origin)) " + unit.gameObject.name
-                                //    + Mathf.Abs(Vector2.Distance(unitPos, origin)));
-                                //Debug.Log("Mathf.Abs(Vector2.Distance(hitsPos, origin)) " + hits.collider.gameObject.name
-                                //    + Mathf.Abs(Vector2.Distance(hitsPos, origin)));
+                                
+                                unit = hits.collider.gameObject;
                                 // unitÇ∆é©ï™ÇÃãóó£ÇÊÇËç°ìñÇΩÇ¡ÇΩpointÇÃãóó£Ç™íZÇ©Ç¡ÇΩÇÁÇªÇ¡ÇøÇ…à⁄ìÆÇ∑ÇÈ
-                                if (Mathf.Abs(Vector2.Distance(unitPos, origin)) >=
-                                    Mathf.Abs(Vector2.Distance(hitsPos, origin)) &&
-                                    hitVis.visited )
-                                {
-                                    Debug.Log("êÊÇ…ìñÇΩÇ¡ÇΩ" + unit.gameObject.name + "ÇÊÇËç°ìñÇΩÇ¡ÇΩ" +
-                                    hits.collider.gameObject.name + "ÇÃÇŸÇ§Ç™óDêÊìxÇ™çÇÇ¢ÇÊ");
-                                    unit = hits.collider.gameObject;
-                                    moveSpd = mateCore.moveSpd;
-                                    stateNo = (int)State.Move;
-                                    break;
-                                }
-                                else
-                                {
-                                    Debug.Log("ìñÇΩÇ¡ÇΩÇØÇ«Ç‡Ç∆Ç‡Ç∆Ç†ÇÈ" + unit.gameObject.name +
-                                            "ÇÊÇËóDêÊìxí·Ç¢ÇÊ");
-                                    if (unit.gameObject.GetComponent<TargetPoint>().visited)
-                                    {
-                                        Debug.Log(unit.gameObject.name);
-                                        unit = hits.collider.gameObject;
-                                        moveSpd = mateCore.moveSpd;
-                                        stateNo = (int)State.Move;
-                                    }
-                                    break;
-                                }
+                                //if (Mathf.Abs(Vector2.Distance(unitPos, origin)) >=
+                                //    Mathf.Abs(Vector2.Distance(hitsPos, origin)) &&
+                                //    !hitVis.visited )
+                                //{
+                                //    Debug.Log("êÊÇ…ìñÇΩÇ¡ÇΩ" + unit.gameObject.name + "ÇÊÇËç°ìñÇΩÇ¡ÇΩ" +
+                                //    hits.collider.gameObject.name + "ÇÃÇŸÇ§Ç™óDêÊìxÇ™çÇÇ¢ÇÊ");
+                                //    unit = hits.collider.gameObject;
+                                //    moveSpd = mateCore.moveSpd;
+                                //    stateNo = (int)State.Move;
+                                //    break;
+                                //}
+                                //else
+                                //{
+                                //    Debug.Log("ìñÇΩÇ¡ÇΩÇØÇ«Ç‡Ç∆Ç‡Ç∆Ç†ÇÈ" + unit.gameObject.name +
+                                //            "ÇÊÇËóDêÊìxí·Ç¢ÇÊ");
+                                //    if (!hitVis.visited)
+                                //    {
+                                //        Debug.Log(unit.gameObject.name);
+                                //        unit = hits.collider.gameObject;
+                                //        moveSpd = mateCore.moveSpd;
+                                //        stateNo = (int)State.Move;
+                                //    }                      
+                                //    break;
+                                //}
                                 
                             }
                             else
@@ -295,11 +302,11 @@ public class MateController : MonoBehaviour
             }
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<TargetPoint>() != null)
-        {
-            collision.gameObject.GetComponent<TargetPoint>().visited = false;
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.GetComponent<TargetPoint>() != null)
+    //    {
+    //        collision.gameObject.GetComponent<TargetPoint>().visited = false;
+    //    }
+    //}
 }

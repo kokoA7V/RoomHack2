@@ -18,14 +18,15 @@ public class Move : MonoBehaviour
         unitRb = GetComponent<Rigidbody2D>();
     }
 
-    public void UnitMove(float _moveSpd,GameObject _unit)
+    public void UnitMove(float _moveSpd,Vector3 _unit)
     {
         Debug.Log("“®‚¢‚Ä‚é");
-        movePos = _unit.transform.position - this.transform.position;
+        movePos = _unit - this.transform.position;
+        //movePos = _unit.transform.position - this.transform.position;
         moveDir = movePos.normalized;
 
         //unitRb.AddForce(moveDir * _moveSpd);
-        this.transform.position += moveDir * _moveSpd;
+        unitRb.velocity = moveDir * _moveSpd;
 
         //if (Mathf.Abs(movePos.x) <= 0.1f && Mathf.Abs(movePos.y) <= 0.1f)
         //{
