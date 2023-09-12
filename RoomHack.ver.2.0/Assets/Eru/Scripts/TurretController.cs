@@ -51,11 +51,11 @@ public class TurretController : MonoBehaviour, IUnitHack
 
         if (!hacked)
         {
-            //if (obj.TryGetComponent<PlayerController>(out PlayerController pc)) StartCoroutine(Shoting());
+            if (obj.TryGetComponent<MateController>(out MateController pc)) StartCoroutine(Shoting());
         }
         else if(atkEnemyFlg)
         {
-            //if (obj.TryGetComponent<EnemyController>(out EnemyController ec)) StartCoroutine(Shoting());
+            if (obj.TryGetComponent<EnemyController>(out EnemyController ec)) StartCoroutine(Shoting());
         }
     }
 

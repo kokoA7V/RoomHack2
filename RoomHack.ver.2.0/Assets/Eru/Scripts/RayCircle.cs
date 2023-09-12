@@ -86,7 +86,7 @@ public class RayCircle
             // レイキャストを発射
             RaycastHit2D hit = Physics2D.Raycast(tr.position, direction, detectionRange, layerMask);
 
-            if(rayFlg) Debug.DrawRay(tr.position, direction * detectionRange, Color.red);
+            if(rayFlg) Debug.DrawRay(tr.position, direction * detectionRange, Color.blue);
 
             // レイキャストが何かにヒットした場合
             if (hit.collider != null)
