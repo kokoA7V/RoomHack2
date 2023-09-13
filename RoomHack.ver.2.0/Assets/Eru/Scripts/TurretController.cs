@@ -46,16 +46,22 @@ public class TurretController : MonoBehaviour, IUnitHack
         GameObject obj = rayCircle.CircleChk();
 
         if (obj == null) return;
-        ObjRotation(obj);
-        if (!shotFlg) return;
 
         if (!hacked)
         {
-            if (obj.TryGetComponent<MateController>(out MateController pc)) StartCoroutine(Shoting());
+            if (obj.TryGetComponent<MateController>(out MateController pc))
+            {
+                ObjRotation(obj);
+                StartCoroutine(Shoting());
+            }
         }
         else if(atkEnemyFlg)
         {
-            if (obj.TryGetComponent<EnemyController>(out EnemyController ec)) StartCoroutine(Shoting());
+            if (obj.TryGetComponent<EnemyController>(out EnemyController ec))
+            {
+                ObjRotation(obj);
+                StartCoroutine(Shoting());
+            }
         }
     }
 
@@ -77,6 +83,8 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     private IEnumerator Shoting()
     {
+        if (!shotFlg) yield break;
+
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 

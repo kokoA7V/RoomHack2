@@ -28,7 +28,14 @@ public class DoorController : MonoBehaviour ,IUnitHack
     private BoxCollider2D bc2d;
 
     [SerializeField]
+    private bool flg = false;
+    [SerializeField]
+    private bool openFlg = false;
+
+    [SerializeField]
     private Transform leftBoard, rightBoard;
+    [SerializeField]
+    private Transform leftStart, rightStart;
 
     [SerializeField]
     private float speed;
@@ -41,18 +48,35 @@ public class DoorController : MonoBehaviour ,IUnitHack
 
     public void StatusDisp()
     {
-        bc2d.isTrigger = true;
+        if (flg) return;
+        bc2d.isTrigger = !bc2d.isTrigger;
         StartCoroutine(Move());
+        flg = true;
     }
 
     private IEnumerator Move()
     {
-        while (Vector3.Distance(left.transform.position, leftBoard.position) > 0.01f || Vector3.Distance(right.transform.position, rightBoard.position) > 0.01f)
+        if (!openFlg)
         {
-            left.transform.position = Vector3.MoveTowards(left.transform.position, leftBoard.position, speed * Time.deltaTime);
-            right.transform.position = Vector3.MoveTowards(right.transform.position, rightBoard.position, speed * Time.deltaTime);
-            yield return null;
+            while (Vector3.Distance(left.transform.position, leftBoard.position) > 0.01f || Vector3.Distance(right.transform.position, rightBoard.position) > 0.01f)
+            {
+                left.transform.position = Vector3.MoveTowards(left.transform.position, leftBoard.position, speed * Time.deltaTime);
+                right.transform.position = Vector3.MoveTowards(right.transform.position, rightBoard.position, speed * Time.deltaTime);
+                yield return null;
+            }
+            openFlg = true;
         }
+        else
+        {
+            while (Vector3.Distance(left.transform.position, leftStart.position) > 0.01f || Vector3.Distance(right.transform.position, rightStart.position) > 0.01f)
+            {
+                left.transform.position = Vector3.MoveTowards(left.transform.position, leftStart.position, speed * Time.deltaTime);
+                right.transform.position = Vector3.MoveTowards(right.transform.position, rightStart.position, speed * Time.deltaTime);
+                yield return null;
+            }
+            openFlg = false;
+        }
+        flg = false;
         yield break;
     }
 }
