@@ -148,7 +148,7 @@ public class MateController : MonoBehaviour
             {
                 case 0:
                     Debug.Log("Move" + moveSpd);
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(1))
                     {
                         mousePos = Input.mousePosition;
                         worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10f));
