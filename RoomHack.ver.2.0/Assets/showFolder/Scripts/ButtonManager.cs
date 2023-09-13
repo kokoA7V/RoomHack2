@@ -5,46 +5,76 @@ using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
-    public Button buttonA;
-    public Button buttonB;
+    [SerializeField] Button buttonA;
+    [SerializeField] Button buttonB;
 
-    public GameObject[] buttonTrigA; // ButtonAを押したときに表示するボタンセット
-    public GameObject[] buttonTrigB; // ButtonBを押したときに表示するボタンセット
+    [SerializeField] GameObject[] buttonTrigA; // ButtonAを押したときに表示するボタンセット
+    [SerializeField] GameObject[] buttonTrigB; // ButtonBを押したときに表示するボタンセット
 
-    private bool isButtonAToggled = false;
-    private bool isButtonBToggled = false;
+    [SerializeField] ImageManager imagemanager;
+
+    [SerializeField] bool[] isButtonToggled;
+
+    const int toggleNo = 3;
 
     void Start()
     {
+        isButtonToggled = new bool[toggleNo] { false, false, false };
+
         buttonA.onClick.AddListener(ToggleButtonsSetA);
         buttonB.onClick.AddListener(ToggleButtonsSetB);
     }
 
     void ToggleButtonsSetA() //ButtonA
     {
-
-        isButtonAToggled = !isButtonAToggled;
-
-        // ButtonAを押したときにはButtonBのセットを非表示にする
-        foreach (GameObject obj in buttonTrigB) obj.SetActive(false);
-
-        foreach (GameObject obj in buttonTrigA) obj.SetActive(isButtonAToggled);
-
-        // ButtonAのセットが表示されている場合、ButtonAを再度押すことで非表示にする
-        if (isButtonAToggled) isButtonAToggled = false;
+        ToggleButtonsSet(0);
     }
 
     void ToggleButtonsSetB() //ButtonB
     {
-        isButtonBToggled = !isButtonBToggled;
+        ToggleButtonsSet(1);
+    }
+
+    void ToggleButtonsSet(int i)
+    {
+        imagemanager.UnShowImage(); //image非表示
+
+        for (int j = 0; j < toggleNo; j++)
+        {
+            isButtonToggled[j] = false;
+        }
+
+        isButtonToggled[i] = true;
+
+        // ButtonAを押したときにはButtonBのセットを非表示にする
+        foreach (GameObject obj in buttonTrigB) obj.SetActive(false);
 
         // ButtonBを押したときにはButtonAのセットを非表示にする
         foreach (GameObject obj in buttonTrigA) obj.SetActive(false);
 
-        // ButtonBのセットを表示する
-        foreach (GameObject obj in buttonTrigB)  obj.SetActive(isButtonBToggled);
+        if (i == 0)
+        {
+            // ButtonAセットを表示する。
+            foreach (GameObject obj in buttonTrigA) obj.SetActive(true);
+        }
+        else if(i == 1)
+        {
+            // ButtonBのセットを表示する
+            foreach (GameObject obj in buttonTrigB) obj.SetActive(true);
+        }
+    }
 
-        if (isButtonBToggled) isButtonBToggled = false;
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            // ButtonAを押したときにはButtonBのセットを非表示にする
+            foreach (GameObject obj in buttonTrigB) obj.SetActive(false);
+
+            // ButtonBを押したときにはButtonAのセットを非表示にする
+            foreach (GameObject obj in buttonTrigA) obj.SetActive(false);
+        }
     }
 }
 
