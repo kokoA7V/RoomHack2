@@ -28,7 +28,16 @@ public class SightCheak : MonoBehaviour
             if (emHits.collider != null)
             {
                 Debug.Log(emHits.collider.gameObject.name+"‚ðŒŸ’m‚µ‚½(EnemyCheck)");
-                if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable)) return true ;
+                if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable)) {
+                    if (damageable.dmgLayer==0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
                 else return false;
             }
         }
