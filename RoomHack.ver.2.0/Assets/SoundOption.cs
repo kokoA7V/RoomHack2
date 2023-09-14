@@ -12,20 +12,20 @@ public class SoundOption : MonoBehaviour
 
     private void Start()
     {
-        audioMixer.GetFloat("BGMGroup", out float bgmVolume); //AudioMixerで設定した"BGMGroup"を呼び出し
+        audioMixer.GetFloat("BGMVolume", out float bgmVolume); //AudioMixerで設定した"BGMGroup"を呼び出し
         BGMSlider.value = bgmVolume;
-        audioMixer.GetFloat("SEGroup", out float seVolume);　 //AudioMixerで設定した"SEGrouop"を呼び出し
+        audioMixer.GetFloat("SEVolume", out float seVolume);　 //AudioMixerで設定した"SEGrouop"を呼び出し
         SESlider.value = seVolume;
     }
 
     public void SetBGM(float volume)
     {
-        audioMixer.SetFloat("BGMGroup", volume);
+        audioMixer.SetFloat("BGMVolume", volume);
     }
 
     public void SetSE(float volume)
     {
-        audioMixer.SetFloat("SEGroup", volume);
+        audioMixer.SetFloat("SEVolume", volume);
     }
 
 

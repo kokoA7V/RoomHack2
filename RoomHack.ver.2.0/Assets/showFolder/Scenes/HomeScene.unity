@@ -794,7 +794,7 @@ RectTransform:
   - {fileID: 1866382682}
   - {fileID: 428495236}
   m_Father: {fileID: 1212938457}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1225,7 +1225,7 @@ RectTransform:
   - {fileID: 1198812195}
   - {fileID: 920639817}
   m_Father: {fileID: 1212938457}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3127,8 +3127,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 432308980}
   - {fileID: 671121209}
+  - {fileID: 432308980}
   - {fileID: 1038054186}
   - {fileID: 1358024128}
   - {fileID: 1460786950}
@@ -3175,7 +3175,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2747310512702517917, guid: 4b57ab3d85cc55140b91cab157f2c13b, type: 2}
   m_audioClip: {fileID: 8300000, guid: f30d762c41445ae4d86f2b6d0ac5ff36, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3271,17 +3271,17 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2924742346189034435, guid: 4b57ab3d85cc55140b91cab157f2c13b, type: 2}
   m_audioClip: {fileID: 8300000, guid: f30d762c41445ae4d86f2b6d0ac5ff36, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 161
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0.34
+  Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -3315,7 +3315,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.53
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3368,8 +3368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 4b57ab3d85cc55140b91cab157f2c13b, type: 2}
-  BGMSlider: {fileID: 0}
-  SESlider: {fileID: 0}
+  BGMSlider: {fileID: 1866382683}
+  SESlider: {fileID: 428495235}
 --- !u!4 &1266283208
 Transform:
   m_ObjectHideFlags: 0
@@ -4083,8 +4083,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 443697382}
   m_HandleRect: {fileID: 946032124}
   m_Direction: 0
-  m_MinValue: -40
-  m_MaxValue: 20
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
