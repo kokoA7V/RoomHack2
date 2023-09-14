@@ -66,6 +66,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
     public Sprite icon;
     public Sprite frameSprite;
+    public SpriteRenderer frameSR;
 
     [Multiline]
     public string titleStr;

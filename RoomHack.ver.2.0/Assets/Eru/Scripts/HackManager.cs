@@ -115,7 +115,7 @@ public class HackManager : MonoBehaviour
             hackUI.lvText.text = enemyCon.lvStr[h];
             hackUI.comentText.text = enemyCon.comentStr;
 
-            if (h == 1) turretCon.frameSR.sprite = enemyCon.frameSprite;
+            if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;
         }
     }
 }
