@@ -102,5 +102,20 @@ public class HackManager : MonoBehaviour
 
             if (h == 1) turretCon.frameSR.sprite = turretCon.frameSprite;
         }
+
+        //エネミー
+        else if (hit.collider.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyCon))
+        {
+            hackUI._randomFlg = enemyCon.randomFlg;
+            hackUI._word = new string[enemyCon.word.Length];
+            for (int i = 0; i < enemyCon.word.Length; i++) hackUI._word[i] = enemyCon.word[i];
+
+            hackUI.imageIcon.sprite = enemyCon.icon;
+            hackUI.titleText.text = enemyCon.titleStr;
+            hackUI.lvText.text = enemyCon.lvStr[h];
+            hackUI.comentText.text = enemyCon.comentStr;
+
+            if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;
+        }
     }
 }

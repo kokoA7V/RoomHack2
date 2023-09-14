@@ -193,6 +193,23 @@ MonoBehaviour:
     gameType: 45
     dirType: 1
     rayFlg: 1
+  word:
+  - TYPING
+  randomFlg: 0
+  icon: {fileID: 0}
+  frameSprite: {fileID: 21300000, guid: 378104b8e42c6454f809d22a122cde3b, type: 3}
+  frameSR: {fileID: 8484085581071652382}
+  titleStr: Enemy1-1
+  lvStr:
+  - 'SecLv :1
+
+    UnHacked'
+  - 'SecLv :1
+
+    Hacked'
+  comentStr: '//Hacking
+
+    //OpenClose'
 --- !u!114 &4964421392328172577
 MonoBehaviour:
   m_ObjectHideFlags: 0

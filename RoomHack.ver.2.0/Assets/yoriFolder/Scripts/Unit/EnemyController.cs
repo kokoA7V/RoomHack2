@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour ,IUnitHack
 {
     private Vector3 movePos;
     private Vector2 moveDir;
@@ -57,7 +57,24 @@ public class EnemyController : MonoBehaviour
         Search,
         Num
     }
-    // Start is called before the first frame update
+
+    public string[] word;
+
+    public bool randomFlg;
+
+    public bool hacked { get; set; } = false;
+
+    public Sprite icon;
+    public Sprite frameSprite;
+    public SpriteRenderer frameSR;
+
+    [Multiline]
+    public string titleStr;
+    [Multiline]
+    public string[] lvStr = new string[2];
+    [Multiline]
+    public string comentStr;
+
     void Start()
     {
         eCore = GetComponent<UnitCore>();
@@ -140,6 +157,11 @@ public class EnemyController : MonoBehaviour
                 stateNo = (int)State.Shot;
                 break;
         }
+    }
+
+    public void StatusDisp()
+    {
+        Debug.Log("ハッキング完了");
     }
 
     void ActSearch()
