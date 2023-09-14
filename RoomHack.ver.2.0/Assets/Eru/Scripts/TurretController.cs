@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour, IUnitHack
@@ -25,32 +26,43 @@ public class TurretController : MonoBehaviour, IUnitHack
     private GameObject top;
 
     [SerializeField]
+    private GameObject bulletPrefab;
+
+    [SerializeField]
+    private float bulletSpeed = 3f;
+
+    [SerializeField]
+    private float shotTime = 1f;
+
+    [SerializeField,Header("ÉåÉCÇÃê›íË")]
     private RayCircle rayCircle = new RayCircle();
 
 
     private bool atkEnemyFlg = false;
     private bool shotFlg = false;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        GameObject obj = rayCircle.CircleChk(transform);
-
+        GameObject obj = rayCircle.CircleChk();
         if (obj == null) return;
-        ObjRotation(obj);
-        if (!shotFlg) return;
 
         if (!hacked)
         {
-            //if (obj.TryGetComponent<PlayerController>(out PlayerController pc)) Shoting(obj);
+            if (obj.TryGetComponent<MateController>(out MateController pc))
+            {
+                ObjRotation(obj);
+                if (!shotFlg) return;
+                StartCoroutine(Shoting());
+            }
         }
         else if(atkEnemyFlg)
         {
-            //if (obj.TryGetComponent<EnemyController>(out EnemyController ec)) Shoting(obj);
+            if (obj.TryGetComponent<EnemyController>(out EnemyController ec))
+            {
+                ObjRotation(obj);
+                if (!shotFlg) return;
+                StartCoroutine(Shoting());
+            }
         }
     }
 
@@ -70,9 +82,17 @@ public class TurretController : MonoBehaviour, IUnitHack
         else shotFlg = false;
     }
 
-    private void Shoting(GameObject obj)
+    private IEnumerator Shoting()
     {
-        //íeî≠éÀ
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+        Vector3 shootDirection = Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector3.up;
+        rb.velocity = shootDirection * bulletSpeed;
+
+        yield return new WaitForSeconds(shotTime);
+
+        yield break;
     }
 
     public void StatusDisp()

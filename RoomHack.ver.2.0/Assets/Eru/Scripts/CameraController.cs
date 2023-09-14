@@ -26,6 +26,6 @@ public class CameraController : MonoBehaviour, IUnitHack
 
     public void StatusDisp()
     {
-        Destroy(noiseObj);
+        noiseObj.SetActive(!noiseObj.activeSelf);
     }
 }

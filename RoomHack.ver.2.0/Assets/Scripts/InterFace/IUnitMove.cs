@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUnitMove 
 {
-    void Move(float moveSpd, GameObject unit);
+    void Move(float moveSpd, Vector3 unit);
 }
