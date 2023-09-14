@@ -68,12 +68,22 @@ public class EnemyController : MonoBehaviour ,IUnitHack
     public Sprite frameSprite;
     public SpriteRenderer frameSR;
 
+    [SerializeField]
+    private Sprite frameEnemySprite;
+
+    [SerializeField]
+    private float hackTime = 10f;
+
+    private float time;
+
     [Multiline]
     public string titleStr;
     [Multiline]
     public string[] lvStr = new string[2];
     [Multiline]
     public string comentStr;
+
+    private bool hackedFlg = false;
 
     void Start()
     {
@@ -103,6 +113,13 @@ public class EnemyController : MonoBehaviour ,IUnitHack
     // Update is called once per frame
     void Update()
     {
+        if (time > 0) time -= Time.deltaTime;
+        else if (hackedFlg && time <= 0)
+        {
+            hacked = false;
+            hackedFlg = false;
+            frameSR.sprite = frameEnemySprite;
+        }
         actFuncTbl[stateNo]();
     }
 
@@ -161,6 +178,9 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
     public void StatusDisp()
     {
+        if (!hacked) return;
+        if (time <= 0) time = hackTime;
+        hackedFlg = true;
         Debug.Log("ハッキング完了");
     }
 

@@ -106,6 +106,7 @@ public class TypingObj : MonoBehaviour
 
                                 //CoolHackUI生成
                                 hackManager.InstantHackUI(hit, unitHack);
+                                Debug.Log(unitHack.hacked);
                                 hackManager.nowObj = null;
                                 Destroy(gameObject);
                             }

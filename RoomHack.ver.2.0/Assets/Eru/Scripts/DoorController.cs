@@ -23,13 +23,18 @@ public class DoorController : MonoBehaviour ,IUnitHack
 
     public SpriteRenderer leftFrameSR, rightFrameSR;
 
-    public Sprite frameSprite;
+    public Sprite frameMateSprite;
+    [SerializeField]
+    private Sprite frameEnemySprite;
+
+    [SerializeField]
+    private float hackTime = 10f;
+
+    private float time;
 
     private BoxCollider2D bc2d;
 
-    [SerializeField]
     private bool flg = false;
-    [SerializeField]
     private bool openFlg = false;
 
     [SerializeField]
@@ -40,15 +45,37 @@ public class DoorController : MonoBehaviour ,IUnitHack
     [SerializeField]
     private float speed;
 
+    private bool hackedFlg = false;
+
     void Start()
     {
         bc2d = GetComponent<BoxCollider2D>();
         bc2d.isTrigger = false;
     }
 
+    private void Update()
+    {
+        if (time > 0) time -= Time.deltaTime;
+        else if (hackedFlg && time <= 0)
+        {
+            hacked = false;
+            hackedFlg = false;
+            leftFrameSR.sprite = frameEnemySprite;
+            rightFrameSR.sprite = frameEnemySprite;
+            bc2d.isTrigger = false;
+            if (openFlg)
+            {
+                StartCoroutine(Move());
+                flg = true;
+            }
+        }
+    }
+
     public void StatusDisp()
     {
-        if (flg) return;
+        if (flg || !hacked) return;
+        if (time <= 0) time = hackTime;
+        hackedFlg = true;
         bc2d.isTrigger = !bc2d.isTrigger;
         StartCoroutine(Move());
         flg = true;

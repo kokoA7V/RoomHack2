@@ -23,6 +23,14 @@ public class TurretController : MonoBehaviour, IUnitHack
     public Sprite frameSprite;
 
     [SerializeField]
+    private Sprite frameEnemySprite;
+
+    [SerializeField]
+    private float hackTime = 10f;
+
+    private float time;
+
+    [SerializeField]
     private GameObject top;
 
     [SerializeField]
@@ -40,9 +48,20 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     private bool atkEnemyFlg = false;
     private bool shotFlg = false;
+    private bool hackedFlg = false;
 
     void Update()
     {
+        if (time > 0) time -= Time.deltaTime;
+        else if (hackedFlg && time <= 0)
+        {
+            hacked = false;
+            hackedFlg = false;
+            frameSR.sprite = frameEnemySprite;
+            atkEnemyFlg = false;
+        }
+
+
         GameObject obj = rayCircle.CircleChk();
         if (obj == null) return;
 
@@ -97,6 +116,9 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     public void StatusDisp()
     {
+        if (!hacked) return;
+        if (time <= 0) time = hackTime;
+        hackedFlg = true;
         atkEnemyFlg = true;
     }
 }

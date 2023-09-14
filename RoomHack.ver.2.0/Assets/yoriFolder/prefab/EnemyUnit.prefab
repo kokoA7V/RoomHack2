@@ -210,6 +210,8 @@ MonoBehaviour:
   comentStr: '//Hacking
 
     //OpenClose'
+  frameEnemySprite: {fileID: 21300000, guid: 3354bd80b9f5ed54eb9d531a9769de04, type: 3}
+  hackTime: 10
 --- !u!114 &4964421392328172577
 MonoBehaviour:
   m_ObjectHideFlags: 0

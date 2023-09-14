@@ -143,6 +143,8 @@ MonoBehaviour:
   noiseObj: {fileID: 4018928411573309960}
   frameSR: {fileID: 4018928411756678744}
   frameSprite: {fileID: 21300000, guid: 5f9500da80cce304489b8722bc032831, type: 3}
+  frameEnemySprite: {fileID: 21300000, guid: 79f710b53dbd95342b2659ea84fdd9a9, type: 3}
+  hackTime: 10
 --- !u!1 &4018928411573309960
 GameObject:
   m_ObjectHideFlags: 0
