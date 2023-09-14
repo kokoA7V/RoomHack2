@@ -27,9 +27,9 @@ public class StartButtonController : MonoBehaviour
         while (true)
         {
             textCom.color = new Color(textCom.color.r, textCom.color.g, textCom.color.b, 0f);
-            yield return new WaitForSeconds(flashSpd);
-            textCom.color = new Color(textCom.color.r, textCom.color.g, textCom.color.b, 0.5f);
-            yield return new WaitForSeconds(flashSpd);
+            yield return new WaitForSeconds(flashSpd); //フレーム停止
+            textCom.color = new Color(textCom.color.r, textCom.color.g, textCom.color.b, 1f);
+            yield return new WaitForSeconds(flashSpd); //フレーム停止
         }
     }
 

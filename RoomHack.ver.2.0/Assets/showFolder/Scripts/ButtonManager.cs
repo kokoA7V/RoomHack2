@@ -7,9 +7,11 @@ public class ButtonManager : MonoBehaviour
 {
     [SerializeField] Button buttonA;
     [SerializeField] Button buttonB;
+    [SerializeField] Button OptionButton;
 
     [SerializeField] GameObject[] buttonTrigA; // ButtonAを押したときに表示するボタンセット
     [SerializeField] GameObject[] buttonTrigB; // ButtonBを押したときに表示するボタンセット
+    [SerializeField] GameObject OptionTrig;
 
     [SerializeField] ImageManager imagemanager;
 
@@ -21,8 +23,11 @@ public class ButtonManager : MonoBehaviour
     {
         isButtonToggled = new bool[toggleNo] { false, false, false };
 
+        //Unity内にあるOnClickの処理をプログラムで
+
         buttonA.onClick.AddListener(ToggleButtonsSetA);
         buttonB.onClick.AddListener(ToggleButtonsSetB);
+        OptionButton.onClick.AddListener(OptionButtonSet);
     }
 
     void ToggleButtonsSetA() //ButtonA
@@ -35,6 +40,10 @@ public class ButtonManager : MonoBehaviour
         ToggleButtonsSet(1);
     }
 
+    void OptionButtonSet()
+    {
+        ToggleButtonsSet(2);
+    }
     void ToggleButtonsSet(int i)
     {
         imagemanager.UnShowImage(); //image非表示
@@ -62,18 +71,25 @@ public class ButtonManager : MonoBehaviour
             // ButtonBのセットを表示する
             foreach (GameObject obj in buttonTrigB) obj.SetActive(true);
         }
+        else if(i == 2)
+        {
+            OptionTrig.SetActive(true);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
+        //ClickしたらUIを非表示にする処理
 
+        if (Input.GetMouseButtonDown(0))　
+        {
             // ButtonAを押したときにはButtonBのセットを非表示にする
             foreach (GameObject obj in buttonTrigB) obj.SetActive(false);
 
             // ButtonBを押したときにはButtonAのセットを非表示にする
             foreach (GameObject obj in buttonTrigA) obj.SetActive(false);
+
+            //OptionTrig.SetActive(false);
         }
     }
 }

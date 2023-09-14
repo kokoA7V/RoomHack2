@@ -7,15 +7,11 @@ public class ImageButton : MonoBehaviour,IPointerEnterHandler
 {
     public ImageManager imagemanager;
 
-    [SerializeField] int showImageNo;
+    [SerializeField] int showImageNo;@//‰æ‘œ‚ª•\¦‚³‚ê‚é”Ô†
 
     public void OnPointerEnter(PointerEventData eventData) //UI—v‘f‚ÉG‚ê‚½‚Æ‚«
     {
         Debug.Log("a");
         imagemanager.ShowImage(showImageNo);
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-
     }
 }

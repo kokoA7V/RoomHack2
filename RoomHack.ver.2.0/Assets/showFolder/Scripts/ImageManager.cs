@@ -12,13 +12,13 @@ public class ImageManager : MonoBehaviour
     int sprNo = 0;
 
     // Start is called before the first frame update
-    public void ShowImage(int n)
+    public void ShowImage(int n) //引数n
     {
-        sprNo = n;
+        sprNo = n;　//nに入る番号によって画像が切り替えれるように。
     }
     public void UnShowImage()
     {
-        sprNo = 0;
+        sprNo = 0; //非表示にする。0の番号には透明な画像を入れる予定。
     }
 
     private void Update()
