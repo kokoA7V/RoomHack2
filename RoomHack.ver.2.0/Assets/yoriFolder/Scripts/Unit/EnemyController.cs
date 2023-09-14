@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour ,IUnitHack
+public class EnemyController : MonoBehaviour 
 {
     private Vector3 movePos;
     private Vector2 moveDir;
@@ -50,6 +50,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
     [SerializeField, Header("ÉåÉCÇÃê›íË")]
     private RayCircle rayCircle = new RayCircle();
+
     enum State
     {
         Shot,
