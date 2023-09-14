@@ -83,8 +83,8 @@ public class HackManager : MonoBehaviour
 
             if (h == 1)
             {
-                doorCon.leftFrameSR.sprite = doorCon.frameSprite;
-                doorCon.rightFrameSR.sprite = doorCon.frameSprite;
+                doorCon.leftFrameSR.sprite = doorCon.frameMateSprite;
+                doorCon.rightFrameSR.sprite = doorCon.frameMateSprite;
             }
         }
 

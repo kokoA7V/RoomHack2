@@ -24,8 +24,33 @@ public class CameraController : MonoBehaviour, IUnitHack
 
     public Sprite frameSprite;
 
+    [SerializeField]
+    private Sprite frameEnemySprite;
+
+    [SerializeField]
+    private float hackTime = 10f;
+
+    private float time;
+
+    private bool hackedFlg = false;
+
+    private void Update()
+    {
+        if (time > 0) time -= Time.deltaTime;
+        else if(hackedFlg && time <= 0)
+        {
+            hacked = false;
+            hackedFlg = false;
+            frameSR.sprite = frameEnemySprite;
+            noiseObj.SetActive(true);
+        }
+    }
+
     public void StatusDisp()
     {
+        if (!hacked) return;
+        if (time <= 0) time = hackTime;
+        hackedFlg = true;
         noiseObj.SetActive(!noiseObj.activeSelf);
     }
 }
