@@ -37,6 +37,7 @@ public class HackUI : MonoBehaviour
     private void Update()
     {
         if (!unitHack.hacked && hackedFlg) Destroy(gameObject);
+        if (Input.GetKeyDown(KeyCode.Return)) PushButton();
     }
 
     public void PushButton()
