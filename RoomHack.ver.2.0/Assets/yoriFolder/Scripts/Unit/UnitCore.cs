@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitDamage,IUnitHack
+public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitDamage
 {
-    private UnitStatusDisp uStatusDisp = new UnitStatusDisp();
 
     public int maxHP { get; set; } = 3;
     public int nowHP { get; set; }
@@ -29,10 +28,5 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitDamage,IUnitHa
     public void Move(float moveSpd,Vector3 unit)
     {
         GetComponent<Move>().UnitMove(moveSpd,unit);
-    }
-
-    public void StatusDisp(bool hacked, float time, float hackTime, bool hackedFlg)
-    {
-        uStatusDisp.StatusDisp( hacked, time,  hackTime,  hackedFlg);
     }
 }

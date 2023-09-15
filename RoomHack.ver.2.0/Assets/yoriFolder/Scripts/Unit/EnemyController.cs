@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour 
+public class EnemyController : MonoBehaviour ,IUnitHack
 {
     private Vector3 movePos;
     private Vector2 moveDir;
