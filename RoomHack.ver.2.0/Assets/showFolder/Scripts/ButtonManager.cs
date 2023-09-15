@@ -89,7 +89,7 @@ public class ButtonManager : MonoBehaviour
             // ButtonBを押したときにはButtonAのセットを非表示にする
             foreach (GameObject obj in buttonTrigA) obj.SetActive(false);
 
-            OptionTrig.SetActive(false);
+            //OptionTrig.SetActive(false);
         }
     }
 }
