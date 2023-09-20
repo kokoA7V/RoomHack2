@@ -28,7 +28,7 @@ public class Move : MonoBehaviour
         //unitRb.AddForce(moveDir * _moveSpd);
         unitRb.velocity = moveDir * _moveSpd;
 
-        if (Mathf.Abs(movePos.x) <= 0.3f && Mathf.Abs(movePos.y) <= 0.3f)
+        if (Mathf.Abs(movePos.x) <= 0.5f && Mathf.Abs(movePos.y) <= 0.5f)
         {
             Debug.Log("Ž~‚Ü‚é‚æ");
             unitRb.velocity = Vector2.zero;
