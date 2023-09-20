@@ -26,7 +26,7 @@ public class TurretController : MonoBehaviour, IUnitHack
     private Sprite frameEnemySprite;
 
     [SerializeField]
-    private float hackTime = 10f;
+    private float[] hackTime = new float[3];
 
     private float time;
 
@@ -61,22 +61,34 @@ public class TurretController : MonoBehaviour, IUnitHack
             atkEnemyFlg = false;
         }
 
-
         GameObject obj = rayCircle.CircleChk();
-        if (obj == null) return;
 
-        if (!hacked)
+        if (atkEnemyFlg && GameData.TurretLv == 1)
         {
-            if (obj.TryGetComponent<MateController>(out MateController pc))
+            Debug.Log("É^ÉåÉbÉgí‚é~");
+            return;
+        }
+        else if (atkEnemyFlg && GameData.TurretLv == 2)
+        {
+            //åÎìÆçÏ
+
+        }
+        else if (atkEnemyFlg && GameData.TurretLv == 3)
+        {
+            if (obj == null) return;
+
+            if (obj.TryGetComponent<EnemyController>(out EnemyController ec))
             {
                 ObjRotation(obj);
                 if (!shotFlg) return;
                 StartCoroutine(Shoting());
             }
         }
-        else if(atkEnemyFlg)
+
+        if (obj == null) return;
+        if (!hacked)
         {
-            if (obj.TryGetComponent<EnemyController>(out EnemyController ec))
+            if (obj.TryGetComponent<MateController>(out MateController pc))
             {
                 ObjRotation(obj);
                 if (!shotFlg) return;
@@ -103,6 +115,8 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     private IEnumerator Shoting()
     {
+        yield return new WaitForSeconds(shotTime);
+
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
@@ -117,7 +131,7 @@ public class TurretController : MonoBehaviour, IUnitHack
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime;
+        if (time <= 0) time = hackTime[GameData.TurretLv - 1];
         hackedFlg = true;
         atkEnemyFlg = true;
     }

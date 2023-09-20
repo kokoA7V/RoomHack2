@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
     private Sprite frameEnemySprite;
 
     [SerializeField]
-    private float hackTime = 10f;
+    private float[] hackTime = new float[3];
 
     private float time;
 
@@ -179,7 +179,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime;
+        if (time <= 0) time = hackTime[GameData.EnemyLv - 1];
         hackedFlg = true;
         Debug.Log("ハッキング完了");
     }

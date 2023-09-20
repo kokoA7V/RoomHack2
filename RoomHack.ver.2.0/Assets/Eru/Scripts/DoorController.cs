@@ -28,7 +28,7 @@ public class DoorController : MonoBehaviour ,IUnitHack
     private Sprite frameEnemySprite;
 
     [SerializeField]
-    private float hackTime = 10f;
+    private float[] hackTime = new float[3];
 
     private float time;
 
@@ -74,7 +74,7 @@ public class DoorController : MonoBehaviour ,IUnitHack
     public void StatusDisp()
     {
         if (flg || !hacked) return;
-        if (time <= 0) time = hackTime;
+        if (time <= 0) time = hackTime[GameData.DoorLv - 1];
         hackedFlg = true;
         bc2d.isTrigger = !bc2d.isTrigger;
         StartCoroutine(Move());
