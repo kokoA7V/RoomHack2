@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Load : MonoBehaviour
 {
 
-	private AsyncOperation async;
+	public AsyncOperation async;
 
 	public Text loadingText;
 	public Slider loadingBar;
