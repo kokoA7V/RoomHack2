@@ -70,7 +70,13 @@ public class TurretController : MonoBehaviour, IUnitHack
             hackedFlg = false;
             frameSR.sprite = frameEnemySprite;
             atkEnemyFlg = false;
-            if (GameData.TurretLv == 1) transform.rotation = Quaternion.Euler(0f, 0f, startZ);
+            if (GameData.TurretLv == 1)
+            {
+                while (transform.eulerAngles.z > startZ + 3f || transform.eulerAngles.z < startZ - 3f)
+                {
+                    transform.rotation = Quaternion.RotateTowards(top.transform.rotation, Quaternion.Euler(0f, 0f, startZ), 5f);
+                }
+            }
         }
 
         if (shotTimer > 0) shotTimer -= Time.deltaTime;
