@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SightCheak : MonoBehaviour
@@ -13,7 +11,7 @@ public class SightCheak : MonoBehaviour
         Ray emCheackray = new Ray(origin, diredtion);
 
         // Ray‚ğ•\¦
-        Debug.DrawRay(emCheackray.origin, emCheackray.direction , Color.blue);
+        Debug.DrawRay(emCheackray.origin, emCheackray.direction, Color.blue);
 
         // ray‚Ì‹——£‚ğ§ŒÀ
         float maxDistance = 0.7f;
@@ -22,14 +20,15 @@ public class SightCheak : MonoBehaviour
         int layerMask = ~(1 << gameObject.layer);
 
         // ‰½‚©“–‚½‚Á‚½‚çpnt‚Éonj‚ğ“ü‚ê‚é
-        emHit = Physics2D.RaycastAll(emCheackray.origin, emCheackray.direction , maxDistance, layerMask);
+        emHit = Physics2D.RaycastAll(emCheackray.origin, emCheackray.direction, maxDistance, layerMask);
         foreach (RaycastHit2D emHits in emHit)
         {
             if (emHits.collider != null)
             {
-                Debug.Log(emHits.collider.gameObject.name+"‚ğŒŸ’m‚µ‚½(EnemyCheck)");
-                if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable)) {
-                    if (damageable.dmgLayer==0)
+                Debug.Log(emHits.collider.gameObject.name + "‚ğŒŸ’m‚µ‚½(EnemyCheck)");
+                if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable))
+                {
+                    if (damageable.dmgLayer == 0)
                     {
                         return false;
                     }
