@@ -226,7 +226,10 @@ MonoBehaviour:
   frameSR: {fileID: 3399257354534189314}
   frameSprite: {fileID: 21300000, guid: dadbe173327a52a459836bd764ee26d0, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: c5784b0aaf81ac743850cc1f0866466f, type: 3}
-  hackTime: 10
+  hackTime:
+  - 10
+  - 15
+  - 20
   top: {fileID: 3399257354056436488}
   bulletPrefab: {fileID: 725749280987857624, guid: 3dfdaf38eb9f09f4e9a611a534841af4, type: 3}
   bulletSpeed: 3

@@ -144,7 +144,10 @@ MonoBehaviour:
   frameSR: {fileID: 4018928411756678744}
   frameSprite: {fileID: 21300000, guid: 396f7e9014cc8154ca806a0a9c66f124, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: a67004a533c1e194788744fb45323b60, type: 3}
-  hackTime: 10
+  hackTime:
+  - 10
+  - 15
+  - 20
 --- !u!1 &4018928411573309960
 GameObject:
   m_ObjectHideFlags: 0
