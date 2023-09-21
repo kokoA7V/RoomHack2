@@ -743,8 +743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.82, y: -134.6}
-  m_SizeDelta: {x: 463.99, y: 53.81}
+  m_AnchoredPosition: {x: 14.64, y: -375.65}
+  m_SizeDelta: {x: 493.25, y: 116.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940008424
 MonoBehaviour:
@@ -837,11 +837,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 297d4d98b1441334cb40b0f8a303ce05, type: 3}
-    m_FontSize: 30
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 60
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2265,6 +2265,10 @@ PrefabInstance:
     - target: {fileID: 4106423967550404998, guid: d2bdbcce283199f40a1e93d0f2987ef4, type: 3}
       propertyPath: m_Name
       value: HackText
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106423967550404998, guid: d2bdbcce283199f40a1e93d0f2987ef4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4106423967550404999, guid: d2bdbcce283199f40a1e93d0f2987ef4, type: 3}
       propertyPath: m_Pivot.x
