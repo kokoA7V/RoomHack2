@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour, IUnitHack
     private Sprite frameEnemySprite;
 
     [SerializeField]
-    private float hackTime = 10f;
+    private float[] hackTime = new float[3];
 
     private float time;
 
@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour, IUnitHack
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime;
+        if (time <= 0) time = hackTime[GameData.CameraLv - 1];
         hackedFlg = true;
         noiseObj.SetActive(!noiseObj.activeSelf);
     }

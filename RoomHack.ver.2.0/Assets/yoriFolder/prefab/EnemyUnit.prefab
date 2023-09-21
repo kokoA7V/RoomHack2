@@ -184,12 +184,12 @@ MonoBehaviour:
   methodNo: 0
   rayCircle:
     tr: {fileID: 8484085580889226523}
-    numberOfRays: 15
-    detectionRange: 1
+    numberOfRays: 18
+    detectionRange: 3
     layerMask:
       serializedVersion: 2
       m_Bits: 128
-    chkType: 180
+    chkType: 360
     gameType: 45
     dirType: 1
     rayFlg: 1
@@ -200,7 +200,10 @@ MonoBehaviour:
   frameSprite: {fileID: 21300000, guid: 378104b8e42c6454f809d22a122cde3b, type: 3}
   frameSR: {fileID: 8484085581071652382}
   frameEnemySprite: {fileID: 21300000, guid: 3354bd80b9f5ed54eb9d531a9769de04, type: 3}
-  hackTime: 10
+  hackTime:
+  - 10
+  - 15
+  - 20
   titleStr: Enemy1-1
   lvStr:
   - 'SecLv :1

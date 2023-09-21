@@ -26,7 +26,7 @@ public class TurretController : MonoBehaviour, IUnitHack
     private Sprite frameEnemySprite;
 
     [SerializeField]
-    private float hackTime = 10f;
+    private float[] hackTime = new float[3];
 
     private float time;
 
@@ -41,14 +41,25 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     [SerializeField]
     private float shotTime = 1f;
+    private float shotTimer;
+
+    [SerializeField]
+    private float breakTime = 1f;
+    private float breakTimer;
 
     [SerializeField,Header("レイの設定")]
     private RayCircle rayCircle = new RayCircle();
 
+    private float startZ;
 
     private bool atkEnemyFlg = false;
     private bool shotFlg = false;
     private bool hackedFlg = false;
+
+    private void Start()
+    {
+        startZ = transform.eulerAngles.z;
+    }
 
     void Update()
     {
@@ -59,28 +70,55 @@ public class TurretController : MonoBehaviour, IUnitHack
             hackedFlg = false;
             frameSR.sprite = frameEnemySprite;
             atkEnemyFlg = false;
+            if (GameData.TurretLv == 1)
+            {
+                while (transform.eulerAngles.z > startZ + 3f || transform.eulerAngles.z < startZ - 3f)
+                {
+                    transform.rotation = Quaternion.RotateTowards(top.transform.rotation, Quaternion.Euler(0f, 0f, startZ), 5f);
+                }
+            }
         }
 
+        if (shotTimer > 0) shotTimer -= Time.deltaTime;
+        
 
         GameObject obj = rayCircle.CircleChk();
-        if (obj == null) return;
 
+        if (atkEnemyFlg && GameData.TurretLv == 0)
+        {
+            Debug.Log("タレット停止");
+            return;
+        }
+        else if (atkEnemyFlg && GameData.TurretLv == 1)
+        {
+            //誤動作
+            Debug.Log("タレット誤動作");
+            if (breakTimer > 0)
+            {
+                breakTimer -= Time.deltaTime;
+                transform.rotation = Quaternion.RotateTowards(top.transform.rotation, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)), 5f);
+                if (shotTimer <= 0) StartCoroutine(Shoting());
+            }
+            if (breakTimer <= 0) breakTimer = breakTime;
+        }
+        else if (atkEnemyFlg && GameData.TurretLv == 3)
+        {
+            if (obj == null) return;
+
+            if (obj.TryGetComponent<EnemyController>(out EnemyController ec))
+            {
+                ObjRotation(obj);
+                if (shotFlg && shotTimer <= 0) StartCoroutine(Shoting());
+            }
+        }
+
+        if (obj == null) return;
         if (!hacked)
         {
             if (obj.TryGetComponent<MateController>(out MateController pc))
             {
                 ObjRotation(obj);
-                if (!shotFlg) return;
-                StartCoroutine(Shoting());
-            }
-        }
-        else if(atkEnemyFlg)
-        {
-            if (obj.TryGetComponent<EnemyController>(out EnemyController ec))
-            {
-                ObjRotation(obj);
-                if (!shotFlg) return;
-                StartCoroutine(Shoting());
+                if (shotFlg && shotTimer <= 0) StartCoroutine(Shoting());
             }
         }
     }
@@ -97,12 +135,15 @@ public class TurretController : MonoBehaviour, IUnitHack
 
         // 目標の角度に対する許容誤差内になると向いたこととみなす
         float currentAngle = transform.eulerAngles.z;
-        if (Mathf.Abs(angle - currentAngle) < 3f || Mathf.Abs(angle - currentAngle) > 357f) shotFlg = true;
+        if (Mathf.Abs(angle - currentAngle) < 3f && Mathf.Abs(angle - currentAngle) > -3f || 
+            Mathf.Abs(angle - currentAngle) > 357f && Mathf.Abs(angle - currentAngle) < 363f) shotFlg = true;
         else shotFlg = false;
     }
 
     private IEnumerator Shoting()
     {
+        shotTimer = shotTime;
+
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
@@ -117,7 +158,7 @@ public class TurretController : MonoBehaviour, IUnitHack
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime;
+        if (time <= 0) time = hackTime[GameData.TurretLv - 1];
         hackedFlg = true;
         atkEnemyFlg = true;
     }
