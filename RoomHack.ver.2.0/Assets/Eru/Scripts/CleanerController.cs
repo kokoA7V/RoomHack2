@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlarmController : MonoBehaviour, IUnitHack
+public class CleanerController : MonoBehaviour, IUnitHack
 {
     public string[] word;
 
@@ -50,17 +50,17 @@ public class AlarmController : MonoBehaviour, IUnitHack
 
         if (hackedFlg && GameData.AlarmLv == 1)
         {
-            Debug.Log("Œx•ñ‘•’u’âŽ~");
+            Debug.Log("’âŽ~");
             return;
         }
-        else if(hackedFlg && GameData.AlarmLv == 2)
+        else if (hackedFlg && GameData.AlarmLv == 2)
         {
 
-            Debug.Log("Œx•ñ‘•’u”ÍˆÍƒAƒbƒv");
+            Debug.Log("–\‘–");
         }
-        else if(hackedFlg && GameData.AlarmLv == 3)
+        else if (hackedFlg && GameData.AlarmLv == 3)
         {
-            Debug.Log("Œx•ñ‘•’u”j‰ó");
+            Debug.Log("”š”j");
             Destroy(gameObject);
         }
     }
@@ -68,7 +68,7 @@ public class AlarmController : MonoBehaviour, IUnitHack
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime[GameData.AlarmLv - 1];
+        if (time <= 0) time = hackTime[GameData.CleanerLv - 1];
         hackedFlg = true;
     }
 }
