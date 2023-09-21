@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DigestionController : MonoBehaviour, IUnitHack
+public class ComputerController : MonoBehaviour, IUnitHack
 {
     public string[] word;
 
@@ -33,7 +33,7 @@ public class DigestionController : MonoBehaviour, IUnitHack
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -46,26 +46,22 @@ public class DigestionController : MonoBehaviour, IUnitHack
             frameSR.sprite = frameEnemySprite;
         }
 
-        if (hackedFlg && GameData.DigestionLv == 1)
+        if (hackedFlg && GameData.ComputerLv == 1)
         {
-            Debug.Log("ŒëŒx•ñ");
+            Debug.Log("ƒ[ƒ‹‚ªŒ©‚¦‚é");
             return;
         }
-        else if (hackedFlg && GameData.DigestionLv == 2)
+        else if (hackedFlg && GameData.ComputerLv == 2)
         {
 
-            Debug.Log("•Â‚¶‚ß");
-        }
-        else if (hackedFlg && GameData.DigestionLv == 3)
-        {
-            Debug.Log("‹Câ");
+            Debug.Log("Œë“®ì");
         }
     }
 
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime[GameData.DigestionLv - 1];
+        if (time <= 0) time = hackTime[GameData.ComputerLv - 1];
         hackedFlg = true;
     }
 }
