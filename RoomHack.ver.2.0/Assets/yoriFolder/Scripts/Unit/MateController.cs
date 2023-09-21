@@ -52,11 +52,7 @@ public class MateController : MonoBehaviour
     [SerializeField, Header("レイの設定")]
     private RayCircle rayCircle = new RayCircle();
 
-    const int PosHistorySize = 16;
-    private Queue<Vector3> _playerPosHistory = new Queue<Vector3>();
 
-    private Vector3 _targetPos;
-    private Vector3 _prevPlayerPos;
     enum State
     {
         Wait,
@@ -90,8 +86,6 @@ public class MateController : MonoBehaviour
         unit = null;
 
         movePos = this.transform.position;
-
-        InitPos();
     }
 
     void Update()
@@ -99,8 +93,7 @@ public class MateController : MonoBehaviour
         actFuncTbl[stateNo]();
         Debug.Log("StateNo " + stateNo);
 
-        UpdateTargetPos();
-        ShortCutTargetPos();
+
     }
     private void ActWait()
     {
@@ -215,50 +208,7 @@ public class MateController : MonoBehaviour
         }
     }
 
-    void UpdateTargetPos()
-    {
-        Vector3 currentPlayerPos = leaderObj.transform.position;
-        if (Vector3.Distance(currentPlayerPos, _prevPlayerPos) > 1.5f)
-        {
-            _prevPlayerPos = currentPlayerPos;
-            if (_playerPosHistory.Count >= PosHistorySize)
-            {
-                _targetPos = _playerPosHistory.Dequeue();
-
-                // たぶん引っかかってるのでワープさせちゃう
-                transform.position = _targetPos;
-            }
-            _playerPosHistory.Enqueue(currentPlayerPos);
-        }
-    }
-
-    void InitPos()
-    {
-        // 最初は自分の位置を目的地にしておく
-        _targetPos = transform.position;
-        _playerPosHistory.Enqueue(leaderObj.transform.position);
-
-        //for (int i = 0; i < PosHistorySize; ++i)
-        //{
-        //    var guide = Instantiate(posGuidePrefab);
-        //    guide.transform.position = transform.position;
-        //    _posGuides.Add(guide);
-        //}
-    }
-
-    // Mateが近くに来た時の処理
-    void ShortCutTargetPos()
-    {
-        if (Vector3.Distance(transform.position, leaderObj.transform.position) < 7.0f &&
-            _playerPosHistory.Count >= 4)
-        {
-            while (_playerPosHistory.Count > 4)
-            {
-                _playerPosHistory.Dequeue();
-            }
-            _targetPos = _playerPosHistory.Peek();
-        }
-    }
+   
     // いずれ別のクラスにするそれまではここ
     private Vector3 hitsPos;
     private Vector3 unitPos;
