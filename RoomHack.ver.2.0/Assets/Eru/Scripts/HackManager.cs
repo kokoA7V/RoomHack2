@@ -162,5 +162,35 @@ public class HackManager : MonoBehaviour
 
             if (h == 1) digestionCon.frameSR.sprite = digestionCon.frameSprite;
         }
+
+        //パソコン
+        else if (hit.collider.gameObject.TryGetComponent<ComputerController>(out ComputerController computerCon))
+        {
+            hackUI._randomFlg = computerCon.randomFlg;
+            hackUI._word = new string[computerCon.word.Length];
+            for (int i = 0; i < computerCon.word.Length; i++) hackUI._word[i] = computerCon.word[i];
+
+            hackUI.imageIcon.sprite = computerCon.icon;
+            hackUI.titleText.text = computerCon.titleStr;
+            hackUI.lvText.text = computerCon.lvStr[h];
+            hackUI.comentText.text = computerCon.comentStr;
+
+            if (h == 1) computerCon.frameSR.sprite = computerCon.frameSprite;
+        }
+
+        //エアコン
+        else if (hit.collider.gameObject.TryGetComponent<AriConditionerController>(out AriConditionerController ariConditionerCon))
+        {
+            hackUI._randomFlg = ariConditionerCon.randomFlg;
+            hackUI._word = new string[ariConditionerCon.word.Length];
+            for (int i = 0; i < ariConditionerCon.word.Length; i++) hackUI._word[i] = ariConditionerCon.word[i];
+
+            hackUI.imageIcon.sprite = ariConditionerCon.icon;
+            hackUI.titleText.text = ariConditionerCon.titleStr;
+            hackUI.lvText.text = ariConditionerCon.lvStr[h];
+            hackUI.comentText.text = ariConditionerCon.comentStr;
+
+            if (h == 1) ariConditionerCon.frameSR.sprite = ariConditionerCon.frameSprite;
+        }
     }
 }
