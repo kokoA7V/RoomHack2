@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MateController : MonoBehaviour
@@ -52,7 +50,6 @@ public class MateController : MonoBehaviour
     [SerializeField, Header("ÉåÉCÇÃê›íË")]
     private RayCircle rayCircle = new RayCircle();
 
-
     enum State
     {
         Wait,
@@ -92,9 +89,10 @@ public class MateController : MonoBehaviour
     {
         actFuncTbl[stateNo]();
         Debug.Log("StateNo " + stateNo);
-
-
     }
+
+
+
     private void ActWait()
     {
         switch (methodNo)
@@ -208,7 +206,7 @@ public class MateController : MonoBehaviour
         }
     }
 
-   
+
     // Ç¢Ç∏ÇÍï ÇÃÉNÉâÉXÇ…Ç∑ÇÈÇªÇÍÇ‹Ç≈ÇÕÇ±Ç±
     private Vector3 hitsPos;
     private Vector3 unitPos;

@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
     private Vector3 movePos;
-    
+
     [SerializeField]
     private float limitSpeed;
 
@@ -27,7 +26,7 @@ public class Move : MonoBehaviour
         InitPos();
     }
 
-    public void UnitMove(float _moveSpd,Vector3 _unit)
+    public void UnitMove(float _moveSpd, Vector3 _unit)
     {
 
         UpdateTargetPos();
@@ -35,7 +34,8 @@ public class Move : MonoBehaviour
 
         Debug.Log("“®‚¢‚Ä‚é");
         unit = _unit;
-        movePos = _unit - this.transform.position;
+
+        movePos = _targetPos - this.transform.position;
         //movePos = _unit.transform.position - this.transform.position;
         moveDir = movePos.normalized;
 
