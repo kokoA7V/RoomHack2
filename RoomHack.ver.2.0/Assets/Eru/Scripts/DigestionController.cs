@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CleanerController : MonoBehaviour, IUnitHack
+public class DigestionController : MonoBehaviour, IUnitHack
 {
     public string[] word;
 
@@ -48,27 +48,26 @@ public class CleanerController : MonoBehaviour, IUnitHack
             frameSR.sprite = frameEnemySprite;
         }
 
-        if (hackedFlg && GameData.CleanerLv == 1)
+        if (hackedFlg && GameData.DigestionLv == 1)
         {
-            Debug.Log("í‚é~");
+            Debug.Log("åÎåxïÒ");
             return;
         }
-        else if (hackedFlg && GameData.CleanerLv == 2)
+        else if (hackedFlg && GameData.DigestionLv == 2)
         {
 
-            Debug.Log("ñ\ëñ");
+            Debug.Log("ï¬Ç∂çûÇﬂ");
         }
-        else if (hackedFlg && GameData.CleanerLv == 3)
+        else if (hackedFlg && GameData.DigestionLv == 3)
         {
-            Debug.Log("îöîj");
-            Destroy(gameObject);
+            Debug.Log("ãCê‚");
         }
     }
 
     public void StatusDisp()
     {
         if (!hacked) return;
-        if (time <= 0) time = hackTime[GameData.CleanerLv - 1];
+        if (time <= 0) time = hackTime[GameData.DigestionLv - 1];
         hackedFlg = true;
     }
 }

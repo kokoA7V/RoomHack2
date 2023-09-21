@@ -119,33 +119,48 @@ public class HackManager : MonoBehaviour
         }
 
         //Œx•ñ‘•’u
-        else if (hit.collider.gameObject.TryGetComponent<AlarmController>(out AlarmController AlarmCon))
+        else if (hit.collider.gameObject.TryGetComponent<AlarmController>(out AlarmController alarmCon))
         {
-            hackUI._randomFlg = AlarmCon.randomFlg;
-            hackUI._word = new string[AlarmCon.word.Length];
-            for (int i = 0; i < AlarmCon.word.Length; i++) hackUI._word[i] = AlarmCon.word[i];
+            hackUI._randomFlg = alarmCon.randomFlg;
+            hackUI._word = new string[alarmCon.word.Length];
+            for (int i = 0; i < alarmCon.word.Length; i++) hackUI._word[i] = alarmCon.word[i];
 
-            hackUI.imageIcon.sprite = AlarmCon.icon;
-            hackUI.titleText.text = AlarmCon.titleStr;
-            hackUI.lvText.text = AlarmCon.lvStr[h];
-            hackUI.comentText.text = AlarmCon.comentStr;
+            hackUI.imageIcon.sprite = alarmCon.icon;
+            hackUI.titleText.text = alarmCon.titleStr;
+            hackUI.lvText.text = alarmCon.lvStr[h];
+            hackUI.comentText.text = alarmCon.comentStr;
 
-            if (h == 1) AlarmCon.frameSR.sprite = AlarmCon.frameSprite;
+            if (h == 1) alarmCon.frameSR.sprite = alarmCon.frameSprite;
         }
 
         //‚¨‘|œƒƒ{ƒbƒg
-        else if (hit.collider.gameObject.TryGetComponent<CleanerController>(out CleanerController CleanerCon))
+        else if (hit.collider.gameObject.TryGetComponent<CleanerController>(out CleanerController cleanerCon))
         {
-            hackUI._randomFlg = CleanerCon.randomFlg;
-            hackUI._word = new string[CleanerCon.word.Length];
-            for (int i = 0; i < CleanerCon.word.Length; i++) hackUI._word[i] = CleanerCon.word[i];
+            hackUI._randomFlg = cleanerCon.randomFlg;
+            hackUI._word = new string[cleanerCon.word.Length];
+            for (int i = 0; i < cleanerCon.word.Length; i++) hackUI._word[i] = cleanerCon.word[i];
 
-            hackUI.imageIcon.sprite = CleanerCon.icon;
-            hackUI.titleText.text = CleanerCon.titleStr;
-            hackUI.lvText.text = CleanerCon.lvStr[h];
-            hackUI.comentText.text = CleanerCon.comentStr;
+            hackUI.imageIcon.sprite = cleanerCon.icon;
+            hackUI.titleText.text = cleanerCon.titleStr;
+            hackUI.lvText.text = cleanerCon.lvStr[h];
+            hackUI.comentText.text = cleanerCon.comentStr;
 
-            if (h == 1) CleanerCon.frameSR.sprite = CleanerCon.frameSprite;
+            if (h == 1) cleanerCon.frameSR.sprite = cleanerCon.frameSprite;
+        }
+
+        //Á‰ÎÝ”õ
+        else if (hit.collider.gameObject.TryGetComponent<DigestionController>(out DigestionController digestionCon))
+        {
+            hackUI._randomFlg = digestionCon.randomFlg;
+            hackUI._word = new string[digestionCon.word.Length];
+            for (int i = 0; i < digestionCon.word.Length; i++) hackUI._word[i] = digestionCon.word[i];
+
+            hackUI.imageIcon.sprite = digestionCon.icon;
+            hackUI.titleText.text = digestionCon.titleStr;
+            hackUI.lvText.text = digestionCon.lvStr[h];
+            hackUI.comentText.text = digestionCon.comentStr;
+
+            if (h == 1) digestionCon.frameSR.sprite = digestionCon.frameSprite;
         }
     }
 }
