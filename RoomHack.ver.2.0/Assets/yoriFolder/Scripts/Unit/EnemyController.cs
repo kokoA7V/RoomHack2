@@ -50,6 +50,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
     [SerializeField, Header("ƒŒƒC‚Ìİ’è")]
     private RayCircle rayCircle = new RayCircle();
+
     enum State
     {
         Shot,
