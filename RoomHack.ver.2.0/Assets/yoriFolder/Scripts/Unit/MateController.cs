@@ -91,8 +91,6 @@ public class MateController : MonoBehaviour
         Debug.Log("StateNo " + stateNo);
     }
 
-
-
     private void ActWait()
     {
         switch (methodNo)
@@ -165,9 +163,26 @@ public class MateController : MonoBehaviour
                     if (leaderObj == null)
                     {
                         leader = true;
+
                         mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
                     }
-                    movePos = leaderObj.transform.position;
+                    else
+                    {
+                        movePos = leaderObj.transform.position;
+                    }
+
+
+                    if (Mathf.Abs(movePos.x - this.transform.position.x) <= 1f &&
+                        Mathf.Abs(movePos.y - this.transform.position.y) <= 1f)
+                    {
+                        Debug.Log("Ž~‚Ü‚é‚æ(Mate)");
+                        plRb.velocity = Vector2.zero;
+                        moveSpd = 0;
+                    }
+                    else
+                    {
+                        moveSpd = mateCore.moveSpd;
+                    }
                 }
                 Debug.Log("Move" + moveSpd);
 

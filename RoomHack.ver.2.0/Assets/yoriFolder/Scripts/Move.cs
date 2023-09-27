@@ -35,8 +35,8 @@ public class Move : MonoBehaviour
         Debug.Log("ìÆÇ¢ÇƒÇÈ");
         unit = _unit;
 
-        movePos = _targetPos - this.transform.position;
-        //movePos = _unit.transform.position - this.transform.position;
+        //movePos = _targetPos - this.transform.position;
+        movePos = _unit - this.transform.position;
         moveDir = movePos.normalized;
 
         //unitRb.AddForce(moveDir * _moveSpd);
@@ -46,7 +46,7 @@ public class Move : MonoBehaviour
         {
             Debug.Log("é~Ç‹ÇÈÇÊ");
             unitRb.velocity = Vector2.zero;
-            _targetPos = _playerPosHistory.Dequeue();
+            //_targetPos = _playerPosHistory.Dequeue();
         }
         // óÕÇÃâ¡ÇÌÇÈï˚å¸Ç…ê≥ñ ÇçáÇÌÇπÇÈ
         transform.up = movePos.normalized;
