@@ -84,12 +84,12 @@ public class TurretController : MonoBehaviour, IUnitHack
 
         GameObject obj = rayCircle.CircleChk();
 
-        if (atkEnemyFlg && GameData.TurretLv == 0)
+        if (atkEnemyFlg && GameData.TurretLv == 1)
         {
             Debug.Log("タレット停止");
             return;
         }
-        else if (atkEnemyFlg && GameData.TurretLv == 1)
+        else if (atkEnemyFlg && GameData.TurretLv == 2)
         {
             //誤動作
             Debug.Log("タレット誤動作");

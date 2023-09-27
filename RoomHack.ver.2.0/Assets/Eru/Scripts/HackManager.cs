@@ -117,5 +117,80 @@ public class HackManager : MonoBehaviour
 
             if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;
         }
+
+        //警報装置
+        else if (hit.collider.gameObject.TryGetComponent<AlarmController>(out AlarmController alarmCon))
+        {
+            hackUI._randomFlg = alarmCon.randomFlg;
+            hackUI._word = new string[alarmCon.word.Length];
+            for (int i = 0; i < alarmCon.word.Length; i++) hackUI._word[i] = alarmCon.word[i];
+
+            hackUI.imageIcon.sprite = alarmCon.icon;
+            hackUI.titleText.text = alarmCon.titleStr;
+            hackUI.lvText.text = alarmCon.lvStr[h];
+            hackUI.comentText.text = alarmCon.comentStr;
+
+            if (h == 1) alarmCon.frameSR.sprite = alarmCon.frameSprite;
+        }
+
+        //お掃除ロボット
+        else if (hit.collider.gameObject.TryGetComponent<CleanerController>(out CleanerController cleanerCon))
+        {
+            hackUI._randomFlg = cleanerCon.randomFlg;
+            hackUI._word = new string[cleanerCon.word.Length];
+            for (int i = 0; i < cleanerCon.word.Length; i++) hackUI._word[i] = cleanerCon.word[i];
+
+            hackUI.imageIcon.sprite = cleanerCon.icon;
+            hackUI.titleText.text = cleanerCon.titleStr;
+            hackUI.lvText.text = cleanerCon.lvStr[h];
+            hackUI.comentText.text = cleanerCon.comentStr;
+
+            if (h == 1) cleanerCon.frameSR.sprite = cleanerCon.frameSprite;
+        }
+
+        //消火設備
+        else if (hit.collider.gameObject.TryGetComponent<DigestionController>(out DigestionController digestionCon))
+        {
+            hackUI._randomFlg = digestionCon.randomFlg;
+            hackUI._word = new string[digestionCon.word.Length];
+            for (int i = 0; i < digestionCon.word.Length; i++) hackUI._word[i] = digestionCon.word[i];
+
+            hackUI.imageIcon.sprite = digestionCon.icon;
+            hackUI.titleText.text = digestionCon.titleStr;
+            hackUI.lvText.text = digestionCon.lvStr[h];
+            hackUI.comentText.text = digestionCon.comentStr;
+
+            if (h == 1) digestionCon.frameSR.sprite = digestionCon.frameSprite;
+        }
+
+        //パソコン
+        else if (hit.collider.gameObject.TryGetComponent<ComputerController>(out ComputerController computerCon))
+        {
+            hackUI._randomFlg = computerCon.randomFlg;
+            hackUI._word = new string[computerCon.word.Length];
+            for (int i = 0; i < computerCon.word.Length; i++) hackUI._word[i] = computerCon.word[i];
+
+            hackUI.imageIcon.sprite = computerCon.icon;
+            hackUI.titleText.text = computerCon.titleStr;
+            hackUI.lvText.text = computerCon.lvStr[h];
+            hackUI.comentText.text = computerCon.comentStr;
+
+            if (h == 1) computerCon.frameSR.sprite = computerCon.frameSprite;
+        }
+
+        //エアコン
+        else if (hit.collider.gameObject.TryGetComponent<AriConditionerController>(out AriConditionerController ariConditionerCon))
+        {
+            hackUI._randomFlg = ariConditionerCon.randomFlg;
+            hackUI._word = new string[ariConditionerCon.word.Length];
+            for (int i = 0; i < ariConditionerCon.word.Length; i++) hackUI._word[i] = ariConditionerCon.word[i];
+
+            hackUI.imageIcon.sprite = ariConditionerCon.icon;
+            hackUI.titleText.text = ariConditionerCon.titleStr;
+            hackUI.lvText.text = ariConditionerCon.lvStr[h];
+            hackUI.comentText.text = ariConditionerCon.comentStr;
+
+            if (h == 1) ariConditionerCon.frameSR.sprite = ariConditionerCon.frameSprite;
+        }
     }
 }
