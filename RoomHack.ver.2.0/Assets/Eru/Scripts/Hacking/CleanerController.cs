@@ -31,9 +31,15 @@ public class CleanerController : MonoBehaviour, IUnitHack
 
     private bool hackedFlg = false;
 
+    private Rigidbody2D rb;
+
+    [SerializeField, Header("ˆÚ“®‘¬“x")]
+    private float speed = 3f;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * speed;
     }
 
     void Update()
@@ -53,7 +59,6 @@ public class CleanerController : MonoBehaviour, IUnitHack
         }
         else if (hackedFlg && GameData.CleanerLv == 2)
         {
-
             Debug.Log("–\‘–");
         }
         else if (hackedFlg && GameData.CleanerLv == 3)
