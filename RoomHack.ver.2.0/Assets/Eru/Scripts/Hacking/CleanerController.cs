@@ -36,6 +36,8 @@ public class CleanerController : MonoBehaviour, IUnitHack
     [SerializeField, Header("ˆÚ“®‘¬“x")]
     private float speed = 3f;
 
+    private bool flg = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,16 +52,20 @@ public class CleanerController : MonoBehaviour, IUnitHack
             hacked = false;
             hackedFlg = false;
             frameSR.sprite = frameEnemySprite;
+            rb.velocity = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * speed;
+            flg = false;
         }
 
         if (hackedFlg && GameData.CleanerLv == 1)
         {
             Debug.Log("’âŽ~");
+            rb.velocity = Vector2.zero;
             return;
         }
         else if (hackedFlg && GameData.CleanerLv == 2)
         {
             Debug.Log("–\‘–");
+            flg = true;
         }
         else if (hackedFlg && GameData.CleanerLv == 3)
         {
@@ -73,5 +79,10 @@ public class CleanerController : MonoBehaviour, IUnitHack
         if (!hacked) return;
         if (time <= 0) time = hackTime[GameData.CleanerLv - 1];
         hackedFlg = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(flg) rb.velocity = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * speed * 1.5f;
     }
 }

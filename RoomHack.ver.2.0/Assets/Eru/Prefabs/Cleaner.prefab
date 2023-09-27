@@ -121,7 +121,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 3ef0765dfd5948246b1717bdd07dbf61, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8323737506743731875
 MonoBehaviour:
@@ -139,16 +139,22 @@ MonoBehaviour:
   - TYPING
   randomFlg: 0
   icon: {fileID: 21300000, guid: aea7181968529f9488e57e9903e3bc58, type: 3}
-  titleStr: aadsf
+  titleStr: Cleaner1-1
   lvStr:
-  - safd
-  - fdsa
-  comentStr: afds
+  - 'SecLv :1
+
+    UnHacked'
+  - 'SecLv :1
+
+    Hacked'
+  comentStr: '//Hacking
+
+    //OpenClose'
   frameSR: {fileID: 8323737506743731872}
   frameSprite: {fileID: 21300000, guid: 396f7e9014cc8154ca806a0a9c66f124, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: a67004a533c1e194788744fb45323b60, type: 3}
   hackTime:
   - 10
-  - 10
-  - 10
+  - 15
+  - 20
   speed: 3
