@@ -10,6 +10,11 @@ public class StartSceneTextManager : MonoBehaviour
 
     string[] dispText = new string[13];
 
+    float textDelayTotal = 0.5f;
+
+    float delay;
+    Vector3 move;
+
     private void Start()
     {
         int index = -1;
@@ -19,7 +24,7 @@ public class StartSceneTextManager : MonoBehaviour
             SCT[index] = obj.GetComponent<HackText>();
         }
 
-        dispText[0] = "ユーザーのデバイスステータスを確認中";
+        dispText[0] = "Checking user device status";
         dispText[1] = "batteryLevel: " + SystemInfo.batteryLevel * 100 + "%";
         dispText[2] = "deviceModel: " + SystemInfo.deviceModel;
         dispText[3] = "deviceType: " + SystemInfo.deviceType;
@@ -29,8 +34,8 @@ public class StartSceneTextManager : MonoBehaviour
         dispText[7] = "processorType: " + SystemInfo.processorType;
         dispText[8] = "supportsLocationService: " + SystemInfo.supportsLocationService;
         dispText[9] = "systemMemorySize: " + SystemInfo.systemMemorySize;
-        dispText[10] = "起動申請を認証中";
-        dispText[11] = "認証確認　RoomHack.exe Activate";
+        dispText[10] = "Activation application is being verified";
+        dispText[11] = "Authentication Confirmation RoomHack.exe Activate";
         dispText[12] = "...\n";
 
         SCT[0].inputText = dispText[0];
@@ -43,14 +48,17 @@ public class StartSceneTextManager : MonoBehaviour
         SCT[3].inputText = dispText[12];
         SCT[4].inputText = dispText[11];
 
-        SCT[0].textDelay = 5;
-        SCT[1].textDelay = 60;
-        SCT[2].textDelay = 5;
-        SCT[3].textDelay = 60;
-        SCT[4].textDelay = 7;
+        SCT[0].textDelay = 5 * textDelayTotal;
+        SCT[1].textDelay = 60 * textDelayTotal;
+        SCT[2].textDelay = 5 * textDelayTotal;
+        SCT[3].textDelay = 60 * textDelayTotal;
+        SCT[4].textDelay = 7 * textDelayTotal;
 
         SCT[1].afterDelay = 60;
         SCT[3].afterDelay = 60;
+
+        delay = 0;
+        move = new Vector3(0, 50, 0);
     }
 
     private void Update()
@@ -79,7 +87,18 @@ public class StartSceneTextManager : MonoBehaviour
 
         if (SCT[4].textEnd == true)
         {
-            SceneManager.LoadScene("TitleScene");
+            //SceneManager.LoadScene("TitleScene");
+
+            delay += Time.deltaTime;
+            if(delay >= 0.3)
+            {
+                SCT[0].GetComponent<RectTransform>().anchoredPosition3D += move;
+                SCT[1].GetComponent<RectTransform>().anchoredPosition3D += move;
+                SCT[2].GetComponent<RectTransform>().anchoredPosition3D += move;
+                SCT[3].GetComponent<RectTransform>().anchoredPosition3D += move;
+                SCT[4].GetComponent<RectTransform>().anchoredPosition3D += move;
+                delay = 0;
+            }
         }
     }
 }

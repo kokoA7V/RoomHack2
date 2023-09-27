@@ -11,7 +11,7 @@ public class HackText : MonoBehaviour
     public bool textEnd = false;
 
     // 一文字あたりのディレイフレーム
-    public int textDelay = 10;
+    public float textDelay = 10;
 
     // Start時とEnd時のそれぞれのディレイ
     public int beforeDelay = 0;
