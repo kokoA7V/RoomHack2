@@ -24,10 +24,20 @@ public class HackUI : MonoBehaviour
 
     public Text titleText, lvText, comentText;
 
+    private bool hackedFlg = false;
+
     void Start()
     {
         // RectTransformÇÃç¿ïWÇê›íË
         HackUIPos.anchoredPosition = targetPosition;
+        if (unitHack.hacked) hackedFlg = true;
+        else hackedFlg = false;
+    }
+
+    private void Update()
+    {
+        if (!unitHack.hacked && hackedFlg) Destroy(gameObject);
+        if (Input.GetKeyDown(KeyCode.Return)) PushButton();
     }
 
     public void PushButton()

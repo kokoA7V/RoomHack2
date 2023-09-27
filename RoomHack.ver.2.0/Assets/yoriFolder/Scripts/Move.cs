@@ -28,11 +28,11 @@ public class Move : MonoBehaviour
         //unitRb.AddForce(moveDir * _moveSpd);
         unitRb.velocity = moveDir * _moveSpd;
 
-        //if (Mathf.Abs(movePos.x) <= 0.1f && Mathf.Abs(movePos.y) <= 0.1f)
-        //{
-        //    Debug.Log("Ž~‚Ü‚é‚æ");
-        //    unitRb.velocity = Vector2.zero;
-        //}
+        if (Mathf.Abs(movePos.x) <= 0.3f && Mathf.Abs(movePos.y) <= 0.3f)
+        {
+            Debug.Log("Ž~‚Ü‚é‚æ");
+            unitRb.velocity = Vector2.zero;
+        }
         // —Í‚Ì‰Á‚í‚é•ûŒü‚É³–Ê‚ð‡‚í‚¹‚é
         transform.up = movePos.normalized;
 

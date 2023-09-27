@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour ,IUnitHack
 {
     private Vector3 movePos;
     private Vector2 moveDir;
@@ -50,6 +50,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField, Header("レイの設定")]
     private RayCircle rayCircle = new RayCircle();
+
     enum State
     {
         Shot,
@@ -57,7 +58,34 @@ public class EnemyController : MonoBehaviour
         Search,
         Num
     }
-    // Start is called before the first frame update
+
+    public string[] word;
+
+    public bool randomFlg;
+
+    public bool hacked { get; set; } = false;
+
+    public Sprite icon;
+    public Sprite frameSprite;
+    public SpriteRenderer frameSR;
+
+    [SerializeField]
+    private Sprite frameEnemySprite;
+
+    [SerializeField]
+    private float[] hackTime = new float[3];
+
+    private float time;
+
+    [Multiline]
+    public string titleStr;
+    [Multiline]
+    public string[] lvStr = new string[2];
+    [Multiline]
+    public string comentStr;
+
+    private bool hackedFlg = false;
+
     void Start()
     {
         eCore = GetComponent<UnitCore>();
@@ -86,6 +114,13 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (time > 0) time -= Time.deltaTime;
+        else if (hackedFlg && time <= 0)
+        {
+            hacked = false;
+            hackedFlg = false;
+            frameSR.sprite = frameEnemySprite;
+        }
         actFuncTbl[stateNo]();
     }
 
@@ -140,6 +175,14 @@ public class EnemyController : MonoBehaviour
                 stateNo = (int)State.Shot;
                 break;
         }
+    }
+
+    public void StatusDisp()
+    {
+        if (!hacked) return;
+        if (time <= 0) time = hackTime[GameData.EnemyLv - 1];
+        hackedFlg = true;
+        Debug.Log("ハッキング完了");
     }
 
     void ActSearch()
