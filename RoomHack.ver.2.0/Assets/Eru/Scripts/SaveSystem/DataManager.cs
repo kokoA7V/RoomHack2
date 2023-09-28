@@ -1,18 +1,18 @@
-//ƒf[ƒ^‚ğƒZ[ƒu‚µ‚½‚è“Ç‚İ‚ñ‚¾‚è‚µ‚Ü‚·
+//ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒ¼ãƒ–ã—ãŸã‚Šèª­ã¿è¾¼ã‚“ã ã‚Šã—ã¾ã™
 
 using UnityEngine;
 using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    //ƒNƒ‰ƒX‚ÌQÆ
+    //ã‚¯ãƒ©ã‚¹ã®å‚ç…§
     public Save saveClass;
     public Read readClass;
 
-    //ƒZ[ƒuƒtƒ@ƒCƒ‹w’è•Ï”
+    //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®šå¤‰æ•°
     public static int saveFile = 1;
 
-    //ƒZ[ƒuƒf[ƒ^‚ª‚ ‚é‚©‚Ì”»’è•Ï”
+    //ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹ã‹ã®åˆ¤å®šå¤‰æ•°
     public static bool saveData = false;
 
     void Start()
@@ -22,17 +22,17 @@ public class DataManager : MonoBehaviour
 
     public void Read()
     {
-        //“Ç‚İ‚Ş
+        //èª­ã¿è¾¼ã‚€
         readClass.enabled = true;
-        Debug.Log("“Ç‚İ‚İ‚ª‚¨‚í‚è‚Ü‚µ‚½");
+        Debug.Log("èª­ã¿è¾¼ã¿ãŒãŠã‚ã‚Šã¾ã—ãŸ");
     }
 
     public void Save()
     {
-        //ƒZ[ƒu‚·‚é
+        //ã‚»ãƒ¼ãƒ–ã™ã‚‹
         saveClass.enabled = true;
         readClass.enabled = true;
-        Debug.Log("ƒZ[ƒu‚ª‚Å‚«‚Ü‚µ‚½");
+        Debug.Log("ã‚»ãƒ¼ãƒ–ãŒã§ãã¾ã—ãŸ");
     }
 
     private void OnDestroy()
@@ -40,46 +40,46 @@ public class DataManager : MonoBehaviour
         Save();
     }
 
-    //ƒZ[ƒuƒf[ƒ^íœ
+    //ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿å‰Šé™¤
     public void Delete()
     {
 #if UNITY_EDITOR
-        //UnityEditorã‚È‚ç
-        //Assetƒtƒ@ƒCƒ‹‚Ì’†‚ÌSaveƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //UnityEditorä¸Šãªã‚‰
+        //Assetãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­ã®Saveãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         string path = Application.dataPath + "/Save";
 
 #else
-        //‚»‚¤‚Å‚È‚¯‚ê‚Î
-        //.exe‚ª‚ ‚é‚Æ‚±‚ë‚ÉSaveƒtƒ@ƒCƒ‹‚ğì¬‚µ‚»‚±‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //ãã†ã§ãªã‘ã‚Œã°
+        //.exeãŒã‚ã‚‹ã¨ã“ã‚ã«Saveãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         Directory.CreateDirectory("Save");
         string path = Directory.GetCurrentDirectory() + "/Save";
 
 #endif
 
-        //ƒtƒ@ƒCƒ‹íœ
+        //ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
         File.Delete(path + "/save" + saveFile + ".bytes");
 
-        //ƒŠƒ[ƒh
+        //ãƒªãƒ­ãƒ¼ãƒ‰
         readClass.enabled = true;
 
-        Debug.Log("ƒf[ƒ^‚Ìíœ‚ªI‚í‚è‚Ü‚µ‚½");
+        Debug.Log("ãƒ‡ãƒ¼ã‚¿ã®å‰Šé™¤ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ");
     }
 
-    //ƒtƒ@ƒCƒ‹‚P
+    //ãƒ•ã‚¡ã‚¤ãƒ«ï¼‘
     public void File1()
     {
         saveFile = 1;
         Read();
     }
 
-    //ƒtƒ@ƒCƒ‹2
+    //ãƒ•ã‚¡ã‚¤ãƒ«2
     public void File2()
     {
         saveFile = 2;
         Read();
     }
 
-    //ƒtƒ@ƒCƒ‹3
+    //ãƒ•ã‚¡ã‚¤ãƒ«3
     public void File3()
     {
         saveFile = 3;

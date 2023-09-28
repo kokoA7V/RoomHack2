@@ -27,7 +27,7 @@ public class HackManager : MonoBehaviour
 
             if (hit.collider != null && hit.collider.gameObject.TryGetComponent<IUnitHack>(out IUnitHack iUnitHack))
             {
-                // ƒNƒŠƒbƒNˆ—
+                // ã‚¯ãƒªãƒƒã‚¯å‡¦ç†
                 if (HackUIObj == null) return;
                 if (nowObj == hit.collider.gameObject) return;
                 nowObj = hit.collider.gameObject;
@@ -38,9 +38,9 @@ public class HackManager : MonoBehaviour
         }
     }
 
-    public void InstantHackUI(RaycastHit2D hit,IUnitHack iUnitHack)
+    public void InstantHackUI(RaycastHit2D hit, IUnitHack iUnitHack)
     {
-        //HackUI‚ğ¶¬
+        //HackUIã‚’ç”Ÿæˆ
         nowHackUI = Instantiate(HackUIObj);
         HackUI hackUI = nowHackUI.GetComponent<HackUI>();
         hackUI.hackManager = GetComponent<HackManager>();
@@ -54,7 +54,7 @@ public class HackManager : MonoBehaviour
         }
         else h = 0;
 
-        //ƒJƒƒ‰
+        //ã‚«ãƒ¡ãƒ©ã‚„ã§
         if (hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
         {
             hackUI._randomFlg = cameraCon.randomFlg;
@@ -66,10 +66,10 @@ public class HackManager : MonoBehaviour
             hackUI.lvText.text = cameraCon.lvStr[h];
             hackUI.comentText.text = cameraCon.comentStr;
 
-            if(h == 1) cameraCon.frameSR.sprite = cameraCon.frameSprite;
+            if (h == 1) cameraCon.frameSR.sprite = cameraCon.frameSprite;
         }
 
-        //ƒhƒA
+        //ãƒ‰ã‚¢
         else if (hit.collider.gameObject.TryGetComponent<DoorController>(out DoorController doorCon))
         {
             hackUI._randomFlg = doorCon.randomFlg;
@@ -88,7 +88,7 @@ public class HackManager : MonoBehaviour
             }
         }
 
-        //ƒ^ƒŒƒbƒg
+        //ã‚¿ãƒ¬ãƒƒãƒˆ
         else if (hit.collider.gameObject.TryGetComponent<TurretController>(out TurretController turretCon))
         {
             hackUI._randomFlg = turretCon.randomFlg;
@@ -103,7 +103,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) turretCon.frameSR.sprite = turretCon.frameSprite;
         }
 
-        //ƒGƒlƒ~[
+        //ã‚¨ãƒãƒŸãƒ¼
         else if (hit.collider.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyCon))
         {
             hackUI._randomFlg = enemyCon.randomFlg;
@@ -118,7 +118,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;
         }
 
-        //Œx•ñ‘•’u
+        //è­¦å ±è£…ç½®
         else if (hit.collider.gameObject.TryGetComponent<AlarmController>(out AlarmController alarmCon))
         {
             hackUI._randomFlg = alarmCon.randomFlg;
@@ -133,7 +133,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) alarmCon.frameSR.sprite = alarmCon.frameSprite;
         }
 
-        //‚¨‘|œƒƒ{ƒbƒg
+        //ãŠæƒé™¤ãƒ­ãƒœãƒƒãƒˆ
         else if (hit.collider.gameObject.TryGetComponent<CleanerController>(out CleanerController cleanerCon))
         {
             hackUI._randomFlg = cleanerCon.randomFlg;
@@ -148,7 +148,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) cleanerCon.frameSR.sprite = cleanerCon.frameSprite;
         }
 
-        //Á‰Îİ”õ
+        //æ¶ˆç«è¨­å‚™
         else if (hit.collider.gameObject.TryGetComponent<DigestionController>(out DigestionController digestionCon))
         {
             hackUI._randomFlg = digestionCon.randomFlg;
@@ -163,7 +163,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) digestionCon.frameSR.sprite = digestionCon.frameSprite;
         }
 
-        //ƒpƒ\ƒRƒ“
+        //ãƒ‘ã‚½ã‚³ãƒ³
         else if (hit.collider.gameObject.TryGetComponent<ComputerController>(out ComputerController computerCon))
         {
             hackUI._randomFlg = computerCon.randomFlg;
@@ -178,7 +178,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) computerCon.frameSR.sprite = computerCon.frameSprite;
         }
 
-        //ƒGƒAƒRƒ“
+        //ã‚¨ã‚¢ã‚³ãƒ³
         else if (hit.collider.gameObject.TryGetComponent<AriConditionerController>(out AriConditionerController ariConditionerCon))
         {
             hackUI._randomFlg = ariConditionerCon.randomFlg;
