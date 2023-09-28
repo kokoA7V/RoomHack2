@@ -38,14 +38,13 @@ public class MateController : MonoBehaviour
     Vector3 movePos;
 
     [SerializeField, Header("リーダー任命ならtrue")]
-    private bool leader;
+    public bool leader;
 
     [SerializeField, Header("リーダーのポジション")]
     private GameObject leaderObj;
     private MateController mateCon;
     [SerializeField, Header("Mateのポジション")]
     public GameObject mateObj;
-
     //[SerializeField, Header("レイの設定")]
     //private RayCircle rayCircle = new RayCircle();
 
@@ -88,6 +87,12 @@ public class MateController : MonoBehaviour
 
     void Update()
     {
+        if (leaderObj == null)
+        {
+            leader = true;
+            mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
+        }
+
         if (!leader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
         else actFuncTbl[stateNo]();
 
@@ -158,6 +163,7 @@ public class MateController : MonoBehaviour
                 // リーダーだったらマウスクリックで移動
                 if (leader)
                 {
+                    mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
                     if (Input.GetMouseButtonDown(1))
                     {
                         mousePos = Input.mousePosition;
@@ -174,7 +180,8 @@ public class MateController : MonoBehaviour
                         mateCon = leaderObj.GetComponent<MateController>();
                         mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
                     }
-                    else movePos = leaderObj.transform.position;
+                    else
+                        movePos = leaderObj.transform.position;
 
                     // ある程度リーダーに近づいたら止まる
                     if (Mathf.Abs(movePos.x - this.transform.position.x) <= 1f &&
