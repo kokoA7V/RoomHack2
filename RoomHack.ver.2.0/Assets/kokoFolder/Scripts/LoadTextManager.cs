@@ -33,19 +33,22 @@ public class LoadTextManager : MonoBehaviour
 
     private void Update()
     {
-        if(LoadObj.GetComponent<Load>().async.progress >= 1)
+        if (LoadObj.GetComponent<Load>().async != null)
         {
-            TextObj[1].GetComponent<HackText>().textDelay = 0;
+            if (LoadObj.GetComponent<Load>().async.progress >= 0.9f)
+            {
+                TextObj[1].GetComponent<HackText>().textDelay = 0;
 
-            TextObj[2].GetComponent<Text>().text = "(2/2)";
-        }
-        else if (LoadObj.GetComponent<Load>().async.progress >= 0.5f)
-        {
-            TextObj[0].GetComponent<HackText>().textDelay = 0;
+                TextObj[2].GetComponent<Text>().text = "(2/2)";
+            }
+            if (LoadObj.GetComponent<Load>().async.progress >= 0.4f)
+            {
+                TextObj[0].GetComponent<HackText>().textDelay = 0;
 
-            TextObj[1].GetComponent<HackText>().textStart = true;
+                TextObj[1].GetComponent<HackText>().textStart = true;
 
-            TextObj[2].GetComponent<Text>().text = "(1/2)";
+                TextObj[2].GetComponent<Text>().text = "(1/2)";
+            }
         }
     }
 }

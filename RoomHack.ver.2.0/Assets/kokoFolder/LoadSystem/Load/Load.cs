@@ -39,7 +39,11 @@ public class Load : MonoBehaviour
 		//読み込みたいシーンが増えたらelseifを使って増やしていく
 		else if (SL == 1)
 		{
-			//async = SceneManager.LoadSceneAsync("");
+			async = SceneManager.LoadSceneAsync("TitleScene");
+		}
+		else if (SL == 2)
+		{
+			async = SceneManager.LoadSceneAsync("HomeScene");
 		}
 
 		//ロード完了してもシーン移行しないようにする
