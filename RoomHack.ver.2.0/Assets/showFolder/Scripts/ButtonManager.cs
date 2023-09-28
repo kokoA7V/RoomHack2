@@ -9,7 +9,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] Button buttonB;
     [SerializeField] Button OptionButton;
 
-    //ƒ}ƒl[ƒVƒXƒeƒ€ŠÖ˜A
+    //ãƒãƒãƒ¼ã‚·ã‚¹ãƒ†ãƒ é–¢é€£
     [SerializeField] Button CleanButton;
     [SerializeField] Button firedeathButton;
     [SerializeField] Button pcButton;
@@ -20,15 +20,17 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] Button DoorButton;
     [SerializeField] Button CameraButton;
 
-    //ƒŒƒxƒ‹ƒAƒbƒvƒ{ƒ^ƒ“
+    //ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ãƒœã‚¿ãƒ³
     [SerializeField] GameObject LevelUpButton;
 
 
-    [SerializeField] GameObject[] buttonTrigA; // ButtonA‚ğ‰Ÿ‚µ‚½‚Æ‚«‚É•\¦‚·‚éƒ{ƒ^ƒ“ƒZƒbƒg
-    [SerializeField] GameObject[] buttonTrigB; 
+    [SerializeField] GameObject[] StageTrig; //Stageã‚’æŠ¼ã—ãŸã¨ãã«è¡¨ç¤ºã•ã‚Œã‚‹UIã‚’æ ¼ç´ã™ã‚‹å ´æ‰€
+    [SerializeField] GameObject[] ShopTrig; //Shopã‚’æŠ¼ã—ãŸã¨ãã«è¡¨ç¤ºã•ã‚Œã‚‹UIã‚’æ ¼ç´ã™ã‚‹å ´æ‰€
+
     public  GameObject OptionTrig;
 
     [SerializeField] ImageManager imagemanager;
+
     [SerializeField] LevelUpButton levelup;
 
     [SerializeField] bool[] isButtonToggled;
@@ -36,11 +38,11 @@ public class ButtonManager : MonoBehaviour
     bool alreadybutton = false;
     
     public bool Cleanbutton = false;
-    public bool firedeathbutton = false;
-    public bool pcbutton = false;
-    public bool eaconbutton = false;
-    public bool Keihoubutton = false;
-    public bool Tarretbutton = false;
+    public bool Digestionbutton = false;
+    public bool computorbutton = false;
+    public bool AriConditionerbutton = false;
+    public bool Alarmbutton = false;
+    public bool Turretbutton = false;
     public bool Enemybutton = false;
     public bool Doorbutton = false;
     public bool Camerabutton = false;
@@ -52,115 +54,114 @@ public class ButtonManager : MonoBehaviour
     {
         isButtonToggled = new bool[toggleNo] { false, false, false };
 
-        //Unity“à‚É‚ ‚éOnClick‚Ìˆ—‚ğƒvƒƒOƒ‰ƒ€‚Å
+        //Unityå†…ã«ã‚ã‚‹OnClickã®å‡¦ç†ã‚’ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§
 
-        buttonA.onClick.AddListener(ToggleButtonsSetA);
-        buttonB.onClick.AddListener(ToggleButtonsSetB);
+        buttonA.onClick.AddListener(StageButtonsSet);
+        buttonB.onClick.AddListener(ShopButtonSet);
         OptionButton.onClick.AddListener(OptionButtonSet);
 
-        //ƒ}ƒl[ƒVƒXƒeƒ€ŠÖ˜A
+        //ä»¥ä¸‹ãƒãƒãƒ¼ã‚·ã‚¹ãƒ†ãƒ é–¢é€£
 
-        //ƒ{ƒ^ƒ“‚ªİ’è‚³‚ê‚Ä‚¢‚é‚©‚Ì”»•Êˆ—
+        //ãƒœã‚¿ãƒ³ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã‹ã®åˆ¤åˆ¥å‡¦ç†
         if (!alreadybutton)
         {
             CleanButton.onClick.AddListener(CleanButtonSet);
-            firedeathButton.onClick.AddListener(FireDeathButtonSet);
-            pcButton.onClick.AddListener(PcButtonSet);
-            eaconButton.onClick.AddListener(EaconButtonSet);
-            KeihouButton.onClick.AddListener(KeihouButtonSet);
-            TarretButton.onClick.AddListener(TarretButtonSet);
+            firedeathButton.onClick.AddListener(DigestionButtonSet);
+            pcButton.onClick.AddListener(ComputorButtonSet);
+            eaconButton.onClick.AddListener(AriConditionerButtonSet);
+            KeihouButton.onClick.AddListener(AlarmButtonSet);
+            TarretButton.onClick.AddListener(TurretButtonSet);
             EnemyButton.onClick.AddListener(EnemyButtonSet);
             DoorButton.onClick.AddListener(DoorButtonSet);
             CameraButton.onClick.AddListener(CameraButtonSet);
             alreadybutton = true; 
         }
     }
-    void ToggleButtonsSetA() //ButtonA
-    {
-        ToggleButtonsSet(0);
-    }
-
-    void ToggleButtonsSetB() //ButtonB
-    {
-        ToggleButtonsSet(1);
-    }
-
-    void OptionButtonSet()
-    {
-        ToggleButtonsSet(2);
-    }
-
-    //ƒ}ƒl[ƒVƒXƒeƒ€ŠÖ˜A
+    //ãƒãƒãƒ¼ã‚·ã‚¹ãƒ†ãƒ é–¢é€£
 
 
-    //ƒNƒŠ[ƒ“—p
+    //ã‚¯ãƒªãƒ¼ãƒ³ç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
     void CleanButtonSet()
     {
         LevelUpButton.SetActive(true);
         Cleanbutton = true;
     }
 
-    //Á‰»‹@Ší—p
-    void FireDeathButtonSet()
+    //æ¶ˆåŒ–æ©Ÿå™¨ç”¨ã®ãƒœã‚¿ãƒ³
+    void DigestionButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        firedeathbutton = true;
+         LevelUpButton.SetActive(true);
+         Digestionbutton = true;
     }
 
-    //ƒRƒ“ƒsƒ…[ƒ^[—p
-    void PcButtonSet()
+    //ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ãƒ¼ç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
+    void ComputorButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        pcbutton = true;
+            LevelUpButton.SetActive(true);
+            computorbutton = true;
     }
 
-    //ƒGƒAƒRƒ“—p
-    void EaconButtonSet()
+    //ã‚¨ã‚¢ã‚³ãƒ³ç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
+    void AriConditionerButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        eaconbutton = true;
+            LevelUpButton.SetActive(true);
+            AriConditionerbutton = true;
     }
 
-    //Œx•ñ‹@Ší—p
-    void KeihouButtonSet()
+    //è­¦å ±æ©Ÿå™¨ç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
+    void AlarmButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        Keihoubutton = true;
+            LevelUpButton.SetActive(true);
+            Alarmbutton = true;
     }
 
-    //ƒ^ƒŒƒbƒg—p
-    void TarretButtonSet()
+    //ã‚¿ãƒ¬ãƒƒãƒˆç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
+    void TurretButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        Tarretbutton = true;
+            LevelUpButton.SetActive(true);
+            Turretbutton = true;
     }
 
-    //“G—p
+    //æ•µç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
     void EnemyButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        Enemybutton = true;
+            LevelUpButton.SetActive(true);
+            Enemybutton = true;
     }
 
-    //ƒhƒA—p
+    //ãƒ‰ã‚¢ç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
     void DoorButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        Doorbutton = true;
+            LevelUpButton.SetActive(true);
+            Doorbutton = true;
     }
 
-    //ƒJƒƒ‰—p
+    //ã‚«ãƒ¡ãƒ©ç”¨ã®ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å‡¦ç†
     void CameraButtonSet()
     {
-        LevelUpButton.SetActive(true);
-        Camerabutton = true;
+            LevelUpButton.SetActive(true);
+            Camerabutton = true;
     }
 
-
-
-    void ToggleButtonsSet(int i) //‚»‚ê‚¼‚ê‚Ìƒ{ƒ^ƒ“‚ğˆø”‚ÅŠÇ—
+    void StageButtonsSet() //Stageç”¨ã®ãƒœã‚¿ãƒ³
     {
-        imagemanager.UnShowImage(); //image”ñ•\¦
+        ToggleButtonsSet(0);
+    }
+
+    void ShopButtonSet() //Shopç”¨ã®ãƒœã‚¿ãƒ³
+    {
+        ToggleButtonsSet(1);
+    }
+
+    void OptionButtonSet() //ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒœã‚¿ãƒ³
+    {
+        ToggleButtonsSet(2);
+    }
+    //å„ãã‚Œãã‚Œã®ãƒœã‚¿ãƒ³ã®è¡¨ç¤ºãƒ»éè¡¨ç¤ºã®è¨­å®šã€‚
+
+    void ToggleButtonsSet(int i) //ãã‚Œãã‚Œã®ãƒœã‚¿ãƒ³ã‚’å¼•æ•°ã§ç®¡ç†
+    {
+        imagemanager.UnShowImage(); //imageéè¡¨ç¤º
 
         for (int j = 0; j < toggleNo; j++)
         {
@@ -169,27 +170,28 @@ public class ButtonManager : MonoBehaviour
 
         isButtonToggled[i] = true;
 
-        // ButtonA‚ğ‰Ÿ‚µ‚½‚Æ‚«‚É‚ÍButtonB‚ÌƒZƒbƒg‚ğ”ñ•\¦‚É‚·‚é
-        foreach (GameObject obj in buttonTrigB) obj.SetActive(false);
+        // ButtonAã‚’æŠ¼ã—ãŸã¨ãã«ã¯ButtonBã®ã‚»ãƒƒãƒˆã‚’éè¡¨ç¤ºã«ã™ã‚‹
+        foreach (GameObject obj in ShopTrig) obj.SetActive(false);
 
-        // ButtonB‚ğ‰Ÿ‚µ‚½‚Æ‚«‚É‚ÍButtonA‚ÌƒZƒbƒg‚ğ”ñ•\¦‚É‚·‚é
-        foreach (GameObject obj in buttonTrigA) obj.SetActive(false);
+        // ButtonBã‚’æŠ¼ã—ãŸã¨ãã«ã¯ButtonAã®ã‚»ãƒƒãƒˆã‚’éè¡¨ç¤ºã«ã™ã‚‹
+        foreach (GameObject obj in StageTrig) obj.SetActive(false);
 
         OptionTrig.SetActive(false);
         LevelUpButton.SetActive(false);
 
         if (i == 0)
         {
-            // ButtonAƒZƒbƒg‚ğ•\¦‚·‚éB
-            foreach (GameObject obj in buttonTrigA) obj.SetActive(true);
+            // Stageã®ã‚»ãƒƒãƒˆã‚’è¡¨ç¤ºã™ã‚‹ã€‚
+            foreach (GameObject obj in StageTrig) obj.SetActive(true);
         }
         else if(i == 1)
         {
-            // ButtonB‚ÌƒZƒbƒg‚ğ•\¦‚·‚é
-            foreach (GameObject obj in buttonTrigB) obj.SetActive(true);
+            // Shopã®ã‚»ãƒƒãƒˆã‚’è¡¨ç¤ºã™ã‚‹
+            foreach (GameObject obj in ShopTrig) obj.SetActive(true);
         }
         else if(i == 2)
         {
+            //Optionç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹ã€‚
             OptionTrig.SetActive(true);
         }
     }
