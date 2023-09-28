@@ -33,7 +33,7 @@ public class CleanerController : MonoBehaviour, IUnitHack
 
     private Rigidbody2D rb;
 
-    [SerializeField, Header("ˆÚ“®‘¬“x")]
+    [SerializeField, Header("ç§»å‹•é€Ÿåº¦")]
     private float speed = 3f;
 
     private bool flg = false;
@@ -58,18 +58,18 @@ public class CleanerController : MonoBehaviour, IUnitHack
 
         if (hackedFlg && GameData.CleanerLv == 1)
         {
-            Debug.Log("’â~");
+            Debug.Log("åœæ­¢");
             rb.velocity = Vector2.zero;
             return;
         }
         else if (hackedFlg && GameData.CleanerLv == 2)
         {
-            Debug.Log("–\‘–");
+            Debug.Log("æš´èµ°");
             flg = true;
         }
         else if (hackedFlg && GameData.CleanerLv == 3)
         {
-            Debug.Log("”š”j");
+            Debug.Log("çˆ†ç ´");
             Destroy(gameObject);
         }
     }
@@ -83,6 +83,6 @@ public class CleanerController : MonoBehaviour, IUnitHack
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(flg) rb.velocity = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * speed * 1.5f;
+        if(flg) rb.velocity = 1.5f * speed * new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
     }
 }
