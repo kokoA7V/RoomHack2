@@ -27,7 +27,7 @@ public class HackManager : MonoBehaviour
 
             if (hit.collider != null && hit.collider.gameObject.TryGetComponent<IUnitHack>(out IUnitHack iUnitHack))
             {
-                // ÉNÉäÉbÉNèàóù
+                // „ÇØ„É™„ÉÉ„ÇØÂá¶ÁêÜ
                 if (HackUIObj == null) return;
                 if (nowObj == hit.collider.gameObject) return;
                 nowObj = hit.collider.gameObject;
@@ -38,9 +38,9 @@ public class HackManager : MonoBehaviour
         }
     }
 
-    public void InstantHackUI(RaycastHit2D hit,IUnitHack iUnitHack)
+    public void InstantHackUI(RaycastHit2D hit, IUnitHack iUnitHack)
     {
-        //HackUIÇê∂ê¨
+        //HackUI„ÇíÁîüÊàê
         nowHackUI = Instantiate(HackUIObj);
         HackUI hackUI = nowHackUI.GetComponent<HackUI>();
         hackUI.hackManager = GetComponent<HackManager>();
@@ -54,7 +54,7 @@ public class HackManager : MonoBehaviour
         }
         else h = 0;
 
-        //ÉJÉÅÉâ
+        //„Ç´„É°„É©„ÇÑ„Åß
         if (hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
         {
             hackUI._randomFlg = cameraCon.randomFlg;
@@ -66,10 +66,10 @@ public class HackManager : MonoBehaviour
             hackUI.lvText.text = cameraCon.lvStr[h];
             hackUI.comentText.text = cameraCon.comentStr;
 
-            if(h == 1) cameraCon.frameSR.sprite = cameraCon.frameSprite;
+            if (h == 1) cameraCon.frameSR.sprite = cameraCon.frameSprite;
         }
 
-        //ÉhÉA
+        //„Éâ„Ç¢
         else if (hit.collider.gameObject.TryGetComponent<DoorController>(out DoorController doorCon))
         {
             hackUI._randomFlg = doorCon.randomFlg;
@@ -88,7 +88,7 @@ public class HackManager : MonoBehaviour
             }
         }
 
-        //É^ÉåÉbÉg
+        //„Çø„É¨„ÉÉ„Éà
         else if (hit.collider.gameObject.TryGetComponent<TurretController>(out TurretController turretCon))
         {
             hackUI._randomFlg = turretCon.randomFlg;
@@ -103,7 +103,7 @@ public class HackManager : MonoBehaviour
             if (h == 1) turretCon.frameSR.sprite = turretCon.frameSprite;
         }
 
-        //ÉGÉlÉ~Å[
+        //„Ç®„Éç„Éü„Éº
         else if (hit.collider.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyCon))
         {
             hackUI._randomFlg = enemyCon.randomFlg;
@@ -116,6 +116,81 @@ public class HackManager : MonoBehaviour
             hackUI.comentText.text = enemyCon.comentStr;
 
             if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;
+        }
+
+        //Ë≠¶Â†±Ë£ÖÁΩÆ
+        else if (hit.collider.gameObject.TryGetComponent<AlarmController>(out AlarmController alarmCon))
+        {
+            hackUI._randomFlg = alarmCon.randomFlg;
+            hackUI._word = new string[alarmCon.word.Length];
+            for (int i = 0; i < alarmCon.word.Length; i++) hackUI._word[i] = alarmCon.word[i];
+
+            hackUI.imageIcon.sprite = alarmCon.icon;
+            hackUI.titleText.text = alarmCon.titleStr;
+            hackUI.lvText.text = alarmCon.lvStr[h];
+            hackUI.comentText.text = alarmCon.comentStr;
+
+            if (h == 1) alarmCon.frameSR.sprite = alarmCon.frameSprite;
+        }
+
+        //„ÅäÊéÉÈô§„É≠„Éú„ÉÉ„Éà
+        else if (hit.collider.gameObject.TryGetComponent<CleanerController>(out CleanerController cleanerCon))
+        {
+            hackUI._randomFlg = cleanerCon.randomFlg;
+            hackUI._word = new string[cleanerCon.word.Length];
+            for (int i = 0; i < cleanerCon.word.Length; i++) hackUI._word[i] = cleanerCon.word[i];
+
+            hackUI.imageIcon.sprite = cleanerCon.icon;
+            hackUI.titleText.text = cleanerCon.titleStr;
+            hackUI.lvText.text = cleanerCon.lvStr[h];
+            hackUI.comentText.text = cleanerCon.comentStr;
+
+            if (h == 1) cleanerCon.frameSR.sprite = cleanerCon.frameSprite;
+        }
+
+        //Ê∂àÁÅ´Ë®≠ÂÇô
+        else if (hit.collider.gameObject.TryGetComponent<DigestionController>(out DigestionController digestionCon))
+        {
+            hackUI._randomFlg = digestionCon.randomFlg;
+            hackUI._word = new string[digestionCon.word.Length];
+            for (int i = 0; i < digestionCon.word.Length; i++) hackUI._word[i] = digestionCon.word[i];
+
+            hackUI.imageIcon.sprite = digestionCon.icon;
+            hackUI.titleText.text = digestionCon.titleStr;
+            hackUI.lvText.text = digestionCon.lvStr[h];
+            hackUI.comentText.text = digestionCon.comentStr;
+
+            if (h == 1) digestionCon.frameSR.sprite = digestionCon.frameSprite;
+        }
+
+        //„Éë„ÇΩ„Ç≥„É≥
+        else if (hit.collider.gameObject.TryGetComponent<ComputerController>(out ComputerController computerCon))
+        {
+            hackUI._randomFlg = computerCon.randomFlg;
+            hackUI._word = new string[computerCon.word.Length];
+            for (int i = 0; i < computerCon.word.Length; i++) hackUI._word[i] = computerCon.word[i];
+
+            hackUI.imageIcon.sprite = computerCon.icon;
+            hackUI.titleText.text = computerCon.titleStr;
+            hackUI.lvText.text = computerCon.lvStr[h];
+            hackUI.comentText.text = computerCon.comentStr;
+
+            if (h == 1) computerCon.frameSR.sprite = computerCon.frameSprite;
+        }
+
+        //„Ç®„Ç¢„Ç≥„É≥
+        else if (hit.collider.gameObject.TryGetComponent<AriConditionerController>(out AriConditionerController ariConditionerCon))
+        {
+            hackUI._randomFlg = ariConditionerCon.randomFlg;
+            hackUI._word = new string[ariConditionerCon.word.Length];
+            for (int i = 0; i < ariConditionerCon.word.Length; i++) hackUI._word[i] = ariConditionerCon.word[i];
+
+            hackUI.imageIcon.sprite = ariConditionerCon.icon;
+            hackUI.titleText.text = ariConditionerCon.titleStr;
+            hackUI.lvText.text = ariConditionerCon.lvStr[h];
+            hackUI.comentText.text = ariConditionerCon.comentStr;
+
+            if (h == 1) ariConditionerCon.frameSR.sprite = ariConditionerCon.frameSprite;
         }
     }
 }
