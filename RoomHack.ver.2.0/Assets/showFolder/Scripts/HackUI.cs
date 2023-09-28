@@ -18,7 +18,7 @@ public class HackUI : MonoBehaviour
     public RaycastHit2D hit;
 
     [SerializeField]
-    private Vector2 targetPosition = new Vector2(541f, -260); //inspectorで自由に変更可能
+    private Vector2 targetPosition = new Vector2(541f, -260);
 
     public Image imageBG,imageIcon;
 

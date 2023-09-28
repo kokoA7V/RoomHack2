@@ -54,7 +54,7 @@ public class HackManager : MonoBehaviour
         }
         else h = 0;
 
-        //カメラやで
+        //カメラ
         if (hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
         {
             hackUI._randomFlg = cameraCon.randomFlg;
