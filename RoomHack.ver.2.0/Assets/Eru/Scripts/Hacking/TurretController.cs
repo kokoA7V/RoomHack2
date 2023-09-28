@@ -47,7 +47,7 @@ public class TurretController : MonoBehaviour, IUnitHack
     private float breakTime = 1f;
     private float breakTimer;
 
-    [SerializeField,Header("ƒŒƒC‚Ìİ’è")]
+    [SerializeField,Header("ãƒ¬ã‚¤ã®è¨­å®š")]
     private RayCircle rayCircle = new RayCircle();
 
     private float startZ;
@@ -86,13 +86,13 @@ public class TurretController : MonoBehaviour, IUnitHack
 
         if (atkEnemyFlg && GameData.TurretLv == 1)
         {
-            Debug.Log("ƒ^ƒŒƒbƒg’â~");
+            Debug.Log("ã‚¿ãƒ¬ãƒƒãƒˆåœæ­¢");
             return;
         }
         else if (atkEnemyFlg && GameData.TurretLv == 2)
         {
-            //Œë“®ì
-            Debug.Log("ƒ^ƒŒƒbƒgŒë“®ì");
+            //èª¤å‹•ä½œ
+            Debug.Log("ã‚¿ãƒ¬ãƒƒãƒˆèª¤å‹•ä½œ");
             if (breakTimer > 0)
             {
                 breakTimer -= Time.deltaTime;
@@ -125,15 +125,15 @@ public class TurretController : MonoBehaviour, IUnitHack
 
     private void ObjRotation(GameObject obj)
     {
-        // “G‚ÌˆÊ’u‚©‚ç©•ª‚ÌˆÊ’u‚ğˆø‚¢‚ÄA“G‚ğŒü‚­•ûŒüƒxƒNƒgƒ‹‚ğŒvZ
+        // æ•µã®ä½ç½®ã‹ã‚‰è‡ªåˆ†ã®ä½ç½®ã‚’å¼•ã„ã¦ã€æ•µã‚’å‘ãæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
         Vector3 direction = obj.transform.position - top.transform.position;
 
-        // ƒxƒNƒgƒ‹‚ğŠp“x‚É•ÏŠ·‚µ‚Ä“G‚ğŒü‚­
+        // ãƒ™ã‚¯ãƒˆãƒ«ã‚’è§’åº¦ã«å¤‰æ›ã—ã¦æ•µã‚’å‘ã
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.RotateTowards(top.transform.rotation, targetRotation, 5f);
 
-        // –Ú•W‚ÌŠp“x‚É‘Î‚·‚é‹–—eŒë·“à‚É‚È‚é‚ÆŒü‚¢‚½‚±‚Æ‚Æ‚İ‚È‚·
+        // ç›®æ¨™ã®è§’åº¦ã«å¯¾ã™ã‚‹è¨±å®¹èª¤å·®å†…ã«ãªã‚‹ã¨å‘ã„ãŸã“ã¨ã¨ã¿ãªã™
         float currentAngle = transform.eulerAngles.z;
         if (Mathf.Abs(angle - currentAngle) < 3f && Mathf.Abs(angle - currentAngle) > -3f || 
             Mathf.Abs(angle - currentAngle) > 357f && Mathf.Abs(angle - currentAngle) < 363f) shotFlg = true;

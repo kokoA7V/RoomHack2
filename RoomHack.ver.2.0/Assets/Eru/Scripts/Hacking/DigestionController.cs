@@ -48,17 +48,17 @@ public class DigestionController : MonoBehaviour, IUnitHack
 
         if (hackedFlg && GameData.DigestionLv == 1)
         {
-            Debug.Log("ŒëŒx•ñ");
+            Debug.Log("èª¤è­¦å ±");
             return;
         }
         else if (hackedFlg && GameData.DigestionLv == 2)
         {
 
-            Debug.Log("•Â‚¶‚ß");
+            Debug.Log("é–‰ã˜è¾¼ã‚");
         }
         else if (hackedFlg && GameData.DigestionLv == 3)
         {
-            Debug.Log("‹Câ");
+            Debug.Log("æ°—çµ¶");
         }
     }
 
