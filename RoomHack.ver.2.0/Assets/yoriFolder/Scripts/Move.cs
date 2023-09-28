@@ -32,7 +32,7 @@ public class Move : MonoBehaviour
         UpdateTargetPos();
         ShortCutTargetPos();
 
-        Debug.Log("ìÆÇ¢ÇƒÇÈ");
+        Debug.Log("Âãï„ÅÑ„Å¶„Çã");
         unit = _unit;
 
         //movePos = _targetPos - this.transform.position;
@@ -44,17 +44,17 @@ public class Move : MonoBehaviour
 
         if (Mathf.Abs(movePos.x) <= 0.5f && Mathf.Abs(movePos.y) <= 0.5f)
         {
-            Debug.Log("é~Ç‹ÇÈÇÊ");
+            Debug.Log("Ê≠¢„Åæ„Çã„Çà");
             unitRb.velocity = Vector2.zero;
             //_targetPos = _playerPosHistory.Dequeue();
         }
-        // óÕÇÃâ¡ÇÌÇÈï˚å¸Ç…ê≥ñ ÇçáÇÌÇπÇÈ
+        // Âäõ„ÅÆÂä†„Çè„ÇãÊñπÂêë„Å´Ê≠£Èù¢„ÇíÂêà„Çè„Åõ„Çã
         transform.up = movePos.normalized;
 
-        // ÉXÉsÅ[ÉhÇ…êßå¿ÇÇ©ÇØÇÈ
-        float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);Å@//Xï˚å¸ÇÃë¨ìxÇêßå¿
-        float speedYTemp = Mathf.Clamp(unitRb.velocity.y, -limitSpeed, limitSpeed);  //Yï˚å¸ÇÃë¨ìxÇêßå¿
-        unitRb.velocity = new Vector3(speedXTemp, speedYTemp);Å@Å@Å@Å@Å@Å@Å@Å@Å@Å@Å@//é¿ç€Ç…êßå¿ÇµÇΩílÇë„ì¸
+        // „Çπ„Éî„Éº„Éâ„Å´Âà∂Èôê„Çí„Åã„Åë„Çã
+        float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);„ÄÄ//XÊñπÂêë„ÅÆÈÄüÂ∫¶„ÇíÂà∂Èôê
+        float speedYTemp = Mathf.Clamp(unitRb.velocity.y, -limitSpeed, limitSpeed);  //YÊñπÂêë„ÅÆÈÄüÂ∫¶„ÇíÂà∂Èôê
+        unitRb.velocity = new Vector3(speedXTemp, speedYTemp);„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ„ÄÄ//ÂÆüÈöõ„Å´Âà∂Èôê„Åó„ÅüÂÄ§„Çí‰ª£ÂÖ•
     }
 
     void UpdateTargetPos()
@@ -67,7 +67,7 @@ public class Move : MonoBehaviour
             {
                 _targetPos = _playerPosHistory.Dequeue();
 
-                // ÇΩÇ‘ÇÒà¯Ç¡Ç©Ç©Ç¡ÇƒÇÈÇÃÇ≈ÉèÅ[ÉvÇ≥ÇπÇøÇ·Ç§
+                // „Åü„Å∂„ÇìÂºï„Å£„Åã„Åã„Å£„Å¶„Çã„ÅÆ„Åß„ÉØ„Éº„Éó„Åï„Åõ„Å°„ÇÉ„ÅÜ
                 transform.position = _targetPos;
             }
             _playerPosHistory.Enqueue(currentPlayerPos);
@@ -76,7 +76,7 @@ public class Move : MonoBehaviour
 
     void InitPos()
     {
-        // ç≈èâÇÕé©ï™ÇÃà íuÇñ⁄ìIínÇ…ÇµÇƒÇ®Ç≠
+        // ÊúÄÂàù„ÅØËá™ÂàÜ„ÅÆ‰ΩçÁΩÆ„ÇíÁõÆÁöÑÂú∞„Å´„Åó„Å¶„Åä„Åè
         _targetPos = transform.position;
         _playerPosHistory.Enqueue(unit);
 
@@ -88,7 +88,7 @@ public class Move : MonoBehaviour
         //}
     }
 
-    // MateÇ™ãﬂÇ≠Ç…óàÇΩéûÇÃèàóù
+    // Mate„ÅåËøë„Åè„Å´Êù•„ÅüÊôÇ„ÅÆÂá¶ÁêÜ
     void ShortCutTargetPos()
     {
         if (Vector3.Distance(transform.position, unit) < 7.0f &&

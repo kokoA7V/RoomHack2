@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 6929050727563301687}
   - component: {fileID: 6929050727563301704}
   - component: {fileID: 1919298312665203071}
+  - component: {fileID: 1076594796341242554}
   - component: {fileID: 5775106252436386477}
-  - component: {fileID: 6618707433518540243}
   - component: {fileID: 45598809462331277}
   - component: {fileID: 6164201091611692341}
   - component: {fileID: 8618579637686576483}
@@ -190,17 +190,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateNo: 0
   methodNo: 0
-  rayCircle:
-    tr: {fileID: 0}
-    numberOfRays: 12
-    detectionRange: 5
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    chkType: 360
-    gameType: 45
-    dirType: 1
-    rayFlg: 0
+  leader: 0
+  leaderObj: {fileID: 0}
+  mateObj: {fileID: 0}
 --- !u!114 &6929050727563301687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +225,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1919298312665203071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +239,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limitSpeed: 200
+--- !u!114 &1076594796341242554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929050727563301682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bc09c80cba5e424683b7447fb861c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 5
+  numberOfRays: 12
 --- !u!114 &5775106252436386477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,18 +268,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 725749280987857624, guid: 3dfdaf38eb9f09f4e9a611a534841af4, type: 3}
   bulletSpeed: 5
   shotTime: 0.3
---- !u!114 &6618707433518540243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6929050727563301682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc09c80cba5e424683b7447fb861c84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &45598809462331277
 CircleCollider2D:
   m_ObjectHideFlags: 0

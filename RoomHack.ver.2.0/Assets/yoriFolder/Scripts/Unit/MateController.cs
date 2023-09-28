@@ -2,26 +2,24 @@ using UnityEngine;
 
 public class MateController : MonoBehaviour
 {
-    // î•ñæ“¾
+    // æƒ…å ±å–å¾—
     UnitCore mateCore;
 
-    [SerializeField, Header("s“®”Ô†")]
-    public int stateNo = 0;      // s“®”Ô†
-    [SerializeField, Header("ƒƒ\ƒbƒh—p”Ä—p”Ô†")]
-    public int methodNo = 0;   // ƒƒ\ƒbƒh—p”Ä—p”Ô†
+    [SerializeField, Header("è¡Œå‹•ç•ªå·")]
+    public int stateNo = 0;      // è¡Œå‹•ç•ªå·
+    [SerializeField, Header("ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·")]
+    public int methodNo = 0;   // ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·
 
     SightCheak unitSight;
-
-    private TargetPoint hitsPnt;
-    private TargetPoint unitPnt;
+    GameObject target;
 
     private Rigidbody2D plRb;
 
-    // ƒfƒŠƒQ[ƒh
-    // ŠÖ”‚ğŒ^‚É‚·‚é‚½‚ß‚Ì‚à‚Ì
+    // ãƒ‡ãƒªã‚²ãƒ¼ãƒ‰
+    // é–¢æ•°ã‚’å‹ã«ã™ã‚‹ãŸã‚ã®ã‚‚ã®
     private delegate void ActFunc();
 
-    // ŠÖ”‚Ì”z—ñ
+    // é–¢æ•°ã®é…åˆ—
     private ActFunc[] actFuncTbl;
 
     private float moveSpd;
@@ -39,16 +37,17 @@ public class MateController : MonoBehaviour
     Vector3 mousePos;
     Vector3 movePos;
 
-    [SerializeField, Header("ƒŠ[ƒ_[”C–½‚È‚çtrue")]
+    [SerializeField, Header("ãƒªãƒ¼ãƒ€ãƒ¼ä»»å‘½ãªã‚‰true")]
     private bool leader;
 
-    [SerializeField, Header("ƒŠ[ƒ_[‚Ìƒ|ƒWƒVƒ‡ƒ“")]
+    [SerializeField, Header("ãƒªãƒ¼ãƒ€ãƒ¼ã®ãƒã‚¸ã‚·ãƒ§ãƒ³")]
     private GameObject leaderObj;
-    [SerializeField, Header("Mate‚Ìƒ|ƒWƒVƒ‡ƒ“")]
+    private MateController mateCon;
+    [SerializeField, Header("Mateã®ãƒã‚¸ã‚·ãƒ§ãƒ³")]
     public GameObject mateObj;
 
-    [SerializeField, Header("ƒŒƒC‚Ìİ’è")]
-    private RayCircle rayCircle = new RayCircle();
+    //[SerializeField, Header("ãƒ¬ã‚¤ã®è¨­å®š")]
+    //private RayCircle rayCircle = new RayCircle();
 
     enum State
     {
@@ -61,6 +60,8 @@ public class MateController : MonoBehaviour
     void Start()
     {
         mateCore = GetComponent<UnitCore>();
+
+        if (!leader) mateCon = leaderObj.GetComponent<MateController>();
 
         moveSpd = mateCore.moveSpd;
         mateCore.dmgLayer = 1;
@@ -87,7 +88,9 @@ public class MateController : MonoBehaviour
 
     void Update()
     {
-        actFuncTbl[stateNo]();
+        if (!leader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
+        else actFuncTbl[stateNo]();
+
         Debug.Log("StateNo " + stateNo);
     }
 
@@ -96,7 +99,7 @@ public class MateController : MonoBehaviour
         switch (methodNo)
         {
             case 0:
-                Debug.Log("‘Ò‚¿‚ÉˆÚs");
+                Debug.Log("å¾…ã¡ã«ç§»è¡Œ");
 
                 plRb.velocity = Vector2.zero;
                 methodCtr = 1.5f;
@@ -107,13 +110,13 @@ public class MateController : MonoBehaviour
                 if (methodCtr <= 0)
                 {
                     plRb.isKinematic = true;
-                    Debug.Log("Š®‘S‚É~‚Ü‚Á‚½");
+                    Debug.Log("å®Œå…¨ã«æ­¢ã¾ã£ãŸ");
                     isEm = true;
                     methodNo++;
                 }
                 break;
             case 2:
-                Debug.Log("‚à‚¤“®‚¯‚é‚æ");
+                Debug.Log("ã‚‚ã†å‹•ã‘ã‚‹ã‚ˆ");
                 plRb.isKinematic = false;
                 methodNo = 0;
                 break;
@@ -125,7 +128,8 @@ public class MateController : MonoBehaviour
         switch (methodNo)
         {
             case 0:
-                Debug.Log("Shot‚ÉˆÚs");
+                if (!leader) ObjRotation(mateCon.target);
+                Debug.Log("Shotã«ç§»è¡Œ");
                 plRb.velocity = Vector3.zero;
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
                 methodCtr = 2f;
@@ -144,15 +148,14 @@ public class MateController : MonoBehaviour
                 break;
         }
     }
-    // ˆÚ“®‚µ‚Ä“G‚ª‚¢‚½‚çshot‚ÉˆÚ“®‚·‚é
+    // ç§»å‹•ã—ã¦æ•µãŒã„ãŸã‚‰shotã«ç§»å‹•ã™ã‚‹
     private void ActMove()
     {
-        GameObject emunit = rayCircle.CircleChk();
         Debug.Log("move" + unit);
         switch (methodNo)
         {
             case 0:
-                // ƒŠ[ƒ_[‚¾‚Á‚½‚çƒ}ƒEƒXƒNƒŠƒbƒN‚ÅˆÚ“®
+                // ãƒªãƒ¼ãƒ€ãƒ¼ã ã£ãŸã‚‰ãƒã‚¦ã‚¹ã‚¯ãƒªãƒƒã‚¯ã§ç§»å‹•
                 if (leader)
                 {
                     if (Input.GetMouseButtonDown(1))
@@ -161,39 +164,35 @@ public class MateController : MonoBehaviour
                         movePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10f));
                     }
                 }
-                // ˆá‚Á‚½‚çƒŠ[ƒ_[‚É‚Â‚¢‚Ä‚¢‚­
+                // é•ã£ãŸã‚‰ãƒªãƒ¼ãƒ€ãƒ¼ã«ã¤ã„ã¦ã„ã
                 else
                 {
-                    // ƒŠ[ƒ_[‚ªÁ‚¦‚½‚çƒŠ[ƒ_[‚É‚È‚é
+                    // ãƒªãƒ¼ãƒ€ãƒ¼ãŒæ¶ˆãˆãŸã‚‰ãƒªãƒ¼ãƒ€ãƒ¼ã«ãªã‚‹
                     if (leaderObj == null)
                     {
                         leader = true;
-
+                        mateCon = leaderObj.GetComponent<MateController>();
                         mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
                     }
-                    else
-                    {
-                        movePos = leaderObj.transform.position;
-                    }
+                    else movePos = leaderObj.transform.position;
 
-                    // ‚ ‚é’ö“xƒŠ[ƒ_[‚É‹ß‚Ã‚¢‚½‚ç~‚Ü‚é
+                    // ã‚ã‚‹ç¨‹åº¦ãƒªãƒ¼ãƒ€ãƒ¼ã«è¿‘ã¥ã„ãŸã‚‰æ­¢ã¾ã‚‹
                     if (Mathf.Abs(movePos.x - this.transform.position.x) <= 1f &&
                         Mathf.Abs(movePos.y - this.transform.position.y) <= 1f)
                     {
                         plRb.velocity = Vector2.zero;
                         moveSpd = 0;
                     }
-                    else
-                    {
-                        moveSpd = mateCore.moveSpd;
-                    }
+                    else moveSpd = mateCore.moveSpd;
                 }
 
                 mateCore.Move(moveSpd, movePos);
 
-                ////“G‚ª‚¢‚½‚çShot‚ÉˆÚs
-                if (unitSight.EnemyCheck() && isEm)
+                ////æ•µãŒã„ãŸã‚‰Shotã«ç§»è¡Œ
+                target = unitSight.EnemyCheck();
+                if (target != null && isEm)
                 {
+                    Debug.Log(target);
                     movePos = this.transform.position;
                     methodNo++;
                     break;
@@ -215,7 +214,7 @@ public class MateController : MonoBehaviour
             case 0:
                 if (unitSight.EnemyCheck() && isEm)
                 {
-                    Debug.Log("Shot‚ÉˆÚs");
+                    Debug.Log("Shotã«ç§»è¡Œ");
                     methodNo = 0;
                     methodCtr = 0;
                     stateNo = (int)State.Shot;
@@ -223,5 +222,16 @@ public class MateController : MonoBehaviour
                 }
                 break;
         }
+    }
+    private void ObjRotation(GameObject obj)
+    {
+        if (obj == null) return;
+        // æ•µã®ä½ç½®ã‹ã‚‰è‡ªåˆ†ã®ä½ç½®ã‚’å¼•ã„ã¦ã€æ•µã‚’å‘ãæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+        Vector3 direction = obj.transform.position - this.transform.position;
+
+        // ãƒ™ã‚¯ãƒˆãƒ«ã‚’è§’åº¦ã«å¤‰æ›ã—ã¦æ•µã‚’å‘ã
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, 5f);
     }
 }

@@ -2,29 +2,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IUnitHack
 {
-    private Vector3 movePos;
-    private Vector2 moveDir;
+    // æƒ…å ±å–å¾—
+    private UnitCore eCore;
 
-    // î•ñæ“¾
-    UnitCore eCore;
-
-    [SerializeField, Header("s“®”Ô†")]
-    public int stateNo = 0;      // s“®”Ô†
-    [SerializeField, Header("ƒƒ\ƒbƒh—p”Ä—p”Ô†")]
-    public int methodNo = 0;   // ƒƒ\ƒbƒh—p”Ä—p”Ô†
-
-    SightCheak emCheak;
-
-    TargetPoint hitsPnt;
-    TargetPoint unitPnt;
+    [SerializeField, Header("è¡Œå‹•ç•ªå·")]
+    public int stateNo = 0;      // è¡Œå‹•ç•ªå·
+    [SerializeField, Header("ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·")]
+    public int methodNo = 0;   // ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·
 
     private Rigidbody2D plRb;
 
-    // ƒfƒŠƒQ[ƒh
-    // ŠÖ”‚ğŒ^‚É‚·‚é‚½‚ß‚Ì‚à‚Ì
+    // ãƒ‡ãƒªã‚²ãƒ¼ãƒ‰
+    // é–¢æ•°ã‚’å‹ã«ã™ã‚‹ãŸã‚ã®ã‚‚ã®
     private delegate void ActFunc();
 
-    // ŠÖ”‚Ì”z—ñ
+    // é–¢æ•°ã®é…åˆ—
     private ActFunc[] actFuncTbl;
 
     private float moveSpd;
@@ -42,11 +34,11 @@ public class EnemyController : MonoBehaviour, IUnitHack
     int emDmgLayer = 2;
 
     private Vector3 unitPos;
-    private Vector3 hitsPos;
+    private GameObject target;
 
     private SightCheak eSight;
 
-    [SerializeField, Header("ƒŒƒC‚Ìİ’è")]
+    [SerializeField, Header("ãƒ¬ã‚¤ã®è¨­å®š")]
     private RayCircle rayCircle = new RayCircle();
 
     enum State
@@ -103,7 +95,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
         plRb = GetComponent<Rigidbody2D>();
 
-        emCheak = GetComponent<SightCheak>();
+        //emCheak = GetComponent<SightCheak>();
         eCore.dmgLayer = emDmgLayer;
 
         unit = null;
@@ -127,7 +119,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
         switch (methodNo)
         {
             case 0:
-                Debug.Log("Shot‚ÉˆÚs");
+                Debug.Log("Shotã«ç§»è¡Œ");
                 eCore.Shot(eCore.dmgLayer, pow, burst);
                 methodCtr = 1.5f;
                 methodNo++;
@@ -158,8 +150,9 @@ public class EnemyController : MonoBehaviour, IUnitHack
                     unitPos = unit.transform.position;
                 eCore.Move(moveSpd, unitPos);
 
-                //“G‚ª‚¢‚½‚çShot‚ÉˆÚs
-                if (eSight.EnemyCheck() && isEm)
+                //æ•µãŒã„ãŸã‚‰Shotã«ç§»è¡Œ
+                target = eSight.EnemyCheck();
+                if (target != null && isEm)
                 {
                     methodNo++;
                     break;
@@ -180,7 +173,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
         if (!hacked) return;
         if (time <= 0) time = hackTime[GameData.EnemyLv - 1];
         hackedFlg = true;
-        Debug.Log("ƒnƒbƒLƒ“ƒOŠ®—¹");
+        Debug.Log("ãƒãƒƒã‚­ãƒ³ã‚°å®Œäº†");
     }
 
     void ActSearch()
@@ -190,7 +183,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
         //    case 0:
         //        if (emCheak.EnemyCheck() && isEm)
         //        {
-        //            //Debug.Log("Shot‚ÉˆÚs");
+        //            //Debug.Log("Shotã«ç§»è¡Œ");
         //            methodNo = 0;
         //            methodCtr = 0;
         //            stateNo = (int)State.Shot;
