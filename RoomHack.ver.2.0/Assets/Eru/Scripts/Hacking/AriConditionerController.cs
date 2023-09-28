@@ -48,12 +48,12 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
 
         if (hackedFlg && GameData.AriConditionerLv == 1)
         {
-            Debug.Log("ƒGƒAƒRƒ“’â~");
+            Debug.Log("ã‚¨ã‚¢ã‚³ãƒ³åœæ­¢");
         }
         else if (hackedFlg && GameData.AriConditionerLv == 2)
         {
 
-            Debug.Log("—â’g–[‹N“®");
+            Debug.Log("å†·æš–æˆ¿èµ·å‹•");
         }
     }
 

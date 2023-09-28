@@ -7,7 +7,7 @@ public class DebugAudioPlay : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("SpaceƒL[‚ÅSEÄ¶");
+        Debug.Log("Spaceã‚­ãƒ¼ã§SEå†ç”Ÿ");
     }
 
     void Update()
