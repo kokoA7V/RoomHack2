@@ -87,9 +87,9 @@ public class TypingObj : MonoBehaviour
 
                         //色変更処理
                         string _text = "<color=#" + clearColorCode + ">";
-                        for (int j = 0; j < i; j++) _text = _text + word[clearWord][j].ToString();
-                        _text = _text + "</color>";
-                        for(int j = i;j< word[clearWord].Length; j++) _text = _text + word[clearWord][j].ToString();
+                        for (int j = 0; j < i; j++) _text += word[clearWord][j].ToString();
+                        _text += "</color>";
+                        for(int j = i;j< word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
                         text.text = _text;
 
                         //1ワードクリア処理
@@ -131,9 +131,9 @@ public class TypingObj : MonoBehaviour
             text.transform.localPosition = originalPosition + randomOffset;
 
             string _text = "<color=#" + clearColorCode + ">";
-            for (int j = 0; j < i; j++) _text = _text + word[clearWord][j].ToString();
+            for (int j = 0; j < i; j++) _text += word[clearWord][j].ToString();
             _text = _text + "</color><color=#" + missColorCode + ">" + word[clearWord][i].ToString() + "</color>";
-            for (int j = i + 1; j < word[clearWord].Length; j++) _text = _text + word[clearWord][j].ToString();
+            for (int j = i + 1; j < word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
             text.text = _text;
 
             currentShakeDuration -= Time.deltaTime * decreaseFactor;
@@ -144,9 +144,9 @@ public class TypingObj : MonoBehaviour
             text.transform.localPosition = originalPosition;
 
             string _text = "<color=#" + clearColorCode + ">";
-            for (int j = 0; j < i; j++) _text = _text + word[clearWord][j].ToString();
-            _text = _text + "</color>";
-            for (int j = i; j < word[clearWord].Length; j++) _text = _text + word[clearWord][j].ToString();
+            for (int j = 0; j < i; j++) _text += word[clearWord][j].ToString();
+            _text += "</color>";
+            for (int j = i; j < word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
             text.text = _text;
         }
     }
