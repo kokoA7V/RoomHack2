@@ -18,7 +18,7 @@ public class HackUI : MonoBehaviour
     public RaycastHit2D hit;
 
     [SerializeField]
-    private Vector2 targetPosition = new Vector2(541f, -260); //inspector‚Å©—R‚É•ÏX‰Â”\
+    private Vector2 targetPosition = new Vector2(541f, -260); //inspectorã§è‡ªç”±ã«å¤‰æ›´å¯èƒ½
 
     public Image imageBG,imageIcon;
 
@@ -28,7 +28,7 @@ public class HackUI : MonoBehaviour
 
     void Start()
     {
-        // RectTransform‚ÌÀ•W‚ğİ’è
+        // RectTransformã®åº§æ¨™ã‚’è¨­å®š
         HackUIPos.anchoredPosition = targetPosition;
         if (unitHack.hacked) hackedFlg = true;
         else hackedFlg = false;
@@ -50,7 +50,7 @@ public class HackUI : MonoBehaviour
     {
         GameObject obj = Instantiate(typingobj);
         hackManager.nowTypingFlg = true;
-        //TypingObj‚ÉHackManager‚©‚ç–á‚Á‚½ƒf[ƒ^‚ğ‘—‚éB
+        //TypingObjã«HackManagerã‹ã‚‰è²°ã£ãŸãƒ‡ãƒ¼ã‚¿ã‚’é€ã‚‹ã€‚
         TypingObj typing = obj.GetComponent<TypingObj>();
         typing.hit = hit;
         typing.hackManager = hackManager;
