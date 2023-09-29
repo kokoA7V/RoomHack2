@@ -10,8 +10,8 @@ public class MateController : MonoBehaviour
     [SerializeField, Header("メソッド用汎用番号")]
     public int methodNo = 0;   // メソッド用汎用番号
 
-    SightCheak unitSight;
-    GameObject target;
+    private SightCheak unitSight;
+    public GameObject target;
 
     private Rigidbody2D plRb;
 
@@ -50,10 +50,8 @@ public class MateController : MonoBehaviour
 
     enum State
     {
-        Wait,
         Shot,
         Move,
-        Search,
         Num
     }
     void Start()
@@ -67,10 +65,8 @@ public class MateController : MonoBehaviour
         burst = 3;
 
         actFuncTbl = new ActFunc[(int)State.Num];
-        actFuncTbl[(int)State.Wait] = ActWait;
         actFuncTbl[(int)State.Shot] = ActShot;
         actFuncTbl[(int)State.Move] = ActMove;
-        actFuncTbl[(int)State.Search] = ActSearch;
 
         stateNo = (int)State.Move;
 
@@ -87,10 +83,12 @@ public class MateController : MonoBehaviour
 
     void Update()
     {
-        if (leaderObj == null)
+        if (leaderObj == null && !leader)
         {
             leader = true;
-            mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
+            movePos = this.transform.position;
+            Debug.Log("リーダー変わったよ");
+            if (mateObj != null) mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
         }
 
         if (!leader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
@@ -98,50 +96,30 @@ public class MateController : MonoBehaviour
 
         Debug.Log("StateNo " + stateNo);
     }
-
-    private void ActWait()
-    {
-        switch (methodNo)
-        {
-            case 0:
-                Debug.Log("待ちに移行");
-
-                plRb.velocity = Vector2.zero;
-                methodCtr = 1.5f;
-                methodNo++;
-                break;
-            case 1:
-                methodCtr -= Time.deltaTime;
-                if (methodCtr <= 0)
-                {
-                    plRb.isKinematic = true;
-                    Debug.Log("完全に止まった");
-                    isEm = true;
-                    methodNo++;
-                }
-                break;
-            case 2:
-                Debug.Log("もう動けるよ");
-                plRb.isKinematic = false;
-                methodNo = 0;
-                break;
-        }
-
-    }
     private void ActShot()
     {
         switch (methodNo)
         {
             case 0:
-                if (!leader) ObjRotation(mateCon.target);
                 Debug.Log("Shotに移行");
+                
                 plRb.velocity = Vector3.zero;
+                
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
-                methodCtr = 2f;
+                
+                methodCtr = 1f;
                 methodNo++;
                 break;
             case 1:
+                if (!leader)
+                {
+                    mateCon = leaderObj.GetComponent<MateController>();
+                    target = mateCon.target;
+                }
+                ObjRotation(target);
+
                 plRb.velocity = Vector3.zero;
+
                 methodCtr -= Time.deltaTime;
                 if (methodCtr <= 0)
                 {
@@ -163,7 +141,6 @@ public class MateController : MonoBehaviour
                 // リーダーだったらマウスクリックで移動
                 if (leader)
                 {
-                    mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
                     if (Input.GetMouseButtonDown(1))
                     {
                         mousePos = Input.mousePosition;
@@ -173,15 +150,7 @@ public class MateController : MonoBehaviour
                 // 違ったらリーダーについていく
                 else
                 {
-                    // リーダーが消えたらリーダーになる
-                    if (leaderObj == null)
-                    {
-                        leader = true;
-                        mateCon = leaderObj.GetComponent<MateController>();
-                        mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
-                    }
-                    else
-                        movePos = leaderObj.transform.position;
+                    movePos = leaderObj.transform.position;
 
                     // ある程度リーダーに近づいたら止まる
                     if (Mathf.Abs(movePos.x - this.transform.position.x) <= 1f &&
@@ -199,7 +168,6 @@ public class MateController : MonoBehaviour
                 target = unitSight.EnemyCheck();
                 if (target != null && isEm)
                 {
-                    Debug.Log(target);
                     movePos = this.transform.position;
                     methodNo++;
                     break;
@@ -211,22 +179,6 @@ public class MateController : MonoBehaviour
                 methodCtr = 0;
                 isEm = false;
                 stateNo = (int)State.Shot;
-                break;
-        }
-    }
-    void ActSearch()
-    {
-        switch (methodNo)
-        {
-            case 0:
-                if (unitSight.EnemyCheck() && isEm)
-                {
-                    Debug.Log("Shotに移行");
-                    methodNo = 0;
-                    methodCtr = 0;
-                    stateNo = (int)State.Shot;
-                    isEm = false;
-                }
                 break;
         }
     }

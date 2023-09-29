@@ -9,24 +9,19 @@ public class MainCameraController : MonoBehaviour
 
     // バーチャルカメラ
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (var item in mateList)
+
+        foreach (var item in mateList ?? new List<MateController>())
         {
-            if (item == null)
+            if (item != null)
             {
-                mateList.Remove(item);
-            }
-            if (item.leader)
-            {
-                virtualCamera.Follow = item.GetComponent<Transform>();
+                if (item.leader)
+                {
+                    virtualCamera.Follow = item.GetComponent<Transform>();
+                }
             }
         }
     }

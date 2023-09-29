@@ -129,7 +129,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2205353370004845531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,12 +184,12 @@ MonoBehaviour:
   methodNo: 0
   rayCircle:
     tr: {fileID: 8484085580889226523}
-    numberOfRays: 12
-    detectionRange: 5
+    numberOfRays: 6
+    detectionRange: 1
     layerMask:
       serializedVersion: 2
       m_Bits: 128
-    chkType: 90
+    chkType: 180
     gameType: 45
     dirType: 1
     rayFlg: 1
