@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
     private int pow;
 
     // 
-    private GameObject unit;
+    public GameObject unit;
 
     private float methodCtr = 0;
 
@@ -141,25 +141,38 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     void ActMove()
     {
-        GameObject unit = rayCircle.CircleChk();
+        GameObject mateUnit = rayCircle.CircleChk();
 
         switch (methodNo)
         {
             case 0:
-                if (unit == null) return;
-                Debug.Log("Move" + moveSpd);
-                if (unit.TryGetComponent<MateController>(out MateController pc))
-                    unitPos = unit.transform.position;
-                eCore.Move(moveSpd, unitPos);
-
-                //敵がいたらShotに移行
-                target = eSight.EnemyCheck();
-                if (target != null && isEm)
+                if (mateUnit != null)
                 {
-                    methodNo++;
-                    break;
+                    Debug.Log("Move" + moveSpd);
+                    if (mateUnit.TryGetComponent<MateController>(out MateController pc))
+                        unitPos = mateUnit.transform.position;
+                    eCore.Move(moveSpd, unitPos);
+
+                    //敵がいたらShotに移行
+                    target = eSight.EnemyCheck();
+                    if (target != null && isEm)
+                    {
+                        methodNo++;
+                    }
                 }
-                break;
+                else if (unit != null)
+                {
+                    unitPos = unit.transform.position;
+                    eCore.Move(moveSpd, unitPos);
+
+                    //敵がいたらShotに移行
+                    target = eSight.EnemyCheck();
+                    if (target != null && isEm)
+                    {
+                        methodNo++;
+                    }
+                }
+                    break;
             case 1:
                 plRb.velocity = Vector3.zero;
                 methodNo = 0;

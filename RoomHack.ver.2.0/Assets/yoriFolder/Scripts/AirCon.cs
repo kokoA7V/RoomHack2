@@ -58,7 +58,7 @@ public class AirCon : MonoBehaviour,IUnitHack
             {
                 do
                 {
-                    emList[emList.Count - 1].unitPos = exitObj.transform.position;
+                    emList[emList.Count - 1].unit = exitObj;
                 } while (emList == null);
             }
         }
