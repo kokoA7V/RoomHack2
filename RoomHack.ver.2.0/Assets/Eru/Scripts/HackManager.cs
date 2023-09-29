@@ -182,7 +182,7 @@ public class HackManager : MonoBehaviour
         }
 
         //エアコン
-        else if (hit.collider.gameObject.TryGetComponent<AriConditionerController>(out AriConditionerController ariConditionerCon))
+        else if (hit.collider.gameObject.TryGetComponent<AirConditionerController>(out AirConditionerController ariConditionerCon))
         {
             hackUI._randomFlg = ariConditionerCon.randomFlg;
             hackUI._word = new string[ariConditionerCon.word.Length];

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AriConditionerController : MonoBehaviour, IUnitHack
+public class AirConditionerController : MonoBehaviour, IUnitHack
 {
     public string[] word;
 
@@ -33,7 +33,8 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
 
     private bool hackedFlg = false;
 
-    private List<EnemyController> emList;
+    [HideInInspector]
+    public List<EnemyController> emList;
 
     private int methodNo = 0;
     private int methodNo2 = 0;
@@ -46,7 +47,7 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
 
     private float exitTime = 0;
 
-    private bool flg = false;
+    public bool moveFlg = false;
 
     private GameObject emObj;
 
@@ -79,11 +80,11 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
                         exitTime += Time.deltaTime;
                         if (exitTime >= 5f)
                         {
-                            if (!flg)
+                            if (!moveFlg)
                             {
                                 emObj = emList[emList.Count - 1].gameObject;
                                 emList[emList.Count - 1].unit = exitObj1;
-                                flg = true;
+                                moveFlg = true;
                                 methodNo++;
                             }
                         }
@@ -120,19 +121,5 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
         if (time <= 0) time = hackTime[GameData.AriConditionerLv - 1];
         hackedFlg = true;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<EnemyController>(out EnemyController pc))
-        {
-            emList.Add(pc);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<EnemyController>(out EnemyController pc))
-        {
-            emList.Remove(pc);
-            flg = true;
-        }
-    }
+
 }
