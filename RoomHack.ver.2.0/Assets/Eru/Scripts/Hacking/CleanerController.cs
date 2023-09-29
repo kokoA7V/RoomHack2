@@ -75,6 +75,11 @@ public class CleanerController : MonoBehaviour, IUnitHack
             Debug.Log("爆破");
             Destroy(gameObject);
         }
+
+        Vector2 movementDirection = rb.velocity.normalized;
+        float angleInRadians = Mathf.Atan2(movementDirection.y, movementDirection.x);
+        float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleInDegrees + 180f));
     }
 
     public void StatusDisp()
