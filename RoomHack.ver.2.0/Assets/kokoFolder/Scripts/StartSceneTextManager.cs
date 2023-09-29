@@ -10,12 +10,13 @@ public class StartSceneTextManager : MonoBehaviour
     Button exitButton;
 
     [SerializeField] GameObject[] hackText = new GameObject[7];
-    [SerializeField] GameObject[] titleObj = new GameObject[5];
+    [SerializeField] GameObject[] titleObj = new GameObject[6];
     // 0 title
     // 1 id
     // 2 pass
     // 3 login
     // 4 exit
+    // 5 subtitle
 
     HackText[] SCT = new HackText[7];
     // 5 ID
@@ -91,6 +92,7 @@ public class StartSceneTextManager : MonoBehaviour
         titleObj[2].SetActive(false);
         titleObj[3].SetActive(false);
         titleObj[4].SetActive(false);
+        titleObj[5].SetActive(false);
 
         count = 0;
         time = 0;
@@ -113,6 +115,7 @@ public class StartSceneTextManager : MonoBehaviour
             titleObj[2].transform.position += move2 * 25;
             titleObj[3].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
             titleObj[4].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
+            titleObj[5].transform.position += move2 * 25;
 
             count = 25;
         }
@@ -169,6 +172,7 @@ public class StartSceneTextManager : MonoBehaviour
                     titleObj[2].transform.position += move2;
                     titleObj[3].GetComponent<RectTransform>().anchoredPosition3D += move;
                     titleObj[4].GetComponent<RectTransform>().anchoredPosition3D += move;
+                    titleObj[5].transform.position += move2;
                 }
 
                 time = 0;
@@ -177,13 +181,22 @@ public class StartSceneTextManager : MonoBehaviour
 
             if (count >= 28)
             {
+                titleObj[5].SetActive(true);
+            }
+
+            if (count >= 29)
+            {
                 titleObj[1].SetActive(true);
                 titleObj[2].SetActive(true);
+            }
+
+            if (count >= 30)
+            {
                 titleObj[3].SetActive(true);
                 titleObj[4].SetActive(true);
             }
 
-            
+
             if (SCT[5].textEnd)
             {
                 SCT[6].textStart = true;

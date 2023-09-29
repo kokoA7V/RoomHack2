@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/kokoFolder/Scenes/TitleScene.unity
     guid: 53be9677bf73b3244ac09292e807340f
-  - enabled: 1
-    path: Assets/kokoFolder/Scenes/TitleScene.unity
-    guid: 4fda8a6e6f88d0b4db53cb08e0535f89
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/kokoFolder/LoadSystem/Scenes/Scene1.unity
     guid: 43990d22740d5fa4ebda58a972daf2a7
