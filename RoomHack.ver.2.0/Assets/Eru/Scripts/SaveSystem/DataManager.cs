@@ -1,5 +1,3 @@
-//データをセーブしたり読み込んだりします
-
 using UnityEngine;
 using System.IO;
 

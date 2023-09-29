@@ -48,17 +48,17 @@ public class AlarmController : MonoBehaviour, IUnitHack
 
         if (hackedFlg && GameData.AlarmLv == 1)
         {
-            Debug.Log("Œx•ñ‘•’u’â~");
+            Debug.Log("è­¦å ±è£…ç½®åœæ­¢");
             return;
         }
         else if(hackedFlg && GameData.AlarmLv == 2)
         {
 
-            Debug.Log("Œx•ñ‘•’u”ÍˆÍƒAƒbƒv");
+            Debug.Log("è­¦å ±è£…ç½®ç¯„å›²ã‚¢ãƒƒãƒ—");
         }
         else if(hackedFlg && GameData.AlarmLv == 3)
         {
-            Debug.Log("Œx•ñ‘•’u”j‰ó");
+            Debug.Log("è­¦å ±è£…ç½®ç ´å£Š");
             Destroy(gameObject);
         }
     }

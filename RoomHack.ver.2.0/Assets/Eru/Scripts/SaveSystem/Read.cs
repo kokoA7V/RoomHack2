@@ -1,4 +1,4 @@
-//ƒtƒ@ƒCƒ‹‚Ìƒf[ƒ^‚ğ“Ç‚İ‚İ‚Ü‚·
+//ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã¿ã¾ã™
 
 using System.IO;
 using System.Security.Cryptography;
@@ -15,49 +15,49 @@ public class Read : MonoBehaviour
     private void DoRead()
     {
 #if UNITY_EDITOR
-        //UnityEditorã‚È‚ç
-        //Assetƒtƒ@ƒCƒ‹‚Ì’†‚ÌSaveƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //UnityEditorä¸Šãªã‚‰
+        //Assetãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­ã®Saveãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         string path = Application.dataPath + "/Save";
 
 #else
-        //‚»‚¤‚Å‚È‚¯‚ê‚Î
-        //.exe‚ª‚ ‚é‚Æ‚±‚ë‚ÉSaveƒtƒ@ƒCƒ‹‚ğì¬‚µ‚»‚±‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //ãã†ã§ãªã‘ã‚Œã°
+        //.exeãŒã‚ã‚‹ã¨ã“ã‚ã«Saveãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         Directory.CreateDirectory("Save");
         string path = Directory.GetCurrentDirectory() + "/Save";
 
 #endif
 
-        //ƒZ[ƒuƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğİ’è
+        //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’è¨­å®š
         string SaveFilePath = path + "/save" + DataManager.saveFile + ".bytes";
 
-        //ƒZ[ƒuƒtƒ@ƒCƒ‹‚ª‚ ‚é‚©
+        //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹ã‹
         if (File.Exists(SaveFilePath))
         {
             DataManager.saveData = true;
 
-            //ƒtƒ@ƒCƒ‹ƒ‚[ƒh‚ğƒI[ƒvƒ“‚É‚·‚é
+            //ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¢ãƒ¼ãƒ‰ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã«ã™ã‚‹
             FileStream file = new FileStream(SaveFilePath, FileMode.Open, FileAccess.Read);
             try
             {
-                // ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+                // ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
                 byte[] arrRead = File.ReadAllBytes(SaveFilePath);
 
-                // •œ†‰»
+                // å¾©å·åŒ–
                 byte[] arrDecrypt = AesDecrypt(arrRead);
 
-                // byte”z—ñ‚ğ•¶š—ñ‚É•ÏŠ·
+                // byteé…åˆ—ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
                 string decryptStr = Encoding.UTF8.GetString(arrDecrypt);
 
-                // JSONŒ`®‚Ì•¶š—ñ‚ğƒZ[ƒuƒf[ƒ^‚ÌƒNƒ‰ƒX‚É•ÏŠ·
+                // JSONå½¢å¼ã®æ–‡å­—åˆ—ã‚’ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã®ã‚¯ãƒ©ã‚¹ã«å¤‰æ›
                 SaveData saveData = JsonUtility.FromJson<SaveData>(decryptStr);
 
-                //ƒf[ƒ^‚Ì”½‰f
+                //ãƒ‡ãƒ¼ã‚¿ã®åæ˜ 
                 ReadData(saveData);
 
             }
             finally
             {
-                // ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+                // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
                 if (file != null)
                 {
                     file.Close();
@@ -66,15 +66,14 @@ public class Read : MonoBehaviour
         }
         else
         {
-            Debug.Log("ƒZ[ƒuƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚¹‚ñ");
+            Debug.Log("ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚Šã¾ã›ã‚“");
             DataManager.saveData = false;
         }
 
         this.enabled = false;
-
     }
 
-    //ƒf[ƒ^‚Ì“Ç‚İ‚İi”½‰fj
+    //ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ï¼ˆåæ˜ ï¼‰
     private void ReadData(SaveData saveData)
     {
         GameData.Money = saveData.Money;
@@ -90,10 +89,10 @@ public class Read : MonoBehaviour
     }
 
 
-    /// AesManagedƒ}ƒl[ƒWƒƒ[‚ğæ“¾
+    /// AesManagedãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’å–å¾—
     private AesManaged GetAesManager()
     {
-        //”CˆÓ‚Ì”¼Šp‰p”16•¶š(Save.cs‚Æ“¯‚¶‚â‚Â‚É)
+        //ä»»æ„ã®åŠè§’è‹±æ•°16æ–‡å­—(Save.csã¨åŒã˜ã‚„ã¤ã«)
         string aesIv = "8901436610125689";
         string aesKey = "8396289437824386";
 
@@ -107,12 +106,12 @@ public class Read : MonoBehaviour
         return aes;
     }
 
-    /// AES•œ†‰»
+    /// AESå¾©å·åŒ–
     public byte[] AesDecrypt(byte[] byteText)
     {
-        // AESƒ}ƒl[ƒWƒƒ[æ“¾
+        // AESãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼å–å¾—
         var aes = GetAesManager();
-        // •œ†‰»
+        // å¾©å·åŒ–
         byte[] decryptText = aes.CreateDecryptor().TransformFinalBlock(byteText, 0, byteText.Length);
 
         return decryptText;

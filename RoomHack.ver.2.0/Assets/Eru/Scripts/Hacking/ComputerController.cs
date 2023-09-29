@@ -48,13 +48,13 @@ public class ComputerController : MonoBehaviour, IUnitHack
 
         if (hackedFlg && GameData.ComputerLv == 1)
         {
-            Debug.Log("ƒ[ƒ‹‚ªŒ©‚¦‚é");
+            Debug.Log("ãƒ¡ãƒ¼ãƒ«ãŒè¦‹ãˆã‚‹");
             return;
         }
         else if (hackedFlg && GameData.ComputerLv == 2)
         {
 
-            Debug.Log("Œë“®ì");
+            Debug.Log("èª¤å‹•ä½œ");
         }
     }
 
