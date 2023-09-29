@@ -16,9 +16,11 @@ public class HackUI : MonoBehaviour
     public IUnitHack unitHack;
     [HideInInspector]
     public RaycastHit2D hit;
+    [HideInInspector]
+    public StageTimeManager timeManager;
 
     [SerializeField]
-    private Vector2 targetPosition = new Vector2(541f, -260); //inspectorで自由に変更可能
+    private Vector2 targetPosition = new Vector2(541f, -260);
 
     public Image imageBG,imageIcon;
 
@@ -53,6 +55,7 @@ public class HackUI : MonoBehaviour
         //TypingObjにHackManagerから貰ったデータを送る。
         TypingObj typing = obj.GetComponent<TypingObj>();
         typing.hit = hit;
+        typing.timeManager = timeManager;
         typing.hackManager = hackManager;
         typing.unitHack = unitHack;
         typing.randomFlg = _randomFlg;
