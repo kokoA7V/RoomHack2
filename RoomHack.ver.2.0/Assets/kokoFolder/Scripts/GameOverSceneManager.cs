@@ -107,6 +107,6 @@ public class GameOverSceneManager : MonoBehaviour
     void BackOnClick()
     {
         Load.SL = 2;
-        SceneManager.LoadScene("HomeScene");
+        SceneManager.LoadScene("LoadScene");
     }
 }
