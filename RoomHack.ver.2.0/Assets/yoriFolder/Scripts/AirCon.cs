@@ -4,7 +4,7 @@ using UnityEngine;
 public class AirCon : MonoBehaviour
 {
     [SerializeField]
-    AirConditionerController airCon;
+    private AirConditionerController airCon;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<EnemyController>(out EnemyController pc))
@@ -19,7 +19,7 @@ public class AirCon : MonoBehaviour
         {
             airCon = collision.GetComponent<AirConditionerController>();
             airCon.emList.Remove(pc);
-            airCon.moveFlg=
+            airCon.moveFlg = true;
         }
     }
 }
