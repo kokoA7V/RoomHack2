@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/kokoFolder/LoadSystem/Scenes/Scene2.unity
     guid: 252a8046b6abe874e8101675e953d8e9
+  - enabled: 1
+    path: Assets/showFolder/Scenes/HomeScene.unity
+    guid: dd56fc6296bd92a44a764b7723389dba
+  - enabled: 1
+    path: Assets/kokoFolder/Scenes/GameOverScene.unity
+    guid: 06bd8d96479ed1041bc06d66c2ca0ac2
   m_configObjects: {}

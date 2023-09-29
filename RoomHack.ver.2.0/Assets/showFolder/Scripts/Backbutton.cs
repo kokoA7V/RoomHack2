@@ -20,6 +20,6 @@ public class Backbutton : MonoBehaviour
 
     public void OnClick()
     {
-        SceneManager.LoadScene("kokoScene");
+
     }
 }
