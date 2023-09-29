@@ -7,27 +7,19 @@ public class LevelUpButton : MonoBehaviour
 {
     [SerializeField] ButtonManager buttonmng;
     [SerializeField] MoneyManager moneymanager;
+    [SerializeField] LevelManager levelmng;
+    [SerializeField] SkillData skillmng;
 
-    public Text Cleanleveltx;
-    public GameObject Digeleveltx;
-    public GameObject Computerleveltx;
-    public GameObject Ariconleveltx;
-    public GameObject Alarmleveltx;
-    public GameObject Turretleveltx;
-    public GameObject Enemyleveltx;
-    public GameObject Doorleveltx;
-    public GameObject Cameraleveltx;
-
-    
     // Start is called before the first frame update
     public void OnClick()
     {
         //クリーン用
-        if (buttonmng.Cleanbutton)　//クリーンのlevelが3以下なら処理
+        if (buttonmng.Cleanbutton )　//クリーンのlevelが3以下なら処理
         {
-            if (GameData.CleanerLv <= 4)
+            bool flg = moneymanager.BuySkill(0);
+            if (GameData.CleanerLv < 3 && flg)
             {
-                moneymanager.BuySkill(0);
+                levelmng.CleanLevelcounter++;
                 GameData.CleanerLv += 1;
                 this.gameObject.SetActive(false);
                 buttonmng.Cleanbutton = false;
@@ -37,21 +29,25 @@ public class LevelUpButton : MonoBehaviour
         //消化機器用
         if (buttonmng.Digestionbutton)
         {
-            if (GameData.DigestionLv <= 4) //Digeのlevelが3以下なら処理
+            bool flg = moneymanager.BuySkill(1);
+            if (GameData.DigestionLv < 3 && flg) //Digeのlevelが3以下なら処理
             {
-                moneymanager.BuySkill(1);
+                levelmng.DigeLevelcounter++;
                 GameData.DigestionLv += 1;
                 this.gameObject.SetActive(false);
                 buttonmng.Digestionbutton = false;
             }
+          
         }
+
 
         //コンピューター用
         if (buttonmng.computorbutton)
         {
-            if (GameData.ComputerLv <= 4)　//Computerのlevelが3以下なら処理
+            bool flg = moneymanager.BuySkill(2);
+            if (GameData.ComputerLv < 3 && flg)　//Computerのlevelが3以下なら処理
             {
-                moneymanager.BuySkill(2);
+                levelmng.ComputerLevelcounter++;
                 GameData.ComputerLv += 1;
                 this.gameObject.SetActive(false);
                 buttonmng.computorbutton = false;
@@ -61,9 +57,10 @@ public class LevelUpButton : MonoBehaviour
         //エアコン用
         if (buttonmng.AriConditionerbutton) //エアコンのlevelが3以下なら処理
         {
-            if (GameData.AriConditionerLv <= 4)
-            {
-                moneymanager.BuySkill(3);
+            bool flg = moneymanager.BuySkill(3);
+            if (GameData.AriConditionerLv < 3 && flg)
+            { 
+                levelmng.AriconLevelcounter++;
                 GameData.AriConditionerLv += 1;
                 this.gameObject.SetActive(false);
                 buttonmng.AriConditionerbutton = false;
@@ -73,63 +70,70 @@ public class LevelUpButton : MonoBehaviour
         //警報機器用
         if (buttonmng.Alarmbutton)  //Alarmのlevelが3以下なら処理
         {
+            bool flg = moneymanager.BuySkill(4);
+            if (GameData.AlarmLv < 3 && flg)
             {
-                if (GameData.AlarmLv <= 4)
-                {
-                    moneymanager.BuySkill(4);
-                    GameData.AlarmLv += 1;
-                    this.gameObject.SetActive(false);
-                    buttonmng.Digestionbutton = false;
-                }
+                levelmng.AlarmLevelcounter++;
+                GameData.AlarmLv += 1;
+                this.gameObject.SetActive(false);
+                buttonmng.Digestionbutton = false;
             }
+        }
 
-            //タレット用
-            if (buttonmng.Turretbutton) //Turretのlevelが3以下なら処理
+        //タレット用
+        if (buttonmng.Turretbutton) //Turretのlevelが3以下なら処理
+        {
+            bool flg = moneymanager.BuySkill(5);
+            if (GameData.TurretLv < 3 && flg)
             {
-                if (GameData.TurretLv <= 4)
-                {
-                    moneymanager.BuySkill(5);
-                    GameData.TurretLv += 1;
-                    this.gameObject.SetActive(false);
-                    buttonmng.Turretbutton = false;
-                }
+              
+                levelmng.TurretLevelcounter++;
+                GameData.TurretLv += 1;
+                this.gameObject.SetActive(false);
+                buttonmng.Turretbutton = false;
             }
+        }
 
-            //敵用
-            if (buttonmng.Enemybutton)
+        //敵用
+        if (buttonmng.Enemybutton)
+        {
+            bool flg = moneymanager.BuySkill(6);
+            if (GameData.EnemyLv < 3 && flg) //Enemyのlevelが3以下なら処理
             {
-                if (GameData.EnemyLv <= 4) //Enemyのlevelが3以下なら処理
-                {
-                    moneymanager.BuySkill(6);
-                    GameData.EnemyLv += 1;
-                    this.gameObject.SetActive(false);
-                    buttonmng.Enemybutton = false;
-                }
+              
+                levelmng.EnemyLevelcounter++;
+                GameData.EnemyLv += 1;
+                this.gameObject.SetActive(false);
+                buttonmng.Enemybutton = false;
             }
+        }
 
-            //ドア用
-            if (buttonmng.Doorbutton)
+        //ドア用
+        if (buttonmng.Doorbutton)
+        {
+            bool flg = moneymanager.BuySkill(7);
+            if (GameData.DoorLv < 3 && flg) //Doorのlevelが3以下なら処理
             {
-                if (GameData.EnemyLv <= 4) //Doorのlevelが3以下なら処理
-                {
-                    moneymanager.BuySkill(7);
-                    GameData.DoorLv += 1;
-                    this.gameObject.SetActive(false);
-                    buttonmng.Doorbutton = false;
-                }
+               
+                levelmng.DoorLevelcounter++;
+                GameData.DoorLv += 1;
+                this.gameObject.SetActive(false);
+                buttonmng.Doorbutton = false;
             }
+        }
 
-            //カメラ用
-            if (buttonmng.Camerabutton)
+        //カメラ用
+        if (buttonmng.Camerabutton)
+        {
+            bool flg = moneymanager.BuySkill(8);
+            if (GameData.CameraLv < 3  && flg) //Cameraのlevelが3以下なら処理
             {
-                if (GameData.CameraLv <= 4) //Cameraのlevelが3以下なら処理
-                {
-                    moneymanager.BuySkill(8);
-                    GameData.CameraLv += 1;
-                    this.gameObject.SetActive(false);
-                    buttonmng.Camerabutton = false;
-                }
+                levelmng.CameraLevelcounter++;
+                GameData.CameraLv += 1;
+                this.gameObject.SetActive(false);
+                buttonmng.Camerabutton = false;
             }
         }
     }
 }
+

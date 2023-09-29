@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillData : MonoBehaviour
+public class SkillData :MonoBehaviour
 {
     //ドアのスキルコスト
     [SerializeField] public int Doorcost = 100;

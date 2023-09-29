@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1574,20 +1574,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 60
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
-
-'
+  m_Text: 
 --- !u!222 &745697759
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1612,8 +1610,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 162.57, y: -22.25}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 263.22, y: -79.04}
+  m_SizeDelta: {x: 399.44, y: 104.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &746716311
 GameObject:
@@ -2514,11 +2512,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bf53d47b74d4c47a694916d1cbe0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMoney: 2000
-  haveMoney: 0
+  haveMoney: 2000
   haveText: {fileID: 1303323907}
   useText: {fileID: 48644266}
-  notText: {fileID: 745697758}
+  NotbuyText: {fileID: 745697758}
   Skillmng: {fileID: 1314758456}
 --- !u!1 &990229774
 GameObject:
@@ -4915,15 +4912,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonmng: {fileID: 735282047}
   moneymanager: {fileID: 984277404}
-  Cleanleveltx: {fileID: 0}
-  Digeleveltx: {fileID: 822261620}
-  Computerleveltx: {fileID: 274952002}
-  Ariconleveltx: {fileID: 290334795}
-  Alarmleveltx: {fileID: 746716311}
-  Turretleveltx: {fileID: 1018985942}
-  Enemyleveltx: {fileID: 594235635}
-  Doorleveltx: {fileID: 1749937584}
-  Cameraleveltx: {fileID: 1286373923}
+  levelmng: {fileID: 1851712293}
+--- !u!1 &1851712292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1851712294}
+  - component: {fileID: 1851712293}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1851712293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851712292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae315f7461f33749be8fbb4a5579c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CleanLevelText: {fileID: 852482634}
+  DigeLevelText: {fileID: 822261622}
+  ComputerLevelText: {fileID: 274952004}
+  AriconLevelText: {fileID: 290334797}
+  AlarmLevelText: {fileID: 746716313}
+  TurretLevelText: {fileID: 1018985944}
+  EnemyLevelText: {fileID: 594235637}
+  DoorLevelText: {fileID: 1749937586}
+  CameraLevelText: {fileID: 1286373925}
+  CleanLevelcounter: 0
+  DigeLevelcounter: 0
+  ComputerLevelcounter: 0
+  AriconLevelcounter: 0
+  AlarmLevelcounter: 0
+  TurretLevelcounter: 0
+  EnemyLevelcounter: 0
+  DoorLevelcounter: 0
+  CameraLevelcounter: 0
+--- !u!4 &1851712294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851712292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.500741, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1908443017
 GameObject:
   m_ObjectHideFlags: 0

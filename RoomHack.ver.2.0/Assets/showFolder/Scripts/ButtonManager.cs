@@ -27,7 +27,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject[] StageTrig; //Stageを押したときに表示されるUIを格納する場所
     [SerializeField] GameObject[] ShopTrig; //Shopを押したときに表示されるUIを格納する場所
 
-    public  GameObject OptionTrig;
+    public GameObject OptionTrig;
 
     [SerializeField] ImageManager imagemanager;
 
@@ -36,7 +36,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] bool[] isButtonToggled;
     [SerializeField] bool OptionTri = false;
     bool alreadybutton = false;
-    
+
     public bool Cleanbutton = false;
     public bool Digestionbutton = false;
     public bool computorbutton = false;
@@ -74,7 +74,7 @@ public class ButtonManager : MonoBehaviour
             EnemyButton.onClick.AddListener(EnemyButtonSet);
             DoorButton.onClick.AddListener(DoorButtonSet);
             CameraButton.onClick.AddListener(CameraButtonSet);
-            alreadybutton = true; 
+            alreadybutton = true;
         }
     }
     //マネーシステム関連
@@ -83,6 +83,7 @@ public class ButtonManager : MonoBehaviour
     //クリーン用のボタンを押した後の処理
     void CleanButtonSet()
     {
+        FlgReset();
         LevelUpButton.SetActive(true);
         Cleanbutton = true;
     }
@@ -90,57 +91,65 @@ public class ButtonManager : MonoBehaviour
     //消化機器用のボタン
     void DigestionButtonSet()
     {
-         LevelUpButton.SetActive(true);
-         Digestionbutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        Digestionbutton = true;
     }
 
     //コンピューター用のボタンを押した後の処理
     void ComputorButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            computorbutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        computorbutton = true;
     }
 
     //エアコン用のボタンを押した後の処理
     void AriConditionerButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            AriConditionerbutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        AriConditionerbutton = true;
     }
 
     //警報機器用のボタンを押した後の処理
     void AlarmButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            Alarmbutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        Alarmbutton = true;
     }
 
     //タレット用のボタンを押した後の処理
     void TurretButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            Turretbutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        Turretbutton = true;
     }
 
     //敵用のボタンを押した後の処理
     void EnemyButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            Enemybutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        Enemybutton = true;
     }
 
     //ドア用のボタンを押した後の処理
     void DoorButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            Doorbutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        Doorbutton = true;
     }
 
     //カメラ用のボタンを押した後の処理
     void CameraButtonSet()
     {
-            LevelUpButton.SetActive(true);
-            Camerabutton = true;
+        FlgReset();
+        LevelUpButton.SetActive(true);
+        Camerabutton = true;
     }
 
     void StageButtonsSet() //Stage用のボタン
@@ -157,6 +166,26 @@ public class ButtonManager : MonoBehaviour
     {
         ToggleButtonsSet(2);
     }
+
+    private void FlgReset()
+    {
+        Cleanbutton = false;
+        Digestionbutton = false;
+        computorbutton = false;
+        AriConditionerbutton = false;
+        Alarmbutton = false;
+        Turretbutton = false;
+        Enemybutton = false;
+        Doorbutton = false;
+        Camerabutton = false;
+    }
+
+
+
+
+
+
+
     //各それぞれのボタンの表示・非表示の設定。
 
     void ToggleButtonsSet(int i) //それぞれのボタンを引数で管理
@@ -184,19 +213,15 @@ public class ButtonManager : MonoBehaviour
             // Stageのセットを表示する。
             foreach (GameObject obj in StageTrig) obj.SetActive(true);
         }
-        else if(i == 1)
+        else if (i == 1)
         {
             // Shopのセットを表示する
             foreach (GameObject obj in ShopTrig) obj.SetActive(true);
         }
-        else if(i == 2)
+        else if (i == 2)
         {
             //Option画面を表示する。
             OptionTrig.SetActive(true);
         }
     }
 }
-
-
-
-
