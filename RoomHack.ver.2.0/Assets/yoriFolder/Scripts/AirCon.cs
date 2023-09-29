@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AriConditionerController : MonoBehaviour, IUnitHack
+public class AirCon : MonoBehaviour,IUnitHack
 {
     public string[] word;
 
@@ -32,6 +32,10 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
 
     private bool hackedFlg = false;
 
+    private bool flg = false;
+
+    private float exitTime = 0;
+
     private List<EnemyController> emList;
 
     private int methodNo = 0;
@@ -46,22 +50,22 @@ public class AriConditionerController : MonoBehaviour, IUnitHack
 
     void Update()
     {
-        if (time > 0) time -= Time.deltaTime;
-        else if (hackedFlg && time <= 0)
-        {
-            hacked = false;
-            hackedFlg = false;
-            frameSR.sprite = frameEnemySprite;
-        }
-
         if (hackedFlg && GameData.AriConditionerLv == 1)
         {
-            Debug.Log("エアコン停止");
+            Debug.Log(emList.Count);
+            exitTime += Time.deltaTime;
+            if (exitTime <= 5f)
+            {
+                do
+                {
+                    emList[emList.Count - 1].unitPos = exitObj.transform.position;
+                } while (emList == null);
+            }
         }
         else if (hackedFlg && GameData.AriConditionerLv == 2)
         {
-
-            Debug.Log("冷暖房起動");
+            Debug.Log("暴走");
+            flg = true;
         }
     }
 

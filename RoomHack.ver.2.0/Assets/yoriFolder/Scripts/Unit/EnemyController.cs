@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     int emDmgLayer = 2;
 
-    private Vector3 unitPos;
+    public Vector3 unitPos;
     private GameObject target;
 
     private SightCheak eSight;
