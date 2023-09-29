@@ -37,6 +37,9 @@ public class TypingObj : MonoBehaviour
     [HideInInspector]
     public RaycastHit2D hit;
 
+    [HideInInspector]
+    public StageTimeManager timeManager;
+
     private Text text;
 
     private string clearColorCode, missColorCode;
@@ -120,6 +123,7 @@ public class TypingObj : MonoBehaviour
                     {
                         //ミス処理
                         currentShakeDuration = shakeDuration;
+                        timeManager.TypingMiss();
                     }
                 }
             }

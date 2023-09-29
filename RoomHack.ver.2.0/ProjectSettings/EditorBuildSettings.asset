@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/kokoFolder/Scenes/TitleScene.unity
+    guid: 53be9677bf73b3244ac09292e807340f
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/kokoFolder/LoadSystem/Scenes/Scene1.unity
+    guid: 43990d22740d5fa4ebda58a972daf2a7
+  - enabled: 1
+    path: Assets/kokoFolder/LoadSystem/Scenes/LoadScene.unity
+    guid: c821c8a204108754194d09cdc69a07d5
+  - enabled: 1
+    path: Assets/kokoFolder/LoadSystem/Scenes/Scene2.unity
+    guid: 252a8046b6abe874e8101675e953d8e9
   m_configObjects: {}

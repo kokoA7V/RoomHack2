@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class DebugAudioPlay : MonoBehaviour
 {
-    [SerializeField]
-    AudioSource seAudioSource;
-
-    private void Start()
+    public void BGMAudioPlay(int value)
     {
-        Debug.Log("SpaceÉLÅ[Ç≈SEçƒê∂");
+        AudioPlay.instance.BGMPlay(value);
     }
 
-    void Update()
+    public void SEAudioPlay(int value)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            seAudioSource.Play();
-        }
+        AudioPlay.instance.SEPlay(value);
     }
 }

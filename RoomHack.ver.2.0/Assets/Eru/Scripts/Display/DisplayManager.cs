@@ -6,19 +6,19 @@ using UnityEngine.UI;
 
 public class DisplayManager : MonoBehaviour
 {
-    [SerializeField, Header("ƒXƒNƒŠ[ƒ“ƒ‚[ƒhƒhƒƒbƒvƒ_ƒEƒ“")]
+    [SerializeField, Header("ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³")]
     private Dropdown screenDropDown;
 
-    [SerializeField, Header("‰ğ‘œ“xƒhƒƒbƒvƒ_ƒEƒ“")]
+    [SerializeField, Header("è§£åƒåº¦ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³")]
     private Dropdown resolutionDropDown;
 
-    [SerializeField, Header("ƒ‰ƒCƒg")]
+    [SerializeField, Header("ãƒ©ã‚¤ãƒˆ")]
     private new Light light;
 
-    [SerializeField, Header("–¾‚é‚³ƒeƒLƒXƒg")]
+    [SerializeField, Header("æ˜ã‚‹ã•ãƒ†ã‚­ã‚¹ãƒˆ")]
     private Text brightnessText;
 
-    [SerializeField, Header("–¾‚é‚³ƒXƒ‰ƒCƒ_[")]
+    [SerializeField, Header("æ˜ã‚‹ã•ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼")]
     private Slider brightnessSlider;
 
     private int width = 1920;
@@ -41,22 +41,22 @@ public class DisplayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒNƒŠ[ƒ“ƒ‚[ƒh•ÏX
+    /// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰å¤‰æ›´
     /// </summary>
     public void ChangeScreenMode()
     {
-        //ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh
+        //ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
         if (screenDropDown.value == 0) screenModeFlg = true;
 
-        //ƒEƒBƒ“ƒhƒEƒ‚[ƒh
+        //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰
         else if (screenDropDown.value == 1) screenModeFlg = false;
 
-        //XV
+        //æ›´æ–°
         ChangeDisplay();
     }
 
     /// <summary>
-    /// ‰ğ‘œ“x•ÏX
+    /// è§£åƒåº¦å¤‰æ›´
     /// </summary>
     public void ChangeResolution()
     {
@@ -123,12 +123,12 @@ public class DisplayManager : MonoBehaviour
             height = 768;
         }
 
-        //XV
+        //æ›´æ–°
         ChangeDisplay();
     }
 
     /// <summary>
-    /// ƒfƒBƒXƒvƒŒƒCİ’è•ÏX
+    /// ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤è¨­å®šå¤‰æ›´
     /// </summary>
     private void ChangeDisplay()
     {
@@ -136,7 +136,7 @@ public class DisplayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰æ–Ê‚Ì–¾‚é‚³•ÏX
+    /// ç”»é¢ã®æ˜ã‚‹ã•å¤‰æ›´
     /// </summary>
     /// <param name="brightness"></param>
     public void SetBrightness(float brightness)
@@ -155,45 +155,45 @@ public class DisplayManager : MonoBehaviour
     public void Save()
     {
 #if UNITY_EDITOR
-        //UnityEditorã‚È‚ç
-        //Assetƒtƒ@ƒCƒ‹‚Ì’†‚ÌSaveƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //UnityEditorä¸Šãªã‚‰
+        //Assetãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­ã®Saveãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         string path = Application.dataPath + "/Save";
 
 #else
-        //‚»‚¤‚Å‚È‚¯‚ê‚Î
-        //.exe‚ª‚ ‚é‚Æ‚±‚ë‚ÉSaveƒtƒ@ƒCƒ‹‚ğì¬‚µ‚»‚±‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //ãã†ã§ãªã‘ã‚Œã°
+        //.exeãŒã‚ã‚‹ã¨ã“ã‚ã«Saveãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         Directory.CreateDirectory("Save");
         string path = Directory.GetCurrentDirectory() + "/Save";
 
 #endif
 
-        //ƒZ[ƒuƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğİ’è
+        //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’è¨­å®š
         string SaveFilePath = path + "/display.bytes";
 
-        // ƒZ[ƒuƒf[ƒ^‚Ìì¬
+        // ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆ
         DisplaySaveData saveData = CreateSaveData();
 
-        // ƒZ[ƒuƒf[ƒ^‚ğJSONŒ`®‚Ì•¶š—ñ‚É•ÏŠ·
+        // ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã‚’JSONå½¢å¼ã®æ–‡å­—åˆ—ã«å¤‰æ›
         string jsonString = JsonUtility.ToJson(saveData);
 
-        // •¶š—ñ‚ğbyte”z—ñ‚É•ÏŠ·
+        // æ–‡å­—åˆ—ã‚’byteé…åˆ—ã«å¤‰æ›
         byte[] bytes = Encoding.UTF8.GetBytes(jsonString);
 
-        // AESˆÃ†‰»
+        // AESæš—å·åŒ–
         byte[] arrEncrypted = AesEncrypt(bytes);
 
-        // w’è‚µ‚½ƒpƒX‚Éƒtƒ@ƒCƒ‹‚ğì¬
+        // æŒ‡å®šã—ãŸãƒ‘ã‚¹ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆ
         FileStream file = new FileStream(SaveFilePath, FileMode.Create, FileAccess.Write);
 
-        //ƒtƒ@ƒCƒ‹‚É•Û‘¶‚·‚é
+        //ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜ã™ã‚‹
         try
         {
-            // ƒtƒ@ƒCƒ‹‚É•Û‘¶
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
             file.Write(arrEncrypted, 0, arrEncrypted.Length);
         }
         finally
         {
-            // ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
             if (file != null)
             {
                 file.Close();
@@ -204,47 +204,47 @@ public class DisplayManager : MonoBehaviour
     public void Load()
     {
 #if UNITY_EDITOR
-        //UnityEditorã‚È‚ç
-        //Assetƒtƒ@ƒCƒ‹‚Ì’†‚ÌSaveƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //UnityEditorä¸Šãªã‚‰
+        //Assetãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­ã®Saveãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         string path = Application.dataPath + "/Save";
 
 #else
-        //‚»‚¤‚Å‚È‚¯‚ê‚Î
-        //.exe‚ª‚ ‚é‚Æ‚±‚ë‚ÉSaveƒtƒ@ƒCƒ‹‚ğì¬‚µ‚»‚±‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //ãã†ã§ãªã‘ã‚Œã°
+        //.exeãŒã‚ã‚‹ã¨ã“ã‚ã«Saveãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         Directory.CreateDirectory("Save");
         string path = Directory.GetCurrentDirectory() + "/Save";
 
 #endif
 
-        //ƒZ[ƒuƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğİ’è
+        //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’è¨­å®š
         string SaveFilePath = path + "/display.bytes";
 
-        //ƒZ[ƒuƒtƒ@ƒCƒ‹‚ª‚ ‚é‚©
+        //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹ã‹
         if (File.Exists(SaveFilePath))
         {
-            //ƒtƒ@ƒCƒ‹ƒ‚[ƒh‚ğƒI[ƒvƒ“‚É‚·‚é
+            //ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¢ãƒ¼ãƒ‰ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã«ã™ã‚‹
             FileStream file = new FileStream(SaveFilePath, FileMode.Open, FileAccess.Read);
             try
             {
-                // ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+                // ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
                 byte[] arrRead = File.ReadAllBytes(SaveFilePath);
 
-                // •œ†‰»
+                // å¾©å·åŒ–
                 byte[] arrDecrypt = AesDecrypt(arrRead);
 
-                // byte”z—ñ‚ğ•¶š—ñ‚É•ÏŠ·
+                // byteé…åˆ—ã‚’æ–‡å­—åˆ—ã«å¤‰æ›
                 string decryptStr = Encoding.UTF8.GetString(arrDecrypt);
 
-                // JSONŒ`®‚Ì•¶š—ñ‚ğƒZ[ƒuƒf[ƒ^‚ÌƒNƒ‰ƒX‚É•ÏŠ·
+                // JSONå½¢å¼ã®æ–‡å­—åˆ—ã‚’ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã®ã‚¯ãƒ©ã‚¹ã«å¤‰æ›
                 DisplaySaveData saveData = JsonUtility.FromJson<DisplaySaveData>(decryptStr);
 
-                //ƒf[ƒ^‚Ì”½‰f
+                //ãƒ‡ãƒ¼ã‚¿ã®åæ˜ 
                 ReadData(saveData);
 
             }
             finally
             {
-                // ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+                // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
                 if (file != null)
                 {
                     file.Close();
@@ -257,16 +257,16 @@ public class DisplayManager : MonoBehaviour
             resolutionDropDown.value = 0;
             brightnessSlider.value = 1f;
 
-            //XV
+            //æ›´æ–°
             ChangeDisplay();
             SetBrightness(brightnessSlider.value);
         }
     }
 
-    // ƒZ[ƒuƒf[ƒ^‚Ìì¬
+    // ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆ
     private DisplaySaveData CreateSaveData()
     {
-        //ƒZ[ƒuƒf[ƒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰»
+        //ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–
         DisplaySaveData saveData = new DisplaySaveData();
 
         saveData.screenMode = screenDropDown.value;
@@ -276,7 +276,7 @@ public class DisplayManager : MonoBehaviour
         return saveData;
     }
 
-    //ƒf[ƒ^‚Ì“Ç‚İ‚İi”½‰fj
+    //ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ï¼ˆåæ˜ ï¼‰
     private void ReadData(DisplaySaveData saveData)
     {
         screenDropDown.value = saveData.screenMode;
@@ -285,12 +285,12 @@ public class DisplayManager : MonoBehaviour
     }
 
     /// <summary>
-    ///  AesManagedƒ}ƒl[ƒWƒƒ[‚ğæ“¾
+    ///  AesManagedãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’å–å¾—
     /// </summary>
     /// <returns></returns>
     private AesManaged GetAesManager()
     {
-        //”CˆÓ‚Ì”¼Šp‰p”16•¶š
+        //ä»»æ„ã®åŠè§’è‹±æ•°16æ–‡å­—
         string aesIv = "8974632758937851";
         string aesKey = "7468735999189354";
 
@@ -305,58 +305,58 @@ public class DisplayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// AESˆÃ†‰»
+    /// AESæš—å·åŒ–
     /// </summary>
     /// <param name="byteText"></param>
     /// <returns></returns>
     public byte[] AesEncrypt(byte[] byteText)
     {
-        // AESƒ}ƒl[ƒWƒƒ[‚Ìæ“¾
+        // AESãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®å–å¾—
         AesManaged aes = GetAesManager();
-        // ˆÃ†‰»
+        // æš—å·åŒ–
         byte[] encryptText = aes.CreateEncryptor().TransformFinalBlock(byteText, 0, byteText.Length);
 
         return encryptText;
     }
 
     /// <summary>
-    /// AES•œ†‰»
+    /// AESå¾©å·åŒ–
     /// </summary>
     /// <param name="byteText"></param>
     /// <returns></returns>
     public byte[] AesDecrypt(byte[] byteText)
     {
-        // AESƒ}ƒl[ƒWƒƒ[æ“¾
+        // AESãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼å–å¾—
         var aes = GetAesManager();
-        // •œ†‰»
+        // å¾©å·åŒ–
         byte[] decryptText = aes.CreateDecryptor().TransformFinalBlock(byteText, 0, byteText.Length);
 
         return decryptText;
     }
 
-    //ƒZ[ƒuƒf[ƒ^íœ
+    //ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿å‰Šé™¤
     public void Init()
     {
 #if UNITY_EDITOR
-        //UnityEditorã‚È‚ç
-        //Assetƒtƒ@ƒCƒ‹‚Ì’†‚ÌSaveƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //UnityEditorä¸Šãªã‚‰
+        //Assetãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­ã®Saveãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         string path = Application.dataPath + "/Save";
 
 #else
-        //‚»‚¤‚Å‚È‚¯‚ê‚Î
-        //.exe‚ª‚ ‚é‚Æ‚±‚ë‚ÉSaveƒtƒ@ƒCƒ‹‚ğì¬‚µ‚»‚±‚ÌƒpƒX‚ğ“ü‚ê‚é
+        //ãã†ã§ãªã‘ã‚Œã°
+        //.exeãŒã‚ã‚‹ã¨ã“ã‚ã«Saveãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã®ãƒ‘ã‚¹ã‚’å…¥ã‚Œã‚‹
         Directory.CreateDirectory("Save");
         string path = Directory.GetCurrentDirectory() + "/Save";
 
 #endif
 
-        //ƒtƒ@ƒCƒ‹íœ
+        //ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
         File.Delete(path + "/display.bytes");
 
-        //ƒŠƒ[ƒh
+        //ãƒªãƒ­ãƒ¼ãƒ‰
         Load();
 
-        Debug.Log("ƒf[ƒ^‚Ì‰Šú‰»‚ªI‚í‚è‚Ü‚µ‚½");
+        Debug.Log("ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ãŒçµ‚ã‚ã‚Šã¾ã—ãŸ");
     }
 }
 
