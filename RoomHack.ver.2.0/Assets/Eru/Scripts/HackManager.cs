@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HackManager : MonoBehaviour
 {
+    public StageTimeManager timeManager;
+
     public GameObject HackUIObj;
 
     [HideInInspector]
@@ -46,6 +48,7 @@ public class HackManager : MonoBehaviour
         hackUI.hackManager = GetComponent<HackManager>();
         hackUI.unitHack = iUnitHack;
         hackUI.hit = hit;
+        hackUI.timeManager = timeManager;
 
         if (iUnitHack.hacked)
         {
