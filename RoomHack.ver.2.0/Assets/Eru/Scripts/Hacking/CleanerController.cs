@@ -36,6 +36,9 @@ public class CleanerController : MonoBehaviour, IUnitHack
     [SerializeField, Header("移動速度")]
     private float speed = 3f;
 
+    [SerializeField, Header("攻撃対象レイヤー")]
+    private LayerMask layerMask;
+
     private bool flg = false;
 
     void Start()
@@ -84,5 +87,7 @@ public class CleanerController : MonoBehaviour, IUnitHack
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(flg) rb.velocity = 1.5f * speed * new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+
+        if (collision.gameObject.layer == layerMask) Debug.Log("攻撃");
     }
 }
