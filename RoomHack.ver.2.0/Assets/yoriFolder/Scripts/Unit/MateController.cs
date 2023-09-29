@@ -1,29 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MateController : MonoBehaviour
 {
-    // î•ñæ“¾
+    // æƒ…å ±å–å¾—
     UnitCore mateCore;
 
-    [SerializeField, Header("s“®”Ô†")]
-    public int stateNo = 0;      // s“®”Ô†
-    [SerializeField, Header("ƒƒ\ƒbƒh—p”Ä—p”Ô†")]
-    public int methodNo = 0;   // ƒƒ\ƒbƒh—p”Ä—p”Ô†
+    [SerializeField, Header("è¡Œå‹•ç•ªå·")]
+    public int stateNo = 0;      // è¡Œå‹•ç•ªå·
+    [SerializeField, Header("ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·")]
+    public int methodNo = 0;   // ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·
 
-    SightCheak unitSight;
-
-    private TargetPoint hitsPnt;
-    private TargetPoint unitPnt;
+    private SightCheak unitSight;
+    public GameObject target;
 
     private Rigidbody2D plRb;
 
-    // ƒfƒŠƒQ[ƒh
-    // ŠÖ”‚ğŒ^‚É‚·‚é‚½‚ß‚Ì‚à‚Ì
+    // ãƒ‡ãƒªã‚²ãƒ¼ãƒ‰
+    // é–¢æ•°ã‚’å‹ã«ã™ã‚‹ãŸã‚ã®ã‚‚ã®
     private delegate void ActFunc();
 
-    // ŠÖ”‚Ì”z—ñ
+    // é–¢æ•°ã®é…åˆ—
     private ActFunc[] actFuncTbl;
 
     private float moveSpd;
@@ -39,31 +35,38 @@ public class MateController : MonoBehaviour
     private int burst;
 
     Vector3 mousePos;
-    Vector3 worldPos;
+    Vector3 movePos;
 
-    [SerializeField, Header("ƒŒƒC‚Ìİ’è")]
-    private RayCircle rayCircle = new RayCircle();
+    [SerializeField, Header("ãƒªãƒ¼ãƒ€ãƒ¼ä»»å‘½ãªã‚‰true")]
+    public bool leader;
+
+    [SerializeField, Header("ãƒªãƒ¼ãƒ€ãƒ¼ã®ãƒã‚¸ã‚·ãƒ§ãƒ³")]
+    private GameObject leaderObj;
+    private MateController mateCon;
+    [SerializeField, Header("Mateã®ãƒã‚¸ã‚·ãƒ§ãƒ³")]
+    public GameObject mateObj;
+    //[SerializeField, Header("ãƒ¬ã‚¤ã®è¨­å®š")]
+    //private RayCircle rayCircle = new RayCircle();
+
     enum State
     {
-        Wait,
         Shot,
         Move,
-        Search,
         Num
     }
     void Start()
     {
         mateCore = GetComponent<UnitCore>();
-        
+
+        if (!leader) mateCon = leaderObj.GetComponent<MateController>();
+
         moveSpd = mateCore.moveSpd;
         mateCore.dmgLayer = 1;
         burst = 3;
-       
+
         actFuncTbl = new ActFunc[(int)State.Num];
-        actFuncTbl[(int)State.Wait] = ActWait;
         actFuncTbl[(int)State.Shot] = ActShot;
         actFuncTbl[(int)State.Move] = ActMove;
-        actFuncTbl[(int)State.Search] = ActSearch;
 
         stateNo = (int)State.Move;
 
@@ -75,59 +78,48 @@ public class MateController : MonoBehaviour
 
         unit = null;
 
-        worldPos = this.transform.position;
+        movePos = this.transform.position;
     }
 
     void Update()
     {
-        actFuncTbl[stateNo]();
-        //Debug.Log("ugoiteru");
-        //ActMove();
-        Debug.Log("StateNo " + stateNo);
-
-    }
-    private void ActWait()
-    {
-        switch (methodNo)
+        if (leaderObj == null && !leader)
         {
-            case 0:
-                Debug.Log("‘Ò‚¿‚ÉˆÚs");
-
-                plRb.velocity = Vector2.zero;
-                methodCtr = 1.5f;
-                methodNo++;
-                break;
-            case 1:
-                methodCtr -= Time.deltaTime;
-                if (methodCtr<=0)
-                {
-                    plRb.isKinematic = true;
-                    Debug.Log("Š®‘S‚É~‚Ü‚Á‚½");
-                    isEm = true;
-                    methodNo++;
-                }    
-                break;
-            case 2:
-                Debug.Log("‚à‚¤“®‚¯‚é‚æ");
-                plRb.isKinematic = false;
-                methodNo = 0;
-                break;
+            leader = true;
+            movePos = this.transform.position;
+            Debug.Log("ãƒªãƒ¼ãƒ€ãƒ¼å¤‰ã‚ã£ãŸã‚ˆ");
+            if (mateObj != null) mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
         }
-       
+
+        if (!leader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
+        else actFuncTbl[stateNo]();
+
+        Debug.Log("StateNo " + stateNo);
     }
     private void ActShot()
     {
         switch (methodNo)
         {
             case 0:
-                Debug.Log("Shot‚ÉˆÚs");
+                Debug.Log("Shotã«ç§»è¡Œ");
+                
                 plRb.velocity = Vector3.zero;
+                
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
-                methodCtr = 2f;
+                
+                methodCtr = 1f;
                 methodNo++;
                 break;
             case 1:
+                if (!leader)
+                {
+                    mateCon = leaderObj.GetComponent<MateController>();
+                    target = mateCon.target;
+                }
+                ObjRotation(target);
+
                 plRb.velocity = Vector3.zero;
+
                 methodCtr -= Time.deltaTime;
                 if (methodCtr <= 0)
                 {
@@ -139,181 +131,66 @@ public class MateController : MonoBehaviour
                 break;
         }
     }
+    // ç§»å‹•ã—ã¦æ•µãŒã„ãŸã‚‰shotã«ç§»å‹•ã™ã‚‹
     private void ActMove()
     {
         Debug.Log("move" + unit);
-        //if ( unit!=null )
-        //{
-            switch (methodNo)
-            {
-                case 0:
-                    Debug.Log("Move" + moveSpd);
-                    if (Input.GetMouseButtonDown(1))
-                    {
-                        mousePos = Input.mousePosition;
-                        worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10f));
-                    }
-                    mateCore.Move(moveSpd, worldPos);
-                    ////“G‚ª‚¢‚½‚çShot‚ÉˆÚs
-                    if (unitSight.EnemyCheck() && isEm)
-                    {
-                        worldPos = this.transform.position;
-                        methodNo++;
-                        break;
-                    }
-                    break;
-                case 1:
-                    plRb.velocity = Vector3.zero;
-                    methodNo = 0;
-                    methodCtr = 0;
-                    isEm = false;
-                    stateNo = (int)State.Shot;
-                    break;
-            }
-        //}
-        //else
-        //{
-        //    methodNo = 0;
-        //    methodCtr = 0;
-        //    stateNo = (int)State.Search;
-        //    isEm = false;
-        //}
-    }
-    void ActSearch()
-    {
         switch (methodNo)
         {
             case 0:
-                if (unitSight.EnemyCheck() && isEm)
+                // ãƒªãƒ¼ãƒ€ãƒ¼ã ã£ãŸã‚‰ãƒã‚¦ã‚¹ã‚¯ãƒªãƒƒã‚¯ã§ç§»å‹•
+                if (leader)
                 {
-                    Debug.Log("Shot‚ÉˆÚs");
-                    methodNo = 0;
-                    methodCtr = 0;
-                    stateNo = (int)State.Shot;
-                    isEm = false;
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        mousePos = Input.mousePosition;
+                        movePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10f));
+                    }
                 }
+                // é•ã£ãŸã‚‰ãƒªãƒ¼ãƒ€ãƒ¼ã«ã¤ã„ã¦ã„ã
+                else
+                {
+                    movePos = leaderObj.transform.position;
+
+                    // ã‚ã‚‹ç¨‹åº¦ãƒªãƒ¼ãƒ€ãƒ¼ã«è¿‘ã¥ã„ãŸã‚‰æ­¢ã¾ã‚‹
+                    if (Mathf.Abs(movePos.x - this.transform.position.x) <= 1f &&
+                        Mathf.Abs(movePos.y - this.transform.position.y) <= 1f)
+                    {
+                        plRb.velocity = Vector2.zero;
+                        moveSpd = 0;
+                    }
+                    else moveSpd = mateCore.moveSpd;
+                }
+
+                mateCore.Move(moveSpd, movePos);
+
+                ////æ•µãŒã„ãŸã‚‰Shotã«ç§»è¡Œ
+                target = unitSight.EnemyCheck();
+                if (target != null && isEm)
+                {
+                    movePos = this.transform.position;
+                    methodNo++;
+                    break;
+                }
+                break;
+            case 1:
+                plRb.velocity = Vector3.zero;
+                methodNo = 0;
+                methodCtr = 0;
+                isEm = false;
+                stateNo = (int)State.Shot;
                 break;
         }
     }
+    private void ObjRotation(GameObject obj)
+    {
+        if (obj == null) return;
+        // æ•µã®ä½ç½®ã‹ã‚‰è‡ªåˆ†ã®ä½ç½®ã‚’å¼•ã„ã¦ã€æ•µã‚’å‘ãæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+        Vector3 direction = obj.transform.position - this.transform.position;
 
-
-    // ‚¢‚¸‚ê•Ê‚ÌƒNƒ‰ƒX‚É‚·‚é‚»‚ê‚Ü‚Å‚Í‚±‚±
-    private Vector3 hitsPos;
-    private Vector3 unitPos;
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    //Debug.Log("atattayo");
-    //    // ƒ^[ƒQƒbƒgƒ|ƒCƒ“ƒg‚ª‚Â‚¢‚Ä‚é‚©‚Ç‚¤‚©
-    //    hitsPnt = collision.gameObject.GetComponent<TargetPoint>();
-    //    // ‚Â‚¢‚Ä‚½‚çˆ—
-    //    if (hitsPnt != null)
-    //    {
-    //        // Shot’†‚È‚çˆ—‚µ‚È‚¢
-    //        if (stateNo == (int)State.Shot)
-    //        {
-    //            return;
-    //        }
-    //        // Ray‚ğ¶¬
-    //        Vector3 origin = this.gameObject.transform.position;
-    //        Vector3 diredtion = hitsPnt.gameObject.transform.position - origin;
-    //        diredtion = diredtion.normalized;
-    //        Ray ray = new Ray(origin, diredtion * 10);
-
-    //        // Ray‚ğ•\¦
-    //        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-    //        float maxDistance = 10;
-    //        // ©•ª‚Í“–‚½‚ç‚È‚¢‚æ‚¤‚É‚·‚é
-    //        int layerMask = ~(1 << gameObject.layer);
-    //        //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
-
-    //        // ‰½‚©“–‚½‚Á‚½‚ç–¼‘O‚ğ•Ô‚·
-    //        RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance, layerMask);
-    //        foreach (RaycastHit2D hits in hit)
-    //        {
-    //            if (hits.collider != null)
-    //            {
-    //                // •Ç‚É“–‚½‚Á‚½‚ç‚Ìunit‚Ì’†g‚ğnull‚É‚·‚é
-    //                if (hits.collider.gameObject.layer == 8)
-    //                {
-    //                    Debug.Log("ray‚ª(•Ç)" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
-    //                    unit = null;
-    //                    break;
-    //                }
-    //                else
-    //                {
-    //                    Debug.Log("ray‚ª" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
-    //                    // unit‚Ì’†g‚ª“ü‚Á‚Ä‚¢‚½‚ç
-    //                    if (unit != null)
-    //                    {
-    //                        unitPos = unit.gameObject.transform.position;
-    //                        hitsPos = hits.collider.gameObject.transform.position;
-    //                        // unit‚Æ©•ª‚Ì‹——£‚ª0.5ˆÈ‰º‚¾‚Á‚½‚çmoveSpd‚ğ0‚É‚·‚é
-    //                        if (Mathf.Abs(Vector2.Distance(unitPos, origin)) <= 0.5 &&
-    //                            !unit.GetComponent<TargetPoint>().visited)
-    //                        {
-    //                            Debug.Log(unit + "0.5ˆÈ‰º");
-    //                            Debug.Log(Mathf.Abs(Vector2.Distance(unitPos, origin)));
-    //                            moveSpd = 0;
-    //                            unit.GetComponent<TargetPoint>().visited = true;
-    //                            plRb.velocity = Vector2.zero;
-    //                        }
-    //                        // unit‚ÆƒŒƒC‚ª“–‚½‚Á‚½obj‚ªˆá‚Á‚½‚ç
-    //                        if (unit.gameObject != hits.collider.gameObject)
-    //                        {
-    //                            TargetPoint hitVis = hits.collider.gameObject.GetComponent<TargetPoint>();
-                                
-    //                            unit = hits.collider.gameObject;
-    //                            // unit‚Æ©•ª‚Ì‹——£‚æ‚è¡“–‚½‚Á‚½point‚Ì‹——£‚ª’Z‚©‚Á‚½‚ç‚»‚Á‚¿‚ÉˆÚ“®‚·‚é
-    //                            //if (Mathf.Abs(Vector2.Distance(unitPos, origin)) >=
-    //                            //    Mathf.Abs(Vector2.Distance(hitsPos, origin)) &&
-    //                            //    !hitVis.visited )
-    //                            //{
-    //                            //    Debug.Log("æ‚É“–‚½‚Á‚½" + unit.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
-    //                            //    hits.collider.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
-    //                            //    unit = hits.collider.gameObject;
-    //                            //    moveSpd = mateCore.moveSpd;
-    //                            //    stateNo = (int)State.Move;
-    //                            //    break;
-    //                            //}
-    //                            //else
-    //                            //{
-    //                            //    Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unit.gameObject.name +
-    //                            //            "‚æ‚è—Dæ“x’á‚¢‚æ");
-    //                            //    if (!hitVis.visited)
-    //                            //    {
-    //                            //        Debug.Log(unit.gameObject.name);
-    //                            //        unit = hits.collider.gameObject;
-    //                            //        moveSpd = mateCore.moveSpd;
-    //                            //        stateNo = (int)State.Move;
-    //                            //    }                      
-    //                            //    break;
-    //                            //}
-                                
-    //                        }
-    //                        else
-    //                        {
-    //                            Debug.Log("“¯‚¶‚à‚Ì‚Æ“–‚½‚Á‚½‚æ");
-    //                        }
-    //                    }
-    //                    // unit‚É‰½‚à‚È‚©‚Á‚½‚ç
-    //                    else
-    //                    {
-    //                        unit = hits.collider.gameObject;
-    //                        Debug.Log("Å‰‚É“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg" + unit.gameObject.name);
-    //                        // ˆÚ“®‚·‚×‚«obj‚É“–‚½‚Á‚½‚çMove‚ÉˆÚs
-    //                        stateNo = (int)State.Move;
-    //                        break;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.GetComponent<TargetPoint>() != null)
-    //    {
-    //        collision.gameObject.GetComponent<TargetPoint>().visited = false;
-    //    }
-    //}
+        // ãƒ™ã‚¯ãƒˆãƒ«ã‚’è§’åº¦ã«å¤‰æ›ã—ã¦æ•µã‚’å‘ã
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, 5f);
+    }
 }

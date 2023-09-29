@@ -32,10 +32,10 @@ public class DoorController : MonoBehaviour ,IUnitHack
 
     private float time;
 
-    private BoxCollider2D bc2d;
+    public BoxCollider2D bc2d;
 
     private bool flg = false;
-    private bool openFlg = false;
+    public bool openFlg = false;
 
     [SerializeField]
     private Transform leftBoard, rightBoard;
@@ -81,7 +81,7 @@ public class DoorController : MonoBehaviour ,IUnitHack
         flg = true;
     }
 
-    private IEnumerator Move()
+    public IEnumerator Move()
     {
         if (!openFlg)
         {
