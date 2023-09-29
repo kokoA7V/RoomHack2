@@ -3,16 +3,16 @@ using UnityEngine;
 [System.Serializable]
 public class RayCircle
 {
-    [SerializeField, Header("ƒŒƒC‚Ìn“_")]
+    [SerializeField, Header("ãƒ¬ã‚¤ã®å§‹ç‚¹")]
     private Transform tr;
 
-    [SerializeField, Header("ƒŒƒC‚Ì–{”")]
+    [SerializeField, Header("ãƒ¬ã‚¤ã®æœ¬æ•°")]
     private int numberOfRays = 12;
 
-    [SerializeField, Header("ƒŒƒC‚ÌÅ‘å‹——£")]
+    [SerializeField, Header("ãƒ¬ã‚¤ã®æœ€å¤§è·é›¢")]
     private float detectionRange = 5f;
 
-    [SerializeField, Header("‘ÎÛ‚ÌƒŒƒCƒ„[")]
+    [SerializeField, Header("å¯¾è±¡ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼")]
     private LayerMask layerMask;
 
     private enum CHK_TYPE
@@ -21,7 +21,7 @@ public class RayCircle
         HALF = 180,
         QUARTER = 90,
     }
-    [SerializeField, Header("ŒŸ’m”ÍˆÍ")]
+    [SerializeField, Header("æ¤œçŸ¥ç¯„å›²")]
     private CHK_TYPE chkType = CHK_TYPE.FULL;
 
     private enum GAME_TYPE
@@ -29,7 +29,7 @@ public class RayCircle
         DOWN = 45,
         SIDE = 90,
     }
-    [SerializeField, Header("ƒQ[ƒ€ƒ^ƒCƒv"), Tooltip("Œ©‰º‚ë‚µ or ‰¡")]
+    [SerializeField, Header("ã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒ—"), Tooltip("è¦‹ä¸‹ã‚ã— or æ¨ª")]
     private GAME_TYPE gameType = GAME_TYPE.DOWN;
 
     private enum DIR_TYPE
@@ -37,10 +37,10 @@ public class RayCircle
         RIGHT = -1,
         LEFT = 1,
     }
-    [SerializeField, Header("‰ŠúŒü‚«")]
+    [SerializeField, Header("åˆæœŸå‘ã")]
     private DIR_TYPE dirType = DIR_TYPE.LEFT;
 
-    [SerializeField,Header("ƒŒƒC‚Ì‰Â‹‰»")]
+    [SerializeField,Header("ãƒ¬ã‚¤ã®å¯è¦–åŒ–")]
     private bool rayFlg = false;
 
     private GameObject obj;
@@ -74,21 +74,21 @@ public class RayCircle
 
         for (int i = 0; i < numberOfRays +1; i++)
         {
-            // ƒŒƒC‚ÌŠp“x‚ğŒvZ
+            // ãƒ¬ã‚¤ã®è§’åº¦ã‚’è¨ˆç®—
             float angle = (i * (int)chkType / numberOfRays) + q + tr.rotation.eulerAngles.z;
 
-            // Šp“x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·
+            // è§’åº¦ã‚’ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›
             float radians = angle * Mathf.Deg2Rad;
 
-            // ƒŒƒC‚Ì•ûŒüƒxƒNƒgƒ‹‚ğŒvZ
+            // ãƒ¬ã‚¤ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
             Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
 
-            // ƒŒƒCƒLƒƒƒXƒg‚ğ”­Ë
+            // ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆã‚’ç™ºå°„
             RaycastHit2D hit = Physics2D.Raycast(tr.position, direction, detectionRange, layerMask);
 
             if(rayFlg) Debug.DrawRay(tr.position, direction * detectionRange, Color.blue);
 
-            // ƒŒƒCƒLƒƒƒXƒg‚ª‰½‚©‚Éƒqƒbƒg‚µ‚½ê‡
+            // ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆãŒä½•ã‹ã«ãƒ’ãƒƒãƒˆã—ãŸå ´åˆ
             if (hit.collider != null)
             {
                 obj = hit.collider.gameObject;
