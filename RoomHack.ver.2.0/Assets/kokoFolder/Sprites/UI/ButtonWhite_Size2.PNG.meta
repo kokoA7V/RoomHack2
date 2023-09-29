@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:RoomHack.ver.2.0/Assets/kokoFolder/Sprites/Slider/Slider2_Fill.PNG.meta
+guid: 71045907fb0eb5b429d32405d7c1612f
+========
 guid: b2adcc9f220fd3d4aa7694be2441910c
+>>>>>>>> main:RoomHack.ver.2.0/Assets/kokoFolder/Sprites/UI/ButtonWhite_Size2.PNG.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
