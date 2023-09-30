@@ -1,39 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour ,IUnitHack
+public class EnemyController : MonoBehaviour, IUnitHack
 {
-    private Vector3 movePos;
-    private Vector2 moveDir;
+    // æƒ…å ±å–å¾—
+    private UnitCore eCore;
 
-    // î•ñæ“¾
-    UnitCore eCore;
-
-    [SerializeField, Header("s“®”Ô†")]
-    public int stateNo = 0;      // s“®”Ô†
-    [SerializeField, Header("ƒƒ\ƒbƒh—p”Ä—p”Ô†")]
-    public int methodNo = 0;   // ƒƒ\ƒbƒh—p”Ä—p”Ô†
-
-    SightCheak emCheak;
-
-    TargetPoint hitsPnt;
-    TargetPoint unitPnt;
+    [SerializeField, Header("è¡Œå‹•ç•ªå·")]
+    public int stateNo = 0;      // è¡Œå‹•ç•ªå·
+    [SerializeField, Header("ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·")]
+    public int methodNo = 0;   // ãƒ¡ã‚½ãƒƒãƒ‰ç”¨æ±ç”¨ç•ªå·
 
     private Rigidbody2D plRb;
 
-    // ƒfƒŠƒQ[ƒh
-    // ŠÖ”‚ğŒ^‚É‚·‚é‚½‚ß‚Ì‚à‚Ì
+    // ãƒ‡ãƒªã‚²ãƒ¼ãƒ‰
+    // é–¢æ•°ã‚’å‹ã«ã™ã‚‹ãŸã‚ã®ã‚‚ã®
     private delegate void ActFunc();
 
-    // ŠÖ”‚Ì”z—ñ
+    // é–¢æ•°ã®é…åˆ—
     private ActFunc[] actFuncTbl;
 
     private float moveSpd;
     private int pow;
 
     // 
-    private GameObject unit;
+    public GameObject unit;
 
     private float methodCtr = 0;
 
@@ -43,12 +33,12 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
     int emDmgLayer = 2;
 
-    private Vector3 unitPos;
-    private Vector3 hitsPos;
+    public Vector3 unitPos;
+    private GameObject target;
 
     private SightCheak eSight;
 
-    [SerializeField, Header("ƒŒƒC‚Ìİ’è")]
+    [SerializeField, Header("ãƒ¬ã‚¤ã®è¨­å®š")]
     private RayCircle rayCircle = new RayCircle();
 
     enum State
@@ -94,6 +84,8 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
         eCore.dmgLayer = 2;
 
+        eCore.maxHP += 7;
+
         actFuncTbl = new ActFunc[(int)State.Num];
         actFuncTbl[(int)State.Shot] = ActShot;
         actFuncTbl[(int)State.Move] = ActMove;
@@ -105,7 +97,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
         plRb = GetComponent<Rigidbody2D>();
 
-        emCheak = GetComponent<SightCheak>();
+        //emCheak = GetComponent<SightCheak>();
         eCore.dmgLayer = emDmgLayer;
 
         unit = null;
@@ -129,7 +121,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
         switch (methodNo)
         {
             case 0:
-                Debug.Log("Shot‚ÉˆÚs");
+                Debug.Log("Shotã«ç§»è¡Œ");
                 eCore.Shot(eCore.dmgLayer, pow, burst);
                 methodCtr = 1.5f;
                 methodNo++;
@@ -149,24 +141,38 @@ public class EnemyController : MonoBehaviour ,IUnitHack
 
     void ActMove()
     {
-        GameObject unit = rayCircle.CircleChk();
-        
+        GameObject mateUnit = rayCircle.CircleChk();
+
         switch (methodNo)
         {
             case 0:
-                if (unit == null) return;
-                Debug.Log("Move" + moveSpd);
-                if (unit.TryGetComponent<MateController>(out MateController pc))
-                    unitPos = unit.transform.position;
-                eCore.Move(moveSpd, unitPos);
-
-                //“G‚ª‚¢‚½‚çShot‚ÉˆÚs
-                if (eSight.EnemyCheck() && isEm)
+                if (mateUnit != null)
                 {
-                    methodNo++;
-                    break;
+                    Debug.Log("Move" + moveSpd);
+                    if (mateUnit.TryGetComponent<MateController>(out MateController pc))
+                        unitPos = mateUnit.transform.position;
+                    eCore.Move(moveSpd, unitPos);
+
+                    //æ•µãŒã„ãŸã‚‰Shotã«ç§»è¡Œ
+                    target = eSight.EnemyCheck();
+                    if (target != null && isEm)
+                    {
+                        methodNo++;
+                    }
                 }
-                break;
+                else if (unit != null)
+                {
+                    unitPos = unit.transform.position;
+                    eCore.Move(moveSpd, unitPos);
+
+                    //æ•µãŒã„ãŸã‚‰Shotã«ç§»è¡Œ
+                    target = eSight.EnemyCheck();
+                    if (target != null && isEm)
+                    {
+                        methodNo++;
+                    }
+                }
+                    break;
             case 1:
                 plRb.velocity = Vector3.zero;
                 methodNo = 0;
@@ -182,7 +188,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
         if (!hacked) return;
         if (time <= 0) time = hackTime[GameData.EnemyLv - 1];
         hackedFlg = true;
-        Debug.Log("ƒnƒbƒLƒ“ƒOŠ®—¹");
+        Debug.Log("ãƒãƒƒã‚­ãƒ³ã‚°å®Œäº†");
     }
 
     void ActSearch()
@@ -192,7 +198,7 @@ public class EnemyController : MonoBehaviour ,IUnitHack
         //    case 0:
         //        if (emCheak.EnemyCheck() && isEm)
         //        {
-        //            //Debug.Log("Shot‚ÉˆÚs");
+        //            //Debug.Log("Shotã«ç§»è¡Œ");
         //            methodNo = 0;
         //            methodCtr = 0;
         //            stateNo = (int)State.Shot;
@@ -201,114 +207,4 @@ public class EnemyController : MonoBehaviour ,IUnitHack
         //        break;
         //}
     }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    //Debug.Log("atattayo");
-    //    // ƒ^[ƒQƒbƒgƒ|ƒCƒ“ƒg‚ª‚Â‚¢‚Ä‚é‚©‚Ç‚¤‚©
-    //    hitsPnt = collision.gameObject.GetComponent<TargetPoint>();
-    //    // ‚Â‚¢‚Ä‚½‚çˆ—
-    //    if (hitsPnt != null)
-    //    {
-    //        // Shot’†‚È‚çˆ—‚µ‚È‚¢
-    //        if (stateNo == (int)State.Shot)
-    //        {
-    //            return;
-    //        }
-    //        // Ray‚ğ¶¬
-    //        Vector3 origin = this.gameObject.transform.position;
-    //        Vector3 diredtion = hitsPnt.gameObject.transform.position - origin;
-    //        diredtion = diredtion.normalized;
-    //        Ray ray = new Ray(origin, diredtion * 10);
-
-    //        // Ray‚ğ•\¦
-    //        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-    //        float maxDistance = 10;
-    //        // ©•ª‚Í“–‚½‚ç‚È‚¢‚æ‚¤‚É‚·‚é
-    //        int layerMask = ~(1 << gameObject.layer);
-    //        //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
-
-    //        // ‰½‚©“–‚½‚Á‚½‚ç–¼‘O‚ğ•Ô‚·
-    //        RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance, layerMask);
-    //        foreach (RaycastHit2D hits in hit)
-    //        {
-    //            if (hits.collider != null)
-    //            {
-    //                // •Ç‚É“–‚½‚Á‚½‚ç‚Ìunit‚Ì’†g‚ğnull‚É‚·‚é
-    //                if (hits.collider.gameObject.layer == 8)
-    //                {
-    //                    Debug.Log("ray‚ª(•Ç)" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
-    //                    unit = null;
-    //                    break;
-    //                }
-    //                else
-    //                {
-    //                    Debug.Log("ray‚ª" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
-    //                    // unit‚Ì’†g‚ª“ü‚Á‚Ä‚¢‚½‚ç
-    //                    if (unit != null)
-    //                    {
-    //                        unitPos = unit.gameObject.transform.position;
-    //                        hitsPos = hits.collider.gameObject.transform.position;
-    //                        // unit‚Æ©•ª‚Ì‹——£‚ª0.5ˆÈ‰º‚¾‚Á‚½‚çmoveSpd‚ğ0‚É‚·‚é
-    //                        if (Mathf.Abs(Vector2.Distance(unitPos, origin)) <= 0.5 &&
-    //                            !unit.GetComponent<TargetPoint>().visited)
-    //                        {
-    //                            Debug.Log(unit + "0.5ˆÈ‰º");
-    //                            Debug.Log(Mathf.Abs(Vector2.Distance(unitPos, origin)));
-    //                            moveSpd = 0;
-    //                            unit.GetComponent<TargetPoint>().visited = true;
-    //                            plRb.velocity = Vector2.zero;
-    //                        }
-    //                        // unit‚ÆƒŒƒC‚ª“–‚½‚Á‚½obj‚ªˆá‚Á‚½‚ç
-    //                        if (unit.gameObject != hits.collider.gameObject)
-    //                        {
-    //                            TargetPoint hitVis = hits.collider.gameObject.GetComponent<TargetPoint>();
-
-    //                            unit = hits.collider.gameObject;
-    //                            // unit‚Æ©•ª‚Ì‹——£‚æ‚è¡“–‚½‚Á‚½point‚Ì‹——£‚ª’Z‚©‚Á‚½‚ç‚»‚Á‚¿‚ÉˆÚ“®‚·‚é
-    //                            //if (Mathf.Abs(Vector2.Distance(unitPos, origin)) >=
-    //                            //    Mathf.Abs(Vector2.Distance(hitsPos, origin)) &&
-    //                            //    !hitVis.visited )
-    //                            //{
-    //                            //    Debug.Log("æ‚É“–‚½‚Á‚½" + unit.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
-    //                            //    hits.collider.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
-    //                            //    unit = hits.collider.gameObject;
-    //                            //    moveSpd = mateCore.moveSpd;
-    //                            //    stateNo = (int)State.Move;
-    //                            //    break;
-    //                            //}
-    //                            //else
-    //                            //{
-    //                            //    Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unit.gameObject.name +
-    //                            //            "‚æ‚è—Dæ“x’á‚¢‚æ");
-    //                            //    if (!hitVis.visited)
-    //                            //    {
-    //                            //        Debug.Log(unit.gameObject.name);
-    //                            //        unit = hits.collider.gameObject;
-    //                            //        moveSpd = mateCore.moveSpd;
-    //                            //        stateNo = (int)State.Move;
-    //                            //    }                      
-    //                            //    break;
-    //                            //}
-
-    //                        }
-    //                        else
-    //                        {
-    //                            Debug.Log("“¯‚¶‚à‚Ì‚Æ“–‚½‚Á‚½‚æ");
-    //                        }
-    //                    }
-    //                    // unit‚É‰½‚à‚È‚©‚Á‚½‚ç
-    //                    else
-    //                    {
-    //                        unit = hits.collider.gameObject;
-    //                        Debug.Log("Å‰‚É“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg" + unit.gameObject.name);
-    //                        // ˆÚ“®‚·‚×‚«obj‚É“–‚½‚Á‚½‚çMove‚ÉˆÚs
-    //                        stateNo = (int)State.Move;
-    //                        break;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 }
