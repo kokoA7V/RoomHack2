@@ -15,6 +15,30 @@ public class Load : MonoBehaviour
 
 	[SerializeField] Fade fade;
 
+	public string[] sceneStr = new string[20]
+	{
+		"Scene2",
+		"TitleScene",
+		"HomeScene",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"1stStage",
+		"2ndStage",
+		"3rdStage",
+		"4thStage",
+		"5thStage",
+		"6thStage",
+		"7thStage",
+		"8thStage",
+		"9thStage",
+	}; 
+
 	void Start()
 	{
 		//読み込み終了パーセントの表示
@@ -37,18 +61,7 @@ public class Load : MonoBehaviour
 		}
 
 		//読み込みたいシーンが増えたらelseifを使って増やしていく
-		else if (SL == 1)
-		{
-			async = SceneManager.LoadSceneAsync("TitleScene");
-		}
-		else if (SL == 2)
-		{
-			async = SceneManager.LoadSceneAsync("HomeScene");
-		}
-		else if (SL == 11)
-		{
-			async = SceneManager.LoadSceneAsync("1stStage");
-		}
+		async = SceneManager.LoadSceneAsync(sceneStr[SL]);
 
 		//ロード完了してもシーン移行しないようにする
 		async.allowSceneActivation = false;

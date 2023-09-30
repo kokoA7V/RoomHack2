@@ -6,18 +6,18 @@ using System;
 
 public class HackText : MonoBehaviour
 {
-    // ƒeƒLƒXƒgŠJnAI‚í‚èŒŸ’m—p‚Ì•Ï”
+    // ãƒ†ã‚­ã‚¹ãƒˆé–‹å§‹ã€çµ‚ã‚ã‚Šæ¤œçŸ¥ç”¨ã®å¤‰æ•°
     public bool textStart = false;
     public bool textEnd = false;
 
-    // ˆê•¶š‚ ‚½‚è‚ÌƒfƒBƒŒƒCƒtƒŒ[ƒ€
+    // ä¸€æ–‡å­—ã‚ãŸã‚Šã®ãƒ‡ã‚£ãƒ¬ã‚¤ãƒ•ãƒ¬ãƒ¼ãƒ 
     public float textDelay = 10;
 
-    // Start‚ÆEnd‚Ì‚»‚ê‚¼‚ê‚ÌƒfƒBƒŒƒC
-    public int beforeDelay = 0;
-    public int afterDelay = 0;
+    // Startæ™‚ã¨Endæ™‚ã®ãã‚Œãã‚Œã®ãƒ‡ã‚£ãƒ¬ã‚¤
+    public float beforeDelay = 0;
+    public float afterDelay = 0;
 
-    // ‚±‚±‚É“ü‚ê‚½•¶š‚ª“®‚­‚¨`
+    // ã“ã“ã«å…¥ã‚ŒãŸæ–‡å­—ãŒå‹•ããŠï½
     public string inputText = "hello world";
 
     string outputText;
@@ -61,6 +61,11 @@ public class HackText : MonoBehaviour
             }
 
             tx.text = outputText;
+        }
+
+        if (textEnd)
+        {
+            tx.text = inputText;
         }
     }
 }
