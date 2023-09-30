@@ -21,7 +21,7 @@ public class GameOverSceneManager : MonoBehaviour
     Button RebootButton;
     Button BackButton;
 
-    static int GameOverNo = 0;
+    public static int GameOverNo = 0;
     // 0 謎
     // 1 味方死亡
     // 2 逆探知
