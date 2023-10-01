@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
     private Vector3 movePos;
-    
+
     [SerializeField]
     private float limitSpeed;
 
@@ -13,58 +12,93 @@ public class Move : MonoBehaviour
 
     private Vector3 moveDir;
 
+    const int PosHistorySize = 16;
+    private Queue<Vector3> _playerPosHistory = new Queue<Vector3>();
+
+    private Vector3 _targetPos;
+    private Vector3 _prevPlayerPos;
+
+    private Vector3 unit;
     private void Start()
     {
         unitRb = GetComponent<Rigidbody2D>();
+
+        InitPos();
     }
 
-    public void UnitMove(float _moveSpd,Vector3 _unit)
+    public void UnitMove(float _moveSpd, Vector3 _unit)
     {
-        Debug.Log("“®‚¢‚Ä‚é");
+
+        UpdateTargetPos();
+        ShortCutTargetPos();
+
+        Debug.Log("å‹•ã„ã¦ã‚‹");
+        unit = _unit;
+
+        //movePos = _targetPos - this.transform.position;
         movePos = _unit - this.transform.position;
-        //movePos = _unit.transform.position - this.transform.position;
         moveDir = movePos.normalized;
 
         //unitRb.AddForce(moveDir * _moveSpd);
         unitRb.velocity = moveDir * _moveSpd;
 
-        if (Mathf.Abs(movePos.x) <= 0.3f && Mathf.Abs(movePos.y) <= 0.3f)
+        if (Mathf.Abs(movePos.x) <= 0.5f && Mathf.Abs(movePos.y) <= 0.5f)
         {
-            Debug.Log("~‚Ü‚é‚æ");
+            Debug.Log("æ­¢ã¾ã‚‹ã‚ˆ");
             unitRb.velocity = Vector2.zero;
+            //_targetPos = _playerPosHistory.Dequeue();
         }
-        // —Í‚Ì‰Á‚í‚é•ûŒü‚É³–Ê‚ğ‡‚í‚¹‚é
+        // åŠ›ã®åŠ ã‚ã‚‹æ–¹å‘ã«æ­£é¢ã‚’åˆã‚ã›ã‚‹
         transform.up = movePos.normalized;
 
-        // ƒXƒs[ƒh‚É§ŒÀ‚ğ‚©‚¯‚é
-        float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);@//X•ûŒü‚Ì‘¬“x‚ğ§ŒÀ
-        float speedYTemp = Mathf.Clamp(unitRb.velocity.y, -limitSpeed, limitSpeed);  //Y•ûŒü‚Ì‘¬“x‚ğ§ŒÀ
-        unitRb.velocity = new Vector3(speedXTemp, speedYTemp);@@@@@@@@@@@//ÀÛ‚É§ŒÀ‚µ‚½’l‚ğ‘ã“ü
+        // ã‚¹ãƒ”ãƒ¼ãƒ‰ã«åˆ¶é™ã‚’ã‹ã‘ã‚‹
+        float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);ã€€//Xæ–¹å‘ã®é€Ÿåº¦ã‚’åˆ¶é™
+        float speedYTemp = Mathf.Clamp(unitRb.velocity.y, -limitSpeed, limitSpeed);  //Yæ–¹å‘ã®é€Ÿåº¦ã‚’åˆ¶é™
+        unitRb.velocity = new Vector3(speedXTemp, speedYTemp);ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€//å®Ÿéš›ã«åˆ¶é™ã—ãŸå€¤ã‚’ä»£å…¥
     }
 
-    public void DemoMove(float _moveSpd, GameObject _unit)
+    void UpdateTargetPos()
     {
-
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-
-        if (_unit != null)
+        Vector3 currentPlayerPos = unit;
+        if (Vector3.Distance(currentPlayerPos, _prevPlayerPos) > 1.5f)
         {
-            movePos = _unit.transform.position - this.transform.position;
-            moveDir = movePos.normalized;
+            _prevPlayerPos = currentPlayerPos;
+            if (_playerPosHistory.Count >= PosHistorySize)
+            {
+                _targetPos = _playerPosHistory.Dequeue();
 
-            // —Í‚Ì‰Á‚í‚é•ûŒü‚É³–Ê‚ğ‡‚í‚¹‚é
-            transform.up = movePos.normalized;
+                // ãŸã¶ã‚“å¼•ã£ã‹ã‹ã£ã¦ã‚‹ã®ã§ãƒ¯ãƒ¼ãƒ—ã•ã›ã¡ã‚ƒã†
+                transform.position = _targetPos;
+            }
+            _playerPosHistory.Enqueue(currentPlayerPos);
         }
-        else if (moveX != 0 || moveZ != 0)
+    }
+
+    void InitPos()
+    {
+        // æœ€åˆã¯è‡ªåˆ†ã®ä½ç½®ã‚’ç›®çš„åœ°ã«ã—ã¦ãŠã
+        _targetPos = transform.position;
+        _playerPosHistory.Enqueue(unit);
+
+        //for (int i = 0; i < PosHistorySize; ++i)
+        //{
+        //    var guide = Instantiate(posGuidePrefab);
+        //    guide.transform.position = transform.position;
+        //    _posGuides.Add(guide);
+        //}
+    }
+
+    // MateãŒè¿‘ãã«æ¥ãŸæ™‚ã®å‡¦ç†
+    void ShortCutTargetPos()
+    {
+        if (Vector3.Distance(transform.position, unit) < 7.0f &&
+            _playerPosHistory.Count >= 4)
         {
-            transform.up = new Vector2(unitRb.velocity.x, unitRb.velocity.y).normalized;
+            while (_playerPosHistory.Count > 4)
+            {
+                _playerPosHistory.Dequeue();
+            }
+            _targetPos = _playerPosHistory.Peek();
         }
-
-        unitRb.velocity = new Vector2(moveX * _moveSpd, moveZ * _moveSpd);        
-        
-        float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);@//X•ûŒü‚Ì‘¬“x‚ğ§ŒÀ
-        float speedYTemp = Mathf.Clamp(unitRb.velocity.y, -limitSpeed, limitSpeed);  //Y•ûŒü‚Ì‘¬“x‚ğ§ŒÀ
-        unitRb.velocity = new Vector3(speedXTemp, speedYTemp);@@@@@@@@@@@//ÀÛ‚É§ŒÀ‚µ‚½’l‚ğ‘ã“ü
     }
 }

@@ -1,111 +1,126 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SightCheak : MonoBehaviour
+public class SightCheak :MonoBehaviour
 {
+
+
     private RaycastHit2D[] emHit;
-    public bool EnemyCheck()
+
+    [SerializeField, Header("ãƒ¬ã‚¤ã®æœ€å¤§è·é›¢")]
+    private float detectionRange = 5f;
+
+    [SerializeField, Header("ãƒ¬ã‚¤ã®æœ¬æ•°")]
+    private int numberOfRays = 12;
+    public GameObject EnemyCheck()
     {
-        // Ray‚ğ¶¬
-        Vector3 origin = this.gameObject.transform.position;
-        Vector3 diredtion = this.transform.up;
-        Ray emCheackray = new Ray(origin, diredtion);
 
-        // Ray‚ğ•\¦
-        Debug.DrawRay(emCheackray.origin, emCheackray.direction , Color.blue);
-
-        // ray‚Ì‹——£‚ğ§ŒÀ
-        float maxDistance = 0.7f;
-
-        // ©•ªˆÈŠO‚É“–‚½‚é‚æ‚¤‚É‚·‚é
-        int layerMask = ~(1 << gameObject.layer);
-
-        // ‰½‚©“–‚½‚Á‚½‚çpnt‚Éonj‚ğ“ü‚ê‚é
-        emHit = Physics2D.RaycastAll(emCheackray.origin, emCheackray.direction , maxDistance, layerMask);
-        foreach (RaycastHit2D emHits in emHit)
+        for (int i = 0; i < numberOfRays; i++)
         {
-            if (emHits.collider != null)
+
+            float angle = (i * 90/ numberOfRays) + 45 + this.transform.rotation.eulerAngles.z;
+            float radians = angle * Mathf.Deg2Rad;
+            Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+
+            Vector3 origin = this.transform.position;
+            
+            Ray emCheackray = new Ray(origin, direction);
+
+            // Rayã‚’è¡¨ç¤º
+            Debug.DrawRay(emCheackray.origin, emCheackray.direction, Color.blue);
+
+            // rayã®è·é›¢ã‚’åˆ¶é™
+            float maxDistance = 0.7f;
+
+            // è‡ªåˆ†ä»¥å¤–ã«å½“ãŸã‚‹ã‚ˆã†ã«ã™ã‚‹
+            int layerMask = ~(1 << this.gameObject.layer);
+
+            // ä½•ã‹å½“ãŸã£ãŸã‚‰pntã«onjã‚’å…¥ã‚Œã‚‹
+            emHit = Physics2D.RaycastAll(emCheackray.origin, emCheackray.direction, maxDistance, layerMask);
+            foreach (RaycastHit2D emHits in emHit)
             {
-                Debug.Log(emHits.collider.gameObject.name+"‚ğŒŸ’m‚µ‚½(EnemyCheck)");
-                if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable)) {
-                    if (damageable.dmgLayer==0)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                else return false;
-            }
-        }
-        return false;
-    }
-
-    private GameObject unit;
-    private Vector3 hitsPos;
-    private Vector3 unitPos;
-    public int SerchRay(GameObject _obj, int _stateNo)
-    {
-        // Ray‚ğ¶¬
-        Vector3 origin = this.gameObject.transform.position;
-        Vector3 diredtion = _obj.gameObject.transform.position - origin;
-        diredtion = diredtion.normalized;
-        Ray ray = new Ray(origin, diredtion * 10);
-
-        // Ray‚ğ•\¦
-        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-        float maxDistance = 10;
-        int layerMask = ~(1 << gameObject.layer);
-        //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
-
-        // ‰½‚©“–‚½‚Á‚½‚ç–¼‘O‚ğ•Ô‚·
-        RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance, layerMask);
-        foreach (RaycastHit2D hits in hit)
-        {
-            if (hits.collider != null)
-            {
-                if (hits.collider.gameObject.layer == 8)
+                if (emHits.collider != null)
                 {
-                    Debug.Log("ray‚ª(•Ç)" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
-                    //unit = null;
-                    break;
-                }
-                else
-                {
-                    Debug.Log("ray‚ª" + hits.collider.gameObject.name + "‚É“–‚½‚Á‚½");
-                    if (unit != null)
+                    Debug.Log(emHits.collider.gameObject.name + "ã‚’æ¤œçŸ¥ã—ãŸ(EnemyCheck)");
+                    if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable))
                     {
-                        unitPos = unit.gameObject.transform.position;
-                        hitsPos = hits.collider.gameObject.transform.position;
-
-                        // ‹——£‚É‚æ‚Á‚Ä—Dæ‚ğŒˆ‚ß‚é
-                        if (Vector2.Distance(unitPos, origin) >= Vector2.Distance(hitsPos, origin))
+                        if (damageable.dmgLayer == 0)
                         {
-                            Debug.Log("æ‚É“–‚½‚Á‚½" + unit.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
-                                    hits.collider.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
-                            unit = hits.collider.gameObject;
+                            return null;
                         }
                         else
                         {
-                            Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unit.gameObject.name +
-                                    "‚æ‚è—Dæ“x’á‚¢‚æ");
+                            return emHits.collider.gameObject;
                         }
                     }
-                    else
-                    {
-                        unit = hits.collider.gameObject;
-                        Debug.Log("Å‰‚É“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg" + unit.gameObject.name);
-                        // ˆÚ“®‚·‚×‚«obj‚É“–‚½‚Á‚½‚çMove‚ÉˆÚs
-                        //stateNo = (int)State.Move;
-                        return 2;
-                    }
-                    break;
+                    else return null;
                 }
             }
-        }
-        return _stateNo;
+        }       
+        return null;
     }
+
+    //private GameObject unit;
+    //private Vector3 hitsPos;
+    //private Vector3 unitPos;
+    //public int SerchRay(GameObject _obj, int _stateNo)
+    //{
+    //    // Rayã‚’ç”Ÿæˆ
+    //    Vector3 origin = this.gameObject.transform.position;
+    //    Vector3 diredtion = _obj.gameObject.transform.position - origin;
+    //    diredtion = diredtion.normalized;
+    //    Ray ray = new Ray(origin, diredtion * 10);
+
+    //    // Rayã‚’è¡¨ç¤º
+    //    Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
+    //    float maxDistance = 10;
+    //    int layerMask = ~(1 << gameObject.layer);
+    //    //LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
+
+    //    // ä½•ã‹å½“ãŸã£ãŸã‚‰åå‰ã‚’è¿”ã™
+    //    RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance, layerMask);
+    //    foreach (RaycastHit2D hits in hit)
+    //    {
+    //        if (hits.collider != null)
+    //        {
+    //            if (hits.collider.gameObject.layer == 8)
+    //            {
+    //                Debug.Log("rayãŒ(å£)" + hits.collider.gameObject.name + "ã«å½“ãŸã£ãŸ");
+    //                //unit = null;
+    //                break;
+    //            }
+    //            else
+    //            {
+    //                Debug.Log("rayãŒ" + hits.collider.gameObject.name + "ã«å½“ãŸã£ãŸ");
+    //                if (unit != null)
+    //                {
+    //                    unitPos = unit.gameObject.transform.position;
+    //                    hitsPos = hits.collider.gameObject.transform.position;
+
+    //                    // è·é›¢ã«ã‚ˆã£ã¦å„ªå…ˆã‚’æ±ºã‚ã‚‹
+    //                    if (Vector2.Distance(unitPos, origin) >= Vector2.Distance(hitsPos, origin))
+    //                    {
+    //                        Debug.Log("å…ˆã«å½“ãŸã£ãŸ" + unit.gameObject.name + "ã‚ˆã‚Šä»Šå½“ãŸã£ãŸ" +
+    //                                hits.collider.gameObject.name + "ã®ã»ã†ãŒå„ªå…ˆåº¦ãŒé«˜ã„ã‚ˆ");
+    //                        unit = hits.collider.gameObject;
+    //                    }
+    //                    else
+    //                    {
+    //                        Debug.Log("å½“ãŸã£ãŸã‘ã©ã‚‚ã¨ã‚‚ã¨ã‚ã‚‹" + unit.gameObject.name +
+    //                                "ã‚ˆã‚Šå„ªå…ˆåº¦ä½ã„ã‚ˆ");
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    unit = hits.collider.gameObject;
+    //                    Debug.Log("æœ€åˆã«å½“ãŸã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ" + unit.gameObject.name);
+    //                    // ç§»å‹•ã™ã¹ãobjã«å½“ãŸã£ãŸã‚‰Moveã«ç§»è¡Œ
+    //                    //stateNo = (int)State.Move;
+    //                    return 2;
+    //                }
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    return _stateNo;
+    //}
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StageTimeManager : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class StageTimeManager : MonoBehaviour
     private void TimeOver()
     {
         text.text = "Time:<color=#" + missColorCode + ">0</color>";
-        Debug.Log("タイムオーバー");
+        GameOverSceneManager.GameOverNo = 2;
+        SceneManager.LoadScene("GameOverScene");
     }
 }

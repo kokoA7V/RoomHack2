@@ -19,14 +19,16 @@ public class LoadTextManager : MonoBehaviour
 
         // LoadObj.GetComponent<Load>().async.progress
 
-        if(Load.SL == 0)
-        {
-            loadSceneText = "Scene2";
-        }
-        else if(Load.SL == 1)
-        {
+        loadSceneText = LoadObj.GetComponent<Load>().sceneStr[Load.SL];
 
-        }
+        //if (Load.SL == 0)
+        //{
+        //    loadSceneText = "Scene2";
+        //}
+        //else if(Load.SL == 1)
+        //{
+
+        //}
 
         TextObj[0].GetComponent<HackText>().inputText = loadSceneText + " Data Loading...";
     }

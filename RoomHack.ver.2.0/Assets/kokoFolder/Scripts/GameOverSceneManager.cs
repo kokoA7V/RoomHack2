@@ -21,7 +21,7 @@ public class GameOverSceneManager : MonoBehaviour
     Button RebootButton;
     Button BackButton;
 
-    static int GameOverNo = 0;
+    public static int GameOverNo = 0;
     // 0 謎
     // 1 味方死亡
     // 2 逆探知
@@ -31,6 +31,9 @@ public class GameOverSceneManager : MonoBehaviour
     float time;
 
     float trans;
+
+    bool skipStart = false;
+    bool skipEnd = false;
 
     private void Start()
     {
@@ -96,6 +99,22 @@ public class GameOverSceneManager : MonoBehaviour
         {
             GOObj[5].SetActive(true);
             GOObj[6].SetActive(true);
+        }
+
+        if (Input.anyKeyDown)
+        {
+            skipStart = true;
+        }
+
+        if (skipStart && !skipEnd)
+        {
+            time = 10;
+            trans = 0.25f;
+
+            HT1.textEnd = true;
+            HT2.textEnd = true;
+
+            skipEnd = true;
         }
     }
 

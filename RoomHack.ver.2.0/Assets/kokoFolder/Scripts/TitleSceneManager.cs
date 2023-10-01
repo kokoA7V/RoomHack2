@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
-    Button loginButton;
-    Button exitButton;
+    Button LoginButton;
+    Button ExitButton;
 
-    [SerializeField] GameObject[] hackText = new GameObject[7];
-    [SerializeField] GameObject[] titleObj = new GameObject[6];
+    [SerializeField] GameObject[] HackText = new GameObject[7];
+    [SerializeField] GameObject[] TitleObj = new GameObject[6];
     // 0 title
     // 1 id
     // 2 pass
@@ -24,7 +24,8 @@ public class TitleSceneManager : MonoBehaviour
 
     string[] dispText = new string[15];
 
-    float textDelayTotal = 0.5f;
+    bool skipStart = false;
+    bool skipEnd = false;
 
     int count;
     float time;
@@ -32,34 +33,36 @@ public class TitleSceneManager : MonoBehaviour
     Vector3 move;
     Vector3 move2;
 
+    float UISpd = 1;
+
     private void Start()
     {
-        loginButton = titleObj[3].GetComponent<Button>();
-        loginButton.onClick.AddListener(() => SCT[5].textStart = true);
+        LoginButton = TitleObj[3].GetComponent<Button>();
+        LoginButton.onClick.AddListener(() => SCT[5].textStart = true);
 
-        exitButton = titleObj[4].GetComponent<Button>();
-        exitButton.onClick.AddListener(GameExit);
+        ExitButton = TitleObj[4].GetComponent<Button>();
+        ExitButton.onClick.AddListener(GameExit);
 
         int index = -1;
-        foreach (GameObject obj in hackText)
+        foreach (GameObject obj in HackText)
         {
             index++;
             SCT[index] = obj.GetComponent<HackText>();
         }
 
-        dispText[0] = "Checking user device status";
-        dispText[1] = "batteryLevel: " + SystemInfo.batteryLevel * 100 + "%";
-        dispText[2] = "deviceModel: " + SystemInfo.deviceModel;
-        dispText[3] = "deviceType: " + SystemInfo.deviceType;
-        dispText[4] = "operatingSystem: " + SystemInfo.operatingSystem;
-        dispText[5] = "processorCount: " + SystemInfo.processorCount;
-        dispText[6] = "processorFrequency: " + SystemInfo.processorFrequency;
-        dispText[7] = "processorType: " + SystemInfo.processorType;
-        dispText[8] = "supportsLocationService: " + SystemInfo.supportsLocationService;
-        dispText[9] = "systemMemorySize: " + SystemInfo.systemMemorySize;
-        dispText[10] = "Activation application is being verified";
-        dispText[11] = "Authentication Confirmation RoomHack.exe Activate";
-        dispText[12] = "...\n";
+        dispText[0] = " Checking user device status";
+        dispText[1] = " batteryLevel: " + SystemInfo.batteryLevel * 100 + "%";
+        dispText[2] = " deviceModel: " + SystemInfo.deviceModel;
+        dispText[3] = " deviceType: " + SystemInfo.deviceType;
+        dispText[4] = " operatingSystem: " + SystemInfo.operatingSystem;
+        dispText[5] = " processorCount: " + SystemInfo.processorCount;
+        dispText[6] = " processorFrequency: " + SystemInfo.processorFrequency;
+        dispText[7] = " processorType: " + SystemInfo.processorType;
+        dispText[8] = " supportsLocationService: " + SystemInfo.supportsLocationService;
+        dispText[9] = " systemMemorySize: " + SystemInfo.systemMemorySize;
+        dispText[10] = " Activation application is being verified";
+        dispText[11] = " Authentication Confirmation RoomHack.exe Activate";
+        dispText[12] = " ...\n";
         // id
         dispText[13] = SystemInfo.deviceName;
         // pass
@@ -78,21 +81,25 @@ public class TitleSceneManager : MonoBehaviour
         SCT[5].inputText = dispText[13];
         SCT[6].inputText = dispText[14];
 
-        SCT[0].textDelay = 5 * textDelayTotal;
-        SCT[1].textDelay = 60 * textDelayTotal;
-        SCT[2].textDelay = 5 * textDelayTotal;
-        SCT[3].textDelay = 60 * textDelayTotal;
-        SCT[4].textDelay = 7 * textDelayTotal;
+        SCT[0].textDelay = 5;
+        SCT[1].textDelay = 60;
+        SCT[2].textDelay = 5;
+        SCT[3].textDelay = 60;
+        SCT[4].textDelay = 7;
+        SCT[5].textDelay = 10;
+        SCT[6].textDelay = 10;
 
         SCT[1].afterDelay = 60;
         SCT[3].afterDelay = 60;
+        SCT[5].afterDelay = 30;
+        SCT[6].afterDelay = 60;
 
 
-        titleObj[1].SetActive(false);
-        titleObj[2].SetActive(false);
-        titleObj[3].SetActive(false);
-        titleObj[4].SetActive(false);
-        titleObj[5].SetActive(false);
+        TitleObj[1].SetActive(false);
+        TitleObj[2].SetActive(false);
+        TitleObj[3].SetActive(false);
+        TitleObj[4].SetActive(false);
+        TitleObj[5].SetActive(false);
 
         count = 0;
         time = 0;
@@ -100,6 +107,28 @@ public class TitleSceneManager : MonoBehaviour
         move2 = new Vector3(0, 0.46f, 0);
 
         if (Load.SL == 1)
+        {
+            skipStart = true;
+        }
+    }
+
+    private void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        SCT[i].textDelay = 0;
+        //    }
+        //    delay = 0.1f;
+        //}
+
+        if (Input.anyKeyDown)
+        {
+            skipStart = true;
+        }
+
+        if (skipStart && !skipEnd)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -110,26 +139,16 @@ public class TitleSceneManager : MonoBehaviour
             {
                 SCT[i].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
             }
-            titleObj[0].transform.position += move2 * 25;
-            titleObj[1].transform.position += move2 * 25;
-            titleObj[2].transform.position += move2 * 25;
-            titleObj[3].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
-            titleObj[4].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
-            titleObj[5].transform.position += move2 * 25;
+            TitleObj[0].transform.position += move2 * 25;
+            TitleObj[1].transform.position += move2 * 25;
+            TitleObj[2].transform.position += move2 * 25;
+            TitleObj[3].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
+            TitleObj[4].GetComponent<RectTransform>().anchoredPosition3D += move * 25;
+            TitleObj[5].transform.position += move2 * 25;
 
             count = 25;
-        }
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                SCT[i].textDelay = 0;
-            }
-            delay = 0.1f;
+            skipEnd = true;
         }
 
         SCT[0].textStart = true;
@@ -167,12 +186,12 @@ public class TitleSceneManager : MonoBehaviour
                     {
                         SCT[i].GetComponent<RectTransform>().anchoredPosition3D += move;
                     }
-                    titleObj[0].transform.position += move2;
-                    titleObj[1].transform.position += move2;
-                    titleObj[2].transform.position += move2;
-                    titleObj[3].GetComponent<RectTransform>().anchoredPosition3D += move;
-                    titleObj[4].GetComponent<RectTransform>().anchoredPosition3D += move;
-                    titleObj[5].transform.position += move2;
+                    TitleObj[0].transform.position += move2;
+                    TitleObj[1].transform.position += move2;
+                    TitleObj[2].transform.position += move2;
+                    TitleObj[3].GetComponent<RectTransform>().anchoredPosition3D += move;
+                    TitleObj[4].GetComponent<RectTransform>().anchoredPosition3D += move;
+                    TitleObj[5].transform.position += move2;
                 }
 
                 time = 0;
@@ -181,21 +200,34 @@ public class TitleSceneManager : MonoBehaviour
 
             if (count >= 28)
             {
-                titleObj[5].SetActive(true);
+                TitleObj[5].SetActive(true);
             }
 
             if (count >= 29)
             {
-                titleObj[1].SetActive(true);
-                titleObj[2].SetActive(true);
+                TitleObj[1].SetActive(true);
+                TitleObj[2].SetActive(true);
             }
 
             if (count >= 30)
             {
-                titleObj[3].SetActive(true);
-                titleObj[4].SetActive(true);
+                TitleObj[3].SetActive(true);
+                TitleObj[4].SetActive(true);
             }
 
+            if (SCT[5].textStart)
+            {
+                if (Input.anyKeyDown)
+                {
+                    UISpd = 3;
+
+                    SCT[5].textDelay = 10 / UISpd;
+                    SCT[6].textDelay = 10 / UISpd;
+
+                    SCT[5].afterDelay = 30 / UISpd;
+                    SCT[6].afterDelay = 60 / UISpd;
+                }
+            }
 
             if (SCT[5].textEnd)
             {
@@ -204,7 +236,8 @@ public class TitleSceneManager : MonoBehaviour
 
             if(SCT[6].textEnd)
             {
-                Load.SL = 2;
+                if (GameData.tutorial) Load.SL = 2;
+                else Load.SL = 3;
                 SceneManager.LoadScene("LoadScene");
             }
 

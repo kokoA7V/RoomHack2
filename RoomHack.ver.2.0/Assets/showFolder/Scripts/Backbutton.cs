@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class Backbutton : MonoBehaviour
+public class MateObserver : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,10 +14,5 @@ public class Backbutton : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void OnClick()
-    {
-
     }
 }

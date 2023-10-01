@@ -15,67 +15,77 @@ public class Load : MonoBehaviour
 
 	[SerializeField] Fade fade;
 
+	public string[] sceneStr = new string[20]
+	{
+		"Scene2",
+		"TitleScene",
+		"HomeScene",
+		"TutorialScene",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"1stStage",
+		"2ndStage",
+		"3rdStage",
+		"4thStage",
+		"5thStage",
+		"6thStage",
+		"7thStage",
+		"8thStage",
+		"9thStage",
+	}; 
+
 	void Start()
 	{
-		//“Ç‚İ‚İI—¹ƒp[ƒZƒ“ƒg‚Ì•\¦
+		//èª­ã¿è¾¼ã¿çµ‚äº†ãƒ‘ãƒ¼ã‚»ãƒ³ãƒˆã®è¡¨ç¤º
 		loadingText.text = "0%".ToString();
 
-		//“Ç‚İ‚İŠ®—¹ƒo[‚Ì•\¦
+		//èª­ã¿è¾¼ã¿å®Œäº†ãƒãƒ¼ã®è¡¨ç¤º
 		loadingBar.value = 0;
 
-		//1•b‚©‚¯‚ÄFadeOut‚µASceneLoad‚ğ“Ç‚İ‚Ş
+		//1ç§’ã‹ã‘ã¦FadeOutã—ã€SceneLoadã‚’èª­ã¿è¾¼ã‚€
 		fade.FadeOut(1f, () => StartCoroutine("SceneLoad"));
 	}
 
 	public IEnumerator SceneLoad()
 	{
-		//SL‚Å“Ç‚İ‚İ‚½‚¢ƒV[ƒ“‚ğ‹æ•Ê‚·‚é
-		if (SL == 0)
-		{
-			//— ‚ÅScene2‚ğ“Ç‚İ‚Ş
-			async = SceneManager.LoadSceneAsync("Scene2");
-		}
+		//èª­ã¿è¾¼ã¿ãŸã„ã‚·ãƒ¼ãƒ³ãŒå¢—ãˆãŸã‚‰elseifã‚’ä½¿ã£ã¦å¢—ã‚„ã—ã¦ã„ã
+		async = SceneManager.LoadSceneAsync(sceneStr[SL]);
 
-		//“Ç‚İ‚İ‚½‚¢ƒV[ƒ“‚ª‘‚¦‚½‚çelseif‚ğg‚Á‚Ä‘‚â‚µ‚Ä‚¢‚­
-		else if (SL == 1)
-		{
-			async = SceneManager.LoadSceneAsync("TitleScene");
-		}
-		else if (SL == 2)
-		{
-			async = SceneManager.LoadSceneAsync("HomeScene");
-		}
-
-		//ƒ[ƒhŠ®—¹‚µ‚Ä‚àƒV[ƒ“ˆÚs‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+		//ãƒ­ãƒ¼ãƒ‰å®Œäº†ã—ã¦ã‚‚ã‚·ãƒ¼ãƒ³ç§»è¡Œã—ãªã„ã‚ˆã†ã«ã™ã‚‹
 		async.allowSceneActivation = false;
 
-		//“Ç‚İ‚İ’†‚Ìˆ—
+		//èª­ã¿è¾¼ã¿ä¸­ã®å‡¦ç†
 		while (async.progress < 0.9f)
 		{
-			//“Ç‚İ‚İI—¹ƒp[ƒZƒ“ƒg‚Ì•\¦
+			//èª­ã¿è¾¼ã¿çµ‚äº†ãƒ‘ãƒ¼ã‚»ãƒ³ãƒˆã®è¡¨ç¤º
 			loadingText.text = (async.progress * 100).ToString("f0") + "%";
 
-			//“Ç‚İ‚İŠ®—¹ƒo[‚Ì•\¦
+			//èª­ã¿è¾¼ã¿å®Œäº†ãƒãƒ¼ã®è¡¨ç¤º
 			loadingBar.value = async.progress;
 
 			yield return new WaitForSeconds(0);
 		}
-		//“Ç‚İ‚İI—¹ƒp[ƒZƒ“ƒg‚Ì•\¦
+		//èª­ã¿è¾¼ã¿çµ‚äº†ãƒ‘ãƒ¼ã‚»ãƒ³ãƒˆã®è¡¨ç¤º
 		loadingText.text = (async.progress * 100).ToString("f0") + "%";
 
-		//“Ç‚İ‚İŠ®—¹ƒo[‚Ì•\¦
+		//èª­ã¿è¾¼ã¿å®Œäº†ãƒãƒ¼ã®è¡¨ç¤º
 		loadingBar.value = async.progress;
 
-		//0.5•b‘Ò‚Â
+		//0.5ç§’å¾…ã¤
 		yield return new WaitForSeconds(0.5f);
 
-		//“Ç‚İ‚İI—¹ƒp[ƒZƒ“ƒg‚Ì•\¦
+		//èª­ã¿è¾¼ã¿çµ‚äº†ãƒ‘ãƒ¼ã‚»ãƒ³ãƒˆã®è¡¨ç¤º
 		loadingText.text = "100%";
 
-		//“Ç‚İ‚İŠ®—¹ƒo[‚Ì•\¦
+		//èª­ã¿è¾¼ã¿å®Œäº†ãƒãƒ¼ã®è¡¨ç¤º
 		loadingBar.value = 1;
 
-		//1•b‚©‚¯‚ÄFadeIn‚µAƒV[ƒ“ˆÚs‚ğ‹–‰Â‚·‚é
+		//1ç§’ã‹ã‘ã¦FadeInã—ã€ã‚·ãƒ¼ãƒ³ç§»è¡Œã‚’è¨±å¯ã™ã‚‹
 		fade.FadeIn(1f, () => async.allowSceneActivation = true);
 	}
 }
