@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -25,7 +26,7 @@ public class TutorialManager : MonoBehaviour
     [HideInInspector]
     public Text typingText;
 
-    //[HideInInspector]
+    [HideInInspector]
     public int j = 0;
 
     [HideInInspector]
@@ -108,6 +109,8 @@ public class TutorialManager : MonoBehaviour
     private void TutorialClear()
     {
         Debug.Log("clear");
+        Load.SL = 2;
+        SceneManager.LoadScene("LoadScene");
     }
 
     private IEnumerator WindowBlink()
