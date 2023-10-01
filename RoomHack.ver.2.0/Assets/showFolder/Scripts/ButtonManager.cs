@@ -27,9 +27,12 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameObject[] StageTrig; //Stageを押したときに表示されるUIを格納する場所
     [SerializeField] GameObject[] ShopTrig; //Shopを押したときに表示されるUIを格納する場所
 
+
+    public Text useText;
     public GameObject OptionTrig;
 
     [SerializeField] ImageManager imagemanager;
+    [SerializeField] SkillData skilldata;
 
     [SerializeField] LevelUpButton levelup;
 
@@ -47,6 +50,15 @@ public class ButtonManager : MonoBehaviour
     public bool Doorbutton = false;
     public bool Camerabutton = false;
 
+    [SerializeField] int CleanUseMoney;
+    [SerializeField] int DigestionUseMoney;
+    [SerializeField] int ComputorUseMoney;
+    [SerializeField] int AriConditionerUseMoney;
+    [SerializeField] int AlarmUseMoney;
+    [SerializeField] int TurretUseMoney;
+    [SerializeField] int EnemyUseMoney;
+    [SerializeField] int DoorUseMoney;
+    [SerializeField] int CameraUseMoney;
 
     const int toggleNo = 3;
 
@@ -54,6 +66,7 @@ public class ButtonManager : MonoBehaviour
     {
         isButtonToggled = new bool[toggleNo] { false, false, false };
 
+        
         //Unity内にあるOnClickの処理をプログラムで
 
         buttonA.onClick.AddListener(StageButtonsSet);
@@ -75,6 +88,7 @@ public class ButtonManager : MonoBehaviour
             DoorButton.onClick.AddListener(DoorButtonSet);
             CameraButton.onClick.AddListener(CameraButtonSet);
             alreadybutton = true;
+            
         }
     }
     //マネーシステム関連
@@ -84,6 +98,7 @@ public class ButtonManager : MonoBehaviour
     void CleanButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Cleanercost.ToString();
         LevelUpButton.SetActive(true);
         Cleanbutton = true;
     }
@@ -92,6 +107,7 @@ public class ButtonManager : MonoBehaviour
     void DigestionButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Digestioncost.ToString();
         LevelUpButton.SetActive(true);
         Digestionbutton = true;
     }
@@ -100,6 +116,7 @@ public class ButtonManager : MonoBehaviour
     void ComputorButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Computercost.ToString();
         LevelUpButton.SetActive(true);
         computorbutton = true;
     }
@@ -108,6 +125,7 @@ public class ButtonManager : MonoBehaviour
     void AriConditionerButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.AriConditioncost.ToString();
         LevelUpButton.SetActive(true);
         AriConditionerbutton = true;
     }
@@ -116,6 +134,7 @@ public class ButtonManager : MonoBehaviour
     void AlarmButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Alarmcost.ToString();
         LevelUpButton.SetActive(true);
         Alarmbutton = true;
     }
@@ -124,6 +143,7 @@ public class ButtonManager : MonoBehaviour
     void TurretButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Turretcost.ToString();
         LevelUpButton.SetActive(true);
         Turretbutton = true;
     }
@@ -132,6 +152,7 @@ public class ButtonManager : MonoBehaviour
     void EnemyButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Enemycost.ToString();
         LevelUpButton.SetActive(true);
         Enemybutton = true;
     }
@@ -140,6 +161,7 @@ public class ButtonManager : MonoBehaviour
     void DoorButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Doorcost.ToString();
         LevelUpButton.SetActive(true);
         Doorbutton = true;
     }
@@ -148,6 +170,7 @@ public class ButtonManager : MonoBehaviour
     void CameraButtonSet()
     {
         FlgReset();
+        useText.text = "消費: " + skilldata.Cameracost.ToString();
         LevelUpButton.SetActive(true);
         Camerabutton = true;
     }

@@ -144,6 +144,7 @@ public class MoneyManager : MonoBehaviour
         haveText.text = "所持: " + haveMoney.ToString();
     }
 
+
     IEnumerator TextActive()
     {
         Debug.Log("a");
