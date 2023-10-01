@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.3372549, b: 0.31764707, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -181,7 +181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 297d4d98b1441334cb40b0f8a303ce05, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -1554,8 +1554,10 @@ MonoBehaviour:
   - {fileID: 1018985942}
   - {fileID: 1286373923}
   - {fileID: 1749937584}
+  useText: {fileID: 0}
   OptionTrig: {fileID: 2002474835}
   imagemanager: {fileID: 990229775}
+  skilldata: {fileID: 0}
   levelup: {fileID: 1782288910}
   isButtonToggled: 0000
   OptionTri: 0
@@ -1568,6 +1570,15 @@ MonoBehaviour:
   Enemybutton: 0
   Doorbutton: 0
   Camerabutton: 0
+  CleanUseMoney: 0
+  DigestionUseMoney: 0
+  ComputorUseMoney: 0
+  AriConditionerUseMoney: 0
+  AlarmUseMoney: 0
+  TurretUseMoney: 0
+  EnemyUseMoney: 0
+  DoorUseMoney: 0
+  CameraUseMoney: 0
 --- !u!4 &735282048
 Transform:
   m_ObjectHideFlags: 0
@@ -3902,7 +3913,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 297d4d98b1441334cb40b0f8a303ce05, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
