@@ -20,7 +20,7 @@ public class Load : MonoBehaviour
 		"Scene2",
 		"TitleScene",
 		"HomeScene",
-		"",
+		"TutorialScene",
 		"",
 		"",
 		"",
@@ -53,13 +53,6 @@ public class Load : MonoBehaviour
 
 	public IEnumerator SceneLoad()
 	{
-		//SLで読み込みたいシーンを区別する
-		if (SL == 0)
-		{
-			//裏でScene2を読み込む
-			async = SceneManager.LoadSceneAsync("Scene2");
-		}
-
 		//読み込みたいシーンが増えたらelseifを使って増やしていく
 		async = SceneManager.LoadSceneAsync(sceneStr[SL]);
 

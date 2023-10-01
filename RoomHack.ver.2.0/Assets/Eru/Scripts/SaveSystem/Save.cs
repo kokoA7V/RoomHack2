@@ -70,6 +70,7 @@ public class Save : MonoBehaviour
         SaveData saveData = new SaveData();
 
         //ゲームデータの値をセーブデータに代入
+        saveData.tutorial = GameData.tutorial;
         saveData.Money = GameData.Money;
         saveData.DoorLv = GameData.DoorLv;
         saveData.CameraLv = GameData.CameraLv;
