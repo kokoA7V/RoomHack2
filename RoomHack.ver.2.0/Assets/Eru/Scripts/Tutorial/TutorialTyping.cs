@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TypingObj : MonoBehaviour
+public class TutorialTyping : MonoBehaviour
 {
     [Header("ワード")]
     public string[] word;
@@ -16,20 +16,23 @@ public class TypingObj : MonoBehaviour
     [SerializeField, Header("ミス文字の色")]
     private Color missColor = Color.red;
 
-    [SerializeField,Header("振動時間")]
+    [SerializeField, Header("振動時間")]
     private float shakeDuration = 0.15f;
 
-    [SerializeField,Header("振動する力")]
+    [SerializeField, Header("振動する力")]
     private float shakeAmount = 5f;
 
-    [SerializeField,Header("減衰率")]
+    [SerializeField, Header("減衰率")]
     private float decreaseFactor = 1.0f;
 
     [SerializeField, Header("位置")]
     private Vector2 targetPosition = new Vector2(555f, -140f);
 
     [HideInInspector]
-    public HackManager hackManager;
+    public TutorialHackManager tutorialHackManager;
+
+    [HideInInspector]
+    public TutorialManager tutorialManager;
 
     [HideInInspector]
     public IUnitHack unitHack;
@@ -38,7 +41,7 @@ public class TypingObj : MonoBehaviour
     public RaycastHit2D hit;
 
     [HideInInspector]
-    public StageTimeManager timeManager;
+    public TutorialTimeManager timeManager;
 
     private Text text;
 
@@ -64,21 +67,14 @@ public class TypingObj : MonoBehaviour
         clearColorCode = ColorUtility.ToHtmlStringRGB(clearColor);
         missColorCode = ColorUtility.ToHtmlStringRGB(missColor);
         text.text = "<color=#" + clearColorCode + "></color>" + word[clearWord].ToString();
+        tutorialManager.typingText = text;
     }
 
     void Update()
     {
         if (clearFlg) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //キャンセル
-            hackManager.nowTypingFlg = false;
-            hackManager.nowObj = null;
-            Destroy(gameObject);
-        }
-
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && tutorialManager.typingStartFlg)
         {
             foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
             {
@@ -92,7 +88,7 @@ public class TypingObj : MonoBehaviour
                         string _text = "<color=#" + clearColorCode + ">";
                         for (int j = 0; j < i; j++) _text += word[clearWord][j].ToString();
                         _text += "</color>";
-                        for(int j = i;j< word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
+                        for (int j = i; j < word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
                         text.text = _text;
 
                         //1ワードクリア処理
@@ -103,13 +99,14 @@ public class TypingObj : MonoBehaviour
                             {
                                 //ゲームクリア処理
                                 text.text = "GameClear";
+                                if (tutorialManager.j == 9) tutorialManager.questFlg = true;
                                 clearFlg = true;
-                                hackManager.nowTypingFlg = false;
+                                tutorialHackManager.nowTypingFlg = false;
                                 unitHack.hacked = true;
 
                                 //CoolHackUI生成
-                                hackManager.InstantHackUI(hit, unitHack);
-                                hackManager.nowObj = null;
+                                tutorialHackManager.InstantHackUI(hit, unitHack);
+                                tutorialHackManager.nowObj = null;
                                 Destroy(gameObject);
                             }
                             else
@@ -142,7 +139,7 @@ public class TypingObj : MonoBehaviour
 
             currentShakeDuration -= Time.deltaTime * decreaseFactor;
         }
-        else if(!clearFlg)
+        else if (!clearFlg)
         {
             currentShakeDuration = 0f;
             text.transform.localPosition = originalPosition;
