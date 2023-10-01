@@ -80,7 +80,9 @@ public class TutorialManager : MonoBehaviour
             TutorialClear();
             return;
         }
-        if(tutorialText.i == stopNo[j])
+        if (Input.GetKeyDown(KeyCode.Escape)) tutorialText.clearFlg = true;
+
+        if (tutorialText.i == stopNo[j])
         {
             j++;
             tutorialText.stopFlg = true;
@@ -108,7 +110,7 @@ public class TutorialManager : MonoBehaviour
 
     private void TutorialClear()
     {
-        Debug.Log("clear");
+        GameData.tutorial = true;
         Load.SL = 2;
         SceneManager.LoadScene("LoadScene");
     }

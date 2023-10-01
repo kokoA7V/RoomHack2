@@ -236,7 +236,8 @@ public class TitleSceneManager : MonoBehaviour
 
             if(SCT[6].textEnd)
             {
-                Load.SL = 2;
+                if (GameData.tutorial) Load.SL = 2;
+                else Load.SL = 3;
                 SceneManager.LoadScene("LoadScene");
             }
 
