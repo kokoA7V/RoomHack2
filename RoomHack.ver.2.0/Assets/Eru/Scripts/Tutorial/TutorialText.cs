@@ -4,6 +4,18 @@ using UnityEngine.UI;
 
 public class TutorialText : MonoBehaviour
 {
+    [HideInInspector]
+    public bool stopFlg = false;
+
+    [HideInInspector]
+    public bool clearFlg = false;
+
+    [HideInInspector]
+    public int i = 0;
+
+    [HideInInspector]
+    public bool textFlg = true;
+
     [SerializeField, Header("名前")]
     private Text nameText;
 
@@ -19,8 +31,8 @@ public class TutorialText : MonoBehaviour
     [SerializeField, Header("AIアイコン")]
     private Sprite aiSprite;
 
-    [SerializeField, Header("Eruアイコン")]
-    private Sprite eruSprite;
+    [SerializeField, Header("Astraアイコン")]
+    private Sprite astraSprite;
 
     [SerializeField, Header("バックグラウンド開閉時間")]
     private float bgTime = 1f;
@@ -31,10 +43,9 @@ public class TutorialText : MonoBehaviour
     [SerializeField, Header("チュートリアル文"), Multiline]
     private string[] mineStr;
 
-    private string aiName = "AI";
-    private string eruName = "Eru";
+    private readonly string aiName = "AI";
+    private readonly string astraName = "Astra";
 
-    private int i = 0;
 
     private float timer = 0;
 
@@ -42,9 +53,8 @@ public class TutorialText : MonoBehaviour
 
     private bool startFlg = false;  
 
-    private bool textFlg = true;
-
     private bool bgOpenFlg = false;
+
 
     void Start()
     {
@@ -66,6 +76,7 @@ public class TutorialText : MonoBehaviour
 
     void Update()
     {
+        if (clearFlg) return;
 
         //バックグラウンド開閉
         if (bgOpenFlg && scale < 1)
@@ -97,16 +108,16 @@ public class TutorialText : MonoBehaviour
             StartCoroutine(Dialogue());
         }
 
-        if (!bgOpenFlg && scale <= 0) Debug.Log("チュートリアルクリア");
+        if (!bgOpenFlg && scale <= 0) clearFlg = true;
 
-        if (Input.anyKeyDown && startFlg)
+        if (Input.anyKeyDown && startFlg && !stopFlg)
         {
             if (!textFlg)
             {
                 textFlg = true;
                 mineText.text = mineStr[i];
                 i++;
-                if (i >= mineStr.Length - 1) bgOpenFlg = false;
+                if (i > mineStr.Length) bgOpenFlg = false;
             }
             else
             {
@@ -116,16 +127,19 @@ public class TutorialText : MonoBehaviour
         }
     }
     
-    private IEnumerator Dialogue()
+    public IEnumerator Dialogue()
     {
+        if (clearFlg) yield break;
         IconSetting();
         mineText.text = "";
+
         foreach (var word in mineStr[i])
         {
             if (textFlg) yield break;
             mineText.text += word;
             yield return new WaitForSeconds(textTime);
         }
+
         i++;
         if (i >= mineStr.Length - 1) bgOpenFlg = false;
         textFlg = true;
@@ -135,12 +149,13 @@ public class TutorialText : MonoBehaviour
     private void IconSetting()
     {
         //アイコン設定
-        if (i == 2 || i == 45) icon.sprite = eruSprite;
-        else if (i == 44) icon.sprite = aiSprite;
+        if (i == 2 || i == 45) icon.sprite = astraSprite;
+        else if (i == 44 || i == 48) icon.sprite = aiSprite;
 
         if (i == 2) nameText.text = "???";
-        else if (i == 3) nameText.text = eruName;
+        else if (i == 3) nameText.text = astraName;
         else if (i == 44) nameText.text = aiName;
-        else if (i == 45) nameText.text = eruName;
+        else if (i == 45) nameText.text = astraName;
+        else if (i == 48) nameText.text = aiName;
     }
 }
