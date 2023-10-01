@@ -1476,7 +1476,7 @@ MonoBehaviour:
   hp: 3
   tutorialManager: {fileID: 0}
   word:
-  - MISSIOM
+  - MISSION
   - CLEAR
   randomFlg: 0
   icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
