@@ -76,6 +76,7 @@ public class Read : MonoBehaviour
     //データの読み込み（反映）
     private void ReadData(SaveData saveData)
     {
+        GameData.tutorial = saveData.tutorial;
         GameData.Money = saveData.Money;
         GameData.DoorLv = saveData.DoorLv;
         GameData.CameraLv = saveData.CameraLv;

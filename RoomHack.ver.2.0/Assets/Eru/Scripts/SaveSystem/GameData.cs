@@ -1,5 +1,6 @@
 public class GameData
 {
+    public static bool tutorial = false; 
     public static int Money = 0;
     public static int DoorLv = 1;
     public static int CameraLv = 1;

@@ -1,6 +1,7 @@
 [System.Serializable]
 public class SaveData
 {
+    public bool tutorial = false;
     public int Money = 0;
     public int DoorLv = 1;
     public int CameraLv = 1;
