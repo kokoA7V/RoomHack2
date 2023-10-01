@@ -101,6 +101,7 @@ public class TutorialManager : MonoBehaviour
             questFlg = false;
             tutorialText.stopFlg = false;
             buttonFlg = false;
+            tutorialHackManager.hackType = TutorialHackManager.HACK_TYPE.None;
         }
 
         if(q1 && q2 && j == 18)

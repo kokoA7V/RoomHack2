@@ -1078,6 +1078,7 @@ GameObject:
   - component: {fileID: 1345113148}
   - component: {fileID: 1345113150}
   - component: {fileID: 1345113149}
+  - component: {fileID: 1345113152}
   - component: {fileID: 1345113151}
   m_Layer: 5
   m_Name: EndImage
@@ -1125,7 +1126,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 13ba0536cecadf34e9cd4546635fb212, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1143,19 +1144,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345113147}
   m_CullTransparentMesh: 1
---- !u!114 &1345113151
-MonoBehaviour:
+--- !u!95 &1345113151
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345113147}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d76a83525dc90478425d3aa19c3a31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialPosition: {x: 0, y: 0, z: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9dcb731bf1ed92e4bad23d8a6436248c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &1345113152
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345113147}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 257005649825ccd48bd91f27ed93d013, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1491677345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,6 +1932,7 @@ MonoBehaviour:
   - "\u304A\u75B2\u308C\u69D8\u3001\u541B\u306E\u4ECA\u5F8C\u306E\u6D3B\u8E8D\u306B\u3082\u671F\u5F85\u3057\u3066\u3044\u308B\u3002"
   - "\u3067\u306F\u3001\u307E\u305F\u4F1A\u304A\u3046\u3002"
   - "\u901A\u4FE1\u304C\u5207\u65AD\u3055\u308C\u307E\u3057\u305F\u3002"
+  endIcon: {fileID: 1345113149}
 --- !u!1 &2050845887
 GameObject:
   m_ObjectHideFlags: 0
