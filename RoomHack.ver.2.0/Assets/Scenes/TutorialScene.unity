@@ -479,6 +479,7 @@ MonoBehaviour:
   enemy1SR: {fileID: 4902228848105537147}
   enemy2SR: {fileID: 3624341867040824468}
   enemy3SR: {fileID: 1646852878}
+  data: {fileID: 1593845948}
   leftRoomSR: {fileID: 1491677346}
   centerRoomSR: {fileID: 515271083}
   rightRoomSR: {fileID: 531385258}

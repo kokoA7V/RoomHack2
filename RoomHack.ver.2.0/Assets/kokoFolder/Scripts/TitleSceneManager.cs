@@ -35,6 +35,9 @@ public class TitleSceneManager : MonoBehaviour
 
     float UISpd = 1;
 
+    [SerializeField]
+    private DataManager data;
+
     private void Start()
     {
         LoginButton = TitleObj[3].GetComponent<Button>();
@@ -123,7 +126,7 @@ public class TitleSceneManager : MonoBehaviour
         //    delay = 0.1f;
         //}
 
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && GameData.tutorial)
         {
             skipStart = true;
         }
@@ -217,7 +220,7 @@ public class TitleSceneManager : MonoBehaviour
 
             if (SCT[5].textStart)
             {
-                if (Input.anyKeyDown)
+                if (Input.anyKeyDown && GameData.tutorial)
                 {
                     UISpd = 3;
 
@@ -236,6 +239,7 @@ public class TitleSceneManager : MonoBehaviour
 
             if(SCT[6].textEnd)
             {
+                data.Save();
                 if (GameData.tutorial) Load.SL = 2;
                 else Load.SL = 3;
                 SceneManager.LoadScene("LoadScene");

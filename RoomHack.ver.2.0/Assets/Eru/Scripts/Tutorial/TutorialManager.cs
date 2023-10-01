@@ -53,6 +53,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer enemy1SR, enemy2SR, enemy3SR;
 
+    [SerializeField]
+    private DataManager data;
+
     public SpriteRenderer leftRoomSR, centerRoomSR, rightRoomSR;
 
     private readonly int[] stopNo = new int[] { 8, 9, 10, 11, 14, 15, 16, 17, 19, 22, 24, 26, 27, 30, 33, 34, 37, 41, 43, 44, 999};
@@ -77,7 +80,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (tutorialText.clearFlg)
         {
-            TutorialClear();
+            StartCoroutine(TutorialClear());
             return;
         }
         if (Input.GetKeyDown(KeyCode.Escape)) tutorialText.clearFlg = true;
@@ -108,11 +111,14 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void TutorialClear()
+    private IEnumerator TutorialClear()
     {
         GameData.tutorial = true;
+        data.Save();
+        yield return new WaitForSeconds(0.2f);
         Load.SL = 2;
         SceneManager.LoadScene("LoadScene");
+        yield break;
     }
 
     private IEnumerator WindowBlink()
