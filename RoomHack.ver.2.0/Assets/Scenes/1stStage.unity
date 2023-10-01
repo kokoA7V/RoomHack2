@@ -215,6 +215,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8097445299734490267, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097445299734490267, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097445299734490267, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.46
       objectReference: {fileID: 0}
@@ -222,6 +230,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.01
       objectReference: {fileID: 0}
+    - target: {fileID: 8097445299734490269, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2f7f25e7680ea5841a72e4e5c2d91c62, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
 --- !u!1 &297722589
@@ -1623,7 +1635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6536419477334655531, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 2.5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8097445299734490266, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
       propertyPath: m_Size.x
@@ -1645,6 +1657,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.49
       objectReference: {fileID: 0}
+    - target: {fileID: 8097445299734490269, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2f7f25e7680ea5841a72e4e5c2d91c62, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d179480dd80b549907d1452ac7f6c2, type: 3}
 --- !u!1 &1334562446
