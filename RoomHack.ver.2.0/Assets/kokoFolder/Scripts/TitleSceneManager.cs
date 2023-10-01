@@ -38,8 +38,13 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField]
     private DataManager data;
 
+    [SerializeField]
+    private int fps = 60;
+
     private void Start()
     {
+        Application.targetFrameRate = fps;
+
         LoginButton = TitleObj[3].GetComponent<Button>();
         LoginButton.onClick.AddListener(() => SCT[5].textStart = true);
 
@@ -84,18 +89,18 @@ public class TitleSceneManager : MonoBehaviour
         SCT[5].inputText = dispText[13];
         SCT[6].inputText = dispText[14];
 
-        SCT[0].textDelay = 5;
-        SCT[1].textDelay = 60;
-        SCT[2].textDelay = 5;
-        SCT[3].textDelay = 60;
-        SCT[4].textDelay = 7;
-        SCT[5].textDelay = 10;
-        SCT[6].textDelay = 10;
+        SCT[0].textDelay = 2.5f;
+        SCT[1].textDelay = 30;
+        SCT[2].textDelay = 2.5f;
+        SCT[3].textDelay = 30;
+        SCT[4].textDelay = 3.5f;
+        SCT[5].textDelay = 5;
+        SCT[6].textDelay = 5;
 
-        SCT[1].afterDelay = 60;
-        SCT[3].afterDelay = 60;
-        SCT[5].afterDelay = 30;
-        SCT[6].afterDelay = 60;
+        SCT[1].afterDelay = 30;
+        SCT[3].afterDelay = 30;
+        SCT[5].afterDelay = 15;
+        SCT[6].afterDelay = 30;
 
 
         TitleObj[1].SetActive(false);
