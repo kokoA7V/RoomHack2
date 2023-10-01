@@ -107,7 +107,7 @@ public class MateController : MonoBehaviour
                 
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
                 
-                methodCtr = 1f;
+                methodCtr = 2f;
                 methodNo++;
                 break;
             case 1:
