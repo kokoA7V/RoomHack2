@@ -32,6 +32,9 @@ public class GameOverSceneManager : MonoBehaviour
 
     float trans;
 
+    bool skipStart = false;
+    bool skipEnd = false;
+
     private void Start()
     {
         for (int i = 1; i < 7; i++)
@@ -96,6 +99,22 @@ public class GameOverSceneManager : MonoBehaviour
         {
             GOObj[5].SetActive(true);
             GOObj[6].SetActive(true);
+        }
+
+        if (Input.anyKeyDown)
+        {
+            skipStart = true;
+        }
+
+        if (skipStart && !skipEnd)
+        {
+            time = 10;
+            trans = 0.25f;
+
+            HT1.textEnd = true;
+            HT2.textEnd = true;
+
+            skipEnd = true;
         }
     }
 

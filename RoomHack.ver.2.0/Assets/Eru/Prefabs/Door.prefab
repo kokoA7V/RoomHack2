@@ -125,12 +125,14 @@ MonoBehaviour:
   right: {fileID: 4032168422888875042}
   leftFrameSR: {fileID: 4032168423344912495}
   rightFrameSR: {fileID: 4032168423102180988}
-  frameMateSprite: {fileID: 21300000, guid: f65c000f3c295be4fb3de3e6612cd874, type: 3}
-  frameEnemySprite: {fileID: 21300000, guid: c513ee5d81fb1bc4593d7ead0c1d4b72, type: 3}
+  frameMateSprite: {fileID: 21300000, guid: 40fc14290d0453949bdb0fe9952eb76f, type: 3}
+  frameEnemySprite: {fileID: 21300000, guid: c0d86ea03b4b80b4787e90fe5b94cd95, type: 3}
   hackTime:
   - 10
   - 15
   - 20
+  bc2d: {fileID: 0}
+  openFlg: 0
   leftBoard: {fileID: 4032168424065322225}
   rightBoard: {fileID: 4032168422180198935}
   leftStart: {fileID: 4823438387229901081}
@@ -406,7 +408,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: c513ee5d81fb1bc4593d7ead0c1d4b72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0d86ea03b4b80b4787e90fe5b94cd95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -489,7 +491,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: c513ee5d81fb1bc4593d7ead0c1d4b72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0d86ea03b4b80b4787e90fe5b94cd95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

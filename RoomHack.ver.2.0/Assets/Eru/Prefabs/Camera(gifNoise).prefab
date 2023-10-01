@@ -139,7 +139,7 @@ MonoBehaviour:
     Hacked'
   comentStr: '//Hacking
 
-    //OpenClose'
+    //InVisible'
   noiseObj: {fileID: 8097445299734490268}
   frameSR: {fileID: 744921164999495340}
   frameSprite: {fileID: 21300000, guid: 396f7e9014cc8154ca806a0a9c66f124, type: 3}
@@ -218,15 +218,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: 79f710b53dbd95342b2659ea84fdd9a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a67004a533c1e194788744fb45323b60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8097445299734490268
@@ -324,7 +324,7 @@ Animator:
   m_GameObject: {fileID: 8097445299734490268}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b406bade8b1de8e40b06f15dbdf602b3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2f7f25e7680ea5841a72e4e5c2d91c62, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
