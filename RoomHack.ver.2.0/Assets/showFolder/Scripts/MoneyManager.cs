@@ -5,7 +5,7 @@ using System.Collections;
 
 public class MoneyManager : MonoBehaviour
 {
-    public int haveMoney = 2000; //持っているお金
+    public int haveMoney = 2000; //持っているお金(仮）
 
     public Text haveText; //所持金を表示するテキスト
     public Text useText;　//消費するお金を表示するテキスト
@@ -143,6 +143,7 @@ public class MoneyManager : MonoBehaviour
     {
         haveText.text = "所持: " + haveMoney.ToString();
     }
+
 
     IEnumerator TextActive()
     {
