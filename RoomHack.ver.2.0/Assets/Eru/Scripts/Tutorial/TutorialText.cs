@@ -90,7 +90,7 @@ public class TutorialText : MonoBehaviour
             if (timer > 0) timer -= Time.deltaTime;
             else
             {
-                timer = bgTime *= 0.0001f;
+                timer = bgTime * 0.0001f;
                 scale += 0.1f;
                 backGround.transform.localScale = new Vector3(1, Mathf.Clamp01(scale), 1);
             }
@@ -100,7 +100,7 @@ public class TutorialText : MonoBehaviour
             if (timer > 0) timer -= Time.deltaTime;
             else
             {
-                timer = bgTime *= 0.0001f;
+                timer = bgTime * 0.0001f;
                 scale -= 0.1f;
                 backGround.transform.localScale = new Vector3(1, Mathf.Clamp01(scale), 1);
             }
