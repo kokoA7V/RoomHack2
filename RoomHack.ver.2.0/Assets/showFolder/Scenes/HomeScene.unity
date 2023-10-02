@@ -465,7 +465,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Camera
+  m_Text: 'CAMERA
 
 '
 --- !u!222 &266834596
@@ -825,9 +825,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Door
-
-'
+  m_Text: DOOR
 --- !u!222 &395777765
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -915,6 +913,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470246891}
   m_CullTransparentMesh: 1
+--- !u!1 &480413518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1465997944522550306, guid: 9ad8939aec18a0c47abbff9496991b90, type: 3}
+  m_PrefabInstance: {fileID: 1465997945929766286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &480413522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480413518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbc03afd8592d846b9f1cbb8a04421d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashSpd: 1
 --- !u!1 &572554567
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +944,7 @@ GameObject:
   - component: {fileID: 572554570}
   - component: {fileID: 572554569}
   m_Layer: 5
-  m_Name: Arlam
+  m_Name: Alarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1266,7 +1282,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Arlam
+  m_Text: 'ALARM
 
 '
 --- !u!222 &625195108
@@ -1347,9 +1363,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Enemy
-
-'
+  m_Text: ENEMY
 --- !u!222 &667484032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2381,9 +2395,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Stage
-
-'
+  m_Text: STAGE
 --- !u!222 &902978135
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2981,7 +2993,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Clean
+  m_Text: 'CLEAN
 
 '
 --- !u!222 &1063621721
@@ -3386,7 +3398,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ' Compu
+  m_Text: 'COMPU
 
 '
 --- !u!222 &1192744398
@@ -3546,7 +3558,7 @@ GameObject:
   - component: {fileID: 1207816463}
   - component: {fileID: 1207816462}
   m_Layer: 5
-  m_Name: Dige
+  m_Name: FES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4435,7 +4447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Back
+  m_Text: 'BACK
 
 '
 --- !u!222 &1392930739
@@ -4555,7 +4567,7 @@ GameObject:
   - component: {fileID: 1557194406}
   - component: {fileID: 1557194405}
   m_Layer: 5
-  m_Name: Turrect
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4812,7 +4824,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Aricon
+  m_Text: 'AIRCON
 
 '
 --- !u!222 &1764324644
@@ -5118,7 +5130,7 @@ GameObject:
   - component: {fileID: 1908443021}
   - component: {fileID: 1908443020}
   m_Layer: 5
-  m_Name: Aricon
+  m_Name: Aircon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5611,7 +5623,6 @@ GameObject:
   - component: {fileID: 1926878750}
   - component: {fileID: 1926878749}
   - component: {fileID: 1926878748}
-  - component: {fileID: 1926878751}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -5683,7 +5694,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1926878751}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Backbutton, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -5733,18 +5744,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926878746}
   m_CullTransparentMesh: 1
---- !u!114 &1926878751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926878746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b3f8736e933b5449f82cec9ed65ee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2002474835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2054152451870905295, guid: 21eebdb4e0ba05b4b8e69e5ace6ded98, type: 3}
@@ -5941,9 +5940,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Turrect
-
-'
+  m_Text: TURRET
 --- !u!222 &2047065038
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6022,7 +6019,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dige
+  m_Text: 'FES
+
+'
 --- !u!222 &2070485512
 CanvasRenderer:
   m_ObjectHideFlags: 0
