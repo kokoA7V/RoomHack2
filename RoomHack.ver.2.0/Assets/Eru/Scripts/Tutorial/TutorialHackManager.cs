@@ -11,8 +11,8 @@ public class TutorialHackManager : MonoBehaviour
         Door1,
         Camera1,
         Enemy2,
-        Enemy3,
         Door2,
+        None,
     }
     [HideInInspector]
     public HACK_TYPE hackType;
