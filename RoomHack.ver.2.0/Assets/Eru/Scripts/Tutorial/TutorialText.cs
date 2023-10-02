@@ -43,6 +43,10 @@ public class TutorialText : MonoBehaviour
     [SerializeField, Header("チュートリアル文"), Multiline]
     private string[] mineStr;
 
+    [SerializeField]
+    private Image endIcon;
+
+
     private readonly string aiName = "AI";
     private readonly string astraName = "Astra";
 
@@ -72,6 +76,8 @@ public class TutorialText : MonoBehaviour
         backGround.transform.localScale = new Vector3(1, scale, 1);
         timer = bgTime;
         bgOpenFlg = true;
+
+        endIcon.enabled = false;
     }
 
     void Update()
@@ -84,7 +90,7 @@ public class TutorialText : MonoBehaviour
             if (timer > 0) timer -= Time.deltaTime;
             else
             {
-                timer = bgTime *= 0.0001f;
+                timer = bgTime * 0.0001f;
                 scale += 0.1f;
                 backGround.transform.localScale = new Vector3(1, Mathf.Clamp01(scale), 1);
             }
@@ -94,7 +100,7 @@ public class TutorialText : MonoBehaviour
             if (timer > 0) timer -= Time.deltaTime;
             else
             {
-                timer = bgTime *= 0.0001f;
+                timer = bgTime * 0.0001f;
                 scale -= 0.1f;
                 backGround.transform.localScale = new Vector3(1, Mathf.Clamp01(scale), 1);
             }
@@ -115,18 +121,30 @@ public class TutorialText : MonoBehaviour
             if (!textFlg)
             {
                 textFlg = true;
+                endIcon.enabled = true;
                 mineText.text = mineStr[i];
                 i++;
-                if (i > mineStr.Length) bgOpenFlg = false;
             }
             else
             {
                 textFlg = false;
-                StartCoroutine(Dialogue());
+                endIcon.enabled = false;
+                if (i >= mineStr.Length) StartCoroutine(EndTutorial());
+                else StartCoroutine(Dialogue());
             }
         }
     }
     
+    private IEnumerator EndTutorial()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        bgOpenFlg = false;
+
+        yield break;
+    }
+
+
     public IEnumerator Dialogue()
     {
         if (clearFlg) yield break;
@@ -141,8 +159,8 @@ public class TutorialText : MonoBehaviour
         }
 
         i++;
-        if (i >= mineStr.Length - 1) bgOpenFlg = false;
         textFlg = true;
+        endIcon.enabled = true;
         yield break;
     }
 
