@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class SightCheak :MonoBehaviour
+public class SightCheak : MonoBehaviour
 {
-
-
     private RaycastHit2D[] emHit;
 
     [SerializeField, Header("レイの最大距離")]
@@ -11,18 +9,19 @@ public class SightCheak :MonoBehaviour
 
     [SerializeField, Header("レイの本数")]
     private int numberOfRays = 12;
+
+    [SerializeField]
+    private LayerMask layerMask;
     public GameObject EnemyCheck()
     {
-
         for (int i = 0; i < numberOfRays; i++)
         {
-
-            float angle = (i * 90/ numberOfRays) + 45 + this.transform.rotation.eulerAngles.z;
+            float angle = (i * 90 / numberOfRays) + 45 + this.transform.rotation.eulerAngles.z;
             float radians = angle * Mathf.Deg2Rad;
             Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
 
             Vector3 origin = this.transform.position;
-            
+
             Ray emCheackray = new Ray(origin, direction);
 
             // Rayを表示
@@ -32,7 +31,7 @@ public class SightCheak :MonoBehaviour
             float maxDistance = 0.7f;
 
             // 自分以外に当たるようにする
-            int layerMask = ~(1 << this.gameObject.layer);
+            //int layerMask = ~(1 << this.gameObject.layer);
 
             // 何か当たったらpntにonjを入れる
             emHit = Physics2D.RaycastAll(emCheackray.origin, emCheackray.direction, maxDistance, layerMask);
@@ -55,7 +54,7 @@ public class SightCheak :MonoBehaviour
                     else return null;
                 }
             }
-        }       
+        }
         return null;
     }
 

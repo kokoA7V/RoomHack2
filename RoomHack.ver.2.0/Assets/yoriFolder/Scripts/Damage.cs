@@ -5,10 +5,11 @@ public class Damage : MonoBehaviour
     UnitCore uCore;
     private int nowHp;
 
-    void Start()
+    void Awake()
     {
         uCore = this.gameObject.GetComponent<UnitCore>();
         nowHp = uCore.maxHP;
+        uCore.nowHP = nowHp;
     }
 
     public void HitDmg(int dmg)

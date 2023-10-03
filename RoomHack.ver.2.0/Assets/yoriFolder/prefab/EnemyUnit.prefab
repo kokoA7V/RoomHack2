@@ -144,6 +144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 5
   numberOfRays: 12
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &3283841965071715714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +198,11 @@ MonoBehaviour:
     gameType: 45
     dirType: 1
     rayFlg: 1
+  ptArea1: {x: 0, y: 0}
+  ptArea2: {x: 0, y: 0}
+  ptArea3: {x: 0, y: 0}
+  ptArea4: {x: 0, y: 0}
+  ptArea: []
   word:
   - TYPING
   randomFlg: 0

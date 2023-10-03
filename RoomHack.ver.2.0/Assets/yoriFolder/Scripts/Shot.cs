@@ -29,6 +29,7 @@ public class Shot : MonoBehaviour
 
             Vector3 shootDirection = Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector3.up;
             rb.velocity = shootDirection * bulletSpeed;
+            bullet.transform.up = shootDirection;
 
             yield return new WaitForSeconds(shotTime);
         }
