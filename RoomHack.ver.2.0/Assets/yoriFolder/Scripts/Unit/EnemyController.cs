@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemyController : MonoBehaviour, IUnitHack
 {
     // 情報取得
@@ -53,6 +53,10 @@ public class EnemyController : MonoBehaviour, IUnitHack
     [SerializeField]
     private Vector2 ptArea4;
 
+    [SerializeField]
+    private List<Vector3> ptArea;
+    private int ptNum;
+
     private float ptCtr;
     enum State
     {
@@ -91,6 +95,10 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     void Start()
     {
+
+        ptArea = new List<Vector3>();
+        ptNum = 0;
+
         eCore = GetComponent<UnitCore>();
         eSight = GetComponent<SightCheak>();
         burst = 3;
@@ -196,7 +204,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
                         methodNo++;
                     }
                 }
-                    break;
+                break;
             case 1:
                 plRb.velocity = Vector3.zero;
                 methodNo = 0;
@@ -217,19 +225,34 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     void ActSearch()
     {
-        //switch (methodNo)
-        //{
-        //    case 0:
-        //        eCore.Move(moveSpd, ptArea1);
-        //        if (Mathf.Abs(ptArea1.x - this.transform.position.x) <= 1f &&
-        //               Mathf.Abs(ptArea1.y - this.transform.position.y) <= 1f)
-        //        {
-        //            plRb.velocity = Vector2.zero;
-        //            moveSpd = 0;
-        //            ptCtr
-        //        }
-        //    default:
-        //        break;
-        //}
+        switch (methodNo)
+        {
+            case 0:
+                eCore.Move(moveSpd, ptArea[ptNum]);
+                
+                if (Mathf.Abs(ptArea1.x - this.transform.position.x) <= 1f &&
+                       Mathf.Abs(ptArea1.y - this.transform.position.y) <= 1f)
+                {
+                    plRb.velocity = Vector2.zero;
+                    moveSpd = 0;
+                    ptCtr += Time.deltaTime;
+                    if (ptCtr <= 3f)
+                    {
+                        ptCtr = 0;
+                        methodNo++;
+                    }
+
+                }
+                break;
+            case 1:
+                
+                ptNum++;
+                
+                if (ptNum >= ptArea.Count) ptNum = 0;
+                
+                methodNo = 0;
+                
+                break;
+        }
     }
 }
