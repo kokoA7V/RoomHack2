@@ -19,6 +19,8 @@ public class Move : MonoBehaviour
     private Vector3 _prevPlayerPos;
 
     private Vector3 unit;
+
+    private float moveSpd;
     private void Start()
     {
         unitRb = GetComponent<Rigidbody2D>();
@@ -40,16 +42,18 @@ public class Move : MonoBehaviour
         moveDir = movePos.normalized;
 
         //unitRb.AddForce(moveDir * _moveSpd);
+                
         unitRb.velocity = moveDir * _moveSpd;
 
         if (Mathf.Abs(movePos.x) <= 0.5f && Mathf.Abs(movePos.y) <= 0.5f)
         {
             Debug.Log("止まるよ");
             unitRb.velocity = Vector2.zero;
+            movePos = Vector3.zero;
             //_targetPos = _playerPosHistory.Dequeue();
         }
         // 力の加わる方向に正面を合わせる
-        transform.up = movePos.normalized;
+        else transform.up = movePos.normalized;
 
         // スピードに制限をかける
         float speedXTemp = Mathf.Clamp(unitRb.velocity.x, -limitSpeed, limitSpeed);　//X方向の速度を制限

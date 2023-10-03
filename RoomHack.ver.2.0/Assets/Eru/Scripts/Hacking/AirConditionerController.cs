@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,7 +36,6 @@ public class AirConditionerController : MonoBehaviour, IUnitHack
     public List<EnemyController> emList;
 
     private int methodNo = 0;
-    private int methodNo2 = 0;
 
     [SerializeField]
     private GameObject exitObj1;
@@ -73,6 +71,7 @@ public class AirConditionerController : MonoBehaviour, IUnitHack
             Debug.Log("エアコン停止");
             if (hackedFlg && GameData.AriConditionerLv == 1)
             {
+                if (!(emList?.Count > 0)) methodNo = 3;
                 switch (methodNo)
                 {
                     case 0:
@@ -99,11 +98,16 @@ public class AirConditionerController : MonoBehaviour, IUnitHack
                                 door.StartCoroutine("Move");
                             }
                             emList[emList.Count - 1].unit = exitObj2;
-                            methodNo++;
+
+                            methodNo = 0;
                         }
                         break;
-                    case 2:
-                        if (emList.Count <= 0) methodNo++;
+                    case 3:
+                        if (door.openFlg)
+                        {
+                            door.bc2d.isTrigger = false;
+                            door.StartCoroutine("Move");
+                        }
                         break;
                 }
 

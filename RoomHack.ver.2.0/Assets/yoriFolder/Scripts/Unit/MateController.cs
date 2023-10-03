@@ -54,7 +54,7 @@ public class MateController : MonoBehaviour
     public string mateName;
     private int nameNum;
 
-    private bool stopFlg=false;
+    private bool stopFlg = false;
     enum State
     {
         Shot,
@@ -120,8 +120,6 @@ public class MateController : MonoBehaviour
             case 0:
                 Debug.Log("Shotに移行" + target);
 
-                
-
                 plRb.velocity = Vector3.zero;
 
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
@@ -162,7 +160,7 @@ public class MateController : MonoBehaviour
     // 移動して敵がいたらshotに移動する
     private void ActMove()
     {
-        Debug.Log("move" + moveSpd+" "+gameObject.name);
+        Debug.Log("move" + moveSpd + " " + gameObject.name);
         switch (methodNo)
         {
             case 0:
@@ -179,7 +177,6 @@ public class MateController : MonoBehaviour
                 // 違ったらリーダーについていく
                 else
                 {
-                    Debug.Log(gameObject.name);
                     movePos = leaderObj.transform.position;
 
                     // ある程度リーダーに近づいたら止まる
@@ -188,13 +185,8 @@ public class MateController : MonoBehaviour
                     {
                         plRb.velocity = Vector2.zero;
                         moveSpd = 0;
-                        stopFlg = true;
                     }
-                    else if(!stopFlg)
-                    {
-                        Debug.Log("a");
-                        moveSpd = mateCore.moveSpd;
-                    }
+                    else moveSpd = mateCore.moveSpd;
                 }
 
                 mateCore.Move(moveSpd, movePos);
@@ -227,17 +219,5 @@ public class MateController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, 5f);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<MateController>(out MateController pc))
-        {
-            if (pc.leader)
-            {
-                if(stopFlg) moveSpd = -3;
-                Debug.Log(pc.gameObject.name);
-            }
-        }
     }
 }
