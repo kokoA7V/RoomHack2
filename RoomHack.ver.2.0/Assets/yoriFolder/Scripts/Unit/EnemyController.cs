@@ -41,6 +41,19 @@ public class EnemyController : MonoBehaviour, IUnitHack
     [SerializeField, Header("レイの設定")]
     private RayCircle rayCircle = new RayCircle();
 
+    [SerializeField]
+    private Vector2 ptArea1;
+
+    [SerializeField]
+    private Vector2 ptArea2;
+
+    [SerializeField]
+    private Vector2 ptArea3;
+
+    [SerializeField]
+    private Vector2 ptArea4;
+
+    private float ptCtr;
     enum State
     {
         Shot,
@@ -113,6 +126,17 @@ public class EnemyController : MonoBehaviour, IUnitHack
             hackedFlg = false;
             frameSR.sprite = frameEnemySprite;
         }
+
+        if (hackedFlg && GameData.EnemyLv == 1)
+        {
+        }
+        else if (hackedFlg && GameData.EnemyLv == 2)
+        {
+        }
+        else if (hackedFlg && GameData.EnemyLv == 3)
+        {
+        }
+
         actFuncTbl[stateNo]();
     }
 
@@ -196,14 +220,15 @@ public class EnemyController : MonoBehaviour, IUnitHack
         //switch (methodNo)
         //{
         //    case 0:
-        //        if (emCheak.EnemyCheck() && isEm)
+        //        eCore.Move(moveSpd, ptArea1);
+        //        if (Mathf.Abs(ptArea1.x - this.transform.position.x) <= 1f &&
+        //               Mathf.Abs(ptArea1.y - this.transform.position.y) <= 1f)
         //        {
-        //            //Debug.Log("Shotに移行");
-        //            methodNo = 0;
-        //            methodCtr = 0;
-        //            stateNo = (int)State.Shot;
-        //            isEm = false;
+        //            plRb.velocity = Vector2.zero;
+        //            moveSpd = 0;
+        //            ptCtr
         //        }
+        //    default:
         //        break;
         //}
     }

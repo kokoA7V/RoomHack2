@@ -86,9 +86,9 @@ public class MateController : MonoBehaviour
         if (leaderObj == null && !leader)
         {
             leader = true;
-            movePos = this.transform.position;
             Debug.Log("リーダー変わったよ");
             if (mateObj != null) mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
+            stateNo = (int)State.Move;
         }
 
         if (!leader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
@@ -123,6 +123,8 @@ public class MateController : MonoBehaviour
                 methodCtr -= Time.deltaTime;
                 if (methodCtr <= 0)
                 {
+                    // まだ敵が死んでないならもっかい打つ
+                    if (target != null) methodNo = 0;
                     methodNo = 0;
                     methodCtr = 0;
                     stateNo = (int)State.Move;
@@ -168,7 +170,7 @@ public class MateController : MonoBehaviour
                 target = unitSight.EnemyCheck();
                 if (target != null && isEm)
                 {
-                    movePos = this.transform.position;
+                    //movePos = this.transform.position;
                     methodNo++;
                     break;
                 }
