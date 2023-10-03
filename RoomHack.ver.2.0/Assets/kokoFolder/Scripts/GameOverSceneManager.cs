@@ -76,6 +76,11 @@ public class GameOverSceneManager : MonoBehaviour
         if (time >= 3)
         {
             GOObj[1].SetActive(true);
+
+            if (Input.anyKeyDown)
+            {
+                skipStart = true;
+            }
         }
 
         if (time >= 3.5)
@@ -101,10 +106,7 @@ public class GameOverSceneManager : MonoBehaviour
             GOObj[6].SetActive(true);
         }
 
-        if (Input.anyKeyDown)
-        {
-            skipStart = true;
-        }
+
 
         if (skipStart && !skipEnd)
         {
