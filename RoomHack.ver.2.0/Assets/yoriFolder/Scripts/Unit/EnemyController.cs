@@ -108,6 +108,8 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
         eCore.maxHP += 7;
 
+        pow = 10;
+
         actFuncTbl = new ActFunc[(int)State.Num];
         actFuncTbl[(int)State.Shot] = ActShot;
         actFuncTbl[(int)State.Move] = ActMove;

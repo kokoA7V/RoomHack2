@@ -728,7 +728,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306417131487653098, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Text
-      value: John
+      value: Jon
       objectReference: {fileID: 0}
     - target: {fileID: 886828388932549491, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Color.b
@@ -842,7 +842,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7373771711467841893, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
 --- !u!224 &560101106 stripped
 RectTransform:

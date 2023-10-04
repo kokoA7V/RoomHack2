@@ -12,13 +12,13 @@ public class ImageManager : MonoBehaviour
     int sprNo = 0;
 
     // Start is called before the first frame update
-    public void ShowImage(int n) //ˆø”n
+    public void ShowImage(int n) //å¼•æ•°n
     {
-        sprNo = n;@//n‚É“ü‚é”Ô†‚É‚æ‚Á‚Ä‰æ‘œ‚ªØ‚è‘Ö‚¦‚ê‚é‚æ‚¤‚ÉB
+        sprNo = n;ã€€//nã«å…¥ã‚‹ç•ªå·ã«ã‚ˆã£ã¦ç”»åƒãŒåˆ‡ã‚Šæ›¿ãˆã‚Œã‚‹ã‚ˆã†ã«ã€‚
     }
     public void UnShowImage()
     {
-        sprNo = 0; //”ñ•\¦‚É‚·‚éB0‚Ì”Ô†‚É‚Í“§–¾‚È‰æ‘œ‚ğ“ü‚ê‚é—\’èB
+        sprNo = 0; //éè¡¨ç¤ºã«ã™ã‚‹ã€‚0ã®ç•ªå·ã«ã¯é€æ˜ãªç”»åƒã‚’å…¥ã‚Œã‚‹äºˆå®šã€‚
     }
 
     private void Update()
