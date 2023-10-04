@@ -21,7 +21,7 @@ public class TutorialManager : MonoBehaviour
     public bool questFlg = false;
 
     [HideInInspector]
-    public Image hackButton;
+    public Image hackButton1,hackButton2;
 
     [HideInInspector]
     public Text typingText;
@@ -221,9 +221,9 @@ public class TutorialManager : MonoBehaviour
             for (int k = 0; k < 3; k++)
             {
                 yield return new WaitForSeconds(blinkTime);
-                hackButton.color = new Color(hackButton.color.r, hackButton.color.g, hackButton.color.b, 0f);
+                hackButton1.color = new Color(hackButton1.color.r, hackButton1.color.g, hackButton1.color.b, 0f);
                 yield return new WaitForSeconds(blinkTime);
-                hackButton.color = new Color(hackButton.color.r, hackButton.color.g, hackButton.color.b, 1f);
+                hackButton1.color = new Color(hackButton1.color.r, hackButton1.color.g, hackButton1.color.b, 1f);
             }
 
             buttonFlg = true;
@@ -261,9 +261,9 @@ public class TutorialManager : MonoBehaviour
             for (int k = 0; k < 3; k++)
             {
                 yield return new WaitForSeconds(blinkTime);
-                hackButton.color = new Color(hackButton.color.r, hackButton.color.g, hackButton.color.b, 0f);
+                hackButton2.color = new Color(hackButton2.color.r, hackButton2.color.g, hackButton2.color.b, 0f);
                 yield return new WaitForSeconds(blinkTime);
-                hackButton.color = new Color(hackButton.color.r, hackButton.color.g, hackButton.color.b, 1f);
+                hackButton2.color = new Color(hackButton2.color.r, hackButton2.color.g, hackButton2.color.b, 1f);
             }
 
             buttonFlg = true;

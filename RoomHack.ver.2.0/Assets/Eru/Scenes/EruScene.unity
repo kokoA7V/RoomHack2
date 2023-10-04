@@ -214,10 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeManager: {fileID: 826518357}
-  HackUIObj: {fileID: 6379701507292138747, guid: 6dfd523edc98b2c4fae0293084653991, type: 3}
+  HackUIObj: {fileID: 5841009702486919208, guid: 1e7497175354c6f49a474328fcf585a0, type: 3}
   nowTypingFlg: 0
   nowObj: {fileID: 0}
-  spriteCBG: {fileID: 21300000, guid: 5c7153c130159454cb4dfeac9bd89aeb, type: 3}
 --- !u!4 &79378689
 Transform:
   m_ObjectHideFlags: 0
@@ -246,6 +245,10 @@ PrefabInstance:
     - target: {fileID: 4032168422148569027, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: lvStr
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: titleStr
@@ -444,7 +447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &257909953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2520,6 +2523,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: lvStr
+      value: SecLv:1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: noStr
+      value: 1-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: titleStr
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: comentStr
+      value: "\u30C9\u30A2\u306E\u7BA1\u7406\u6A29\u9650\u306B\u30A2\u30AF\u30BB\u30B9\u3059\u308B\u3002\n\u30C9\u30A2\u306E\u958B\u9589\u3092\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3002"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: hackLvStr
+      value: HackLv:1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: word.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -2538,6 +2561,14 @@ PrefabInstance:
     - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: word.Array.data[3]
       value: SAGE
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: hackedStr.Array.data[0]
+      value: UnHacked
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032168422148569028, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
+      propertyPath: hackedStr.Array.data[1]
+      value: Hacked
       objectReference: {fileID: 0}
     - target: {fileID: 4032168422148569031, guid: 3b200c3546614fd4aa122f2206c33411, type: 3}
       propertyPath: m_RootOrder
@@ -2764,6 +2795,10 @@ PrefabInstance:
     - target: {fileID: 5728813282128932750, guid: 8a7d4779d4fc04a44b890700a42309f1, type: 3}
       propertyPath: m_Name
       value: TimeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728813282128932750, guid: 8a7d4779d4fc04a44b890700a42309f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a7d4779d4fc04a44b890700a42309f1, type: 3}

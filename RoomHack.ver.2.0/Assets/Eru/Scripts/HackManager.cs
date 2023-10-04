@@ -14,9 +14,6 @@ public class HackManager : MonoBehaviour
 
     private GameObject nowHackUI;
 
-    [SerializeField]
-    private Sprite spriteCBG;
-
     private int h = 0;
 
     void Update()
@@ -45,17 +42,18 @@ public class HackManager : MonoBehaviour
         //HackUIを生成
         nowHackUI = Instantiate(HackUIObj);
         HackUI hackUI = nowHackUI.GetComponent<HackUI>();
+        if (iUnitHack.hacked)
+        {
+            hackUI.unHacked.SetActive(false);
+            hackUI.hacked.SetActive(true);
+            h = 1;
+        }
+        else h = 0;
+
         hackUI.hackManager = GetComponent<HackManager>();
         hackUI.unitHack = iUnitHack;
         hackUI.hit = hit;
         hackUI.timeManager = timeManager;
-
-        if (iUnitHack.hacked)
-        {
-            hackUI.imageBG.sprite = spriteCBG;
-            h = 1;
-        }
-        else h = 0;
 
         //カメラ
         if (hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon))
@@ -66,7 +64,8 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = cameraCon.icon;
             hackUI.titleText.text = cameraCon.titleStr;
-            hackUI.lvText.text = cameraCon.lvStr[h];
+            hackUI.lvText.text = cameraCon.lvStr;
+            hackUI.hackLvText.text = cameraCon.hackLvStr;
             hackUI.comentText.text = cameraCon.comentStr;
 
             if (h == 1) cameraCon.frameSR.sprite = cameraCon.frameSprite;
@@ -81,7 +80,8 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = doorCon.icon;
             hackUI.titleText.text = doorCon.titleStr;
-            hackUI.lvText.text = doorCon.lvStr[h];
+            hackUI.lvText.text = doorCon.lvStr;
+            hackUI.hackLvText.text = doorCon.hackLvStr;
             hackUI.comentText.text = doorCon.comentStr;
 
             if (h == 1)
@@ -100,7 +100,6 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = turretCon.icon;
             hackUI.titleText.text = turretCon.titleStr;
-            hackUI.lvText.text = turretCon.lvStr[h];
             hackUI.comentText.text = turretCon.comentStr;
 
             if (h == 1) turretCon.frameSR.sprite = turretCon.frameSprite;
@@ -115,7 +114,6 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = enemyCon.icon;
             hackUI.titleText.text = enemyCon.titleStr;
-            hackUI.lvText.text = enemyCon.lvStr[h];
             hackUI.comentText.text = enemyCon.comentStr;
 
             if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;
@@ -130,7 +128,6 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = alarmCon.icon;
             hackUI.titleText.text = alarmCon.titleStr;
-            hackUI.lvText.text = alarmCon.lvStr[h];
             hackUI.comentText.text = alarmCon.comentStr;
 
             if (h == 1) alarmCon.frameSR.sprite = alarmCon.frameSprite;
@@ -145,7 +142,7 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = cleanerCon.icon;
             hackUI.titleText.text = cleanerCon.titleStr;
-            hackUI.lvText.text = cleanerCon.lvStr[h];
+ 
             hackUI.comentText.text = cleanerCon.comentStr;
 
             if (h == 1) cleanerCon.frameSR.sprite = cleanerCon.frameSprite;
@@ -160,7 +157,7 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = digestionCon.icon;
             hackUI.titleText.text = digestionCon.titleStr;
-            hackUI.lvText.text = digestionCon.lvStr[h];
+   
             hackUI.comentText.text = digestionCon.comentStr;
 
             if (h == 1) digestionCon.frameSR.sprite = digestionCon.frameSprite;
@@ -175,7 +172,6 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = computerCon.icon;
             hackUI.titleText.text = computerCon.titleStr;
-            hackUI.lvText.text = computerCon.lvStr[h];
             hackUI.comentText.text = computerCon.comentStr;
 
             if (h == 1) computerCon.frameSR.sprite = computerCon.frameSprite;
@@ -190,7 +186,6 @@ public class HackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = ariConditionerCon.icon;
             hackUI.titleText.text = ariConditionerCon.titleStr;
-            hackUI.lvText.text = ariConditionerCon.lvStr[h];
             hackUI.comentText.text = ariConditionerCon.comentStr;
 
             if (h == 1) ariConditionerCon.frameSR.sprite = ariConditionerCon.frameSprite;

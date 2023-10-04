@@ -110,17 +110,14 @@ MonoBehaviour:
   - TYPING
   randomFlg: 1
   icon: {fileID: 21300000, guid: 070421061bbad0b4c91878f3c2ba443d, type: 3}
-  titleStr: Door1-1
-  lvStr:
-  - 'SecLv :1
-
-    UnHacked'
-  - 'SecLv :1
-
-    Hacked'
-  comentStr: '//Hacking
-
-    //OpenClose'
+  titleStr: Door
+  noStr: 1-1
+  lvStr: SecLv:1
+  hackedStr:
+  - UnHacked
+  - Hacked
+  hackLvStr: HackLv:1
+  comentStr: "\u30C9\u30A2\u306E\u7BA1\u7406\u6A29\u9650\u306B\u30A2\u30AF\u30BB\u30B9\u3059\u308B\u3002\n\u30C9\u30A2\u306E\u958B\u9589\u3092\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3002"
   left: {fileID: 4032168422235218241}
   right: {fileID: 4032168422888875042}
   leftFrameSR: {fileID: 4032168423344912495}
@@ -362,7 +359,7 @@ Transform:
   m_GameObject: {fileID: 4032168423102180986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4032168422888875043}
   m_RootOrder: 0
@@ -445,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 4032168423344912493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4032168422235218242}
   m_RootOrder: 0

@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class TutorialHackUI : MonoBehaviour
 {
-    public RectTransform HackUIPos;
-    public GameObject typingobj;
-
     [HideInInspector]
     public string[] _word;
     [HideInInspector]
@@ -22,29 +19,26 @@ public class TutorialHackUI : MonoBehaviour
     public TutorialManager tutorialManager;
 
     [SerializeField]
-    private Image button;
+    private Image button1,button2;
 
-    [SerializeField]
-    private Vector2 targetPosition = new Vector2(541f, -260);
+    public GameObject unHacked, hacked, typing;
 
-    public Image imageBG, imageIcon;
+    public Image imageIcon;
 
-    public Text titleText, lvText, comentText;
+    public Text titleText, hackLvText, lvText, comentText;
 
     private bool hackedFlg = false;
 
     void Start()
     {
-        // RectTransformの座標を設定
-        HackUIPos.anchoredPosition = targetPosition;
-        tutorialManager.hackButton = button;
-        if (unitHack.hacked) hackedFlg = true;
-        else hackedFlg = false;
+        tutorialManager.hackButton1 = button1;
+        tutorialManager.hackButton2 = button2;
     }
 
     private void Update()
     {
-        if (!unitHack.hacked && hackedFlg) Destroy(gameObject);
+        if (unitHack.hacked) hackedFlg = true;
+        else if (!unitHack.hacked && hackedFlg) Destroy(gameObject);
         if (Input.GetKeyDown(KeyCode.Return)) PushButton();
     }
 
@@ -66,19 +60,19 @@ public class TutorialHackUI : MonoBehaviour
 
     private void TypingStart()
     {
-        GameObject obj = Instantiate(typingobj);
+        typing.SetActive(true);
+        unHacked.SetActive(false);
         tutorialHackManager.nowTypingFlg = true;
         //TypingObjにHackManagerから貰ったデータを送る。
-        TutorialTyping typing = obj.GetComponent<TutorialTyping>();
-        typing.hit = hit;
-        typing.timeManager = timeManager;
-        typing.tutorialHackManager = tutorialHackManager;
-        typing.tutorialManager = tutorialManager;
-        typing.unitHack = unitHack;
-        typing.randomFlg = _randomFlg;
-        typing.word = new string[_word.Length];
-        for (int i = 0; i < _word.Length; i++) typing.word[i] = _word[i];
-
-        Destroy(gameObject);
+        TutorialTyping typingObj = typing.GetComponentInChildren<TutorialTyping>();
+        typingObj.tutorialHackUI = GetComponent<TutorialHackUI>();
+        typingObj.hit = hit;
+        typingObj.timeManager = timeManager;
+        typingObj.tutorialHackManager = tutorialHackManager;
+        typingObj.tutorialManager = tutorialManager;
+        typingObj.unitHack = unitHack;
+        typingObj.randomFlg = _randomFlg;
+        typingObj.word = new string[_word.Length];
+        for (int i = 0; i < _word.Length; i++) typingObj.word[i] = _word[i];
     }
 }

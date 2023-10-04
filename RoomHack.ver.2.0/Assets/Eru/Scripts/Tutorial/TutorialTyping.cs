@@ -35,6 +35,9 @@ public class TutorialTyping : MonoBehaviour
     public TutorialManager tutorialManager;
 
     [HideInInspector]
+    public TutorialHackUI tutorialHackUI;
+
+    [HideInInspector]
     public IUnitHack unitHack;
 
     [HideInInspector]
@@ -104,10 +107,18 @@ public class TutorialTyping : MonoBehaviour
                                 tutorialHackManager.nowTypingFlg = false;
                                 unitHack.hacked = true;
 
+                                if (hit.collider.gameObject.TryGetComponent<TutorialCameraController>(out TutorialCameraController cameraCon)) cameraCon.frameSR.sprite = cameraCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<TutorialDoor>(out TutorialDoor doorCon))
+                                {
+                                    doorCon.leftFrameSR.sprite = doorCon.frameMateSprite;
+                                    doorCon.rightFrameSR.sprite = doorCon.frameMateSprite;
+                                }
+                                else if (hit.collider.gameObject.TryGetComponent<TutorialEnemy2>(out TutorialEnemy2 enemyCon)) enemyCon.frameSR.sprite = enemyCon.frameSprite;
+
                                 //CoolHackUI生成
-                                tutorialHackManager.InstantHackUI(hit, unitHack);
+                                tutorialHackUI.hacked.SetActive(true);
                                 tutorialHackManager.nowObj = null;
-                                Destroy(gameObject);
+                                tutorialHackUI.typing.SetActive(false);
                             }
                             else
                             {
