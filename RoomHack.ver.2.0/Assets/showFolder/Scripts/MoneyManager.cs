@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using System.Collections;
 
 public class MoneyManager : MonoBehaviour
@@ -15,6 +14,7 @@ public class MoneyManager : MonoBehaviour
     float timecounter = 1;
 
     public SkillData Skillmng;
+
     void Start()
     {
         HaveMoneyText();
