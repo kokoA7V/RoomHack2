@@ -44,6 +44,7 @@ public class TutorialHackUI : MonoBehaviour
 
     public void PushButton()
     {
+        Debug.Log("押した");
         if (!tutorialManager.buttonFlg) return;
         if (unitHack.hacked)
         {
