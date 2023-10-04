@@ -21,12 +21,12 @@ public class AudioPlay : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else Destroy(this.gameObject);
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(this.gameObject);
+        //}
+        //else Destroy(this.gameObject);
     }
 
     public void BGMPlay(int value)
