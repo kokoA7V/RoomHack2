@@ -5,15 +5,14 @@ using System.Collections;
 
 public class MoneyManager : MonoBehaviour
 {
-    public int haveMoney = 2000; //持っているお金(仮）
-
     public Text haveText; //所持金を表示するテキスト
     public Text useText;　//消費するお金を表示するテキスト
     public Text NotbuyText;　//購入出来なかった場合のテキスト
 
+    public bool isSe = true;
     bool isNotText = false;
 
-    float timecounter = 2;
+    float timecounter = 1;
 
     public SkillData Skillmng;
     void Start()
@@ -28,99 +27,108 @@ public class MoneyManager : MonoBehaviour
         //クリーンのスキル購入
         if (skill == 0)
         {
-            if (haveMoney >= Skillmng.Cleanercost && GameData.CleanerLv < 3)
+            if (GameData.Money >= Skillmng.Cleanercost && GameData.CleanerLv < 3)
             {
-                haveMoney -= Skillmng.Cleanercost;
+                GameData.Money -= Skillmng.Cleanercost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //消化機器のスキル購入
         else if (skill == 1)
         {
-            if (haveMoney >= Skillmng.Digestioncost && GameData.DigestionLv < 3)
+            if (GameData.Money >= Skillmng.Digestioncost && GameData.DigestionLv < 3)
             {
-                haveMoney -= Skillmng.Digestioncost;
+                GameData.Money -= Skillmng.Digestioncost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //コンピュータのスキル購入
         else if (skill == 2)
         {
-            if (haveMoney >= Skillmng.Computercost && GameData.ComputerLv < 3)
+            if (GameData.Money >= Skillmng.Computercost && GameData.ComputerLv < 3)
             {
-                haveMoney -= Skillmng.Computercost;
+                GameData.Money -= Skillmng.Computercost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //エアコンのスキル購入
         else if (skill == 3)
         {
-            if (haveMoney >= Skillmng.AriConditioncost && GameData.AriConditionerLv < 3)
+            if (GameData.Money >= Skillmng.AriConditioncost && GameData.AriConditionerLv < 3)
             {
-                haveMoney -= Skillmng.AriConditioncost;
+                GameData.Money -= Skillmng.AriConditioncost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //警報機器のスキル購入
         else if (skill == 4)
         {
-            if (haveMoney >= Skillmng.Alarmcost && GameData.AlarmLv < 3)
+            if (GameData.Money >= Skillmng.Alarmcost && GameData.AlarmLv < 3)
             {
-                haveMoney -= Skillmng.Alarmcost;
+                GameData.Money -= Skillmng.Alarmcost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //タレットのスキル購入
         else if (skill == 5)
         {
-            if (haveMoney >= Skillmng.Turretcost && GameData.TurretLv < 3)
+            if (GameData.Money >= Skillmng.Turretcost && GameData.TurretLv < 3)
             {
-                haveMoney -= Skillmng.Turretcost;
+                GameData.Money -= Skillmng.Turretcost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //敵のスキル購入
         else if (skill == 6)
         {
-            if (haveMoney >= Skillmng.Enemycost && GameData.EnemyLv < 3)
+            if (GameData.Money >= Skillmng.Enemycost && GameData.EnemyLv < 3)
             {
-                haveMoney -= Skillmng.Enemycost;
+                GameData.Money -= Skillmng.Enemycost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //ドアのスキル購入
         else if (skill == 7)
         {
-            if (haveMoney >= Skillmng.Doorcost && GameData.DoorLv < 3)
+            if (GameData.Money >= Skillmng.Doorcost && GameData.DoorLv < 3)
             {
-                haveMoney -= Skillmng.Doorcost;
+                GameData.Money -= Skillmng.Doorcost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
 
         //カメラのスキル購入
         else if (skill == 8)
         {
-            if (haveMoney >= Skillmng.Cameracost && GameData.CameraLv < 3)
+            if (GameData.Money >= Skillmng.Cameracost && GameData.CameraLv < 3)
             {
-                haveMoney -= Skillmng.Cameracost;
+                GameData.Money -= Skillmng.Cameracost;
                 HaveMoneyText();
                 flg= true;
+                isSe = true;
             }
         }
         HaveMoneyText();
@@ -135,13 +143,15 @@ public class MoneyManager : MonoBehaviour
     {
         if (isNotText) return;
         isNotText = true;
+        isSe = false;
         StartCoroutine(TextActive());
         NotbuyText.text = "購入出来ませんでした。";
+      
     }
 
     void HaveMoneyText()
     {
-        haveText.text = "所持: " + haveMoney.ToString();
+        haveText.text = "所持: " + GameData.Money.ToString();
     }
 
 
