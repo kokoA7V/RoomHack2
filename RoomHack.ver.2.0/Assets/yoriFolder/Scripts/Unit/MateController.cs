@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MateController : MonoBehaviour
@@ -48,11 +49,28 @@ public class MateController : MonoBehaviour
     //[SerializeField, Header("レイの設定")]
     //private RayCircle rayCircle = new RayCircle();
 
+    private static List<string> mNames;
+
+    public string mateName;
+    private int nameNum;
+
+    private bool stopFlg = false;
     enum State
     {
         Shot,
         Move,
         Num
+    }
+
+    private void Awake()
+    {
+        mNames = new List<string>() { "John","kokoA7V","OSHO","Eru","NesikoNoNesiko",
+            "V","DayBit","Lucy","esuha","Wick","Ethan", "Bond", "Hunt", "A113","Snake" };
+
+        nameNum = Random.Range(0, mNames.Count);
+
+        mateName = mNames[nameNum];
+        mNames.RemoveAt(nameNum);
     }
     void Start()
     {
@@ -86,7 +104,6 @@ public class MateController : MonoBehaviour
         if (leaderObj == null && !leader)
         {
             leader = true;
-            movePos = this.transform.position;
             Debug.Log("リーダー変わったよ");
             if (mateObj != null) mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
         }
@@ -101,12 +118,12 @@ public class MateController : MonoBehaviour
         switch (methodNo)
         {
             case 0:
-                Debug.Log("Shotに移行");
-                
+                Debug.Log("Shotに移行" + target);
+
                 plRb.velocity = Vector3.zero;
-                
+
                 mateCore.Shot(mateCore.dmgLayer, pow, burst);
-                
+
                 methodCtr = 1f;
                 methodNo++;
                 break;
@@ -120,13 +137,22 @@ public class MateController : MonoBehaviour
 
                 plRb.velocity = Vector3.zero;
 
-                methodCtr -= Time.deltaTime;
-                if (methodCtr <= 0)
+                if (target == null)
                 {
                     methodNo = 0;
                     methodCtr = 0;
                     stateNo = (int)State.Move;
                     isEm = true;
+                    break;
+                }
+
+                methodCtr -= Time.deltaTime;
+                if (methodCtr <= 0)
+                {
+                    // まだ敵が死んでないならもっかい打つ                    
+                    methodNo = 0;
+                    methodCtr = 0;
+                    stateNo = (int)State.Shot;
                 }
                 break;
         }
@@ -134,7 +160,7 @@ public class MateController : MonoBehaviour
     // 移動して敵がいたらshotに移動する
     private void ActMove()
     {
-        Debug.Log("move" + unit);
+        Debug.Log("move" + moveSpd + " " + gameObject.name);
         switch (methodNo)
         {
             case 0:
@@ -145,6 +171,7 @@ public class MateController : MonoBehaviour
                     {
                         mousePos = Input.mousePosition;
                         movePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10f));
+                        moveSpd = mateCore.moveSpd;
                     }
                 }
                 // 違ったらリーダーについていく
@@ -168,7 +195,7 @@ public class MateController : MonoBehaviour
                 target = unitSight.EnemyCheck();
                 if (target != null && isEm)
                 {
-                    movePos = this.transform.position;
+                    //movePos = this.transform.position;
                     methodNo++;
                     break;
                 }

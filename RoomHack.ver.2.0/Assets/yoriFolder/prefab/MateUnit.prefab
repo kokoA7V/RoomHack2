@@ -190,9 +190,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateNo: 0
   methodNo: 0
+  target: {fileID: 0}
   leader: 0
   leaderObj: {fileID: 0}
   mateObj: {fileID: 0}
+  mateName: 
 --- !u!114 &6929050727563301687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +255,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 5
   numberOfRays: 12
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &5775106252436386477
 MonoBehaviour:
   m_ObjectHideFlags: 0

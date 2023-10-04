@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemyController : MonoBehaviour, IUnitHack
 {
     // 情報取得
@@ -41,6 +41,23 @@ public class EnemyController : MonoBehaviour, IUnitHack
     [SerializeField, Header("レイの設定")]
     private RayCircle rayCircle = new RayCircle();
 
+    [SerializeField]
+    private Vector2 ptArea1;
+
+    [SerializeField]
+    private Vector2 ptArea2;
+
+    [SerializeField]
+    private Vector2 ptArea3;
+
+    [SerializeField]
+    private Vector2 ptArea4;
+
+    [SerializeField]
+    private List<Vector3> ptArea;
+    private int ptNum;
+
+    private float ptCtr;
     enum State
     {
         Shot,
@@ -76,8 +93,13 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     private bool hackedFlg = false;
 
+    private bool lv1Hack = false;
     void Start()
     {
+
+        ptArea = new List<Vector3>();
+        ptNum = 0;
+
         eCore = GetComponent<UnitCore>();
         eSight = GetComponent<SightCheak>();
         burst = 3;
@@ -111,7 +133,13 @@ public class EnemyController : MonoBehaviour, IUnitHack
         {
             hacked = false;
             hackedFlg = false;
+            lv1Hack = false;
             frameSR.sprite = frameEnemySprite;
+        }
+
+        if (hackedFlg)
+        {
+            return;
         }
         actFuncTbl[stateNo]();
     }
@@ -146,6 +174,8 @@ public class EnemyController : MonoBehaviour, IUnitHack
         switch (methodNo)
         {
             case 0:
+                if (lv1Hack) return;
+
                 if (mateUnit != null)
                 {
                     Debug.Log("Move" + moveSpd);
@@ -172,7 +202,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
                         methodNo++;
                     }
                 }
-                    break;
+                break;
             case 1:
                 plRb.velocity = Vector3.zero;
                 methodNo = 0;
@@ -193,18 +223,34 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     void ActSearch()
     {
-        //switch (methodNo)
-        //{
-        //    case 0:
-        //        if (emCheak.EnemyCheck() && isEm)
-        //        {
-        //            //Debug.Log("Shotに移行");
-        //            methodNo = 0;
-        //            methodCtr = 0;
-        //            stateNo = (int)State.Shot;
-        //            isEm = false;
-        //        }
-        //        break;
-        //}
+        switch (methodNo)
+        {
+            case 0:
+                eCore.Move(moveSpd, ptArea[ptNum]);
+
+                if (Mathf.Abs(ptArea1.x - this.transform.position.x) <= 1f &&
+                       Mathf.Abs(ptArea1.y - this.transform.position.y) <= 1f)
+                {
+                    plRb.velocity = Vector2.zero;
+                    moveSpd = 0;
+                    ptCtr += Time.deltaTime;
+                    if (ptCtr <= 3f)
+                    {
+                        ptCtr = 0;
+                        methodNo++;
+                    }
+
+                }
+                break;
+            case 1:
+
+                ptNum++;
+
+                if (ptNum >= ptArea.Count) ptNum = 0;
+
+                methodNo = 0;
+
+                break;
+        }
     }
 }
