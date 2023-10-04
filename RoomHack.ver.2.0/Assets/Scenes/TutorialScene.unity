@@ -351,7 +351,7 @@ MonoBehaviour:
   bgmAudioClip:
   - {fileID: 8300000, guid: 993c037b2edafec4caa1e8e10ad05888, type: 3}
   - {fileID: 8300000, guid: 06134e71606b6fc42a53f2332997af8f, type: 3}
-  - {fileID: 8300000, guid: 61fcd0f5d8b980a4685d0c7687ddf16d, type: 3}
+  - {fileID: 8300000, guid: 5779fcc86b376484faa02f2edccaa6b2, type: 3}
   seAudioClip:
   - {fileID: 8300000, guid: 3c22cdbde5ab71046a838ab0f9dd5d45, type: 3}
   - {fileID: 8300000, guid: 1d67b4633e874ca4f839b9b07b97df92, type: 3}

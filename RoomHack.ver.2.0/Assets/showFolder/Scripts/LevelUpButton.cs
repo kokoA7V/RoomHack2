@@ -19,9 +19,9 @@ public class LevelUpButton : MonoBehaviour
         {
             bool flg = moneymanager.BuySkill(0);
 
-            if(moneymanager.isSe) audioPlay.SEPlay(1);
+            if(moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.CleanerLv < 3 && flg)
             {
@@ -36,8 +36,11 @@ public class LevelUpButton : MonoBehaviour
         if (buttonmng.Digestionbutton)
         {
             bool flg = moneymanager.BuySkill(1);
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
+
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
+
             if (GameData.DigestionLv < 3 && flg) //Digeのlevelが3以下なら処理
             {
                 levelmng.DigeLevelcounter++;
@@ -54,9 +57,9 @@ public class LevelUpButton : MonoBehaviour
         {
             bool flg = moneymanager.BuySkill(2);
 
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.ComputerLv < 3 && flg)　//Computerのlevelが3以下なら処理
             {
@@ -72,9 +75,9 @@ public class LevelUpButton : MonoBehaviour
         {
             bool flg = moneymanager.BuySkill(3);
 
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.AriConditionerLv < 3 && flg)
             { 
@@ -89,9 +92,9 @@ public class LevelUpButton : MonoBehaviour
         if (buttonmng.Alarmbutton)  //Alarmのlevelが3以下なら処理
         {
             bool flg = moneymanager.BuySkill(4);
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.AlarmLv < 3 && flg)
             {
@@ -106,9 +109,9 @@ public class LevelUpButton : MonoBehaviour
         if (buttonmng.Turretbutton) //Turretのlevelが3以下なら処理
         {
             bool flg = moneymanager.BuySkill(5);
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.TurretLv < 3 && flg)
             {
@@ -125,9 +128,9 @@ public class LevelUpButton : MonoBehaviour
         {
             bool flg = moneymanager.BuySkill(6);
 
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.EnemyLv < 3 && flg) //Enemyのlevelが3以下なら処理
             {
@@ -144,9 +147,9 @@ public class LevelUpButton : MonoBehaviour
         {
             bool flg = moneymanager.BuySkill(7);
 
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.DoorLv < 3 && flg) //Doorのlevelが3以下なら処理
             {
@@ -163,9 +166,9 @@ public class LevelUpButton : MonoBehaviour
         {
             bool flg = moneymanager.BuySkill(8);
 
-            if (moneymanager.isSe) audioPlay.SEPlay(1);
+            if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
 
-            if (!moneymanager.isSe) audioPlay.SEPlay(2);
+            if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
 
             if (GameData.CameraLv < 3  && flg) //Cameraのlevelが3以下なら処理
             {
