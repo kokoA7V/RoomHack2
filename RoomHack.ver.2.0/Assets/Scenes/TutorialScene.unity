@@ -350,13 +350,13 @@ MonoBehaviour:
   seAudioSource: {fileID: 94212684}
   bgmAudioClip:
   - {fileID: 8300000, guid: 993c037b2edafec4caa1e8e10ad05888, type: 3}
-  - {fileID: 8300000, guid: 06134e71606b6fc42a53f2332997af8f, type: 3}
+  - {fileID: 8300000, guid: 05c15b223c11c31458da93654d9ee501, type: 3}
   - {fileID: 8300000, guid: 61fcd0f5d8b980a4685d0c7687ddf16d, type: 3}
   seAudioClip:
-  - {fileID: 8300000, guid: 3c22cdbde5ab71046a838ab0f9dd5d45, type: 3}
-  - {fileID: 8300000, guid: 1d67b4633e874ca4f839b9b07b97df92, type: 3}
-  - {fileID: 8300000, guid: 3211e2bd0dbe8494dbf74d54ad4af1ae, type: 3}
-  - {fileID: 8300000, guid: 6df7f8f612107c84b8267f1483fef0e2, type: 3}
+  - {fileID: 8300000, guid: 146264af0e9a67446827f60b6e989cba, type: 3}
+  - {fileID: 8300000, guid: 02f0dac22e0ed72448f72538db1954e7, type: 3}
+  - {fileID: 8300000, guid: 9cbd127ea56cbd7479f6460be1151312, type: 3}
+  - {fileID: 8300000, guid: 1445eeb79bdea3749a79b312d6583af4, type: 3}
   bgmLoop: 1
 --- !u!4 &94212687
 Transform:

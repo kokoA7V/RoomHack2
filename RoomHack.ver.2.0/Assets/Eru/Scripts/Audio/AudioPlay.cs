@@ -17,16 +17,24 @@ public class AudioPlay : MonoBehaviour
     [Header("BGMループ")]
     public bool bgmLoop = true;
 
+    [Header("BGMミュート")]
+    public bool bgmMute = true;
+
     public static AudioPlay instance;
 
     private void Awake()
     {
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //    DontDestroyOnLoad(this.gameObject);
-        //}
-        //else Destroy(this.gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else Destroy(this.gameObject);
+    }
+
+    private void Update()
+    {
+        bgmAudioSource.mute = bgmMute;
     }
 
     public void BGMPlay(int value)

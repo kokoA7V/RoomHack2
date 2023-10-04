@@ -131,7 +131,7 @@ public class TitleSceneManager : MonoBehaviour
         //    delay = 0.1f;
         //}
 
-        if (Input.anyKeyDown && GameData.tutorial)
+        if (Input.anyKeyDown && GameData.tutorial && count < 30)
         {
             skipStart = true;
         }
