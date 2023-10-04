@@ -142,8 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc09c80cba5e424683b7447fb861c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5
+  detectionRange: 1
   numberOfRays: 12
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &3283841965071715714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateNo: 0
   methodNo: 0
+  unit: {fileID: 0}
+  unitPos: {x: 0, y: 0, z: 0}
   rayCircle:
     tr: {fileID: 8484085580889226523}
     numberOfRays: 6
@@ -193,17 +198,22 @@ MonoBehaviour:
     gameType: 45
     dirType: 1
     rayFlg: 1
+  ptArea1: {x: 0, y: 0}
+  ptArea2: {x: 0, y: 0}
+  ptArea3: {x: 0, y: 0}
+  ptArea4: {x: 0, y: 0}
+  ptArea: []
   word:
   - TYPING
   randomFlg: 0
   icon: {fileID: 0}
   frameSprite: {fileID: 21300000, guid: 378104b8e42c6454f809d22a122cde3b, type: 3}
   frameSR: {fileID: 8484085581071652382}
-  frameEnemySprite: {fileID: 21300000, guid: 3354bd80b9f5ed54eb9d531a9769de04, type: 3}
+  frameEnemySprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
   hackTime:
-  - 10
-  - 15
-  - 20
+  - 2
+  - 5
+  - 7
   titleStr: Enemy1-1
   lvStr:
   - 'SecLv :1
