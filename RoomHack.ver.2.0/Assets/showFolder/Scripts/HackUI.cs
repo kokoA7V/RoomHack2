@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class HackUI : MonoBehaviour
 {
-    public RectTransform HackUIPos;
-    public GameObject typingobj;
-
     [HideInInspector]
     public string[] _word;
     [HideInInspector]
@@ -19,26 +16,18 @@ public class HackUI : MonoBehaviour
     [HideInInspector]
     public StageTimeManager timeManager;
 
-    [SerializeField]
-    private Vector2 targetPosition = new Vector2(541f, -260);
+    public GameObject unHacked, hacked, typing;
 
-    public Image imageBG,imageIcon;
+    public Image imageIcon;
 
-    public Text titleText, lvText, comentText;
+    public Text titleText, hackLvText,lvText, comentText;
 
     private bool hackedFlg = false;
 
-    void Start()
-    {
-        // RectTransformの座標を設定
-        HackUIPos.anchoredPosition = targetPosition;
-        if (unitHack.hacked) hackedFlg = true;
-        else hackedFlg = false;
-    }
-
     private void Update()
     {
-        if (!unitHack.hacked && hackedFlg) Destroy(gameObject);
+        if (unitHack.hacked) hackedFlg = true;
+        else if (!unitHack.hacked && hackedFlg) Destroy(gameObject);
         if (Input.GetKeyDown(KeyCode.Return)) PushButton();
     }
 
@@ -50,18 +39,18 @@ public class HackUI : MonoBehaviour
 
     private void TypingStart()
     {
-        GameObject obj = Instantiate(typingobj);
+        typing.SetActive(true);
+        unHacked.SetActive(false);
         hackManager.nowTypingFlg = true;
         //TypingObjにHackManagerから貰ったデータを送る。
-        TypingObj typing = obj.GetComponent<TypingObj>();
-        typing.hit = hit;
-        typing.timeManager = timeManager;
-        typing.hackManager = hackManager;
-        typing.unitHack = unitHack;
-        typing.randomFlg = _randomFlg;
-        typing.word = new string[_word.Length];
-        for (int i = 0; i < _word.Length; i++) typing.word[i] = _word[i];
-
-        Destroy(gameObject);
+        TypingObj typingObj = typing.GetComponentInChildren<TypingObj>();
+        typingObj.hackUI = GetComponent<HackUI>();
+        typingObj.hit = hit;
+        typingObj.timeManager = timeManager;
+        typingObj.hackManager = hackManager;
+        typingObj.unitHack = unitHack;
+        typingObj.randomFlg = _randomFlg;
+        typingObj.word = new string[_word.Length];
+        for (int i = 0; i < _word.Length; i++) typingObj.word[i] = _word[i];
     }
 }
