@@ -32,7 +32,8 @@ public class MateStatus : MonoBehaviour
     private int methodNo = 0;
 
     private float ctr = 0;
-    // Start is called before the first frame update
+
+
 
     private void Awake()
     {
@@ -40,7 +41,6 @@ public class MateStatus : MonoBehaviour
         uCore = mObj.GetComponent<UnitCore>();
         mMaxHp = uCore.maxHP;
         nowHp = mMaxHp;
-
         hRAnim = hRAnim.GetComponent<Animator>();
     }
     void Start()
