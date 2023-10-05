@@ -409,7 +409,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: e4d27aa78a2ee4f4db044f18a9aa8adf, type: 2}
+  sharedProfile: {fileID: 11400000, guid: e4f311c6a73153a45a6846b2b2054d22, type: 2}
 --- !u!4 &156606689
 Transform:
   m_ObjectHideFlags: 0
@@ -1549,7 +1549,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
