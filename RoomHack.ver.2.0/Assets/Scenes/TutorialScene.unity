@@ -357,6 +357,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 02f0dac22e0ed72448f72538db1954e7, type: 3}
   - {fileID: 8300000, guid: 9cbd127ea56cbd7479f6460be1151312, type: 3}
   - {fileID: 8300000, guid: 1445eeb79bdea3749a79b312d6583af4, type: 3}
+  - {fileID: 8300000, guid: f3ed2c2bb4f42684e805d5e1075a2260, type: 3}
+  - {fileID: 8300000, guid: 204c6f7a8d2d31b4db9e4b3e08212208, type: 3}
+  - {fileID: 8300000, guid: f858a38e09c5d374f8e910584eaef6c4, type: 3}
   bgmLoop: 1
   bgmMute: 1
 --- !u!4 &94212687

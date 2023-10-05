@@ -152,6 +152,7 @@ public class TutorialText : MonoBehaviour
 
     public IEnumerator Dialogue()
     {
+        AudioPlay.instance.SEPlay(4);
         if (clearFlg) yield break;
         IconSetting();
         mineText.text = "";
