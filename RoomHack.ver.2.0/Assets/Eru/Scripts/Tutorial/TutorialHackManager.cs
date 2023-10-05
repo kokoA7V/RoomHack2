@@ -28,9 +28,6 @@ public class TutorialHackManager : MonoBehaviour
 
     private GameObject nowHackUI;
 
-    [SerializeField]
-    private Sprite spriteCBG;
-
     private int h = 0;
 
     void Update()
@@ -70,7 +67,8 @@ public class TutorialHackManager : MonoBehaviour
 
         if (iUnitHack.hacked)
         {
-            hackUI.imageBG.sprite = spriteCBG;
+            hackUI.unHacked.SetActive(false);
+            hackUI.hacked.SetActive(true);
             h = 1;
         }
         else h = 0;
@@ -84,7 +82,8 @@ public class TutorialHackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = cameraCon.icon;
             hackUI.titleText.text = cameraCon.titleStr;
-            hackUI.lvText.text = cameraCon.lvStr[h];
+            hackUI.lvText.text = cameraCon.lvStr;
+            hackUI.hackLvText.text = cameraCon.hackLvStr;
             hackUI.comentText.text = cameraCon.comentStr;
 
             if (h == 1) cameraCon.frameSR.sprite = cameraCon.frameSprite;
@@ -99,7 +98,8 @@ public class TutorialHackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = doorCon.icon;
             hackUI.titleText.text = doorCon.titleStr;
-            hackUI.lvText.text = doorCon.lvStr[h];
+            hackUI.lvText.text = doorCon.lvStr;
+            hackUI.hackLvText.text = doorCon.hackLvStr;
             hackUI.comentText.text = doorCon.comentStr;
 
             if (h == 1)
@@ -118,7 +118,8 @@ public class TutorialHackManager : MonoBehaviour
 
             hackUI.imageIcon.sprite = enemyCon.icon;
             hackUI.titleText.text = enemyCon.titleStr;
-            hackUI.lvText.text = enemyCon.lvStr[h];
+            hackUI.lvText.text = enemyCon.lvStr;
+            hackUI.hackLvText.text = enemyCon.hackLvStr;
             hackUI.comentText.text = enemyCon.comentStr;
 
             if (h == 1) enemyCon.frameSR.sprite = enemyCon.frameSprite;

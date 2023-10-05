@@ -16,13 +16,13 @@ public class TypingObj : MonoBehaviour
     [SerializeField, Header("ミス文字の色")]
     private Color missColor = Color.red;
 
-    [SerializeField,Header("振動時間")]
+    [SerializeField, Header("振動時間")]
     private float shakeDuration = 0.15f;
 
-    [SerializeField,Header("振動する力")]
+    [SerializeField, Header("振動する力")]
     private float shakeAmount = 5f;
 
-    [SerializeField,Header("減衰率")]
+    [SerializeField, Header("減衰率")]
     private float decreaseFactor = 1.0f;
 
     [SerializeField, Header("位置")]
@@ -30,6 +30,9 @@ public class TypingObj : MonoBehaviour
 
     [HideInInspector]
     public HackManager hackManager;
+
+    [HideInInspector]
+    public HackUI hackUI;
 
     [HideInInspector]
     public IUnitHack unitHack;
@@ -92,7 +95,7 @@ public class TypingObj : MonoBehaviour
                         string _text = "<color=#" + clearColorCode + ">";
                         for (int j = 0; j < i; j++) _text += word[clearWord][j].ToString();
                         _text += "</color>";
-                        for(int j = i;j< word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
+                        for (int j = i; j < word[clearWord].Length; j++) _text += word[clearWord][j].ToString();
                         text.text = _text;
 
                         //1ワードクリア処理
@@ -107,10 +110,24 @@ public class TypingObj : MonoBehaviour
                                 hackManager.nowTypingFlg = false;
                                 unitHack.hacked = true;
 
+                                if (hit.collider.gameObject.TryGetComponent<CameraController>(out CameraController cameraCon)) cameraCon.frameSR.sprite = cameraCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<DoorController>(out DoorController doorCon))
+                                {
+                                    doorCon.leftFrameSR.sprite = doorCon.frameMateSprite;
+                                    doorCon.rightFrameSR.sprite = doorCon.frameMateSprite;
+                                }
+                                else if (hit.collider.gameObject.TryGetComponent<TurretController>(out TurretController turretCon)) turretCon.frameSR.sprite = turretCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<EnemyController>(out EnemyController enemyCon)) enemyCon.frameSR.sprite = enemyCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<AlarmController>(out AlarmController alarmCon)) alarmCon.frameSR.sprite = alarmCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<CleanerController>(out CleanerController cleanerCon)) cleanerCon.frameSR.sprite = cleanerCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<DigestionController>(out DigestionController digestionCon)) digestionCon.frameSR.sprite = digestionCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<ComputerController>(out ComputerController computerCon)) computerCon.frameSR.sprite = computerCon.frameSprite;
+                                else if (hit.collider.gameObject.TryGetComponent<AirConditionerController>(out AirConditionerController ariConditionerCon)) ariConditionerCon.frameSR.sprite = ariConditionerCon.frameSprite;
+
                                 //CoolHackUI生成
-                                hackManager.InstantHackUI(hit, unitHack);
+                                hackUI.hacked.SetActive(true);
                                 hackManager.nowObj = null;
-                                Destroy(gameObject);
+                                hackUI.typing.SetActive(false);
                             }
                             else
                             {
@@ -142,7 +159,7 @@ public class TypingObj : MonoBehaviour
 
             currentShakeDuration -= Time.deltaTime * decreaseFactor;
         }
-        else if(!clearFlg)
+        else if (!clearFlg)
         {
             currentShakeDuration = 0f;
             text.transform.localPosition = originalPosition;

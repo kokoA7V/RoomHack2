@@ -19,13 +19,13 @@ public class TutorialText : MonoBehaviour
     [SerializeField, Header("名前")]
     private Text nameText;
 
-    [SerializeField,Header("本文")]
+    [SerializeField, Header("本文")]
     private Text mineText;
 
     [SerializeField, Header("バックグラウンド")]
     private Image backGround;
 
-    [SerializeField,Header("アイコン")]
+    [SerializeField, Header("アイコン")]
     private Image icon;
 
     [SerializeField, Header("AIアイコン")]
@@ -55,7 +55,7 @@ public class TutorialText : MonoBehaviour
 
     private float scale = 0;
 
-    private bool startFlg = false;  
+    private bool startFlg = false;
 
     private bool bgOpenFlg = false;
 
@@ -107,7 +107,7 @@ public class TutorialText : MonoBehaviour
         }
 
         //最初の一回だけ起動
-        if(!startFlg && bgOpenFlg && scale >= 1)
+        if (!startFlg && bgOpenFlg && scale >= 1)
         {
             startFlg = true;
             textFlg = false;
@@ -120,6 +120,11 @@ public class TutorialText : MonoBehaviour
         {
             if (!textFlg)
             {
+                if (i >= mineStr.Length)
+                {
+                    StartCoroutine(EndTutorial());
+                    return;
+                }
                 textFlg = true;
                 endIcon.enabled = true;
                 mineText.text = mineStr[i];
@@ -134,7 +139,7 @@ public class TutorialText : MonoBehaviour
             }
         }
     }
-    
+
     private IEnumerator EndTutorial()
     {
         yield return new WaitForSeconds(0.5f);
