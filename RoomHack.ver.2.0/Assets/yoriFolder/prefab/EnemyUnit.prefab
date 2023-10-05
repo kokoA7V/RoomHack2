@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc09c80cba5e424683b7447fb861c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5
+  detectionRange: 1
   numberOfRays: 12
   layerMask:
     serializedVersion: 2
@@ -211,9 +211,9 @@ MonoBehaviour:
   frameSR: {fileID: 8484085581071652382}
   frameEnemySprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
   hackTime:
-  - 10
-  - 15
-  - 20
+  - 2
+  - 5
+  - 7
   titleStr: Enemy1-1
   lvStr:
   - 'SecLv :1

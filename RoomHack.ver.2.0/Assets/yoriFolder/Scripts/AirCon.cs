@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AirCon : MonoBehaviour
@@ -9,7 +8,8 @@ public class AirCon : MonoBehaviour
     {
         if (collision.TryGetComponent<EnemyController>(out EnemyController pc))
         {
-            airCon = collision.GetComponent<AirConditionerController>();
+            Debug.Log("Enemy追加" + collision.gameObject.name);
+            airCon = airCon.GetComponent<AirConditionerController>();
             airCon.emList.Add(pc);
         }
     }
@@ -17,9 +17,10 @@ public class AirCon : MonoBehaviour
     {
         if (collision.TryGetComponent<EnemyController>(out EnemyController pc))
         {
-            airCon = collision.GetComponent<AirConditionerController>();
+            airCon = airCon.GetComponent<AirConditionerController>();
             airCon.emList.Remove(pc);
-            airCon.moveFlg = true;
+            Debug.Log("Enemy削除" + collision.gameObject.name);
+            airCon.moveFlg = false;
         }
     }
 }

@@ -93,6 +93,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     private bool hackedFlg = false;
 
+    private bool lv1Hack = false;
     void Start()
     {
 
@@ -106,6 +107,8 @@ public class EnemyController : MonoBehaviour, IUnitHack
         eCore.dmgLayer = 2;
 
         eCore.maxHP += 7;
+
+        pow = 10;
 
         actFuncTbl = new ActFunc[(int)State.Num];
         actFuncTbl[(int)State.Shot] = ActShot;
@@ -132,19 +135,14 @@ public class EnemyController : MonoBehaviour, IUnitHack
         {
             hacked = false;
             hackedFlg = false;
+            lv1Hack = false;
             frameSR.sprite = frameEnemySprite;
         }
 
-        if (hackedFlg && GameData.EnemyLv == 1)
+        if (hackedFlg)
         {
+            return;
         }
-        else if (hackedFlg && GameData.EnemyLv == 2)
-        {
-        }
-        else if (hackedFlg && GameData.EnemyLv == 3)
-        {
-        }
-
         actFuncTbl[stateNo]();
     }
 
@@ -178,6 +176,8 @@ public class EnemyController : MonoBehaviour, IUnitHack
         switch (methodNo)
         {
             case 0:
+                if (lv1Hack) return;
+
                 if (mateUnit != null)
                 {
                     Debug.Log("Move" + moveSpd);
@@ -229,7 +229,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
         {
             case 0:
                 eCore.Move(moveSpd, ptArea[ptNum]);
-                
+
                 if (Mathf.Abs(ptArea1.x - this.transform.position.x) <= 1f &&
                        Mathf.Abs(ptArea1.y - this.transform.position.y) <= 1f)
                 {
@@ -245,13 +245,13 @@ public class EnemyController : MonoBehaviour, IUnitHack
                 }
                 break;
             case 1:
-                
+
                 ptNum++;
-                
+
                 if (ptNum >= ptArea.Count) ptNum = 0;
-                
+
                 methodNo = 0;
-                
+
                 break;
         }
     }

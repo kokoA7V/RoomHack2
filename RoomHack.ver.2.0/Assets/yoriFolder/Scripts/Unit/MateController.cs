@@ -54,6 +54,7 @@ public class MateController : MonoBehaviour
     public string mateName;
     private int nameNum;
 
+    private bool stopFlg = false;
     enum State
     {
         Shot,
@@ -142,6 +143,7 @@ public class MateController : MonoBehaviour
                     methodCtr = 0;
                     stateNo = (int)State.Move;
                     isEm = true;
+                    break;
                 }
 
                 methodCtr -= Time.deltaTime;
@@ -158,7 +160,7 @@ public class MateController : MonoBehaviour
     // 移動して敵がいたらshotに移動する
     private void ActMove()
     {
-        Debug.Log("move" + unit);
+        Debug.Log("move" + moveSpd + " " + gameObject.name);
         switch (methodNo)
         {
             case 0:
@@ -175,7 +177,6 @@ public class MateController : MonoBehaviour
                 // 違ったらリーダーについていく
                 else
                 {
-                    Debug.Log(gameObject.name);
                     movePos = leaderObj.transform.position;
 
                     // ある程度リーダーに近づいたら止まる
