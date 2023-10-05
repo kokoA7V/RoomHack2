@@ -4495,10 +4495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeManager: {fileID: 1173264945}
-  HackUIObj: {fileID: 6379701507292138747, guid: 6dfd523edc98b2c4fae0293084653991, type: 3}
+  HackUIObj: {fileID: 5841009702486919208, guid: 1e7497175354c6f49a474328fcf585a0, type: 3}
   nowTypingFlg: 0
   nowObj: {fileID: 0}
-  spriteCBG: {fileID: 21300000, guid: 5c7153c130159454cb4dfeac9bd89aeb, type: 3}
 --- !u!4 &1970590060
 Transform:
   m_ObjectHideFlags: 0
