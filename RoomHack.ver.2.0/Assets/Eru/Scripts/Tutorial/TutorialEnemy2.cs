@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialEnemy2 : MonoBehaviour,IUnitHack
@@ -24,10 +22,10 @@ public class TutorialEnemy2 : MonoBehaviour,IUnitHack
 
     [Multiline]
     public string titleStr;
-
     [Multiline]
-    public string[] lvStr = new string[2];
-
+    public string lvStr;
+    [Multiline]
+    public string hackLvStr;
     [Multiline]
     public string comentStr;
 
