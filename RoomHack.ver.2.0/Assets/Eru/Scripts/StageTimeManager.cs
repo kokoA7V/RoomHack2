@@ -22,8 +22,9 @@ public class StageTimeManager : MonoBehaviour
     [SerializeField, Header("振動する力")]
     private float shakeAmount = 5f;
 
+    // GameManagerで取りたいのでpublic
     [SerializeField, Header("減衰率")]
-    private float decreaseFactor = 1.0f;
+    public float decreaseFactor = 1.0f;
 
     private Vector3 originalPosition = new Vector3(125, -100, 0);
 
