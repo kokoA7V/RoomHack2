@@ -9,11 +9,13 @@ public class LevelUpButton : MonoBehaviour
     [SerializeField] MoneyManager moneymanager;
     [SerializeField] LevelManager levelmng;
     [SerializeField] SkillData skillmng;
-    [SerializeField] AudioPlay audioPlay;
 
     // Start is called before the first frame update
     public void OnClick()
     {
+        Debug.Log(moneymanager.isSe);
+        Debug.Log(AudioPlay.instance);
+
         //クリーン用
         if (buttonmng.Cleanbutton)　//クリーンのlevelが3以下なら処理
         {
@@ -36,11 +38,8 @@ public class LevelUpButton : MonoBehaviour
         if (buttonmng.Digestionbutton)
         {
             bool flg = moneymanager.BuySkill(1);
-
             if (moneymanager.isSe) AudioPlay.instance.SEPlay(1);
-
             if (!moneymanager.isSe) AudioPlay.instance.SEPlay(2);
-
             if (GameData.DigestionLv < 3 && flg) //Digeのlevelが3以下なら処理
             {
                 levelmng.DigeLevelcounter++;

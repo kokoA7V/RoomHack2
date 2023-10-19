@@ -16,7 +16,6 @@ public class ScrollSystem : MonoBehaviour
 
         if (mousePosition.x > targetpos.x && mousePosition.y > targetpos.y)
         {
-            Debug.Log(mousePosition);
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             scrollRect.verticalNormalizedPosition += scroll * scrollSpd;
             scrollRect.verticalNormalizedPosition = Mathf.Clamp01(scrollRect.verticalNormalizedPosition);//スクロールの速度を制限

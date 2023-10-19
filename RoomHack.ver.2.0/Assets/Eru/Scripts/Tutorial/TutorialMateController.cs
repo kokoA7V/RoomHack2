@@ -25,6 +25,7 @@ public class TutorialMateController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && moveStartFlg)
         {
+            
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
@@ -53,6 +54,7 @@ public class TutorialMateController : MonoBehaviour
         for(int i = 0; i < 3; i++)
         {
             //弾を打つ
+            AudioPlay.instance.SEPlay(5);
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 

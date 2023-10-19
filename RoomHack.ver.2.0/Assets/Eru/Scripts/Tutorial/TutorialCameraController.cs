@@ -12,10 +12,10 @@ public class TutorialCameraController : MonoBehaviour ,IUnitHack
 
     [Multiline]
     public string titleStr;
-
     [Multiline]
-    public string[] lvStr = new string[2];
-
+    public string lvStr;
+    [Multiline]
+    public string hackLvStr;
     [Multiline]
     public string comentStr;
 
