@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextMesManager : MonoBehaviour
+public class TextMesManager: MonoBehaviour
 {
     [HideInInspector]
     public bool stopFlg = false;
@@ -12,10 +11,10 @@ public class TextMesManager : MonoBehaviour
     public bool clearFlg = false;
 
     [HideInInspector]
-    public bool storyflag = false;　//ストーリー進行中のフラグ
+    public bool gostroyflag = false; //ストーリー進行中Flag
 
     [HideInInspector]
-    public bool storyclearflag = false; //ストーリークリアしたらtrueにする（テキスト表示用）
+    public bool storyclearflag = false; //ストーリークリアしたときのFlag
 
     [HideInInspector]
     public int i = 0;
@@ -67,19 +66,14 @@ public class TextMesManager : MonoBehaviour
     private bool bgOpenFlg = false;
 
 
-
-
     void Start()
     {
         //アイコン設定
-        //icon.sprite = aiSprite;
+        icon.sprite = aiSprite;
 
-        ////テキスト
-        if (storyflag || storyclearflag)
-        {
-            nameText.text = aiName;
-            mineText.text = "";
-        }
+        //テキスト設定
+        nameText.text = aiName;
+        mineText.text = "";
         textFlg = true;
         startFlg = false;
 
@@ -95,19 +89,19 @@ public class TextMesManager : MonoBehaviour
     void Update()
     {
         if (clearFlg) return;
-        storyclearflag = true;
+        Debug.Log(storyclearflag);
         //バックグラウンド開閉
-        if (storyclearflag && bgOpenFlg && scale < 1)
+        if (storyclearflag && bgOpenFlg && scale < 1) //開く
         {
             if (timer > 0) timer -= Time.deltaTime;
             else
-            {
+            {   
                 timer = bgTime * 0.0001f;
                 scale += 0.1f;
                 backGround.transform.localScale = new Vector3(1, Mathf.Clamp01(scale), 1);
             }
         }
-        else if (storyclearflag && !bgOpenFlg && scale > 0)
+        else if (!bgOpenFlg && scale > 0)　//閉じる
         {
             if (timer > 0) timer -= Time.deltaTime;
             else
@@ -118,14 +112,13 @@ public class TextMesManager : MonoBehaviour
             }
         }
 
-        //Dialogue起動
-        if (storyclearflag && scale >= 1)
+        //起動
+        if (!startFlg && bgOpenFlg && scale >= 1)
         {
             startFlg = true;
             textFlg = false;
             Dialogue();
         }
-
 
         if (!bgOpenFlg && scale <= 0) clearFlg = true;
 
@@ -147,26 +140,26 @@ public class TextMesManager : MonoBehaviour
             {
                 textFlg = false;
                 endIcon.enabled = false;
-                //if (i >= mineStr.Length) StartCoroutine(EndTutorial());
+                if (i >= mineStr.Length) StartCoroutine(EndTutorial());
+                else Dialogue();
             }
         }
     }
 
-    //private IEnumerator EndTutorial()
-    //{
-    //    yield return new WaitForSeconds(0.5f);
+    private IEnumerator EndTutorial()
+    {
+        yield return new WaitForSeconds(0.5f);
 
-    //    bgOpenFlg = false;
+        bgOpenFlg = false;
 
-    //    yield break;
-    //}
+        yield break;
+    }
 
 
-    public void  Dialogue()
+    void Dialogue()
     {
         AudioPlay.instance.SEPlay(4);
-        if (clearFlg || i >= mineStr.Length) return; // インデックスが範囲外の場合は処理を中断
-
+        if (clearFlg) return;
         IconSetting();
         mineText.text = "";
 
@@ -174,9 +167,10 @@ public class TextMesManager : MonoBehaviour
         {
             if (textFlg) return;
             mineText.text += word;
+            //yield return new WaitForSeconds(textTime);
         }
 
-        i++; // テキストが表示される番号の加算処理
+        i++;
         textFlg = true;
         endIcon.enabled = true;
         return;
@@ -185,8 +179,6 @@ public class TextMesManager : MonoBehaviour
     private void IconSetting()
     {
         //アイコン設定
-        //以下の処理で上記のi++でアイコンやテキストを管理していると思う。
-
         if (i == 2 || i == 45) icon.sprite = astraSprite;
         else if (i == 44 || i == 48) icon.sprite = aiSprite;
 
