@@ -11,7 +11,7 @@ public class TextMesManager: MonoBehaviour
     public bool clearFlg = false;
 
     [HideInInspector]
-    public bool gostroyflag = false; //ストーリー進行中Flag
+    public bool gostoryflag = false; //ストーリー進行中Flag
 
     [HideInInspector]
     public bool storyclearflag = false; //ストーリークリアしたときのFlag
@@ -68,14 +68,19 @@ public class TextMesManager: MonoBehaviour
 
     void Start()
     {
-        //アイコン設定
-        icon.sprite = aiSprite;
+        if (storyclearflag || gostoryflag)
+        {
+            //アイコン設定
+            icon.sprite = aiSprite;
 
-        //テキスト設定
-        nameText.text = aiName;
+            //テキスト設定
+            nameText.text = aiName;
+        }
         mineText.text = "";
         textFlg = true;
         startFlg = false;
+        gostoryflag = false;
+        storyclearflag = false;
 
         //バックグラウンドを開く
         scale = 0;
@@ -88,10 +93,11 @@ public class TextMesManager: MonoBehaviour
 
     void Update()
     {
+        storyclearflag = true;
         if (clearFlg) return;
         Debug.Log(storyclearflag);
         //バックグラウンド開閉
-        if (storyclearflag && bgOpenFlg && scale < 1) //開く
+        if (gostoryflag || storyclearflag && bgOpenFlg && scale < 1) //開く
         {
             if (timer > 0) timer -= Time.deltaTime;
             else
@@ -113,8 +119,9 @@ public class TextMesManager: MonoBehaviour
         }
 
         //起動
-        if (!startFlg && bgOpenFlg && scale >= 1)
+        if (gostoryflag || storyclearflag && !startFlg && bgOpenFlg && scale >= 1)
         {
+            Debug.Log("wara");
             startFlg = true;
             textFlg = false;
             Dialogue();
@@ -140,22 +147,11 @@ public class TextMesManager: MonoBehaviour
             {
                 textFlg = false;
                 endIcon.enabled = false;
-                if (i >= mineStr.Length) StartCoroutine(EndTutorial());
+                if (i >= mineStr.Length) return;
                 else Dialogue();
             }
         }
     }
-
-    private IEnumerator EndTutorial()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        bgOpenFlg = false;
-
-        yield break;
-    }
-
-
     void Dialogue()
     {
         AudioPlay.instance.SEPlay(4);
