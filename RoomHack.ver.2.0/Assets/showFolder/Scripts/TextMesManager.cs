@@ -93,9 +93,8 @@ public class TextMesManager: MonoBehaviour
 
     void Update()
     {
-        storyclearflag = true;
+        storyclearflag = true; //flag確認しただけだからあとで弄ってもらう
         if (clearFlg) return;
-        Debug.Log(storyclearflag);
         //バックグラウンド開閉
         if (gostoryflag || storyclearflag && bgOpenFlg && scale < 1) //開く
         {
@@ -121,7 +120,6 @@ public class TextMesManager: MonoBehaviour
         //起動
         if (gostoryflag || storyclearflag && !startFlg && bgOpenFlg && scale >= 1)
         {
-            Debug.Log("wara");
             startFlg = true;
             textFlg = false;
             Dialogue();
@@ -175,6 +173,7 @@ public class TextMesManager: MonoBehaviour
     private void IconSetting()
     {
         //アイコン設定
+        //下のやつ弄ってガンバって。
         if (i == 2 || i == 45) icon.sprite = astraSprite;
         else if (i == 44 || i == 48) icon.sprite = aiSprite;
 
