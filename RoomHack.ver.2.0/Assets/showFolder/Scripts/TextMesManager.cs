@@ -93,7 +93,7 @@ public class TextMesManager: MonoBehaviour
 
     void Update()
     {
-        storyclearflag = true; //flag確認しただけだからあとで弄ってもらう
+        //storyclearflag = true; //flag確認しただけだからあとで弄ってもらう
         if (clearFlg) return;
         //バックグラウンド開閉
         if (gostoryflag || storyclearflag && bgOpenFlg && scale < 1) //開く
