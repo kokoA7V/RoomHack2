@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour, IUnitHack
 
     private Rigidbody2D plRb;
 
+    [Min(1)]
+    public int lv = 1;
+
     // デリゲード
     // 関数を型にするためのもの
     private delegate void ActFunc();

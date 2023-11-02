@@ -60,7 +60,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = cameraCon.randomFlg;
             hackUI._word = new string[cameraCon.word.Length];
-            for (int i = 0; i < cameraCon.word.Length; i++) hackUI._word[i] = cameraCon.word[i];
+
+            int rand = cameraCon.lv - GameData.CameraLv;
+            if (rand <= 0) rand = 1;
+            else if (cameraCon.word.Length < rand) rand = cameraCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = cameraCon.word[i];
 
             hackUI.imageIcon.sprite = cameraCon.icon;
             hackUI.titleText.text = cameraCon.titleStr;
@@ -76,7 +81,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = doorCon.randomFlg;
             hackUI._word = new string[doorCon.word.Length];
-            for (int i = 0; i < doorCon.word.Length; i++) hackUI._word[i] = doorCon.word[i];
+
+            int rand = doorCon.lv - GameData.DoorLv;
+            if (rand <= 0) rand = 1;
+            else if (doorCon.word.Length < rand) rand = doorCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = doorCon.word[i];
 
             hackUI.imageIcon.sprite = doorCon.icon;
             hackUI.titleText.text = doorCon.titleStr;
@@ -96,7 +106,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = turretCon.randomFlg;
             hackUI._word = new string[turretCon.word.Length];
-            for (int i = 0; i < turretCon.word.Length; i++) hackUI._word[i] = turretCon.word[i];
+
+            int rand = turretCon.lv - GameData.TurretLv;
+            if (rand <= 0) rand = 1;
+            else if (turretCon.word.Length < rand) rand = turretCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = turretCon.word[i];
 
             hackUI.imageIcon.sprite = turretCon.icon;
             hackUI.titleText.text = turretCon.titleStr;
@@ -110,7 +125,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = enemyCon.randomFlg;
             hackUI._word = new string[enemyCon.word.Length];
-            for (int i = 0; i < enemyCon.word.Length; i++) hackUI._word[i] = enemyCon.word[i];
+
+            int rand = enemyCon.lv - GameData.EnemyLv;
+            if (rand <= 0) rand = 1;
+            else if (enemyCon.word.Length < rand) rand = enemyCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = enemyCon.word[i];
 
             hackUI.imageIcon.sprite = enemyCon.icon;
             hackUI.titleText.text = enemyCon.titleStr;
@@ -124,7 +144,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = alarmCon.randomFlg;
             hackUI._word = new string[alarmCon.word.Length];
-            for (int i = 0; i < alarmCon.word.Length; i++) hackUI._word[i] = alarmCon.word[i];
+
+            int rand = alarmCon.lv - GameData.AlarmLv;
+            if (rand <= 0) rand = 1;
+            else if (alarmCon.word.Length < rand) rand = alarmCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = alarmCon.word[i];
 
             hackUI.imageIcon.sprite = alarmCon.icon;
             hackUI.titleText.text = alarmCon.titleStr;
@@ -138,7 +163,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = cleanerCon.randomFlg;
             hackUI._word = new string[cleanerCon.word.Length];
-            for (int i = 0; i < cleanerCon.word.Length; i++) hackUI._word[i] = cleanerCon.word[i];
+
+            int rand = cleanerCon.lv - GameData.CleanerLv;
+            if (rand <= 0) rand = 1;
+            else if (cleanerCon.word.Length < rand) rand = cleanerCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = cleanerCon.word[i];
 
             hackUI.imageIcon.sprite = cleanerCon.icon;
             hackUI.titleText.text = cleanerCon.titleStr;
@@ -153,7 +183,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = digestionCon.randomFlg;
             hackUI._word = new string[digestionCon.word.Length];
-            for (int i = 0; i < digestionCon.word.Length; i++) hackUI._word[i] = digestionCon.word[i];
+
+            int rand = digestionCon.lv - GameData.DigestionLv;
+            if (rand <= 0) rand = 1;
+            else if (digestionCon.word.Length < rand) rand = digestionCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = digestionCon.word[i];
 
             hackUI.imageIcon.sprite = digestionCon.icon;
             hackUI.titleText.text = digestionCon.titleStr;
@@ -168,7 +203,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = computerCon.randomFlg;
             hackUI._word = new string[computerCon.word.Length];
-            for (int i = 0; i < computerCon.word.Length; i++) hackUI._word[i] = computerCon.word[i];
+
+            int rand = computerCon.lv - GameData.ComputerLv;
+            if (rand <= 0) rand = 1;
+            else if (computerCon.word.Length < rand) rand = computerCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = computerCon.word[i];
 
             hackUI.imageIcon.sprite = computerCon.icon;
             hackUI.titleText.text = computerCon.titleStr;
@@ -182,7 +222,12 @@ public class HackManager : MonoBehaviour
         {
             hackUI._randomFlg = ariConditionerCon.randomFlg;
             hackUI._word = new string[ariConditionerCon.word.Length];
-            for (int i = 0; i < ariConditionerCon.word.Length; i++) hackUI._word[i] = ariConditionerCon.word[i];
+
+            int rand = ariConditionerCon.lv - GameData.AriConditionerLv;
+            if (rand <= 0) rand = 1;
+            else if (ariConditionerCon.word.Length < rand) rand = ariConditionerCon.word.Length;
+
+            for (int i = 0; i < rand; i++) hackUI._word[i] = ariConditionerCon.word[i];
 
             hackUI.imageIcon.sprite = ariConditionerCon.icon;
             hackUI.titleText.text = ariConditionerCon.titleStr;

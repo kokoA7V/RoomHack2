@@ -9,6 +9,9 @@ public class DoorController : MonoBehaviour ,IUnitHack
 
     public bool hacked { get; set; } = false;
 
+    [Min(1)]
+    public int lv = 1;
+
     public Sprite icon;
 
     [Multiline]

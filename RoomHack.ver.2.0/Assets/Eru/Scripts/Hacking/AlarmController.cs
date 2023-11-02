@@ -21,6 +21,9 @@ public class AlarmController : MonoBehaviour, IUnitHack
 
     public Sprite frameSprite;
 
+    [Min(1)]
+    public int lv = 1;
+
     [SerializeField]
     private Sprite frameEnemySprite;
 
