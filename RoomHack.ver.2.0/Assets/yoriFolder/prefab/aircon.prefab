@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 7347609960153542532}
   - component: {fileID: 7347609960153542533}
   m_Layer: 0
-  m_Name: AirCon
+  m_Name: aircon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,14 +272,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   word:
-  - A
+  - HVAC
   randomFlg: 0
   icon: {fileID: 21300000, guid: 0d16c2bdfc75a0a44a54ae4d9ff7942b, type: 3}
-  titleStr: 
+  titleStr: AirConditioner
   lvStr:
   - 
   - 
-  comentStr: 
+  comentStr: "\u7A7A\u8ABF\u306B\u4FB5\u5165\u3057\u3001\u90E8\u5C4B\u306E\u6C17\u6E29\u3092\u64CD\u4F5C\u3059\u308B\u3002"
   frameSR: {fileID: 7347609960153542597}
   frameSprite: {fileID: 21300000, guid: c209ec4bca885844ba8a5cc8b1871a6b, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: 0d16c2bdfc75a0a44a54ae4d9ff7942b, type: 3}

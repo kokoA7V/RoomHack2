@@ -26,6 +26,8 @@ public class GameManager_Rescue : GameManager
         CheckRescueLost();
 
         CheckRescueClear();
+
+        ESC();
     }
 
     void CheckRescueLost()

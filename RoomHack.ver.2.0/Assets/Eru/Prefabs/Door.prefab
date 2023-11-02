@@ -107,7 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   word:
-  - TYPING
+  - MOVE
+  - DOOR
   randomFlg: 1
   icon: {fileID: 21300000, guid: 070421061bbad0b4c91878f3c2ba443d, type: 3}
   titleStr: Door

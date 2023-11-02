@@ -204,9 +204,9 @@ MonoBehaviour:
   ptArea4: {x: 0, y: 0}
   ptArea: []
   word:
-  - TYPING
+  - SLASH
   randomFlg: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
   frameSprite: {fileID: 21300000, guid: 378104b8e42c6454f809d22a122cde3b, type: 3}
   frameSR: {fileID: 8484085581071652382}
   frameEnemySprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
@@ -222,9 +222,7 @@ MonoBehaviour:
   - 'SecLv :1
 
     Hacked'
-  comentStr: '//Hacking
-
-    //OpenClose'
+  comentStr: "\u6587\u5316\u796D\u4ED5\u69D8\u3067\u30CF\u30C3\u30AF\u3057\u3066\u3082\u52D5\u304D\u307E\u3059"
 --- !u!114 &4964421392328172577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72355edf9e789984998fb20dc30bcd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gMng: {fileID: 0}
 --- !u!114 &3048576599585814260
 MonoBehaviour:
   m_ObjectHideFlags: 0

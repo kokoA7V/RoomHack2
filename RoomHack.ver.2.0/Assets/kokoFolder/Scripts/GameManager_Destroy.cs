@@ -18,6 +18,8 @@ public class GameManager_Destroy : GameManager
         CheckGameEnd();
 
         CheckDestroy();
+
+        ESC();
     }
 
     void CheckDestroy()

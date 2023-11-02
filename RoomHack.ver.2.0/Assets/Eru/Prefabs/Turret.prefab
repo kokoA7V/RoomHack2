@@ -220,9 +220,7 @@ MonoBehaviour:
   - 'SecLv :1
 
     Hacked'
-  comentStr: '//Hacking
-
-    //OpenClose'
+  comentStr: "\u30BF\u30EC\u30C3\u30C8\u306E\u30B3\u30FC\u30C9\u306B\u4FB5\u5165\u3057\u3001\n\u30BF\u30EC\u30C3\u30C8\u306E\u6A5F\u80FD\u3092\u6B62\u3081\u308B\u3053\u3068\u304C\u3067\u304D\u308B"
   frameSR: {fileID: 3399257354534189314}
   frameSprite: {fileID: 21300000, guid: dadbe173327a52a459836bd764ee26d0, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: c5784b0aaf81ac743850cc1f0866466f, type: 3}
@@ -234,14 +232,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 725749280987857624, guid: 3dfdaf38eb9f09f4e9a611a534841af4, type: 3}
   bulletSpeed: 3
   shotTime: 1
+  breakTime: 1
   rayCircle:
     tr: {fileID: 3399257354437723179}
     numberOfRays: 30
-    detectionRange: 3
+    detectionRange: 2
     layerMask:
       serializedVersion: 2
       m_Bits: 384
-    chkType: 360
+    chkType: 180
     gameType: 45
     dirType: 1
     rayFlg: 1
