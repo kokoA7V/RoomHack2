@@ -22,8 +22,9 @@ public class StageTimeManager : MonoBehaviour
     [SerializeField, Header("振動する力")]
     private float shakeAmount = 5f;
 
+    // GameManagerで取りたいのでpublic
     [SerializeField, Header("減衰率")]
-    private float decreaseFactor = 1.0f;
+    public float decreaseFactor = 1.0f;
 
     private Vector3 originalPosition = new Vector3(125, -100, 0);
 
@@ -31,7 +32,8 @@ public class StageTimeManager : MonoBehaviour
 
     private Text text;
 
-    private float timer;
+    // GameManagerで取りたいのでpublic
+    public float timer;
 
     private float currentShakeDuration = 0f;
 
@@ -43,7 +45,7 @@ public class StageTimeManager : MonoBehaviour
         originalPosition = text.transform.localPosition;
         defaultColorCode = ColorUtility.ToHtmlStringRGB(defaultColor);
         missColorCode = ColorUtility.ToHtmlStringRGB(missColor);
-        text.text = "Time:<color=#" + defaultColorCode + ">" + timer.ToString("F0") + "</color>";
+        text.text = "<color=#" + defaultColorCode + ">" + timer.ToString("F2") + "</color>";
     }
 
     void Update()
@@ -58,7 +60,7 @@ public class StageTimeManager : MonoBehaviour
                 Vector3 randomOffset = Random.insideUnitSphere * shakeAmount;
                 text.transform.localPosition = originalPosition + randomOffset;
 
-                text.text = "Time:<color=#" + missColorCode + ">" + timer.ToString("F0") + "</color>";
+                text.text = "<color=#" + missColorCode + ">" + timer.ToString("F2") + "</color>";
 
                 currentShakeDuration -= Time.deltaTime * decreaseFactor;
             }
@@ -67,8 +69,8 @@ public class StageTimeManager : MonoBehaviour
                 currentShakeDuration = 0f;
                 text.transform.localPosition = originalPosition;
 
-                if (timer <= stageTime / 4) text.text = "Time:<color=#" + missColorCode + ">" + timer.ToString("F0") + "</color>";
-                else text.text = "Time:<color=#" + defaultColorCode + ">" + timer.ToString("F0") + "</color>";
+                if (timer <= stageTime / 4) text.text = "<color=#" + missColorCode + ">" + timer.ToString("F2") + "</color>";
+                else text.text = "<color=#" + defaultColorCode + ">" + timer.ToString("F2") + "</color>";
             }
         }
     }
@@ -81,8 +83,8 @@ public class StageTimeManager : MonoBehaviour
 
     private void TimeOver()
     {
-        text.text = "Time:<color=#" + missColorCode + ">0</color>";
-        GameOverSceneManager.GameOverNo = 2;
-        SceneManager.LoadScene("GameOverScene");
+    //    text.text = "<color=#" + missColorCode + ">0</color>";
+    //    GameOverSceneManager.GameOverNo = 2;
+    //    SceneManager.LoadScene("GameOverScene");
     }
 }

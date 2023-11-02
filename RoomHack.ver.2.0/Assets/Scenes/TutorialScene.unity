@@ -350,16 +350,13 @@ MonoBehaviour:
   seAudioSource: {fileID: 94212684}
   bgmAudioClip:
   - {fileID: 8300000, guid: 993c037b2edafec4caa1e8e10ad05888, type: 3}
-  - {fileID: 8300000, guid: 05c15b223c11c31458da93654d9ee501, type: 3}
-  - {fileID: 8300000, guid: 61fcd0f5d8b980a4685d0c7687ddf16d, type: 3}
+  - {fileID: 8300000, guid: 06134e71606b6fc42a53f2332997af8f, type: 3}
+  - {fileID: 8300000, guid: 5779fcc86b376484faa02f2edccaa6b2, type: 3}
   seAudioClip:
-  - {fileID: 8300000, guid: 146264af0e9a67446827f60b6e989cba, type: 3}
-  - {fileID: 8300000, guid: 02f0dac22e0ed72448f72538db1954e7, type: 3}
-  - {fileID: 8300000, guid: 9cbd127ea56cbd7479f6460be1151312, type: 3}
-  - {fileID: 8300000, guid: 1445eeb79bdea3749a79b312d6583af4, type: 3}
-  - {fileID: 8300000, guid: f3ed2c2bb4f42684e805d5e1075a2260, type: 3}
-  - {fileID: 8300000, guid: 204c6f7a8d2d31b4db9e4b3e08212208, type: 3}
-  - {fileID: 8300000, guid: f858a38e09c5d374f8e910584eaef6c4, type: 3}
+  - {fileID: 8300000, guid: 3c22cdbde5ab71046a838ab0f9dd5d45, type: 3}
+  - {fileID: 8300000, guid: 1d67b4633e874ca4f839b9b07b97df92, type: 3}
+  - {fileID: 8300000, guid: 3211e2bd0dbe8494dbf74d54ad4af1ae, type: 3}
+  - {fileID: 8300000, guid: 6df7f8f612107c84b8267f1483fef0e2, type: 3}
   bgmLoop: 1
   bgmMute: 1
 --- !u!4 &94212687
@@ -376,54 +373,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &156606687
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!224 &134062272 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3922113501746010902, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
+  m_PrefabInstance: {fileID: 560101105}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 156606689}
-  - component: {fileID: 156606688}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &156606688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156606687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: e4f311c6a73153a45a6846b2b2054d22, type: 2}
---- !u!4 &156606689
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156606687}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.7232547, y: -0.12154059, z: -1.1063901}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &163080253
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +686,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306417131487653098, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Text
-      value: Jon
+      value: John
       objectReference: {fileID: 0}
     - target: {fileID: 886828388932549491, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Color.b
@@ -761,6 +715,10 @@ PrefabInstance:
     - target: {fileID: 1515735526626640921, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Color.r
       value: 0.101960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532377547638863153, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5007680062200514370, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Pivot.x
@@ -846,31 +804,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7373771711467841893, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
---- !u!224 &560101106 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5007680062200514370, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
-  m_PrefabInstance: {fileID: 560101105}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &560101107 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3109028344610315229, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
-  m_PrefabInstance: {fileID: 560101105}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &560101108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560101107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8680f30839756c747bff61d66055a53a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &612856256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1484,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2235,9 +2170,11 @@ MonoBehaviour:
   randomFlg: 0
   icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
   titleStr: Enemy1-2
-  lvStr: SecLv:1
-  hackLvStr: HackLv:1
-  comentStr: "\u6B66\u5668\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u308B\u3002\n\u6B66\u5668\u3092\u6545\u969C\u3055\u305B\u6575\u306E\u52D5\u304D\u3092\u6B62\u3081\u308B\u3002"
+  lvStr: 
+  hackLvStr: 
+  comentStr: '//Hacking
+
+    //Stop'
   frameSR: {fileID: 1526925941}
   frameSprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: 3354bd80b9f5ed54eb9d531a9769de04, type: 3}
@@ -2389,7 +2326,7 @@ MonoBehaviour:
   - "\u9593\u9055\u3063\u305F\u6587\u5B57\u3092\u5165\u529B\u3057\u3066\u3057\u307E\u3046\u3068\u3001\r\n\u5236\u9650\u6642\u9593\u304C\u6E1B\u3063\u3066\u3057\u307E\u3046\u304B\u3089\u6C17\u3092\u3064\u3051\u308D\u3002"
   - "\u3044\u3044\u305E\u3001\u305D\u306E\u8ABF\u5B50\u3060\u3002"
   - "\u3053\u308C\u3067\u5DE6\u306E\u30C9\u30A2\u3092\u3053\u3061\u3089\u306E\u7BA1\u7406\u4E0B\u306B\u7F6E\u304F\u3053\u3068\u304C\u3067\u304D\u305F\u3002"
-  - "\u4ECA\u5EA6\u306F\u30CF\u30C3\u30AF\u753B\u9762\u306B\u3042\u308BActive\u3068\u66F8\u304B\u308C\u305F\u30DC\u30BF\u30F3\u304B\u3001\r\nEnter\u30AD\u30FC\u3092\u62BC\u3059\u3068\u30C9\u30A2\u3092\u958B\u304F\u3053\u3068\u304C\u3067\u304D\u308B\u305E\u3002"
+  - "\u3082\u3046\u4E00\u5EA6\u53F3\u4E0B\u306E\u753B\u9762\u306B\u3042\u308BHack\u3068\u66F8\u304B\u308C\u305F\u30DC\u30BF\u30F3\u304B\u3001\r\nEnter\u30AD\u30FC\u3092\u62BC\u3059\u3068\u30C9\u30A2\u3092\u958B\u304F\u3053\u3068\u304C\u3067\u304D\u308B\u305E\u3002"
   - "\u3088\u3057\u3001\u30C9\u30A2\u304C\u958B\u3044\u305F\u306A\u3002\n\u524D\u7DDA\u306E\u5473\u65B9\u306B\u5DE6\u306E\u90E8\u5C4B\u306B\u5411\u304B\u3063\u3066\u3082\u3089\u304A\u3046\u3002"
   - "\u5DE6\u306E\u90E8\u5C4B\u306B\u30DE\u30A6\u30B9\u30AB\u30FC\u30BD\u30EB\u3092\u5408\u308F\u305B\u3066\u53F3\u30AF\u30EA\u30C3\u30AF\u3092\u3057\u3001\r\n\u5473\u65B9\u3092\u5DE6\u306E\u90E8\u5C4B\u306B\u5411\u304B\u308F\u305B\u3066\u304F\u308C\u3002"
   - "\u3080\u3001\u5DE6\u306E\u90E8\u5C4B\u306B\u306F\u6575\u304C\u3044\u305F\u3088\u3046\u3060\u306A\u3002"
@@ -2643,10 +2580,12 @@ MonoBehaviour:
   - PLAY
   randomFlg: 0
   icon: {fileID: 21300000, guid: 47b510f0550776a41b8e81e05af59bfe, type: 3}
-  titleStr: Camera1-1
-  lvStr: SecLv:1
-  hackLvStr: HackLv:1
-  comentStr: "\u30AB\u30E1\u30E9\u306E\u30B3\u30FC\u30C9\u306B\u4FB5\u5165\u3059\u308B\u3002\n\u90E8\u5C4B\u306E\u5185\u90E8\u3092\u78BA\u8A8D\u3067\u304D\u308B\u3002"
+  titleStr: Cam1-1
+  lvStr: 
+  hackLvStr: 
+  comentStr: '//Hacking
+
+    //InVisible'
   noiseObj: {fileID: 8097445300366478939}
   frameSR: {fileID: 744921165698673771}
   frameSprite: {fileID: 21300000, guid: 396f7e9014cc8154ca806a0a9c66f124, type: 3}
@@ -3304,7 +3243,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 560101106}
+  - {fileID: 134062272}
   m_Father: {fileID: 857075198352102936}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4567,9 +4506,11 @@ MonoBehaviour:
   randomFlg: 0
   icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
   titleStr: Enemy1-1
-  lvStr: SecLv:1
-  hackLvStr: HackLv:1
-  comentStr: "\u6B66\u5668\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u308B\u3002\n\u6B66\u5668\u3092\u6545\u969C\u3055\u305B\u6575\u306E\u52D5\u304D\u3092\u6B62\u3081\u308B\u3002"
+  lvStr: 
+  hackLvStr: 
+  comentStr: '//Hacking
+
+    //Stop'
   frameSR: {fileID: 3624341866120165264}
   frameSprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
   frameEnemySprite: {fileID: 21300000, guid: 3354bd80b9f5ed54eb9d531a9769de04, type: 3}
@@ -5137,9 +5078,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 01b0603d03f1dd04c964ba5d7cc96898, type: 3}
   tutorialManager: {fileID: 0}
   titleStr: Door1-1
-  lvStr: SecLv:1
-  hackLvStr: HackLv:1
-  comentStr: "\u30C9\u30A2\u306E\u7BA1\u7406\u6A29\u9650\u306B\u30A2\u30AF\u30BB\u30B9\u3059\u308B\u3002\n\u30C9\u30A2\u306E\u958B\u9589\u3092\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3002"
+  lvStr: 
+  hackLvStr: 
+  comentStr: '//Hacking
+
+    //OpenClose'
   left: {fileID: 4032168423517703418}
   right: {fileID: 4032168423938574745}
   leftFrameSR: {fileID: 4032168422400087508}
@@ -5438,9 +5381,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 01b0603d03f1dd04c964ba5d7cc96898, type: 3}
   tutorialManager: {fileID: 0}
   titleStr: Door1-2
-  lvStr: SecLv:1
-  hackLvStr: HackLv:1
-  comentStr: "\u30C9\u30A2\u306E\u7BA1\u7406\u6A29\u9650\u306B\u30A2\u30AF\u30BB\u30B9\u3059\u308B\u3002\n\u30C9\u30A2\u306E\u958B\u9589\u3092\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3002"
+  lvStr: 
+  hackLvStr: 
+  comentStr: '//Hacking
+
+    //OpenClose'
   left: {fileID: 4032168423742406312}
   right: {fileID: 4032168423051000779}
   leftFrameSR: {fileID: 4032168422712534918}

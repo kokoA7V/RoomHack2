@@ -106,7 +106,7 @@ public class TutorialText : MonoBehaviour
             }
         }
 
-        //最初の一回だけ起動
+        //T起動
         if (!startFlg && bgOpenFlg && scale >= 1)
         {
             startFlg = true;

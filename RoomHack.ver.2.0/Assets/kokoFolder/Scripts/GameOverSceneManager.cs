@@ -25,8 +25,9 @@ public class GameOverSceneManager : MonoBehaviour
     // 0 謎
     // 1 味方死亡
     // 2 逆探知
+    // 3 救助対象
 
-    string[] GOTx = new string[3];
+    string[] GOTx = new string[4];
 
     float time;
 
@@ -45,6 +46,7 @@ public class GameOverSceneManager : MonoBehaviour
         GOTx[0] = "Setteimisu static GameOverSceneManager.GameOverNo Wo Kaetene";
         GOTx[1] = "Mate Unit Signal Lost";
         GOTx[2] = "Detects Suspicious Connection From Outside";
+        GOTx[3] = "Rescue Target Lost Confirmed";
 
         time = 0;
         trans = 1;
