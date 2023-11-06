@@ -1743,6 +1743,7 @@ MonoBehaviour:
   EnemyUseMoney: 0
   DoorUseMoney: 0
   CameraUseMoney: 0
+  titleLogo: {fileID: 1157105457}
 --- !u!4 &735282048
 Transform:
   m_ObjectHideFlags: 0

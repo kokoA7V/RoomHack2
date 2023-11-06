@@ -39,7 +39,7 @@ public class MateController : MonoBehaviour
     Vector3 movePos;
 
     [SerializeField, Header("リーダー任命ならtrue")]
-    public bool leader;
+    public bool isLeader;
 
     [SerializeField, Header("リーダーのポジション")]
     private GameObject leaderObj;
@@ -54,7 +54,22 @@ public class MateController : MonoBehaviour
     public string mateName;
     private int nameNum;
 
-    private bool stopFlg = false;
+    public string leaderTag = "MateLeader"; // リーダーと認識するタグ
+    public string MateTag = "Mate";
+
+    public float leaderCheckInterval = 1.0f; // リーダーチェックの間隔
+
+    private float leaderCheckTimer = 0.0f;
+
+    private List<Transform> followers; // 仲間のリスト
+
+    [SerializeField]
+    LayerMask lederLayer;
+    [SerializeField]
+    LayerMask mateLayer;
+
+    [SerializeField, Header("救出対象")]
+    private bool resFlg = false;
     enum State
     {
         Shot,
@@ -76,7 +91,9 @@ public class MateController : MonoBehaviour
     {
         mateCore = GetComponent<UnitCore>();
 
-        if (!leader) mateCon = leaderObj.GetComponent<MateController>();
+        leaderObj = null;
+        followers = new List<Transform>();
+        isLeader = false;
 
         moveSpd = mateCore.moveSpd;
         mateCore.dmgLayer = 1;
@@ -97,21 +114,17 @@ public class MateController : MonoBehaviour
         unit = null;
 
         movePos = this.transform.position;
+        FindNewLeader();
     }
 
     void Update()
     {
-        if (leaderObj == null && !leader)
-        {
-            leader = true;
-            Debug.Log("リーダー変わったよ");
-            if (mateObj != null) mateObj.GetComponent<MateController>().leaderObj = this.gameObject;
-        }
+        FindNewLeader();
 
-        if (!leader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
+        if (leaderObj == null) SelectNewLeader();
+
+        if (!isLeader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
         else actFuncTbl[stateNo]();
-
-        Debug.Log("StateNo " + stateNo);
     }
     private void ActShot()
     {
@@ -128,7 +141,7 @@ public class MateController : MonoBehaviour
                 methodNo++;
                 break;
             case 1:
-                if (!leader)
+                if (!isLeader)
                 {
                     mateCon = leaderObj.GetComponent<MateController>();
                     target = mateCon.target;
@@ -165,7 +178,7 @@ public class MateController : MonoBehaviour
         {
             case 0:
                 // リーダーだったらマウスクリックで移動
-                if (leader)
+                if (isLeader)
                 {
                     if (Input.GetMouseButtonDown(1))
                     {
@@ -219,5 +232,86 @@ public class MateController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, 5f);
+    }
+
+    private void ResMate()
+    {
+
+    }
+    void FindNewLeader()
+    {
+        GameObject[] leaderCandidates = GameObject.FindGameObjectsWithTag(leaderTag);
+
+        GameObject closestLeader = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var leaderCandidate in leaderCandidates)
+        {
+            float distanceToCandidate = Vector2.Distance(transform.position, leaderCandidate.transform.position);
+
+            if (distanceToCandidate < closestDistance)
+            {
+                closestLeader = leaderCandidate;
+                closestDistance = distanceToCandidate;
+            }
+        }
+
+        leaderObj = closestLeader;
+
+        // リーダーかどうかを判定
+        isLeader = leaderObj == gameObject;
+
+        // リーダーでない場合、タグをクリア
+        if (!isLeader)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Mate");
+            gameObject.tag = "Mate";
+        }
+        else
+        {
+            gameObject.layer = LayerMask.NameToLayer("MateLeader");
+        }
+    }
+    void SelectNewLeader()
+    {
+        GameObject[] potentialLeaders = GameObject.FindGameObjectsWithTag(MateTag);
+
+        if (potentialLeaders.Length > 0)
+        {
+            GameObject newLeaderObject = null;
+
+            foreach (var potentialLeader in potentialLeaders)
+            {
+                if (potentialLeaders.Length == 1 || potentialLeader != gameObject)
+                {
+                    newLeaderObject = potentialLeader; // リーダーを選出
+                    break;
+                }
+            }
+
+            if (newLeaderObject != null)
+            {
+                // リーダーを新しいリーダーに設定
+                SetLeader(newLeaderObject);
+                newLeaderObject.tag = leaderTag; // 新しいリーダータグを付ける
+                gameObject.layer = LayerMask.NameToLayer("MateLeader");
+            }
+        }
+    }
+    public void SetLeader(GameObject newLeaderObject)
+    {
+        leaderObj = newLeaderObject;
+        isLeader = (leaderObj == gameObject); // リーダーかどうかを再評価
+
+        if (isLeader)
+        {
+            gameObject.layer = LayerMask.NameToLayer("MateLeader");
+            gameObject.tag = leaderTag; // リーダータグを付ける
+        }
+        else
+        {
+            gameObject.layer = LayerMask.NameToLayer("Mate");
+            gameObject.tag = "Mate"; // タグをクリア
+        }
     }
 }

@@ -21,6 +21,9 @@ public class Move : MonoBehaviour
     private Vector3 unit;
 
     private float moveSpd;
+
+    public LayerMask obstacleLayer; // 障害物として扱うレイヤー
+
     private void Start()
     {
         unitRb = GetComponent<Rigidbody2D>();
@@ -41,9 +44,45 @@ public class Move : MonoBehaviour
         movePos = _unit - this.transform.position;
         moveDir = movePos.normalized;
 
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, movePos, 1 , obstacleLayer);
+
+        if (hit.collider == null)
+        {
+            float distanceToAlly = Vector3.Distance(transform.position, _unit);
+            if (distanceToAlly < 2)
+            {
+                Vector3 moveAwayDirection = -movePos.normalized;
+                transform.Translate(moveAwayDirection * moveSpd * Time.deltaTime);
+            }
+            // 障害物がない場合、自身を味方に向かって移動
+            else unitRb.velocity = moveDir * _moveSpd;
+
+        }
+        else
+        {
+            // 障害物がある場合、避けるロジックを実装
+            Vector3 normal = hit.normal; // 衝突した表面の法線ベクトルを取得
+
+            // 障害物が左側にある場合
+            if (normal.x > 0)
+            {
+                // 障害物を右に避ける
+                Vector3 newMoveDirection = new Vector3(movePos.y, -movePos.x, 0);
+                transform.Translate(newMoveDirection.normalized * _moveSpd * Time.deltaTime);
+            }
+            // 障害物が右側にある場合
+            else if (normal.x < 0)
+            {
+                // 障害物を左に避ける
+                Vector3 newMoveDirection = new Vector3(-movePos.y, movePos.x, 0);
+                transform.Translate(newMoveDirection.normalized * _moveSpd * Time.deltaTime);
+            }
+            
+        }
         //unitRb.AddForce(moveDir * _moveSpd);
-                
-        unitRb.velocity = moveDir * _moveSpd;
+
+        
 
         if (Mathf.Abs(movePos.x) <= 0.5f && Mathf.Abs(movePos.y) <= 0.5f)
         {
