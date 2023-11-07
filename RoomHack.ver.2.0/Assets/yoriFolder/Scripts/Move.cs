@@ -84,9 +84,9 @@ public class Move : MonoBehaviour
 
         unitRb.velocity = moveDir * _moveSpd;
 
-        if (Mathf.Abs(movePos.x) <= 0.5f && Mathf.Abs(movePos.y) <= 0.5f)
+        if (Mathf.Abs(movePos.x) <= 0.2f && Mathf.Abs(movePos.y) <= 0.2f)
         {
-            Debug.Log("止まるよ");
+            Debug.Log("止まるよ"+gameObject.name);
             unitRb.velocity = Vector2.zero;
             movePos = Vector3.zero;
             //_targetPos = _playerPosHistory.Dequeue();

@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateNo: 0
   methodNo: 0
+  lv: 1
   unit: {fileID: 0}
   unitPos: {x: 0, y: 0, z: 0}
   rayCircle:
@@ -198,18 +199,16 @@ MonoBehaviour:
     gameType: 45
     dirType: 1
     rayFlg: 1
-  ptArea1: {x: 0, y: 0}
-  ptArea2: {x: 0, y: 0}
-  ptArea3: {x: 0, y: 0}
-  ptArea4: {x: 0, y: 0}
   ptArea: []
   word:
   - SLASH
+  - SHOT
+  - SUPER
   randomFlg: 0
   icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
-  frameSprite: {fileID: 21300000, guid: 378104b8e42c6454f809d22a122cde3b, type: 3}
+  frameSprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
   frameSR: {fileID: 8484085581071652382}
-  frameEnemySprite: {fileID: 21300000, guid: 28df46e0781a42d45823666917dedb4e, type: 3}
+  frameEnemySprite: {fileID: 21300000, guid: 3354bd80b9f5ed54eb9d531a9769de04, type: 3}
   hackTime:
   - 2
   - 5
@@ -222,7 +221,8 @@ MonoBehaviour:
   - 'SecLv :1
 
     Hacked'
-  comentStr: "\u6587\u5316\u796D\u4ED5\u69D8\u3067\u30CF\u30C3\u30AF\u3057\u3066\u3082\u52D5\u304D\u307E\u3059"
+  comentStr: "\u6575\u306E\u30C7\u30D0\u30A4\u30B9\u3092\u8AA4\u52D5\u4F5C\u3055\u305B\u3001\n\u4E00\u6642\u7684\u884C\u52D5\u4E0D\u80FD\u306B\u3059\u308B"
+  bossFlg: 0
 --- !u!114 &4964421392328172577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72355edf9e789984998fb20dc30bcd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gMng: {fileID: 0}
+  deathEfect: {fileID: 0}
 --- !u!114 &3048576599585814260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +249,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limitSpeed: 200
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &4839387274231455132
 MonoBehaviour:
   m_ObjectHideFlags: 0

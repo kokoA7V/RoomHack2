@@ -45,22 +45,12 @@ public class EnemyController : MonoBehaviour, IUnitHack
     private RayCircle rayCircle = new RayCircle();
 
     [SerializeField]
-    private Vector2 ptArea1;
-
-    [SerializeField]
-    private Vector2 ptArea2;
-
-    [SerializeField]
-    private Vector2 ptArea3;
-
-    [SerializeField]
-    private Vector2 ptArea4;
-
-    [SerializeField]
-    private List<Vector3> ptArea;
+    private List<GameObject> ptArea;
     private int ptNum;
 
     private float ptCtr;
+
+    private bool turnFlg;
     enum State
     {
         Shot,
@@ -97,10 +87,16 @@ public class EnemyController : MonoBehaviour, IUnitHack
     private bool hackedFlg = false;
 
     private bool lv1Hack = false;
+
+    private int moveNo = 0;
+    private int i = 0;
+
+    [SerializeField]
+    private bool bossFlg = false;
+
+    private bool atkEnemyFlg = false;
     void Start()
     {
-
-        ptArea = new List<Vector3>();
         ptNum = 0;
 
         eCore = GetComponent<UnitCore>();
@@ -108,7 +104,10 @@ public class EnemyController : MonoBehaviour, IUnitHack
         burst = 3;
 
         eCore.dmgLayer = 2;
-
+        if (bossFlg)
+        {
+            eCore.maxHP += 5;
+        }
         eCore.maxHP += 7;
 
         pow = 10;
@@ -118,7 +117,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
         actFuncTbl[(int)State.Move] = ActMove;
         actFuncTbl[(int)State.Search] = ActSearch;
 
-        stateNo = (int)State.Move;
+        stateNo = (int)State.Search;
 
         moveSpd = eCore.moveSpd;
 
@@ -128,6 +127,8 @@ public class EnemyController : MonoBehaviour, IUnitHack
         eCore.dmgLayer = emDmgLayer;
 
         unit = null;
+
+        i = 0;
     }
 
     // Update is called once per frame
@@ -146,6 +147,7 @@ public class EnemyController : MonoBehaviour, IUnitHack
         {
             return;
         }
+        if (lv1Hack && GameData.EnemyLv == 1) return;
         actFuncTbl[stateNo]();
     }
 
@@ -195,18 +197,12 @@ public class EnemyController : MonoBehaviour, IUnitHack
                         methodNo++;
                     }
                 }
-                else if (unit != null)
+                else
                 {
-                    unitPos = unit.transform.position;
-                    eCore.Move(moveSpd, unitPos);
-
-                    //敵がいたらShotに移行
-                    target = eSight.EnemyCheck();
-                    if (target != null && isEm)
-                    {
-                        methodNo++;
-                    }
+                    methodNo = 0;
+                    stateNo = (int)State.Search;
                 }
+
                 break;
             case 1:
                 plRb.velocity = Vector3.zero;
@@ -223,39 +219,61 @@ public class EnemyController : MonoBehaviour, IUnitHack
         if (!hacked) return;
         if (time <= 0) time = hackTime[GameData.EnemyLv - 1];
         hackedFlg = true;
+        lv1Hack = true;
         Debug.Log("ハッキング完了");
     }
 
     void ActSearch()
     {
+        GameObject mateUnit = rayCircle.CircleChk();
+        if (mateUnit != null)
+        {
+            unitPos = mateUnit.transform.position;
+            methodNo = 0;
+            methodCtr = 0;
+            stateNo = (int)State.Move;
+        }
         switch (methodNo)
         {
             case 0:
-                eCore.Move(moveSpd, ptArea[ptNum]);
 
-                if (Mathf.Abs(ptArea1.x - this.transform.position.x) <= 1f &&
-                       Mathf.Abs(ptArea1.y - this.transform.position.y) <= 1f)
+                unitPos = ptArea[i].transform.position;
+                eCore.Move(moveSpd, unitPos);
+                Vector3 unitDis = unitPos - this.gameObject.transform.position;
+                if (Mathf.Abs(unitDis.x) <= 0.3f && Mathf.Abs(unitDis.y) <= 0.3f)
                 {
+                    Debug.Log("止まるよ");
                     plRb.velocity = Vector2.zero;
-                    moveSpd = 0;
-                    ptCtr += Time.deltaTime;
-                    if (ptCtr <= 3f)
-                    {
-                        ptCtr = 0;
-                        methodNo++;
-                    }
-
+                    unitPos = Vector3.zero;
+                    i++;
+                    methodNo++;
                 }
                 break;
             case 1:
+                if (i >= ptArea.Count)
+                {
+                    i = 0;
+                }
+                ObjRotation(ptArea[i]);
 
-                ptNum++;
-
-                if (ptNum >= ptArea.Count) ptNum = 0;
-
-                methodNo = 0;
-
+                if (turnFlg) methodNo = 0;
                 break;
         }
+    }
+    private void ObjRotation(GameObject obj)
+    {
+        // 敵の位置から自分の位置を引いて、敵を向く方向ベクトルを計算
+        Vector3 direction = obj.transform.position - this.transform.position;
+
+        // ベクトルを角度に変換して敵を向く
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, 2f);
+
+        // 目標の角度に対する許容誤差内になると向いたこととみなす
+        float currentAngle = transform.eulerAngles.z;
+        if (Mathf.Abs(angle - currentAngle) < 3f && Mathf.Abs(angle - currentAngle) > -3f ||
+            Mathf.Abs(angle - currentAngle) > 357f && Mathf.Abs(angle - currentAngle) < 363f) turnFlg = true;
+        else turnFlg = false;
     }
 }

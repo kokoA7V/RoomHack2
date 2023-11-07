@@ -59,10 +59,6 @@ public class MateController : MonoBehaviour
 
     public float leaderCheckInterval = 1.0f; // リーダーチェックの間隔
 
-    private float leaderCheckTimer = 0.0f;
-
-    private List<Transform> followers; // 仲間のリスト
-
     [SerializeField]
     LayerMask lederLayer;
     [SerializeField]
@@ -92,7 +88,6 @@ public class MateController : MonoBehaviour
         mateCore = GetComponent<UnitCore>();
 
         leaderObj = null;
-        followers = new List<Transform>();
         isLeader = false;
 
         moveSpd = mateCore.moveSpd;
@@ -159,22 +154,23 @@ public class MateController : MonoBehaviour
 
                 plRb.velocity = Vector3.zero;
 
-                if (target == null)
+                methodCtr -= Time.deltaTime;
+                target = unitSight.EnemyCheck();
+                
+                if (methodCtr <= 0)
                 {
+                    if (target != null)
+                    {
+                        methodNo = 0;
+                        methodCtr = 0;
+                        stateNo = (int)State.Shot;
+                        isEm = true;
+                    }
                     methodNo = 0;
                     methodCtr = 0;
                     stateNo = (int)State.Move;
                     isEm = true;
                     break;
-                }
-
-                methodCtr -= Time.deltaTime;
-                if (methodCtr <= 0)
-                {
-                    // まだ敵が死んでないならもっかい打つ                    
-                    methodNo = 0;
-                    methodCtr = 0;
-                    stateNo = (int)State.Shot;
                 }
                 break;
         }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitDamage
 {
-
     public int maxHP { get; set; } = 5;
     public int nowHP { get; set; } 
     public int dmgLayer { get; set; }
