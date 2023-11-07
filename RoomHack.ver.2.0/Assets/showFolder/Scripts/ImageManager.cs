@@ -5,33 +5,34 @@ using UnityEngine.UI;
 
 public class ImageManager : MonoBehaviour
 {
-    [SerializeField] Image im;
 
-    [SerializeField] Sprite[] spr;
+    [SerializeField] Image[] spr;
 
     int sprNo = 0;
 
     // Start is called before the first frame update
     public void ShowImage(int n) //引数n
     {
-        sprNo = n;　//nに入る番号によって画像が切り替えれるように。
+        spr[n].gameObject.SetActive(true);
     }
-    public void UnShowImage()
+    public void UnShowImage(int n)
     {
-        sprNo = 0; //非表示にする。0の番号には透明な画像を入れる予定。
+        spr[n].gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        im.sprite = spr[sprNo];
+        //im.sprite = spr[sprNo];
 
-        if (sprNo == 0)
-        {
-            im.color = new Color(0, 0, 0, 0);
-        }
-        else
-        {
-            im.color = new Color(255, 255, 255, 255);
-        }
+        //if (sprNo == 0)
+        //{
+        //    spr[sprNo].gameObject.SetActive(false);
+        //    //im.color = new Color(0, 0, 0, 0);
+        //}
+        //else
+        //{
+        //    spr[sprNo].gameObject.SetActive(true);
+        //    //im.color = new Color(255, 255, 255, 255);
+        //}
     }
 }

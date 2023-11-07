@@ -223,7 +223,7 @@ public class ButtonManager : MonoBehaviour
 
     void ToggleButtonsSet(int i) //それぞれのボタンを引数で管理
     {
-        imagemanager.UnShowImage(); //image非表示
+        //imagemanager.UnShowImage(); //image非表示
 
         titleLogo.SetActive(false);
 

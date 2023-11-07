@@ -6654,7 +6654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &6969370776492118863
 Rigidbody2D:
   serializedVersion: 4
@@ -6704,3 +6704,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72355edf9e789984998fb20dc30bcd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEfect: {fileID: 0}
