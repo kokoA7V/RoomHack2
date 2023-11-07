@@ -358,6 +358,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3211e2bd0dbe8494dbf74d54ad4af1ae, type: 3}
   - {fileID: 8300000, guid: 6df7f8f612107c84b8267f1483fef0e2, type: 3}
   bgmLoop: 1
+  bgmMute: 1
 --- !u!4 &94212687
 Transform:
   m_ObjectHideFlags: 0
@@ -372,6 +373,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &134062272 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3922113501746010902, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
+  m_PrefabInstance: {fileID: 560101105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &163080253
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,6 +716,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.101960786
       objectReference: {fileID: 0}
+    - target: {fileID: 1532377547638863153, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5007680062200514370, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -796,28 +806,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
---- !u!224 &560101106 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5007680062200514370, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
-  m_PrefabInstance: {fileID: 560101105}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &560101107 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3109028344610315229, guid: d05e0734e3fe3eb418ba4e41d209491a, type: 3}
-  m_PrefabInstance: {fileID: 560101105}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &560101108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560101107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8680f30839756c747bff61d66055a53a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &612856256
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +843,8 @@ MonoBehaviour:
   tutorialEnemy1: {fileID: 3624341867040824471}
   tutorialEnemy2: {fileID: 1646852880}
   questFlg: 0
-  hackButton: {fileID: 0}
+  hackButton1: {fileID: 0}
+  hackButton2: {fileID: 0}
   typingText: {fileID: 0}
   j: 0
   q1: 0
@@ -1186,12 +1175,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeManager: {fileID: 5728813281379291777}
-  HackUIObj: {fileID: 1949609989713613479, guid: 951bee1bdeabc014892cc4b367ee8fe7, type: 3}
+  HackUIObj: {fileID: 7004892289383295564, guid: 7c618058a9e606b4486b26267b52a70a, type: 3}
   hackType: 0
   nowTypingFlg: 0
   nowObj: {fileID: 0}
   tutorialManager: {fileID: 0}
-  spriteCBG: {fileID: 21300000, guid: 5c7153c130159454cb4dfeac9bd89aeb, type: 3}
 --- !u!4 &1049432504
 Transform:
   m_ObjectHideFlags: 0
@@ -2182,13 +2170,8 @@ MonoBehaviour:
   randomFlg: 0
   icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
   titleStr: Enemy1-2
-  lvStr:
-  - 'SecLv :1
-
-    UnHacked'
-  - 'SecLv :1
-
-    Hacked'
+  lvStr: 
+  hackLvStr: 
   comentStr: '//Hacking
 
     //Stop'
@@ -2598,13 +2581,8 @@ MonoBehaviour:
   randomFlg: 0
   icon: {fileID: 21300000, guid: 47b510f0550776a41b8e81e05af59bfe, type: 3}
   titleStr: Cam1-1
-  lvStr:
-  - 'SecLv :1
-
-    UnHacked'
-  - 'SecLv :1
-
-    Hacked'
+  lvStr: 
+  hackLvStr: 
   comentStr: '//Hacking
 
     //InVisible'
@@ -3265,7 +3243,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 560101106}
+  - {fileID: 134062272}
   m_Father: {fileID: 857075198352102936}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4528,13 +4506,8 @@ MonoBehaviour:
   randomFlg: 0
   icon: {fileID: 21300000, guid: 4457b235ad9725c48a34542c2c51dcb3, type: 3}
   titleStr: Enemy1-1
-  lvStr:
-  - 'SecLv :1
-
-    UnHacked'
-  - 'SecLv :1
-
-    Hacked'
+  lvStr: 
+  hackLvStr: 
   comentStr: '//Hacking
 
     //Stop'
@@ -5105,13 +5078,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 01b0603d03f1dd04c964ba5d7cc96898, type: 3}
   tutorialManager: {fileID: 0}
   titleStr: Door1-1
-  lvStr:
-  - 'SecLv :1
-
-    UnHacked'
-  - 'SecLv :1
-
-    Hacked'
+  lvStr: 
+  hackLvStr: 
   comentStr: '//Hacking
 
     //OpenClose'
@@ -5413,13 +5381,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 01b0603d03f1dd04c964ba5d7cc96898, type: 3}
   tutorialManager: {fileID: 0}
   titleStr: Door1-2
-  lvStr:
-  - 'SecLv :1
-
-    UnHacked'
-  - 'SecLv :1
-
-    Hacked'
+  lvStr: 
+  hackLvStr: 
   comentStr: '//Hacking
 
     //OpenClose'

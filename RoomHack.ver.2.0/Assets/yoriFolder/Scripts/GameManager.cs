@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
         CheckTimeUp();
 
         CheckGameEnd();
+
+        ESC();
     }
 
     public void CheckMateLost()
@@ -79,6 +81,15 @@ public class GameManager : MonoBehaviour
         else if (gameOver)
         {
             SceneManager.LoadScene("GameOverScene");
+        }
+    }
+
+    public void ESC()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Load.SL = 2;
+            SceneManager.LoadScene("LoadScene");
         }
     }
 }

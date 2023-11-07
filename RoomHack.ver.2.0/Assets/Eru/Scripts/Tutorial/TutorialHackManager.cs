@@ -37,11 +37,11 @@ public class TutorialHackManager : MonoBehaviour
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
             if (hit.collider != null && hit.collider.gameObject.TryGetComponent<IUnitHack>(out IUnitHack iUnitHack))
             {
                 //ハックすべきものか確認
                 if (hackType.ToString() != hit.collider.gameObject.name) return;
+                Debug.Log(HackUIObj);
 
                 // クリック処理
                 if (HackUIObj == null) return;

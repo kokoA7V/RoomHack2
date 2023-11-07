@@ -20,7 +20,7 @@ public class HackUI : MonoBehaviour
 
     public Image imageIcon;
 
-    public Text titleText, hackLvText,lvText, comentText;
+    public Text titleText, hackLvText, lvText, comentText;
 
     private bool hackedFlg = false;
 
@@ -50,6 +50,7 @@ public class HackUI : MonoBehaviour
         typingObj.hackManager = hackManager;
         typingObj.unitHack = unitHack;
         typingObj.randomFlg = _randomFlg;
+        Debug.Log(_word.Length);
         typingObj.word = new string[_word.Length];
         for (int i = 0; i < _word.Length; i++) typingObj.word[i] = _word[i];
     }
