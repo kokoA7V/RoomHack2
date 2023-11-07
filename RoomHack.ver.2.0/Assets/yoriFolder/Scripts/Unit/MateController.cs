@@ -68,7 +68,7 @@ public class MateController : MonoBehaviour
     [SerializeField]
     LayerMask mateLayer;
 
-    [SerializeField, Header("救出対象")]
+    [SerializeField, Header("救出対象ならtrue")]
     private bool resFlg = false;
     enum State
     {
@@ -114,7 +114,8 @@ public class MateController : MonoBehaviour
         unit = null;
 
         movePos = this.transform.position;
-        FindNewLeader();
+
+        if (!resFlg) FindNewLeader();
     }
 
     void Update()
@@ -236,7 +237,11 @@ public class MateController : MonoBehaviour
 
     private void ResMate()
     {
+        target = unitSight.EnemyCheck();
+        if (target!=null)
+        {
 
+        }
     }
     void FindNewLeader()
     {
