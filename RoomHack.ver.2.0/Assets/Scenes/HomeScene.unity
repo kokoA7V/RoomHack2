@@ -1075,7 +1075,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'STAGE3
+  m_Text: 'Stage3
 
 '
 --- !u!222 &470246894
@@ -2592,7 +2592,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STAGE1
+  m_Text: STAGE
 --- !u!222 &902978135
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3380,7 +3380,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STAGE2
+  m_Text: Stage2
 --- !u!222 &1180345613
 CanvasRenderer:
   m_ObjectHideFlags: 0
