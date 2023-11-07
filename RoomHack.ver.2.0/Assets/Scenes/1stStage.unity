@@ -643,7 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopFlg: 0
   clearFlg: 0
-  storyflag: 0
+  gostoryflag: 0
   storyclearflag: 0
   i: 0
   textFlg: 1
@@ -1783,7 +1783,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: NAME
+  m_Text: 'AI
+
+'
 --- !u!1001 &1395345908
 PrefabInstance:
   m_ObjectHideFlags: 0
