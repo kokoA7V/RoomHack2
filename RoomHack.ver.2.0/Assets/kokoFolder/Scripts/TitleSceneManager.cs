@@ -29,7 +29,7 @@ public class TitleSceneManager : MonoBehaviour
 
     int count;
     float time;
-    float delay = 0.3f;
+    float delay = 0.2f;
     Vector3 move;
     Vector3 move2;
 
@@ -89,13 +89,13 @@ public class TitleSceneManager : MonoBehaviour
         SCT[5].inputText = dispText[13];
         SCT[6].inputText = dispText[14];
 
-        SCT[0].textDelay = 2.5f;
-        SCT[1].textDelay = 30;
-        SCT[2].textDelay = 2.5f;
-        SCT[3].textDelay = 30;
-        SCT[4].textDelay = 3.5f;
-        SCT[5].textDelay = 5;
-        SCT[6].textDelay = 5;
+        SCT[0].textDelay = 1.5f;
+        SCT[1].textDelay = 20;
+        SCT[2].textDelay = 1.5f;
+        SCT[3].textDelay = 20;
+        SCT[4].textDelay = 1.5f;
+        SCT[5].textDelay = 3;
+        SCT[6].textDelay = 3;
 
         SCT[1].afterDelay = 30;
         SCT[3].afterDelay = 30;
@@ -211,11 +211,11 @@ public class TitleSceneManager : MonoBehaviour
                 TitleObj[5].SetActive(true);
             }
 
-            if (count >= 29)
-            {
-                TitleObj[1].SetActive(true);
-                TitleObj[2].SetActive(true);
-            }
+            //if (count >= 29)
+            //{
+            //    TitleObj[1].SetActive(true);
+            //    TitleObj[2].SetActive(true);
+            //}
 
             if (count >= 30)
             {
@@ -225,6 +225,12 @@ public class TitleSceneManager : MonoBehaviour
 
             if (SCT[5].textStart)
             {
+                TitleObj[1].SetActive(true);
+                TitleObj[2].SetActive(true);
+
+                TitleObj[3].SetActive(false);
+                TitleObj[4].SetActive(false);
+
                 if (Input.anyKeyDown && GameData.tutorial)
                 {
                     UISpd = 3;
