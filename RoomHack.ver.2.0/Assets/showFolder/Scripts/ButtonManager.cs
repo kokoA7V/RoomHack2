@@ -61,6 +61,9 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] int DoorUseMoney;
     [SerializeField] int CameraUseMoney;
 
+    [SerializeField, Header("タイトルのロゴ")]
+    private GameObject titleLogo;
+
     const int toggleNo = 3;
 
     void Start()
@@ -220,7 +223,9 @@ public class ButtonManager : MonoBehaviour
 
     void ToggleButtonsSet(int i) //それぞれのボタンを引数で管理
     {
-        imagemanager.UnShowImage(); //image非表示
+        //imagemanager.UnShowImage(); //image非表示
+
+        titleLogo.SetActive(false);
 
         for (int j = 0; j < toggleNo; j++)
         {

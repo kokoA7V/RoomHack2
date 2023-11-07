@@ -59,7 +59,7 @@ public class MateStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mCon.leader)
+        if (mCon.isLeader)
         {
             leaderObj.SetActive(true);
             menObj.SetActive(false);

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ImageButton : MonoBehaviour,IPointerEnterHandler
+public class ImageButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
 {
     public ImageManager imagemanager;
 
-    [SerializeField] int showImageNo;@//‰æ‘œ‚ª•\¦‚³‚ê‚é”Ô†
+    [SerializeField] int showImageNo;ã€€//ç”»åƒãŒè¡¨ç¤ºã•ã‚Œã‚‹ç•ªå·
 
-    public void OnPointerEnter(PointerEventData eventData) //UI—v‘f‚ÉG‚ê‚½‚Æ‚«
+    public void OnPointerEnter(PointerEventData eventData) //UIè¦ç´ ã«è§¦ã‚ŒãŸã¨ã
     {
         Debug.Log("a");
         imagemanager.ShowImage(showImageNo);
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        imagemanager.UnShowImage(showImageNo);
     }
 }

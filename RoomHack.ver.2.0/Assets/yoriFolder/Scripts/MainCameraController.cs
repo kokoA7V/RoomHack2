@@ -18,7 +18,7 @@ public class MainCameraController : MonoBehaviour
         {
             if (item != null)
             {
-                if (item.leader)
+                if (item.isLeader)
                 {
                     virtualCamera.Follow = item.GetComponent<Transform>();
                 }
