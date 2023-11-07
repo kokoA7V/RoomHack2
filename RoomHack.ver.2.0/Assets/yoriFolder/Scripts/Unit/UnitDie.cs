@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UnitDie : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager gMng;
-
-    private int dieNum = 0;
     public void Die()
     {
         //if (this.TryGetComponent<MateController>(out MateController pc))

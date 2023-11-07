@@ -44,10 +44,10 @@ public class MateController : MonoBehaviour
     [SerializeField, Header("リーダーのポジション")]
     private GameObject leaderObj;
     private MateController mateCon;
-    [SerializeField, Header("Mateのポジション")]
-    public GameObject mateObj;
-    //[SerializeField, Header("レイの設定")]
-    //private RayCircle rayCircle = new RayCircle();
+
+    private GameObject mateObj;
+    [SerializeField, Header("レイの設定")]
+    private RayCircle rescuerRayCircle = new RayCircle();
 
     private static List<string> mNames;
 
@@ -120,12 +120,20 @@ public class MateController : MonoBehaviour
 
     void Update()
     {
-        FindNewLeader();
+        if (resFlg)
+        {
+            ResMate();
+            return;
+        }
+        else
+        {
+            FindNewLeader();
 
-        if (leaderObj == null) SelectNewLeader();
+            if (leaderObj == null) SelectNewLeader();
 
-        if (!isLeader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
-        else actFuncTbl[stateNo]();
+            if (!isLeader) actFuncTbl[leaderObj.GetComponent<MateController>().stateNo]();
+            else actFuncTbl[stateNo]();
+        }       
     }
     private void ActShot()
     {
@@ -237,10 +245,11 @@ public class MateController : MonoBehaviour
 
     private void ResMate()
     {
-        target = unitSight.EnemyCheck();
-        if (target!=null)
+        mateObj = rescuerRayCircle.CircleChk();
+        if (mateObj!=null)
         {
-
+            resFlg = false;
+            FindNewLeader();
         }
     }
     void FindNewLeader()
